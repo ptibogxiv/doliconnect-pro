@@ -43,6 +43,17 @@ load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FI
 add_action( 'user_doliconnect_menu', 'paymentmodes_menu', 4, 1);
 add_action( 'user_doliconnect_paymentmodes', 'paymentmodes_module');
 
+
+function dolipaymentmodes_lock() {
+return apply_filters( 'doliconnect_paymentmodes_lock', null);
+}
+
+//function example_callback( $string ) {
+//    // (maybe) modify $string
+//    return 'test';
+//}
+//add_filter( 'doliconnect_paymentmodes_lock', 'example_callback', 10, 1);
+
 function paymentmodes_menu( $arg ) {
 echo "<a href='".esc_url( add_query_arg( 'module', 'paymentmodes', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
 if ($arg=='paymentmodes') { echo " active";}
@@ -90,6 +101,8 @@ $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc
 
 $listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, $delay);
 //echo $listsource;
+
+echo $lock = dolipaymentmodes_lock();
 
 echo "<script src='https://js.stripe.com/v3/'></script>";
 
