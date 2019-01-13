@@ -102,7 +102,7 @@ $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc
 $listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, $delay);
 //echo $listsource;
 
-echo $lock = dolipaymentmodes_lock();
+$lock = dolipaymentmodes_lock();
 
 echo "<script src='https://js.stripe.com/v3/'></script>";
 
