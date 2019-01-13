@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect Pro
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.1.4
+ * Version: 1.1.5
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -191,7 +191,7 @@ echo '</li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) ) {    
+if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
@@ -289,7 +289,7 @@ echo "<button id='DiscountButton' style='display: none' class='btn btn-warning b
 echo "<button id='CardButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add a card', 'doliconnect-pro' )."</b></button>";
 echo "<button id='BankButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add an account', 'doliconnect-pro' )."</b></button>";
 if ( $listsource->code_client != null ) {
-echo "<div id='DeleteButton' class='btn-group d-flex' role='group'><button id='defaultbtn' class='btn btn-warning w-100' type='submit'><b>".__( 'Set default', 'doliconnect-pro' )."</b></button><button id='deletebtn' class='btn btn-danger w-100' type='submit'><b>".__( 'Delete', 'doliconnect-pro' )."</b></button></div>";
+echo "<div id='DeleteButton' class='btn-group d-flex' role='group'><button id='defaultbtn' class='btn btn-warning w-100' type='submit'><b>".__( 'Favorite', 'doliconnect-pro' )."</b></button><button id='deletebtn' class='btn btn-danger w-100' type='submit'><b>".__( 'Delete', 'doliconnect-pro' )."</b></button></div>";
 } elseif ( $listsource->code_client == null && $listsource->CHQ == null && $listsource->RIB == null ) {
 echo "<center>".__( 'No gateway', 'doliconnect-pro' )."</center>";
 }
