@@ -1309,7 +1309,7 @@ echo $current_user->user_email."<br>".$thirdparty->phone;
 
 echo "</div></div></div><div class='col-12 col-md-8'>";
 
-if ( get_option('doliconnectbeta') =='1' ) {
+if ( !empty($orderfo->paymentintent) ) {
 dolipaymentmodes($orderfo,esc_url(get_permalink())."?pay",esc_url(get_permalink())."?pay", 0);
 } else {
 doligateway('Total',$orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code,esc_url(get_permalink())."?pay",'full','',WEEK_IN_SECONDS);
