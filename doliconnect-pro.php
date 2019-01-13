@@ -583,7 +583,7 @@ window.location = "<?php echo $url."&action=addsource&source="; ?>" + result.sou
 
 //startpayment
 var PayButton = document.getElementById('PayButton');
-var clientSecret = ''; //pi_1DZGTOK034Aqz8l5nmyaf3F3_secret_sFyegsph06Vyae8glAxEyhqtH
+var clientSecret = '<?php echo $object->paymentintent; ?>';
 
 stripe.retrievePaymentIntent(clientSecret).then(function(result) {
 
