@@ -2083,7 +2083,7 @@ echo '</li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) ) {    
+if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
