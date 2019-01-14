@@ -1086,7 +1086,7 @@ $orderfo = CallAPI("GET", "/orders/".constant("DOLICONNECT_CART"), null, dolidel
 //echo $orderfo;
 }
 
-if (defined("DOLIBUG")) {
+if ( defined("DOLIBUG") ) {
 
 echo dolibug();
 
