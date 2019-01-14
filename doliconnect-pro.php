@@ -2199,7 +2199,7 @@ $button .="</script>";
 $currency=$orderfo->multicurrency_code;
 
 if ( $product->type == '1' && !is_null($product->duration_unit) && '0' < ($product->duration_value)) {$duration =__( 'for', 'doliconnect-pro' ).' '.$product->duration_value.' ';
-if ( $product->duration_value >1 ) {
+if ( $product->duration_value > 1 ) {
 if ( $product->duration_unit == y ) { $duration .=__( 'years', 'doliconnect-pro' ); }
 elseif ( $product->duration_unit == m )  {$duration .=__( 'months', 'doliconnect-pro' ); }
 elseif ( $product->duration_unit == d )  {$duration .=__( 'days', 'doliconnect-pro' ); }
@@ -2213,7 +2213,9 @@ elseif ( $product->duration_unit == h )  { $duration .=__( 'hour', 'doliconnect-
 elseif ( $product->duration_unit == i )  { $duration .=__( 'minute', 'doliconnect-pro' ); }
 }
 
-$altdurvalue=60/$product->duration_value;
+if ( $product->duration_unit == i ) {
+$altdurvalue=60/$product->duration_value; 
+}
 
 }
 
