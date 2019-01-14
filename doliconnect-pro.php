@@ -2199,21 +2199,21 @@ $button .="</script>";
 $currency=$orderfo->multicurrency_code;
 
 if ( $product->type == '1' && !is_null($product->duration_unit) && '0' < ($product->duration_value)) {$duration =__( 'for', 'doliconnect-pro' ).' '.$product->duration_value.' ';
-if ( $product->duration_value>1) {
-if ( $product->duration_unit==y) {$duration .=__( 'years', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==m)  {$duration .=__( 'months', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==d)  {$duration .=__( 'days', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==h)  {$duration .=__( 'hours', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==i)  {$duration .=__( 'minutes', 'doliconnect-pro' );}
+if ( $product->duration_value >1 ) {
+if ( $product->duration_unit == y ) { $duration .=__( 'years', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == m )  {$duration .=__( 'months', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == d )  {$duration .=__( 'days', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == h )  {$duration .=__( 'hours', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == i )  {$duration .=__( 'minutes', 'doliconnect-pro' ); }
 } else {
-if ( $product->duration_unit==y) {$duration .=__( 'year', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==m)  {$duration .=__( 'month', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==d)  {$duration .=__( 'day', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==h)  {$duration .=__( 'hour', 'doliconnect-pro' );}
-elseif ( $product->duration_unit==i)  {$duration .=__( 'minute', 'doliconnect-pro' );}
+if ( $product->duration_unit == y ) {$duration .=__( 'year', 'doliconnect-pro' );}
+elseif ( $product->duration_unit == m )  { $duration .=__( 'month', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == d )  { $duration .=__( 'day', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == h )  { $duration .=__( 'hour', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == i )  { $duration .=__( 'minute', 'doliconnect-pro' ); }
 }
-$altdurvalue=$product->duration_value*60;
-$duration .= "<br> ".$altdurvalue." / ".__( 'minute', 'doliconnect-pro' );
+
+$altdurvalue=60/$product->duration_value;
 
 }
 
@@ -2221,19 +2221,22 @@ if ( !empty($product->multiprices_ttc) ) {
 $lvl=constant("PRICE_LEVEL");
 $count=1;
 //$button .=$lvl;
-foreach ($product->multiprices_ttc as $level => $price) {
-if ((constant("PRICE_LEVEL") == 0 && $level == 1) || constant("PRICE_LEVEL")==$level) {
-$button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice($price,$currency);
-if (empty($time)) {$button .=' '.$duration;}
+foreach ( $product->multiprices_ttc as $level => $price ) {
+if ( (constant("PRICE_LEVEL") == 0 && $level == 1 ) || constant("PRICE_LEVEL") == $level ) {
+$button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice( $price, $currency);
+if ( empty($time) ) { $button .=' '.$duration; }
 $button .='</h5>';
+if ( !empty($altdurvalue) ) { $button .= "<h6 class='mb-1 text-right'>soit ".doliprice( $altdurvalue*$price, $currency)." par ".__( 'hour', 'doliconnect-pro' )."</h6>"; } 
 $button .='<small class="float-right">'.__( 'You benefit from the rate', 'doliconnect-pro' ).' '.doliconst(PRODUIT_MULTIPRICES_LABEL.$level).'</small>';
 }
 $count++; 
 }
 } else {
-$button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice($product->price_ttc,$currency);
-if (empty($time)) {$button .=' '.$duration;} 
+$button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice( $product->price_ttc, $currency);
+if ( empty($time) ) { $button .=' '.$duration; } 
 $button .='</h5>';
+if ( !empty($altdurvalue) ) { $button .= "<h6 class='mb-1 text-right'>soit ".doliprice( $altdurvalue*$product->price_ttc, $currency)." par ".__( 'hour', 'doliconnect-pro' )."</h6>"; } 
+
 }
 
 if (constant("PRICE_LEVEL") > 0){
