@@ -1510,7 +1510,7 @@ echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice(
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
 echo "<input type='hidden' name='product_line' value='$line->id'><input type='hidden' name='product_price' value='$line->subprice'><input type='hidden' name='product_update' value='$line->fk_product'>";
-echo "<select name='product_qty' onchange='this.form.submit()'>";
+echo "<select class='form-control' name='product_qty' onchange='this.form.submit()'>";
 if (($product->stock_reel-$line->qty > '0' && $product->type == '0')) {
 if ($product->stock_reel-$line->qty >= '10' ) {
 $m2 = 10;
@@ -1613,17 +1613,21 @@ $resultatsc = CallAPI("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=
 
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
-$boutik.= "<a href='?category=$categorie->id' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
+$boutik.= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
 }}}
+
 $catoption = CallAPI("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, MONTH_IN_SECONDS);
 
-$boutik.= "<a href='?category=$catoption->value' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>
-</ul></div>";
+if ( !empty($catoption->value) && is_user_logged_in() ) {
+$boutik.= "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
+}
+
+$boutik.= "</ul></div>";
 } else {
-if (isset($_GET['product'])) {
+if ( isset($_GET['product']) ) {
 addtodolibasket(esc_attr($_GET['product']), esc_attr($_POST['product_update'][$_GET['product']][qty]), esc_attr($_POST['product_update'][$_GET['product']][price]));
 //echo $_POST['product_update'][$_GET['product']][product];
-wp_redirect(esc_url(doliconnecturl('dolishop')."?category=".$_GET['category']));
+wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnecturl('dolishop')) ) );
 exit;
 }
 $boutik.= "<table class='table' width='100%'>";
