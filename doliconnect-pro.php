@@ -13,7 +13,7 @@
  * Domain Path: /languages
  *
  * @author ptibogxiv.net <support@ptibogxiv.net>
- * @copyright Copyright (c) 2017-2018, ptibogxiv.net
+ * @copyright Copyright (c) 2017-2019, ptibogxiv.net
 **/
 
 // Exit if accessed directly.
