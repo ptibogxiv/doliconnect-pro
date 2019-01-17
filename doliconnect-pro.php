@@ -978,6 +978,7 @@ $year = strftime("%Y",$time);
 
 // modal for login
 if ( !is_user_logged_in() ){
+
 echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
@@ -1653,7 +1654,6 @@ return $boutik;
 add_shortcode('dolishop', 'dolishop_shortcode');
 
 // ********************************************************
-
 function socialconnect( $url ) {
 
 include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/includes/hybridauth/src/autoload.php');
@@ -1665,7 +1665,7 @@ $adapters = $hybridauth->getConnectedAdapters();
 foreach ($hybridauth->getProviders() as $name) {
 
 if (!isset($adapters[$name])) {
-$connect .= "<a href='".doliconnecturl('doliaccount')."?provider=".$name."' onclick='loadingLoginModal()' role='button' class='btn btn-block btn-".strtolower($name)."' title='".__( 'Sign in with', 'doliconnect-pro' )." ".$name."'><b><i class='fab fa-".strtolower($name)." fa-lg float-left'></i> ".__( 'Sign in with', 'doliconnect-pro' )." ".$name."</b></a>";
+$connect .= "<a href='".doliconnecturl('doliaccount')."?provider=".$name."' onclick='loadingLoginModal()' role='button' class='btn btn-block btn-outline-dark' title='".__( 'Sign in with', 'doliconnect-pro' )." ".$name."'><b><i class='fab fa-".strtolower($name)." fa-lg float-left'></i> ".__( 'Sign in with', 'doliconnect-pro' )." ".$name."</b></a>";
 }
 }
 if (!empty($hybridauth->getProviders())) {
@@ -1674,7 +1674,6 @@ $connect .= '<div><div style="display:inline-block;width:46%;float:left"><hr wid
 
 return $connect;
 }
-
 // ********************************************************
 
 function doligateway( $ref, $total, $currency, $redirect,$mode) {
