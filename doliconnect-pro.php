@@ -196,7 +196,7 @@ echo "<li class='list-group-item list-group-item-action flex-column align-items-
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
 echo " ><label class='custom-control-label w-100' for='BkDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
-echo "<center><i class='fas fa-university fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank levy', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'Via SEPA Direct Debit', 'doliconnect-pro' )."</small>";
+echo "<center><i class='fas fa-university fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'Via SEPA Direct Debit', 'doliconnect-pro' )."</small>";
 echo '</div></div></label></div></li>';
 echo '<li class="list-group-item list-group-item-secondary" id="BankForm" style="display: none">';
 echo "<p class='text-justify'>";
@@ -247,7 +247,7 @@ echo "<li id='VirForm' class='list-group-item list-group-item-action flex-column
 if ( $listsource->sources == null && $listsource->card != 1 ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_vir'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"></i></center>';
-echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank Transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
+echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
 echo '</div></div></label></div></li>';
 }
 
@@ -929,7 +929,7 @@ global $wpdb;
 
 doliconnect_enqueues();
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {
 echo "<script>";
 ?>
 function DoliconnectShowPrivacyDiv() {
@@ -948,7 +948,7 @@ echo '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navb
 echo apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
 echo '</div>    
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">'.__( 'I approve', 'doliconnect-pro' ).'</button>
+        <button type="button" class="btn btn-success" >'.__( 'I approve', 'doliconnect-pro' ).'</button>
         <a href="'.wp_logout_url( get_permalink() ).'" type="button" class="btn btn-danger">'.__( 'I refuse', 'doliconnect-pro' ).'</a>
       </div>
     </div>
