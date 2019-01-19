@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect Pro
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.2.1
+ * Version: 1.2.2
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once plugin_dir_path( __FILE__ ) . '/lib/wp-package-updater/class-wp-package-updater.php';
+require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-package-updater.php';
 
 /** Enable plugin updates with license check **/
  $doliconnectpro = new WP_Package_Updater(
