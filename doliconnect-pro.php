@@ -21,22 +21,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once plugin_dir_path(__FILE__).'/update/plugin-update-checker.php';
-$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://www.ptibogxiv.net/?update_action=get_metadata&slug=doliconnect-pro',
-	__FILE__,
-	'doliconnect-pro'
-);
+require_once plugin_dir_path( __FILE__ ) . '/lib/wp-package-updater/class-wp-package-updater.php';
+
+/** Enable plugin updates with license check **/
+ $doliconnectpro = new WP_Package_Updater(
+ 	'https://www.ptibogxiv.net',
+ 	wp_normalize_path( __FILE__ ),
+ 	wp_normalize_path( plugin_dir_path( __FILE__ ) ),
+ 	true
+ );
 
 //Add the license key to query arguments.
-$myUpdateChecker->addQueryArgFilter('doliconnectpro_filter_update_checks');
-function doliconnectpro_filter_update_checks($queryArgs) {
-    $settings = get_site_option('license_private_key');
-    if ( !empty($settings) ) {
-        $queryArgs['license'] = $settings;
-    }
-    return $queryArgs;
-}
+//$myUpdateChecker->addQueryArgFilter('doliconnectpro_filter_update_checks');
+//function doliconnectpro_filter_update_checks($queryArgs) {
+//    $settings = get_site_option('license_private_key');
+//    if ( !empty($settings) ) {
+//        $queryArgs['license'] = $settings;
+//    }
+//    return $queryArgs;
+//}
 
 load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -1656,8 +1659,8 @@ add_shortcode('dolishop', 'dolishop_shortcode');
 // ********************************************************
 function socialconnect( $url ) {
 
-include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/includes/hybridauth/src/autoload.php');
-include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/includes/hybridauth/src/config.php');
+include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/autoload.php');
+include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/config.php');
 
 $hybridauth = new Hybridauth\Hybridauth($config);
 $adapters = $hybridauth->getConnectedAdapters();
