@@ -23,7 +23,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-package-updater.php';
 
-/** Enable plugin updates with license check **/
  $doliconnectpro = new WP_Package_Updater(
  	'https://www.ptibogxiv.net',
  	wp_normalize_path( __FILE__ ),
@@ -37,7 +36,6 @@ function doliconnectpro_run() {
 
 add_action( 'user_doliconnect_menu', 'paymentmodes_menu', 4, 1);
 add_action( 'user_doliconnect_paymentmodes', 'paymentmodes_module');
-
 
 function dolipaymentmodes_lock() {
 return apply_filters( 'doliconnect_paymentmodes_lock', null);
@@ -119,10 +117,6 @@ echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
 }
-
-}
-add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
-
 
 function dolipaymentmodes( $object, $redirect, $url, $delay) {
 global $current_user;
@@ -953,159 +947,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 
 }
 
-// ********************************************************
-
-function doliconnect_privacy() {
-global $wpdb;
-
-doliconnect_enqueues();
-
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {
-echo "<script>";
-?>
-function DoliconnectShowPrivacyDiv() {
-jQuery('#DoliconnectPrivacyModal').modal('show');
-}
-
-window.onload=DoliconnectShowPrivacyDiv;
-<?php
-echo "</SCRIPT>";
-
-echo '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
-<div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - V'.get_the_modified_date( $d, get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
-//echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-echo '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
-echo apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
-echo '</div>    
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" >'.__( 'I approve', 'doliconnect-pro' ).'</button>
-        <a href="'.wp_logout_url( get_permalink() ).'" type="button" class="btn btn-danger">'.__( 'I refuse', 'doliconnect-pro' ).'</a>
-      </div>
-    </div>
-  </div>
-</div>';
-}
-
-if ( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) )) {
-echo "<script>";
-?>
-function DoliconnectShowLoginDiv() {
-jQuery('#DoliconnectLogin').modal('show');
-}
-
-window.onload=DoliconnectShowLoginDiv;
-<?php
-echo "</SCRIPT>";
-}
-
-}
-add_action( 'wp_footer', 'doliconnect_privacy' );
-
-function doliconnect_modal() {
-global $wpdb,$current_user;
-$entity = get_current_blog_id();
-$year = strftime("%Y",$time);
-
-// modal for login
-if ( !is_user_logged_in() ){
-
-echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
-<div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
-
-if ( empty(get_option('doliconnectrestrict')) ) {
-echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
-} else {
-echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Restrict to users', 'doliconnect-pro' )."</h5>";
-}
-
-echo "</div><div class='modal-body'><div id='loginmodal-form'>";
-echo "<b>".get_option('doliaccountinfo')."</b>";
-
-if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
-echo socialconnect(get_permalink());
-}
-
-if (function_exists('secupress_get_module_option') && secupress_get_module_option('move-login_slug-login', $slug, 'users-login' )) {
-$login_url=site_url()."/".secupress_get_module_option('move-login_slug-login', $slug, 'users-login' ); 
-}else{
-$login_url=site_url()."/wp-login.php"; }
-
-if ( function_exists('dolikiosk') && ! empty(dolikiosk()) ) {
-$redirect_to=doliconnecturl('doliaccount');
-} else {
-$redirect_to=get_permalink();
-}
-
-echo "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
-echo "<script>";
-?>
-
-var form = document.getElementById('loginmodal-form');
-form.addEventListener('submit', function(event) { 
-jQuery(window).scrollTop(0);
-jQuery('#CloseModalLogin').hide(); 
-jQuery('#FooterModalLogin').hide();
-jQuery('#loginmodal-form').hide(); 
-jQuery('#doliloading-login-modal').show(); 
-console.log("submit");
-formmodallogin.submit();
-});
-
-<?php
-echo "</script>";
-echo "<div class='form-group'>
-<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
-<div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
-<input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro' )."' name='log' value='' required>";
-echo "</div></div><div class='form-group'>
-<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
-<div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
-<input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro' )."' name='pwd' value ='' required>";
-echo "</div></div>";
-
-//if ( function_exists('dolikiosk') && empty(dolikiosk()) ) {
-if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
-switch_to_blog(1);
-} 
-echo "<div><div class='float-left'><small>";
-if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register') == '1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
-echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'>".__( 'Create an account', 'doliconnect-pro' )."</a>";
-}
-//<input type='checkbox' class='custom-control-input' value='forever' id='remembermemodal' name='rememberme'>";
-//echo "<label class='custom-control-label' for='remembermemodal'> ".__( 'Remember me', 'doliconnect-pro' )."</label>";
-echo "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'>".__( 'Forgot password?', 'doliconnect-pro' )."</a></small></div></div>"; 
-if (get_site_option('doliconnect_mode')=='one') {
-restore_current_blog();
-}
-//}
-
-//<small>";
-//if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register')=='1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) 
-//{echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'><i class='fas fa-user-plus'></i> ".__( 'Create an account', 'doliconnect-pro' )."</a> | ";
-//}
-//echo "<a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'><i class='fas fa-user-shield'></i> ".__( 'Forgot password?', 'doliconnect-pro' )."</a>";
-//echo " | ";
-//echo dolihelp('ISSUE');
-///echo "</small>
-
-echo "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
-echo doliloading('login-modal');
-echo "</div><div id='FooterModalLogin' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
-echo "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
-
-// modal for CGU
-if (get_option('dolicgvcgu')){
-echo "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content'><div class='modal-header'>
-<h5 class='modal-title' id='exampleModalLongTitle'>Conditions Generales d'Utilisation</h5>
-<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>
-<div class='modal-body'>
-en cours d'integration
-</div></div></div></div>";}
-}
-add_action( 'wp_footer', 'doliconnect_modal' );
-// ********************************************************
-function dolicart_shortcode(){
+function dolicart_shortcode() {
 global $wpdb,$current_user;
 $current_user =  wp_get_current_user();
 $entity = get_current_blog_id();
@@ -1684,6 +1526,160 @@ return $boutik;
 }
 add_shortcode('dolishop', 'dolishop_shortcode');
 
+}
+add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
+
+// ********************************************************
+
+function doliconnect_privacy() {
+global $wpdb;
+
+doliconnect_enqueues();
+
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {
+echo "<script>";
+?>
+function DoliconnectShowPrivacyDiv() {
+jQuery('#DoliconnectPrivacyModal').modal('show');
+}
+
+window.onload=DoliconnectShowPrivacyDiv;
+<?php
+echo "</SCRIPT>";
+
+echo '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
+<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - V'.get_the_modified_date( $d, get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
+//echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+echo '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
+echo apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
+echo '</div>    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" >'.__( 'I approve', 'doliconnect-pro' ).'</button>
+        <a href="'.wp_logout_url( get_permalink() ).'" type="button" class="btn btn-danger">'.__( 'I refuse', 'doliconnect-pro' ).'</a>
+      </div>
+    </div>
+  </div>
+</div>';
+}
+
+if ( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) )) {
+echo "<script>";
+?>
+function DoliconnectShowLoginDiv() {
+jQuery('#DoliconnectLogin').modal('show');
+}
+
+window.onload=DoliconnectShowLoginDiv;
+<?php
+echo "</SCRIPT>";
+}
+
+}
+add_action( 'wp_footer', 'doliconnect_privacy' );
+
+function doliconnect_modal() {
+global $wpdb,$current_user;
+$entity = get_current_blog_id();
+$year = strftime("%Y",$time);
+
+// modal for login
+if ( !is_user_logged_in() ){
+
+echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
+<div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
+
+if ( empty(get_option('doliconnectrestrict')) ) {
+echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+} else {
+echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Restrict to users', 'doliconnect-pro' )."</h5>";
+}
+
+echo "</div><div class='modal-body'><div id='loginmodal-form'>";
+echo "<b>".get_option('doliaccountinfo')."</b>";
+
+if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
+echo socialconnect(get_permalink());
+}
+
+if (function_exists('secupress_get_module_option') && secupress_get_module_option('move-login_slug-login', $slug, 'users-login' )) {
+$login_url=site_url()."/".secupress_get_module_option('move-login_slug-login', $slug, 'users-login' ); 
+}else{
+$login_url=site_url()."/wp-login.php"; }
+
+if ( function_exists('dolikiosk') && ! empty(dolikiosk()) ) {
+$redirect_to=doliconnecturl('doliaccount');
+} else {
+$redirect_to=get_permalink();
+}
+
+echo "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
+echo "<script>";
+?>
+
+var form = document.getElementById('loginmodal-form');
+form.addEventListener('submit', function(event) { 
+jQuery(window).scrollTop(0);
+jQuery('#CloseModalLogin').hide(); 
+jQuery('#FooterModalLogin').hide();
+jQuery('#loginmodal-form').hide(); 
+jQuery('#doliloading-login-modal').show(); 
+console.log("submit");
+formmodallogin.submit();
+});
+
+<?php
+echo "</script>";
+echo "<div class='form-group'>
+<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
+<div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
+<input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro' )."' name='log' value='' required>";
+echo "</div></div><div class='form-group'>
+<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
+<div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
+<input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro' )."' name='pwd' value ='' required>";
+echo "</div></div>";
+
+//if ( function_exists('dolikiosk') && empty(dolikiosk()) ) {
+if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
+switch_to_blog(1);
+} 
+echo "<div><div class='float-left'><small>";
+if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register') == '1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
+echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'>".__( 'Create an account', 'doliconnect-pro' )."</a>";
+}
+//<input type='checkbox' class='custom-control-input' value='forever' id='remembermemodal' name='rememberme'>";
+//echo "<label class='custom-control-label' for='remembermemodal'> ".__( 'Remember me', 'doliconnect-pro' )."</label>";
+echo "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'>".__( 'Forgot password?', 'doliconnect-pro' )."</a></small></div></div>"; 
+if (get_site_option('doliconnect_mode')=='one') {
+restore_current_blog();
+}
+//}
+
+//<small>";
+//if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register')=='1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) 
+//{echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'><i class='fas fa-user-plus'></i> ".__( 'Create an account', 'doliconnect-pro' )."</a> | ";
+//}
+//echo "<a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'><i class='fas fa-user-shield'></i> ".__( 'Forgot password?', 'doliconnect-pro' )."</a>";
+//echo " | ";
+//echo dolihelp('ISSUE');
+///echo "</small>
+
+echo "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
+echo doliloading('login-modal');
+echo "</div><div id='FooterModalLogin' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
+echo "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
+
+// modal for CGU
+if (get_option('dolicgvcgu')){
+echo "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content'><div class='modal-header'>
+<h5 class='modal-title' id='exampleModalLongTitle'>Conditions Generales d'Utilisation</h5>
+<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>
+<div class='modal-body'>
+en cours d'integration
+</div></div></div></div>";}
+}
+add_action( 'wp_footer', 'doliconnect_modal' );
 // ********************************************************
 function socialconnect( $url ) {
 
