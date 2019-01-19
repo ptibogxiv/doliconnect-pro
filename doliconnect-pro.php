@@ -107,7 +107,12 @@ echo "<div class='card shadow-sm'>";
 
 echo "<ul class='list-group list-group-flush'><li class='list-group-item'>";
 
-echo "developpement en cours";
+$licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wppus_licenses WHERE email = '".$current_user->user_email."'") ;
+// Parcours des resultats obtenus
+foreach ($licenses as $post) {
+ echo $post->license_key." / ".$post->max_allowed_domains." / ".maybe_unserialize($post->allowed_domains)." / ".$post->date_expiry." / ".$post->package_slug." / ".$post->package_type;
+ echo '<br/>' ;
+}
 
 echo "</li></ul></div>";
 
