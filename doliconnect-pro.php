@@ -31,17 +31,9 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
  	true
  );
 
-//Add the license key to query arguments.
-//$myUpdateChecker->addQueryArgFilter('doliconnectpro_filter_update_checks');
-//function doliconnectpro_filter_update_checks($queryArgs) {
-//    $settings = get_site_option('license_private_key');
-//    if ( !empty($settings) ) {
-//        $queryArgs['license'] = $settings;
-//    }
-//    return $queryArgs;
-//}
-
 load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+
+function doliconnectpro_run() {
 
 add_action( 'user_doliconnect_menu', 'paymentmodes_menu', 4, 1);
 add_action( 'user_doliconnect_paymentmodes', 'paymentmodes_module');
@@ -83,7 +75,7 @@ $gateway = CallAPI("DELETE", "/doliconnector/".constant("DOLIBARR")."/sources/".
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 }
 
-if ($action == 'addsource' && $srcid){
+if ($action == 'addsource' && $srcid) {
 $src = [
 'default' => 0
 ];
@@ -95,6 +87,42 @@ $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", nul
 dolipaymentmodes(null, $url, $url, dolidelay($delay, $_GET["refresh"]));
 
 }
+
+if ( is_plugin_active( 'wp-plugin-update-server/wp-plugin-update-server.php' ) ) {
+add_action( 'compta_doliconnect_menu', 'pluginupdatelicense_menu', 5, 1);
+add_action( 'compta_doliconnect_pluginupdatelicense', 'pluginupdatelicense_module' );
+}  
+
+function pluginupdatelicense_menu( $arg ) {
+echo "<a href='".esc_url( add_query_arg( 'module', 'pluginupdatelicense', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
+if ($arg=='pluginupdatelicense') { echo " active";}
+echo "'>".__( 'Download & license', 'doliconnect' )."</a>";
+}
+
+function pluginupdatelicense_module( $url ) {
+global $wpdb,$current_user;
+$entity = get_current_blog_id();
+$ID = $current_user->ID;
+
+echo "<div class='card shadow-sm'>";
+
+
+echo "<ul class='list-group list-group-flush'><li class='list-group-item'>";
+
+echo "developpement en cours";
+
+echo "</li></ul></div>";
+
+echo "<small><div class='float-left'>";
+echo dolirefresh("/donation/".constant("DOLIBARR"), $url, $delay);
+echo "</div><div class='float-right'>";
+echo dolihelp('ISSUE');
+echo "</div></small>";
+}
+
+}
+add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
+
 
 function dolipaymentmodes( $object, $redirect, $url, $delay) {
 global $current_user;
