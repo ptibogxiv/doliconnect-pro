@@ -11,6 +11,10 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: doliconnect-pro
  * Domain Path: /languages
+ * Icon1x: https://www.ptibogxiv.net/wp-content/wppus/icons/doliconnect-pro-128x128.png
+ * Icon2x: https://www.ptibogxiv.net/wp-content/wppus/icons/doliconnect-pro-256x256.png
+ * BannerHigh: https://raw.githubusercontent.com/froger-me/wp-plugin-update-server/master/examples/banner-1544x500.png
+ * BannerLow: https://www.ptibogxiv.net/wp-content/wppus/banners/doliconnect-pro-722x250.png
  *
  * @author ptibogxiv.net <support@ptibogxiv.net>
  * @copyright Copyright (c) 2017-2019, ptibogxiv.net
@@ -111,7 +115,8 @@ $licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wppus_licenses WHER
 // Parcours des resultats obtenus
 foreach ($licenses as $post) {
  echo "<a href='".site_url()."/wp-update-server/?action=download&package_id=".$post->package_slug."&token=".get_site_option('wppus_package_download_url_token')."&update_license_key=".$post->license_key."&update_license_signature=xyIX4lQKvULMJ3DgqXBKvKHjR6we1jh1T7sR8KCpskJlvMB74sG3TVn6ESUWtHYKMGQaff_yEaC3uYHhCgEdtQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx&update_type=".$post->package_type."&type=".$post->package_type."'>".$post->license_key."</a> / ".$post->max_allowed_domains." / ".maybe_unserialize($post->allowed_domains)." / ".$post->date_expiry." / ".$post->package_slug." / ".$post->package_type;
-//&update_license_signature=xyIX4lQKvULMJ3DgqXBKvKHjR6we1jh1T7sR8KCpskJlvMB74sG3TVn6ESUWtHYKMGQaff_yEaC3uYHhCgEdtQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx
+echo base64_encode(hash_hmac('sha256', $post->license_key, get_site_option('wppus_license_hmac_key')) . $post->license_key);
+
  echo '<br/>' ;
 }
 
