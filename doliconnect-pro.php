@@ -54,7 +54,7 @@ return apply_filters( 'doliconnect_paymentmodes_lock', null);
 function paymentmodes_menu( $arg ) {
 echo "<a href='".esc_url( add_query_arg( 'module', 'paymentmodes', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
 if ($arg=='paymentmodes') { echo " active";}
-echo "'>".__( 'Payment methods', 'doliconnect-pro' )."</a>";
+echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 }
 
 function paymentmodes_module( $url ) {
