@@ -57,7 +57,7 @@ if ($arg=='paymentmodes') { echo " active";}
 echo "'>".__( 'Payment methods', 'doliconnect-pro' )."</a>";
 }
 
-function paymentmodes_module( $url ){
+function paymentmodes_module( $url ) {
 $action = sanitize_text_field($_GET['action']);
 $srcid = sanitize_text_field($_GET['source']);
 
@@ -86,7 +86,10 @@ $gateway = CallAPI("POST", "/doliconnector/".constant("DOLIBARR")."/sources/".$s
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 } 
 
-dolipaymentmodes(null, $url, $url, dolidelay($delay, $_GET["refresh"]));
+$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, $_GET["refresh"]));
+//echo $listsource;
+
+dolipaymentmodes($listsource, null, $url, $url);
 
 }
 
@@ -129,14 +132,11 @@ echo dolihelp('ISSUE');
 echo "</div></small>";
 }
 
-function dolipaymentmodes( $object, $redirect, $url, $delay) {
+function dolipaymentmodes($listsource, $object, $redirect, $url) {
 global $current_user;
 
 $currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');
 $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
-
-$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, $delay);
-//echo $listsource;
 
 $lock = dolipaymentmodes_lock();
 
@@ -1195,10 +1195,13 @@ echo $current_user->user_email."<br>".$thirdparty->phone;
 
 echo "</div></div></div><div class='col-12 col-md-8'>";
 
+$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay( DAY_IN_SECONDS, $_GET["refresh"]));
+//echo $listsource;
+
 if ( !empty($orderfo->paymentintent) ) {
-dolipaymentmodes($orderfo,esc_url(get_permalink())."?pay",esc_url(get_permalink())."?pay", 0);
+dolipaymentmodes($listsource, $orderfo, esc_url(get_permalink())."?pay", esc_url(get_permalink())."?pay");
 } else {
-doligateway('Total',$orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code,esc_url(get_permalink())."?pay",'full','',WEEK_IN_SECONDS);
+doligateway($listsource, 'Total', $orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc, $orderfo->multicurrency_code, esc_url(get_permalink())."?pay", 'full');
 echo doliloading('paymentmodes');
 }
 
@@ -1715,12 +1718,10 @@ return $connect;
 }
 // ********************************************************
 
-function doligateway( $ref, $total, $currency, $redirect,$mode) {
+function doligateway($listsource, $ref, $total, $currency, $redirect, $mode) {
 global $current_user,$wpdb;
-$entity = get_current_blog_id();
 $currency=strtolower($currency);
-$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, HOUR_IN_SECONDS);
-//echo $listsource;
+
 
 echo "<script src='https://js.stripe.com/v3/'></script><script>";
 if ( $listsource->code_account != null ) {
