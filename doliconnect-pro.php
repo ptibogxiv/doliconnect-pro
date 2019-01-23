@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Doliconnect PRO
+ * Plugin Name: Doliconnect Pro
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
  * Version: 1.2.4
@@ -34,10 +34,7 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
  	true
  );
 
-function doliconnect_pro_textdomain() {
-    load_plugin_textdomain( 'doliconnect-pro', false, basename( dirname( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'plugins_loaded', 'doliconnect_pro_textdomain' );
+load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 function doliconnectpro_run() {
 
@@ -61,38 +58,35 @@ echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 }
 
 function paymentmodes_module( $url ) {
-$action = sanitize_text_field($_GET['action']);
-$srcid = sanitize_text_field($_GET['source']);
-
 $delay = DAY_IN_SECONDS;
 
-if ($action == 'setassourcedefault') {
+if ( isset($_GET['action']) && $_GET['action'] == 'setassourcedefault' ) {
 $adh = [
     'default' => 1
 	];
 
-$gateway = CallAPI("PUT", "/doliconnector/".constant("DOLIBARR")."/sources/".$srcid, $adh, dolidelay( 0, true));
+$gateway = CallAPI("PUT", "/doliconnector/".constant("DOLIBARR")."/sources/".sanitize_text_field($_GET['source']), $adh, dolidelay( 0, true));
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 } 
 
-if ($_POST['modepayment'] != 'src_newcard' && $srcid && $action == 'deletesource'){
-$gateway = CallAPI("DELETE", "/doliconnector/".constant("DOLIBARR")."/sources/".$srcid, null, dolidelay( 0, true));
+if ( isset($_POST['modepayment']) && isset($_GET['action']) &&  $_POST['modepayment'] != 'src_newcard' && sanitize_text_field($_GET['source']) && $_GET['action'] == 'deletesource' ) {
+$gateway = CallAPI("DELETE", "/doliconnector/".constant("DOLIBARR")."/sources/".sanitize_text_field($_GET['source']), null, dolidelay( 0, true));
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 }
 
-if ($action == 'addsource' && $srcid) {
+if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'addsource' && sanitize_text_field($_GET['source']) ) {
 $src = [
 'default' => 0
 ];
 
-$gateway = CallAPI("POST", "/doliconnector/".constant("DOLIBARR")."/sources/".$srcid, $src, dolidelay( 0, true));
+$gateway = CallAPI("POST", "/doliconnector/".constant("DOLIBARR")."/sources/".sanitize_text_field($_GET['source']), $src, dolidelay( 0, true));
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 } 
 
-$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, $_GET["refresh"]));
+$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
-dolipaymentmodes($listsource, null, $url, $url);
+dolipaymentmodes($listsource, null, $url, $url, $delay);
 
 }
 
@@ -135,11 +129,13 @@ echo dolihelp('ISSUE');
 echo "</div></small>";
 }
 
-function dolipaymentmodes($listsource, $object, $redirect, $url) {
+function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
 global $current_user;
 
+if ( isset($object) ) {
 $currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');
 $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
+}
 
 $lock = dolipaymentmodes_lock();
 
@@ -188,7 +184,7 @@ if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expirati
 elseif ( $src->default_source == '1' ) { echo " checked "; }
 echo " ><label class='custom-control-label w-100' for='$src->id'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i ';
-if ( $src->type == sepa_debit ) {
+if ( $src->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
 
@@ -199,7 +195,7 @@ else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
 echo '</div><div class="col-9 col-sm-7 col-md-8 col-xl-8 align-middle"><h6 class="my-0">';
-if ( $src->type == sepa_debit ) {
+if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
@@ -342,7 +338,7 @@ echo "</div></div>";
 
 if ( empty($object) ) {
 echo "<small><div class='float-left'>";
-echo dolirefresh("/doliconnector/".constant("DOLIBARR")."/sources",$url,$delay);
+echo dolirefresh("/doliconnector/".constant("DOLIBARR")."/sources", $url, $delay);
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
