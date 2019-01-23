@@ -178,6 +178,15 @@ echo '</div></div></label></div></li>';
 //}
 }
 
+class myCounter implements Countable {
+	public function count() {
+		static $count = 0;
+		return ++$count;
+	}
+}
+ 
+$counter = new myCounter;
+
 //SAVED SOURCES
 if ( $listsource->sources != null ) {  
 foreach ( $listsource->sources as $src ) {                                                                                                                       
@@ -211,7 +220,7 @@ echo "</div></label></div></li>";
 } }
 
 //NEW CARD
-if ( count($listsource->sources) < 5 && $listsource->code_client != null && $listsource->card == 1 ) {      
+if ( count($counter) < 5 && $listsource->code_client != null && $listsource->card == 1 ) {      
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='CdDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newcard' ";
 if ( $listsource->sources == null ) { echo " checked"; }
@@ -229,7 +238,7 @@ echo '</li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
+if ( count($counter) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
