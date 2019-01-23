@@ -132,9 +132,12 @@ echo "</div></small>";
 function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
 global $current_user;
 
-if ( isset($object) ) {
-$currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');
+if ( isset($object) ) { 
+$currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');  
 $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
+} else {
+$currency=strtolower('eur');
+$stripeAmount=0;
 }
 
 $lock = dolipaymentmodes_lock();
@@ -821,7 +824,7 @@ echo "<h4 class='modal-title' id='myModalLabel'>".__( 'Subscription', 'doliconne
 if ( $adherent->id > 0 ) {
 echo "<h6 id ='subscription-h6' class='text-center'>".sprintf(__('Available from %s to %s', 'doliconnect-pro'), strftime("%d/%m/%Y",$adherent->next_subscription_date_start), strftime("%d/%m/%Y",$adherent->next_subscription_date_end));
 
-if ($nextdebut != null ) {
+if ( isset($nextdebut) ) {
 $daterenew =  date_i18n('d/m/Y', $nextdebut);
 } else {
 $daterenew =  date_i18n('d/m/Y', current_time( 'timestamp',1));
@@ -843,12 +846,12 @@ echo "<table class='table table-striped' id ='subscription-table'>";
 if ( ! empty($adherent) && $adherent->statut != 0 ) {
 echo "<tr><td><div class='row'><div class='col-md-8'><b><i class='fas fa-user-slash'></i> ".__( 'Cancel my subscription', 'doliconnect-pro' );
 
-echo "<small></small></b><br /><small class='text-justify text-muted '>".$postadh->note."</small></div><div class='col-md-4'>";
-echo "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'membership', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='2'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-dark btn-block' type='submit'>".__( 'Resiliate', 'doliconnect-pro' )."</button></form>";
+echo "<small></small></b><br /><small class='text-justify text-muted '></small></div><div class='col-md-4'>";
+echo "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'membership', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value=''><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='2'><input type='hidden' name='typeadherent' value=''><button class='btn btn-dark btn-block' type='submit'>".__( 'Resiliate', 'doliconnect-pro' )."</button></form>";
 echo "</td></tr>";
 }
 
-if ( ($adherent->datefin == null) || (current_time( 'timestamp',1)>$next && $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
+if ( !isset($adherent->datefin) || ( $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
 $typeadhesion = CallAPI("GET", "/adherentsplus/type?sortfield=t.family,t.libelle&sortorder=ASC", null);
 //echo $typeadhesion;
 
