@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Doliconnect Pro
+ * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
  * Version: 1.2.4
