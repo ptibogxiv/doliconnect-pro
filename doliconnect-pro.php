@@ -1549,7 +1549,7 @@ add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
 // ********************************************************
 
 function doliconnect_privacy() {
-global $wpdb;
+global $wpdb,$current_user;
 
 doliconnect_enqueues();
 
@@ -1598,7 +1598,7 @@ add_action( 'wp_footer', 'doliconnect_privacy' );
 function doliconnect_modal() {
 global $wpdb,$current_user;
 $entity = get_current_blog_id();
-$year = strftime("%Y",$time);
+$year = strftime("%Y", current_time( 'timestamp', 1));
 
 // modal for login
 if ( !is_user_logged_in() ){
