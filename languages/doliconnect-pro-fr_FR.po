@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-01-22 22:21+0100\n"
-"PO-Revision-Date: 2019-01-22 22:24+0100\n"
+"POT-Creation-Date: 2019-01-23 09:57+0100\n"
+"PO-Revision-Date: 2019-01-23 09:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -613,8 +613,8 @@ msgid "License key to change:"
 msgstr "Clé de licence à changer:"
 
 #. Plugin Name of the plugin/theme
-msgid "Doliconnect Pro"
-msgstr "Doliconnect Pro"
+msgid "Doliconnect PRO"
+msgstr "Doliconnect PRO"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ptibogxiv.net"

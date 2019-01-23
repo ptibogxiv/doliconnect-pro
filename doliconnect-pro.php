@@ -101,7 +101,7 @@ add_action( 'compta_doliconnect_pluginupdatelicense', 'pluginupdatelicense_modul
 function pluginupdatelicense_menu( $arg ) {
 echo "<a href='".esc_url( add_query_arg( 'module', 'pluginupdatelicense', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
 if ($arg=='pluginupdatelicense') { echo " active";}
-echo "'>".__( 'Downloads & licenses', 'doliconnect' )."</a>";
+echo "'>".__( 'Downloads & licenses', 'doliconnect-pro' )."</a>";
 }
 
 function pluginupdatelicense_module( $url ) {
