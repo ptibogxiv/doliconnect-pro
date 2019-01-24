@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Doliconnect Pro
+ * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.2.5
+ * Version: 1.2.6
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -869,7 +869,7 @@ foreach ($typeadhesion as $postadh) {
 $montant1 = $postadh->price;
 $montant2 = $tx*$postadh->price; 
 
-if ( $postadh->subscription == '1' || ($postadh->subscription == '0' && ( $postadh->id == $adherent->typeid ) && $adherent->statut == '1') ) {
+if ( $postadh->statut == '1' || ($postadh->statut == '0' && ( $postadh->id == $adherent->typeid ) && $adherent->statut == '1') ) {
 echo "<tr><td><div class='row'><div class='col-md-8'><b>";
 if ($postadh->family =='1') {
 echo "<i class='fas fa-users fa-fw'></i> ";
@@ -891,8 +891,8 @@ if ( $adherent->datefin != null && $adherent->statut == 1 && $adherent->datefin 
 echo "<button class='btn btn-info btn-block' disabled>".sprintf(__('From %s', 'doliconnect-pro'), date_i18n('d/m/Y', $adherent->next_subscription_renew))."</a>";
 } elseif ( $postadh->family =='1' ) {
 echo "<a href='".doliconnecturl('doliaccount')."?module=ticket&type=COM&create' class='btn btn-info btn-block' role='button'>".__( 'Contact us', 'doliconnect-pro' )."</a>";
-} elseif ( ( $postadh->automatic_renew != '1' ) && ( $postadh->id == $adherent->typeid ) ) {
-echo "<button class='btn btn-secondary btn-block' disabled>".__( 'Not available', 'doliconnect-pro' )."</a>";
+} elseif ( ( $postadh->automatic_renew != '1' || $postadh->statut == '0' ) && ( $postadh->id == $adherent->typeid ) ) {
+echo "<button class='btn btn-secondary btn-block' disabled>".__( 'Non-renewable', 'doliconnect-pro' )."</a>";
 } elseif ( ($postadh->automatic == '1' ) && ($postadh->id == $adherent->typeid) ) {
 if ( $adherent->statut == '1' ) {
 if ( $adherent->datefin == null ) {echo "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'membership', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='4'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-success btn-block' type='submit'>".__( 'Pay', 'doliconnect-pro' )."</button></form>";}
