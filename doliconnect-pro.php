@@ -1408,7 +1408,7 @@ var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
 
 jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0);    
+jQuery(window).scrollTop(0);     
 console.log("submit");
 form.submit();
 
@@ -2291,6 +2291,11 @@ $ln=$line->id;
 }
 }}
 
+if (!isset($qty) ) {
+$qty=null;
+$ln=null;
+}
+
 $button .="<form id='product-add-form-$product->id' role='form' action='".doliconnecturl('dolishop')."?category=".$category."&product=".$product->id."'  method='post'>";
 $button .="<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='product_update[".$product->id."][product]' value='$product->id'>";
 $button .="<script type='text/javascript' language='javascript'>";
@@ -2354,31 +2359,31 @@ $price_ttc=$product->price_ttc;
 //$button .=doliprice($price_ttc);
 if ( is_user_logged_in() && $add==1 ) {
 $button .="<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' >";
-if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
-if ( $product->stock_reel-$line->qty >= '10' ) {
+if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
+if ( $product->stock_reel-$qty >= '10' ) {
 $m2 = 10;
 } elseif ( $product->stock_reel > $line->qty ) {
 $m2 = $product->stock_reel;
-} else { $m2 = $line->qty; }
+} else { $m2 = $qty; }
 } else {
-if ( $line->qty > 1 ){ $m2 = $line->qty; }
+if ( $line->qty > 1 ){ $m2 = $qty; }
 else {$m2 = 1;}
 }
 for ( $i=0;$i<=$m2;$i++ ) {
-		if ( $i == $line->qty ) {
+		if ( $i == $qty ) {
 $button .="<OPTION value='$i' selected='selected'>$i</OPTION>";
 		} else {
 $button .="<OPTION value='$i' >$i</OPTION>";
 		}
 	}
 $button .="</SELECT><DIV class='input-group-append'><BUTTON class='btn btn-outline-secondary' type='submit'>";
-if ( $line->qty > 0 ) {
+if ( $qty > 0 ) {
 $button .="".__( 'Update', 'doliconnect-pro' )."";
 } else {
 $button .="".__( 'Add', 'doliconnect-pro' )."";
 }
 $button .="</button></div></div>";
-if ( $line->qty > 0 ) {
+if ( $qty > 0 ) {
 $button .="<br /><div class='input-group'><a class='btn btn-block btn-warning' href='".doliconnecturl('dolicart')."' role='button' title='".__( 'Go to cart', 'doliconnect-pro' )."'>".__( 'Go to cart', 'doliconnect-pro' )."</a></div>";
 }
 } elseif ( $add == 1 ) {
