@@ -1408,7 +1408,7 @@ echo '<div class="w-100 justify-content-between"><div class="row"><div class="co
 <h6 class="mb-1">'.$line->libelle.'</h6>
 <p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
-echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line->multicurrency_total_ttc?$line->multicurrency_total_ttc:$line->total_ttc,$orderfo->multicurrency_code).'</h5>';
+echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
 echo "<input type='hidden' name='product_line' value='$line->id'><input type='hidden' name='product_price' value='$line->subprice'><input type='hidden' name='product_update' value='$line->fk_product'>";
@@ -1452,9 +1452,9 @@ echo "<br><br><br><br><br></li>";
 
 if ( isset($orderfo) ) {
 echo "<li class='list-group-item list-group-item-info'>";
-echo "<b>".__( 'Total excl. tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_ht?$orderfo->multicurrency_total_ht:$orderfo->total_ht,$orderfo->multicurrency_code)."</b><br />";
-echo "<b>".__( 'Total tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_tva?$orderfo->multicurrency_total_tva:$orderfo->total_tva,$orderfo->multicurrency_code)."</b><br />";
-echo "<b>".__( 'Total incl. tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code)."</b>";
+echo "<b>".__( 'Total excl. tax', 'doliconnect').": ".doliprice($orderfo, 'ht', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b><br />";
+echo "<b>".__( 'Total tax', 'doliconnect').": ".doliprice($orderfo, 'tva', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b><br />";
+echo "<b>".__( 'Total incl. tax', 'doliconnect').": ".doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b>";
 echo "</li>";
 }
 
