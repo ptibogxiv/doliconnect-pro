@@ -343,7 +343,7 @@ echo "<center>".__( 'No gateway', 'doliconnect-pro' )."</center>";
 } else {
 echo "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
 echo "<div id='payment-request-button'><!-- A Stripe Element will be inserted here. --></div>";
-echo "<button id='PayButton' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc,$currency)."</b></button><div id='CardButton' style='display: none'></div><div id='BankButton' style='display: none'></div><div id='DiscountButton' style='display: none'></div><div id='DeleteButton' style='display: none'></div>";
+echo "<button id='PayButton' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object, 'ttc',$currency)."</b></button><div id='CardButton' style='display: none'></div><div id='BankButton' style='display: none'></div><div id='DiscountButton' style='display: none'></div><div id='DeleteButton' style='display: none'></div>";
 }
 
 echo "</div></div>";
