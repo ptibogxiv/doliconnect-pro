@@ -875,6 +875,7 @@ if ($postadh->family =='1') {
 echo "<i class='fas fa-users fa-fw'></i> ";
 } else {echo "<i class='fas fa-user fa-fw'></i> ";}
 echo $postadh->label." <small>";
+if ( !empty($postadh->subscription) ) {
 if ( ( ($postadh->welcome > '0') && ($adherent->datefin == null )) || (($postadh->welcome > '0') && (current_time( 'timestamp',1) > $adherent->next_subscription_valid) && (current_time( 'timestamp',1) > $adherent->datefin) && $adherent->next_subscription_valid != $adherent->datefin ) ) { 
 $montantdata=($tx*$postadh->price)+$postadh->welcome;
 echo "(";
@@ -885,7 +886,7 @@ echo "(".doliprice($montant1);
 echo " ".__( 'yearly', 'doliconnect-pro' );
 $montantdata=($tx*$postadh->price);
 } 
-echo ")";
+echo ")"; } else { echo "<span class='badge badge-pill badge-primary'>".__( 'Free', 'doliconnect-pro' )."</span>"; }
 echo "</small></b><br /><small class='text-justify text-muted '>".$postadh->note."</small></div><div class='col-md-4'>";
 if ( $adherent->datefin != null && $adherent->statut == 1 && $adherent->datefin > $adherent->next_subscription_renew && $adherent->next_subscription_renew > current_time( 'timestamp',1) ) {
 echo "<button class='btn btn-info btn-block' disabled>".sprintf(__('From %s', 'doliconnect-pro'), date_i18n('d/m/Y', $adherent->next_subscription_renew))."</a>";
