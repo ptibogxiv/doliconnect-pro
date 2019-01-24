@@ -69,7 +69,7 @@ $gateway = CallAPI("PUT", "/doliconnector/".constant("DOLIBARR")."/sources/".san
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 } 
 
-if ( isset($_POST['modepayment']) && isset($_GET['action']) &&  $_POST['modepayment'] != 'src_newcard' && sanitize_text_field($_GET['source']) && $_GET['action'] == 'deletesource' ) {
+if ( isset($_GET['action']) && $_GET['action'] == 'deletesource' ) {
 $gateway = CallAPI("DELETE", "/doliconnector/".constant("DOLIBARR")."/sources/".sanitize_text_field($_GET['source']), null, dolidelay( 0, true));
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 }
