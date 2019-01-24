@@ -60,7 +60,7 @@ echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 function paymentmodes_module( $url ) {
 $delay = DAY_IN_SECONDS;
 
-if ( isset($_GET['action']) && $_GET['action'] == 'setassourcedefault' ) {
+if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'setassourcedefault' ) {
 $adh = [
     'default' => 1
 	];
@@ -69,12 +69,12 @@ $gateway = CallAPI("PUT", "/doliconnector/".constant("DOLIBARR")."/sources/".san
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 } 
 
-if ( isset($_GET['action']) && $_GET['action'] == 'deletesource' ) {
+if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'deletesource' ) {
 $gateway = CallAPI("DELETE", "/doliconnector/".constant("DOLIBARR")."/sources/".sanitize_text_field($_GET['source']), null, dolidelay( 0, true));
 $gateway = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay($delay, true));
 }
 
-if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'addsource' && sanitize_text_field($_GET['source']) ) {
+if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'addsource' ) {
 $src = [
 'default' => 0
 ];
