@@ -985,7 +985,7 @@ echo "<span class='text-muted'>".doliprice($line, 'ttc',isset($orderfo->multicur
 }
 
 if ( constant("REMISE_PERCENT") > 0 ) { 
-$remise_percent = ($total->prx*constant("REMISE_PERCENT"))/100;
+$remise_percent = (0*constant("REMISE_PERCENT"))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
               <div class='text-success'>
                 <h6 class='my-0'>".__( 'Customer discount', 'doliconnect' )."</h6>
@@ -993,7 +993,7 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
               </div>
               <span class='text-success'>-".doliprice($remise_percent, null, isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</span></li>";
 } 
-$total=$subtotal-$remise_percent;            
+//$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
               <span>Total </span>
               <strong>".doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</strong></li>";
@@ -1090,7 +1090,7 @@ echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a>
 
 } elseif (isset($_GET['pay']) && constant("DOLICONNECT_CART_ITEM") > 0) {
 
-if ($_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
+if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
 if ($_POST['modepayment']=='src_vir') {
 $source="2";
@@ -1228,7 +1228,7 @@ echo "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'
 doliminicart($orderfo);
 echo "<div class='card'><div class='card-header'>".__( 'Billing', 'doliconnect-pro' )." <small>(<a href='".esc_url(get_permalink(get_option('dolicart'))."?info")."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><div class='card-body'>";
 
-$thirdparty = CallAPI("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, $_GET["refresh"]));
+$thirdparty = CallAPI("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS,  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 echo $thirdparty->name."<br>";
 echo $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town.", ".strtoupper($thirdparty->country)."<br>";
@@ -1236,7 +1236,7 @@ echo $current_user->user_email."<br>".$thirdparty->phone;
 
 echo "</div></div></div><div class='col-12 col-md-8'>";
 
-$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay( DAY_IN_SECONDS, $_GET["refresh"]));
+$listsource = CallAPI("GET", "/doliconnector/".constant("DOLIBARR")."/sources", null, dolidelay( DAY_IN_SECONDS,  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
 if ( !empty($orderfo->paymentintent) ) {
@@ -1248,9 +1248,9 @@ echo doliloading('paymentmodes');
 
 echo "</div></div>";
 
-} elseif (isset($_GET['info']) && constant("DOLICONNECT_CART_ITEM") > 0){
+} elseif ( isset($_GET['info']) && constant("DOLICONNECT_CART_ITEM") > 0 ) {
 
-if ($_POST['info'] == 'validation' && isset($_GET['info']) && !isset($_GET['pay']) && !isset($_GET['validation'])) {
+if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 
 $ID = $current_user->ID;
 wp_update_user( array( 'ID' => $ID, 'user_email' => sanitize_email($_POST['user_email'])));
@@ -1317,7 +1317,7 @@ form.submit();
 <?php
 echo "</SCRIPT><div class='card'><ul class='list-group list-group-flush'>"; 
 
-echo doliconnectuserform(CallAPI("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, $_GET["refresh"])), dolidelay(MONTH_IN_SECONDS, $_GET["refresh"], true), 'full');
+echo doliconnectuserform(CallAPI("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay(MONTH_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'full');
 
 echo "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='cart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 echo "</div></div>";
@@ -1422,7 +1422,9 @@ echo "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-grou
 if ( isset($orderfo) && $orderfo->lines != null && !empty($orderfo->id) ) {
 
 foreach ($orderfo->lines as $line) {
-echo "<li class='list-group-item'>";     
+echo "<li class='list-group-item'>";
+
+$dates = null;     
 if ( $line->date_start != '' && $line->date_end !='')
 {
 $start = date_i18n('d/m/Y', $line->date_start);
@@ -1538,10 +1540,11 @@ doliconnect_enqueues();
 $shop = CallAPI("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, MONTH_IN_SECONDS);
 //echo $shop;
 
+$boutik ="";
 if (defined("DOLIBUG")) {
 $boutik.= dolibug();
 } else {
-if ( !$_GET['category'] ) {
+if ( !isset($_GET['category']) ) {
 $boutik.= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( $shop->value != null ) {
 $resultatsc = CallAPI("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", "", MONTH_IN_SECONDS);
@@ -2086,7 +2089,7 @@ echo "<script>";
 })();
 <?php
 echo "</script>";
-$countsrc=count($listsource->sources);
+
 echo "<div id='payment-request-button'><!-- A Stripe Element will be inserted here. --></div>
 <div id='else' style='display: none' ><br><div style='display:inline-block;width:46%;float:left'><hr width='90%' /></div><div style='display:inline-block;width: 8%;text-align: center;vertical-align:90%'><small class='text-muted'>".__( 'or', 'doliconnect-pro' )."</small></div><div style='display:inline-block;width:46%;float:right' ><hr width='90%'/></div><br></div>";
 echo "<form role='form' action='$redirect' id='gateway-form' method='post' novalidate>";
@@ -2122,6 +2125,15 @@ echo '</li>';
 //}
 } 
 
+class myCounter implements Countable {
+	public function count() {
+		static $count = 0;
+		return ++$count;
+	}
+}
+ 
+$counter = new myCounter;
+
 //SAVED SOURCES
 if ( $listsource->sources != null ) {  
 foreach ( $listsource->sources as $src ) {                                                                                                                       
@@ -2131,7 +2143,7 @@ if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expirati
 elseif ( $src->default_source == '1' ) { echo " checked "; }
 echo " ><label class='custom-control-label w-100' for='$src->id'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i ';
-if ( $src->type == sepa_debit ) {
+if ( $src->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
 
@@ -2142,7 +2154,7 @@ else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
 echo '</div><div class="col-9 col-sm-7 col-md-8 col-xl-8 align-middle"><h6 class="my-0">';
-if ( $src->type == sepa_debit ) {
+if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
@@ -2154,10 +2166,10 @@ echo "<div class='d-none d-sm-block col-2 align-middle text-right'><img src='".p
 echo "</div></label></div></li>";
 } }
 
-if ($countsrc<5 && $listsource->code_client!=null && $listsource->card==1) {      
+if ( count($counter) < 5 && $listsource->code_client!=null && $listsource->card == 1 ) {      
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='CdDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newcard' ";
-if ($listsource->sources==null) {echo " checked";}
+if ( $listsource->sources==null ) {echo " checked";}
 echo " ><label class='custom-control-label w-100' for='CdDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 echo "</label></div></li>";
@@ -2172,7 +2184,7 @@ echo '</li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($listsource->sources) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
+if ( count($counter) < 5 && $listsource->code_client != null && ( $listsource->sepa_direct == 1 || $listsource->sepa_direct != 1 && $listsource->STRIPE == 0 ) && get_current_blog_id() == 1 ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
@@ -2193,8 +2205,8 @@ echo '<div id="iban-errors" role="alert"></div>';
 echo '</li>';
 }
 
-if ($mode != manage) {
-if ($listsource->PAYPAL!=null && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' )){
+if ( $mode != 'manage' ) {
+if ( $listsource->PAYPAL!=null && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' ) ) {
 echo "<li id='PaypalForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_paypal' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_paypal' ";
 echo " ><label class='custom-control-label w-100' for='src_paypal'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
@@ -2289,20 +2301,20 @@ $currency=$orderfo->multicurrency_code;
 
 if ( $product->type == '1' && !is_null($product->duration_unit) && '0' < ($product->duration_value)) {$duration =__( 'for', 'doliconnect-pro' ).' '.$product->duration_value.' ';
 if ( $product->duration_value > 1 ) {
-if ( $product->duration_unit == y ) { $duration .=__( 'years', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == m )  {$duration .=__( 'months', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == d )  {$duration .=__( 'days', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == h )  {$duration .=__( 'hours', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == i )  {$duration .=__( 'minutes', 'doliconnect-pro' ); }
+if ( $product->duration_unit == 'y' ) { $duration .=__( 'years', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'm' )  {$duration .=__( 'months', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'd' )  {$duration .=__( 'days', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'h' )  {$duration .=__( 'hours', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'i' )  {$duration .=__( 'minutes', 'doliconnect-pro' ); }
 } else {
-if ( $product->duration_unit == y ) {$duration .=__( 'year', 'doliconnect-pro' );}
-elseif ( $product->duration_unit == m )  { $duration .=__( 'month', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == d )  { $duration .=__( 'day', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == h )  { $duration .=__( 'hour', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == i )  { $duration .=__( 'minute', 'doliconnect-pro' ); }
+if ( $product->duration_unit == 'y' ) {$duration .=__( 'year', 'doliconnect-pro' );}
+elseif ( $product->duration_unit == 'm' )  { $duration .=__( 'month', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'd' )  { $duration .=__( 'day', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'h' )  { $duration .=__( 'hour', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'i' )  { $duration .=__( 'minute', 'doliconnect-pro' ); }
 }
 
-if ( $product->duration_unit == i ) {
+if ( $product->duration_unit == 'i' ) {
 $altdurvalue=60/$product->duration_value; 
 }
 
@@ -2324,7 +2336,7 @@ $count++;
 }
 } else {
 $button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice( $product->price_ttc, $currency);
-if ( empty($time) ) { $button .=' '.$duration; } 
+if ( empty($time) && isset($duration) ) { $button .=' '.$duration; } 
 $button .='</h5>';
 if ( !empty($altdurvalue) ) { $button .= "<h6 class='mb-1 text-right'>soit ".doliprice( $altdurvalue*$product->price_ttc, $currency)." par ".__( 'hour', 'doliconnect-pro' )."</h6>"; } 
 
@@ -2345,28 +2357,28 @@ $button .="<div class='input-group'><select class='form-control' name='product_u
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$line->qty >= '10' ) {
 $m2 = 10;
-} elseif ( $product->stock_reel>$line->qty ) {
+} elseif ( $product->stock_reel > $line->qty ) {
 $m2 = $product->stock_reel;
 } else { $m2 = $line->qty; }
 } else {
-if ( $line->qty > 1 ){ $m2=$line->qty; }
+if ( $line->qty > 1 ){ $m2 = $line->qty; }
 else {$m2 = 1;}
 }
 for ( $i=0;$i<=$m2;$i++ ) {
-		if ($i==$qty){
+		if ( $i == $line->qty ) {
 $button .="<OPTION value='$i' selected='selected'>$i</OPTION>";
 		} else {
 $button .="<OPTION value='$i' >$i</OPTION>";
 		}
 	}
 $button .="</SELECT><DIV class='input-group-append'><BUTTON class='btn btn-outline-secondary' type='submit'>";
-if ( $qty > 0 ) {
+if ( $line->qty > 0 ) {
 $button .="".__( 'Update', 'doliconnect-pro' )."";
 } else {
 $button .="".__( 'Add', 'doliconnect-pro' )."";
 }
 $button .="</button></div></div>";
-if ( $qty > 0 ) {
+if ( $line->qty > 0 ) {
 $button .="<br /><div class='input-group'><a class='btn btn-block btn-warning' href='".doliconnecturl('dolicart')."' role='button' title='".__( 'Go to cart', 'doliconnect-pro' )."'>".__( 'Go to cart', 'doliconnect-pro' )."</a></div>";
 }
 } elseif ( $add == 1 ) {
@@ -2375,7 +2387,7 @@ $button .="<div class='input-group'><a class='btn btn-block btn-outline-secondar
 $button .="<div class='input-group'><a class='btn btn-block btn-info' href='".doliconnecturl('dolicontact')."?type=COM' role='button' title='".__( 'Login', 'doliconnect-pro' )."'>".__( 'Contact us', 'doliconnect-pro' )."</a></div>";
 }
 $button .="<input type='hidden' name='product_update[".$product->id."][price]' value='$price_ttc'></form>";
-$button .='<div id="product-add-loading-'.$produc->id.'" style="display:none">'.doliprice($price_ttc).'<button class="btn btn-secondary btn-block" disabled><i class="fas fa-spinner fa-pulse fa-1x fa-fw"></i> '.__( 'Loading', 'doliconnect-pro' ).'</button></div>';
+$button .='<div id="product-add-loading-'.$product->id.'" style="display:none">'.doliprice($price_ttc).'<button class="btn btn-secondary btn-block" disabled><i class="fas fa-spinner fa-pulse fa-1x fa-fw"></i> '.__( 'Loading', 'doliconnect-pro' ).'</button></div>';
 $button .="</div>";
 return $button;
 }
