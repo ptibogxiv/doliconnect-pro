@@ -1310,7 +1310,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 <i class='fas fa-check fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td></tr></table><br>";
 
-if ($_POST['cart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation'])) {
+if ( isset($_POST['cart']) && $_POST['cart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation'])) {
 wp_redirect(esc_url(get_permalink().'?info'));
 exit;                                   
 }
@@ -1327,7 +1327,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
 }
  
-if (isset($_POST['product_update'])) {
+if ( isset($_POST['product_update']) ) {
 $result = addtodolibasket($_POST['product_update'], $_POST['product_qty'], $_POST['product_price'], $_POST['product_line']);
 //echo $_POST['product_update']."/".$_POST['product_qty']."/".$_POST['product_price']."/".$_POST['product_line'];
 if (1==1) {
@@ -1342,7 +1342,9 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
 }
 
+if ( isset($orderfo) ) {
 $timeout=$orderfo->date_modification-current_time('timestamp',1)+1200;
+
 
 echo "<script>";
 ?>
@@ -1361,7 +1363,7 @@ echo "</script>";
 //header('Refresh: '.$timeout.'; URL='.esc_url(get_permalink()).'');
 
 //echo date_i18n('d/m/Y H:i', $orderfo[date_modification]);
-
+}
 
 if ( constant("DOLICONNECT_CART")>0 && $orderfo->lines != null ) {  //&& $timeout>'0'                                                                                         
 echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), constant("DOLICONNECT_CART"))." <span class='duration'></span></small></div>";
@@ -1387,7 +1389,7 @@ echo '</script>';
 
 echo "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-group-flush'>";
 
-if ($orderfo->lines != null && !empty($orderfo->id) ) {
+if ( isset($orderfo) && $orderfo->lines != null && !empty($orderfo->id) ) {
 
 foreach ($orderfo->lines as $line) {
 echo "<li class='list-group-item'>";     
@@ -1448,14 +1450,17 @@ echo __( 'to see your basket.', 'doliconnect-pro' ).'</center>';
 echo "<br><br><br><br><br></li>";
 } 
 
+if ( isset($orderfo) ) {
 echo "<li class='list-group-item list-group-item-info'>";
 echo "<b>".__( 'Total excl. tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_ht?$orderfo->multicurrency_total_ht:$orderfo->total_ht,$orderfo->multicurrency_code)."</b><br />";
 echo "<b>".__( 'Total tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_tva?$orderfo->multicurrency_total_tva:$orderfo->total_tva,$orderfo->multicurrency_code)."</b><br />";
 echo "<b>".__( 'Total incl. tax', 'doliconnect-pro').": ".doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code)."</b>";
 echo "</li>";
+}
+
 echo "</ul>";
 
-if ( $orderfo->lines != null || (get_option('dolishop') && $orderfo->lines != null ) || get_option('dolishop') ) {
+if ( isset($orderfo) && ($orderfo->lines != null || (get_option('dolishop') && $orderfo->lines != null ) || get_option('dolishop')) ) {
 echo "<div class='card-body'>";
 echo "<form role='form' action='".esc_url(get_permalink())."' id='cart-action-form' method='post'>";
 echo "<script>";
