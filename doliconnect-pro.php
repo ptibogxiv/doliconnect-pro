@@ -11,6 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: doliconnect-pro
  * Domain Path: /languages
+ * Donate link: https://www.paypal.me/ptibogxiv
  * Icon1x: https://www.ptibogxiv.net/wp-content/wppus/icons/doliconnect-pro-128x128.png
  * Icon2x: https://www.ptibogxiv.net/wp-content/wppus/icons/doliconnect-pro-256x256.png
  * BannerHigh: https://www.ptibogxiv.net/wp-content/wppus/banners/doliconnect-pro-1544x500.png
