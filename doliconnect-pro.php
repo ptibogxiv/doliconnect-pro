@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.2.6
+ * Version: 1.2.7
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -828,6 +828,8 @@ return $adhesion;
 
 function dolimembership_modal( $adherent = null ) {
 
+doliconnect_enqueues();
+
 echo "<div class='modal fade' id='activatemember' tabindex='-1' role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 echo "<h4 class='modal-title' id='myModalLabel'>".__( 'Subscription', 'doliconnect-pro' )." ".$adherent->next_subscription_season."</h4><button id='subscription-close' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div><div class='modal-body'>";
 if ( $adherent->id > 0 ) {
@@ -1648,8 +1650,10 @@ global $wpdb,$current_user;
 $entity = get_current_blog_id();
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
+doliconnect_enqueues();
+
 // modal for login
-if ( !is_user_logged_in() ){
+if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
 
 echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
