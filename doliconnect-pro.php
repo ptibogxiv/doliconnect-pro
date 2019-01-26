@@ -132,6 +132,8 @@ echo "</div></small>";
 function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
 global $current_user;
 
+doliconnect_enqueues();
+
 if ( isset($object) ) { 
 $currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');  
 $stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
@@ -1669,10 +1671,10 @@ echo "</div><div class='modal-body'><div id='loginmodal-form'>";
 echo "<b>".get_option('doliaccountinfo')."</b>";
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
-echo socialconnect(get_permalink());
+echo socialconnect ( get_permalink() );
 }
 
-if (function_exists('secupress_get_module_option') && secupress_get_module_option('move-login_slug-login', $slug, 'users-login' )) {
+if ( function_exists('secupress_get_module_option') && secupress_get_module_option('move-login_slug-login', $slug, 'users-login' )) {
 $login_url=site_url()."/".secupress_get_module_option('move-login_slug-login', $slug, 'users-login' ); 
 }else{
 $login_url=site_url()."/wp-login.php"; }
@@ -1777,6 +1779,7 @@ function doligateway($listsource, $ref, $total, $currency, $redirect, $mode) {
 global $current_user,$wpdb;
 $currency=strtolower($currency);
 
+doliconnect_enqueues();
 
 echo "<script src='https://js.stripe.com/v3/'></script><script>";
 if ( $listsource->code_account != null ) {
