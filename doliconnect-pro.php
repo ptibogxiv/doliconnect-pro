@@ -1601,9 +1601,10 @@ add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
 function doliconnect_privacy() {
 global $wpdb,$current_user;
 
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
+
 doliconnect_enqueues();
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {
 echo "<script>";
 ?>
 function DoliconnectShowPrivacyDiv() {
@@ -1650,10 +1651,10 @@ global $wpdb,$current_user;
 $entity = get_current_blog_id();
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
-doliconnect_enqueues();
-
 // modal for login
 if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
+
+doliconnect_enqueues();
 
 echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
@@ -1751,7 +1752,7 @@ en cours d'integration
 add_action( 'wp_footer', 'doliconnect_modal' );
 // ********************************************************
 function socialconnect( $url ) {
-
+ 
 include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/autoload.php');
 include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/config.php');
 
