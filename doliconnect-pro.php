@@ -306,7 +306,7 @@ echo "<li id='VirForm' class='list-group-item list-group-item-action flex-column
 if ( $listsource->sources == null && $listsource->card != 1 ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_vir'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"></i></center>';
-echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
+echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
 echo '</div></div></label></div></li>';
 }
 
