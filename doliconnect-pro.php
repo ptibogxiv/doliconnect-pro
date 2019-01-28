@@ -1107,13 +1107,13 @@ echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a>
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
-if ($_POST['modepayment']=='src_vir') {
+if ($_POST['modepayment']=='2') {
 $source="2";
 }
-elseif ($_POST['modepayment']=='src_chq') {
+elseif ($_POST['modepayment']=='7') {
 $source="7";
 }
-elseif ($_POST['modepayment']=='src_liq') {
+elseif ($_POST['modepayment']=='4') {
 $source="4";
 }
 elseif ($_POST['modepayment']=='src_payplug') {
@@ -1151,7 +1151,7 @@ if ( $orderfo->id > 0 ) {
 $successurl = doliconnecturl('dolicart')."?validation&order=$orderfo->id";
 $returnurl = doliconnecturl('doliaccount')."?module=order&id=$orderfo->id";
 
-if ( ($_POST['modepayment']!='src_chq' && $_POST['modepayment']!='src_vir' && $_POST['modepayment']!='src_liq' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
+if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, MONTH_IN_SECONDS);
 
@@ -1186,7 +1186,7 @@ wp_redirect( $url );
 exit;
 }
 
-} elseif ($_POST['modepayment']=='src_chq' || $_POST['modepayment']=='src_vir'or $_POST['modepayment']=='src_liq'){
+} elseif ($_POST['modepayment']=='7' || $_POST['modepayment']=='2'or $_POST['modepayment']=='4'){
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, MONTH_IN_SECONDS);
 
@@ -2236,7 +2236,7 @@ echo '</div></div></label></div></li>';
 
 if ( $listsource->RIB != null ) {
 echo "<li id='VirForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='src_vir' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_vir' ";
+<input id='src_vir' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='2' ";
 if ( $listsource->sources == null && $listsource->card != 1 ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_vir'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"></i></center>';
@@ -2246,7 +2246,7 @@ echo '</div></div></label></div></li>';
 
 if ( $listsource->CHQ != null ) {
 echo "<li id='ChqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_chq' ";
+<input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='7' ";
 if ( $listsource->sources == null && $listsource->card != 1 && $listsource->RIB == null ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_chq'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-money-check fa-3x fa-fw" style="color:Tan"></i></center>';
@@ -2256,7 +2256,7 @@ echo '</div></div></label></div></li>';
 
 if ( ! empty(dolikiosk()) ) {
 echo "<li id='LiqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='src_liq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_liq' ";
+<input id='src_liq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='4' ";
 if ( $listsource->sources == null && $listsource->card != 1 && $listsource->CHQ == null && $listsource->RIB == null ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_liq'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-money-bill-alt fa-3x fa-fw" style="color:#85bb65"></i></center>';
