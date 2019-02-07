@@ -1482,7 +1482,7 @@ echo "</form>";
 echo "</div></div></li>";
 }
 } else {
-echo "<li class='list-group-item list-group-item-light'><br><br><br><br><br><center><strong>".__( 'Your basket is empty.', 'doliconnect-pro' )."</strong></center>";
+echo "<li class='list-group-item list-group-item-light'><br><br><br><br><br><center><h5>".__( 'Your basket is empty.', 'doliconnect-pro' )."</h5><br/><small>".dolihelp('COM')."</small></center>";
 if ( !is_user_logged_in() ) {
 echo '<center>'.__( 'If you already have an account,', 'doliconnect-pro' ).' ';
 
