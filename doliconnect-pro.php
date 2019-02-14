@@ -1082,7 +1082,7 @@ $chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your cheque in the amount of %1$s with reference %2$s to %3$s at the following address: %4$s', 'doliconnect' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $bank->proprio, $orderfo->ref, $bank->owner_address )."</p>";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your cheque in the amount of %1$s with reference %2$s to %3$s at the following address: %4$s', 'doliconnect-pro' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $bank->proprio, $orderfo->ref, $bank->owner_address )."</p>";
 }
 elseif ($orderfo->mode_reglement_id == '2') 
 {
