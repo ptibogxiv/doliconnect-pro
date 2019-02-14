@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.4.0
+ * Version: 1.4.1
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1082,7 +1082,7 @@ $chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your cheque in the amount of %1$s with reference %2$s to %3$s at the following address: %4$s', 'doliconnect-pro' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $bank->proprio, $orderfo->ref, $bank->owner_address )."</p>";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</b> to <b>%3$s</b> at the following address', 'doliconnect-pro' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $bank->proprio, $orderfo->ref ).":</p><p><b>$bank->owner_address</b></p>";
 }
 elseif ($orderfo->mode_reglement_id == '2') 
 {
@@ -1090,7 +1090,8 @@ $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your transfert in the amount of %1$s with reference %2$s at the following iban: %3$s', 'doliconnect' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $orderfo->ref, $bank->iban );
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your transfert in the amount of <b>%1$s</b> with reference <b>%2$s</b> at the following account', 'doliconnect-pro' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $orderfo->ref ).":";
+echo "<br><b>IBAN: $bank->iban</b>";
 if ( ! empty($bank->bic) ) { echo "<br><b>BIC/SWIFT : $bank->bic</b>";}
 echo "</p>";
 
