@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-02-14 15:20+0100\n"
-"PO-Revision-Date: 2019-02-14 15:21+0100\n"
+"POT-Creation-Date: 2019-02-14 15:27+0100\n"
+"PO-Revision-Date: 2019-02-14 15:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -277,6 +277,18 @@ msgstr "Quantité"
 msgid "Customer discount"
 msgstr "Remise client"
 
+#: doliconnect-pro.php:1075
+msgid "Your order has been registered"
+msgstr "Votre commande a été enregistrée"
+
+#: doliconnect-pro.php:1075 doliconnect-pro.php:1097
+msgid "Reference"
+msgstr "Référence"
+
+#: doliconnect-pro.php:1075
+msgid "Payment method"
+msgstr "Mode de paiement"
+
 #: doliconnect-pro.php:1085
 #, php-format
 msgid ""
@@ -290,9 +302,9 @@ msgstr ""
 msgid "Your payment has been registered"
 msgstr "Votre paiement a été enregistré"
 
-#: doliconnect-pro.php:1097
-msgid "Reference"
-msgstr "Référence"
+#: doliconnect-pro.php:1101
+msgid "An error occurred"
+msgstr "Une erreur est survenue"
 
 #: doliconnect-pro.php:1104
 msgid "See my order"

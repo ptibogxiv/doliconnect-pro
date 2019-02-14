@@ -1072,7 +1072,7 @@ $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect($return);
 exit;
 }
-echo "<center><h2>Votre commande a bien ete enregistree</h2>Numero de commande : ".$_GET['ref']." <br />Moyen de paiement : $orderfo->mode_reglement<br /><br />";
+echo "<center><h2>".__( 'Your order has been registered', 'doliconnect-pro' )."</h2>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['ref']."<br />".__( 'Payment method', 'doliconnect-pro' ).": $orderfo->mode_reglement<br /><br />";
 $TTC = number_format($orderfo->total_ttc, 2, ',', ' ');
 
 if ( $orderfo->statut == '1' && !isset($_GET['error']) ) {
@@ -1098,7 +1098,7 @@ echo "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has b
 }
 }
 else {
-echo "<div class='alert alert-danger' role='alert'><p>Une erreur est survenue lors du paiement.</p>";
+echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error occurred', 'doliconnect-pro' )."</p>";
 }
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=order&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div>";
