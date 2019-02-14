@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-01-27 21:59+0100\n"
-"PO-Revision-Date: 2019-01-27 21:59+0100\n"
+"POT-Creation-Date: 2019-02-14 15:20+0100\n"
+"PO-Revision-Date: 2019-02-14 15:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -276,6 +276,23 @@ msgstr "Quantité"
 #: doliconnect-pro.php:1006
 msgid "Customer discount"
 msgstr "Remise client"
+
+#: doliconnect-pro.php:1085
+#, php-format
+msgid ""
+"Please send your cheque in the amount of %1$s with reference %2$s to %3$s at "
+"the following address: %4$s"
+msgstr ""
+"Veuillez envoyer votre chèque d'un montant de %1$s avec la référence %2$s à "
+"%3$s à l'adresse suivante: %4$s"
+
+#: doliconnect-pro.php:1097
+msgid "Your payment has been registered"
+msgstr "Votre paiement a été enregistré"
+
+#: doliconnect-pro.php:1097
+msgid "Reference"
+msgstr "Référence"
 
 #: doliconnect-pro.php:1104
 msgid "See my order"

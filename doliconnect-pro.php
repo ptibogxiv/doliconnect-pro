@@ -1082,7 +1082,7 @@ $chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>Merci d'envoyer un cheque d'un montant de <b>$TTC â‚¬</b> libelle a l'ordre de <b>$bank->proprio</b> sous <b>15 jours</b> en rappelant votre rÃeference <b>$ref</b> Ã  l'adresse suivante :</p><p><b>$bank->owner_address</b></p>";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your cheque in the amount of %1$s with reference %2$s to %3$s at the following address: %4$s', 'doliconnect' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $bank->proprio, $orderfo->ref, $bank->owner_address )."</p>";
 }
 elseif ($orderfo->mode_reglement_id == '2') 
 {
@@ -1090,11 +1090,11 @@ $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>Merci d'effectuer un virement d'un montant de <b>$TTC â‚¬</b> sous <b>15 jours</b> en rappelant votre reference <b>$ref</b> sur le compte suivant :</p><p><b>IBAN : $bank->iban</b></p><p><b>SWIFT/BIC : $bank->bic</b></p>";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>Merci d'effectuer un virement d'un montant de <b>".doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code)."</b> sous <b>15 jours</b> en rappelant votre reference <b>$orderfo->ref</b> sur le compte suivant :</p><p><b>IBAN : $bank->iban</b></p><p><b>SWIFT/BIC : $bank->bic</b></p>";
 }
 elseif ($orderfo->mode_reglement_id == '6') 
 {
-echo "<div class='alert alert-success' role='alert'><p>Votre paiement a bien été enregistré<br>Reference:  ".$_GET['charge']."</p>";
+echo "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has been registered', 'doliconnect-pro' )."<br>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['charge']."</p>";
 }
 }
 else {
