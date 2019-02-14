@@ -1090,7 +1090,10 @@ $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, M
 
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, MONTH_IN_SECONDS);
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>Merci d'effectuer un virement d'un montant de <b>".doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code)."</b> sous <b>15 jours</b> en rappelant votre reference <b>$orderfo->ref</b> sur le compte suivant :</p><p><b>IBAN : $bank->iban</b></p><p><b>SWIFT/BIC : $bank->bic</b></p>";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( esc_html__( 'Please send your transfert in the amount of %1$s with reference %2$s at the following iban: %3$s', 'doliconnect' ), doliprice($orderfo->multicurrency_total_ttc?$orderfo->multicurrency_total_ttc:$orderfo->total_ttc,$orderfo->multicurrency_code), $orderfo->ref, $bank->iban );
+if ( ! empty($bank->bic) ) { echo "<br><b>BIC/SWIFT : $bank->bic</b>";}
+echo "</p>";
+
 }
 elseif ($orderfo->mode_reglement_id == '6') 
 {
