@@ -133,7 +133,7 @@ echo '</li>';
 echo "</ul></div>";
 
 echo "<small><div class='float-left'>";
-echo dolirefresh("/donation/".constant("DOLIBARR"), $url, $delay);
+//echo dolirefresh("/donation/".constant("DOLIBARR"), $url, $delay);
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
@@ -141,7 +141,7 @@ echo "</div></small>";
 
 function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
 global $current_user;
-
+$request = "/doliconnector/".constant("DOLIBARR")."/sources";
 doliconnect_enqueues();
 
 if ( isset($object) ) { 
@@ -222,7 +222,7 @@ echo '</div><div class="col-9 col-sm-7 col-md-8 col-xl-8 align-middle"><h6 class
 if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
-echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
+echo $src->reference;
 }
 if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
 echo '</h6>';
@@ -362,7 +362,7 @@ echo "</div></div>";
 
 if ( empty($object) ) {
 echo "<small><div class='float-left'>";
-echo dolirefresh("/doliconnector/".constant("DOLIBARR")."/sources", $url, $delay);
+echo dolirefresh($request, $url, $delay);
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
