@@ -1104,7 +1104,7 @@ echo "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has b
 else {
 echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error occurred', 'doliconnect-pro' )."</p>";
 }
-echo "<br /><a href='".doliconnecturl('doliaccount')."?module=order&id=".$_GET['order']."&ref=".$_GET['ref'];
+echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div>";
 
 } elseif (isset($_GET['pay']) && constant("DOLICONNECT_CART_ITEM") > 0) {
@@ -1153,7 +1153,7 @@ $orderipdate = callDoliApi("PUT", "/orders/".$orderfo->id, $rdr, 0);
 if ( $orderfo->id > 0 ) {
 
 $successurl = doliconnecturl('dolicart')."?validation&order=$orderfo->id";
-$returnurl = doliconnecturl('doliaccount')."?module=order&id=$orderfo->id";
+$returnurl = doliconnecturl('doliaccount')."?module=orders&id=$orderfo->id&ref=$orderfo->ref";
 
 if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
 
