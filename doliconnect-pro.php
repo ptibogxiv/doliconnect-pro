@@ -261,8 +261,7 @@ echo "<p class='text-justify'>";
 $blogname=get_bloginfo('name');
 echo '<small>'.sprintf( esc_html__( 'By providing your IBAN and confirming this form, you are authorizing %s and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.', 'doliconnect-pro' ), $blogname).'</small>';
 echo "</p>";
-echo '<input id="ibanholder-name" name="ibanholder-name" value="" type="text" onchange="ShowHideDiv()" class="form-control" placeholder="'.__( 'Owner', 'doliconnect-pro' ).'" autocomplete="off">
-<div class="invalid-feedback" role="alert">'.__( 'As on your bank account', 'doliconnect-pro' ).'</div>
+echo '<input id="ibanholder-name" name="ibanholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your bank account', 'doliconnect-pro' ).'" autocomplete="off">
 <label for="iban-element"></label>
 <div class="form-control" id="iban-element"><!-- A Stripe Element will be inserted here. --></div>';
 echo '<div id="bank-name"></div>';
@@ -270,7 +269,7 @@ echo '<div id="iban-errors" role="alert"></div>';
 echo '</li>';
 }
 
-if ( ! empty($object) && empty(dolikiosk()) || (! empty($object) && !empty(get_option('doliconnectbeta')) && current_user_can( 'administrator' )) ) {
+if ( (! empty($object) && empty(dolikiosk())) || (! empty($object) && !empty(get_option('doliconnectbeta')) && current_user_can( 'administrator' )) ) {
 //PAYMENT REQUEST API
 echo "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_pra' ";
@@ -442,6 +441,7 @@ var cardElement = elements.create('card', {style: style});
 cardElement.mount('#card-element');
 var displayError = document.getElementById('card-errors');
 displayError.textContent = '';
+document.getElementById("CardButton").disabled = false;
 document.getElementById('cardholder-name').value = '';
 
 if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = false; }
@@ -472,7 +472,9 @@ var displayError = document.getElementById('iban-errors');
 var displayBankname = document.getElementById('bank-name');
 displayError.textContent = '';
 displayBankname.textContent = '';
-document.getElementById("BankButton").disabled = false; 
+document.getElementById("BankButton").disabled = false;
+document.getElementById('ibanholder-name').value = '';
+ 
 ibanElement.on('change', function(ev) {
   if (ev.error) {
     displayError.textContent = ev.error.message;
