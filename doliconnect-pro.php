@@ -240,13 +240,12 @@ echo "><label class='custom-control-label w-100' for='CdDbt'><div class='row'><d
 echo "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 echo "</label></div></li>";
 
-echo '<li class="list-group-item list-group-item-secondary" id="CardForm" style="display: none">';
-echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" onchange="ShowHideDiv()" class="form-control" placeholder="'.__( 'Owner', 'doliconnect-pro' ).'" autocomplete="off">
-<div class="invalid-feedback" role="alert">'.__( 'As on your credit card', 'doliconnect-pro' ).'</div>
+echo '<li class="list-group-item list-group-item-secondary" id="CardForm" style="display: none"><form id="" method="post" class="was-validated" enctype="multipart/form-data">';
+echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" onchange="ShowHideDiv()" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
 <div id="card-errors" role="alert"></div>';
-echo '</li>';
+echo '</div></li>';
 }
 
 //NEW SEPA DIRECT DEBIT
