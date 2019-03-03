@@ -1275,22 +1275,19 @@ echo "</div></div>";
 if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 
 $ID = $current_user->ID;
-wp_update_user( array( 'ID' => $ID, 'user_email' => sanitize_email($_POST['user_email'])));
+wp_update_user( array( 'ID' => $ID, 'user_email' => sanitize_email($thirdparty['email'])));
 wp_update_user( array( 'ID' => $ID, 'nickname' => sanitize_user($_POST['user_nicename'])));
-wp_update_user( array( 'ID' => $ID, 'display_name' => ucfirst(strtolower($_POST['user_firstname']))." ".strtoupper($_POST['user_lastname'])));
-wp_update_user( array( 'ID' => $ID, 'first_name' => ucfirst(sanitize_user(strtolower($_POST['user_firstname'])))));
-wp_update_user( array( 'ID' => $ID, 'last_name' => strtoupper(sanitize_user($_POST['user_lastname']))));
+wp_update_user( array( 'ID' => $ID, 'display_name' => ucfirst(strtolower($thirdparty['firstname']))." ".strtoupper($thirdparty['lastname'])));
+wp_update_user( array( 'ID' => $ID, 'first_name' => ucfirst(sanitize_user(strtolower($thirdparty['firstname'])))));
+wp_update_user( array( 'ID' => $ID, 'last_name' => strtoupper(sanitize_user($thirdparty['lastname']))));
 wp_update_user( array( 'ID' => $ID, 'description' => sanitize_textarea_field($_POST['description'])));
-update_usermeta( $ID, 'billing_civility', $_POST['billing_civility']);
-update_usermeta( $ID, 'billing_type', $_POST['billing_type']);
-update_usermeta( $ID, 'billing_company', sanitize_text_field($_POST['billing_company']));
-update_usermeta( $ID, 'billing_address', sanitize_textarea_field($_POST['billing_address']));
-update_usermeta( $ID, 'billing_zipcode', sanitize_text_field($_POST['billing_zipcode']));
-update_usermeta( $ID, 'billing_city', sanitize_text_field($_POST['billing_city']));
-update_usermeta( $ID, 'billing_country', $_POST['billing_country'] );
-update_usermeta( $ID, 'billing_phone', sanitize_text_field($_POST['billing_phone'])); 
-update_usermeta( $ID, 'billing_birth',$_POST['billing_birth']);
-do_action('wp_dolibarr_sync',constant("DOLIBARR"));
+wp_update_user( array( 'ID' => $ID, 'user_url' => sanitize_textarea_field($thirdparty['url'])));
+update_user_meta( $ID, 'civility_id', sanitize_text_field($thirdparty['civility_id']));
+update_user_meta( $ID, 'billing_type', sanitize_text_field($thirdparty['morphy']));
+if ( isset($_POST['billing_company']) ) { update_user_meta( $ID, 'billing_company', sanitize_text_field($thirdparty['name'])); }
+update_user_meta( $ID, 'billing_birth', $thirdparty['birth']);
+
+do_action('wp_dolibarr_sync', $thirdparty);
 
 // UPDATE INFO USER
 
