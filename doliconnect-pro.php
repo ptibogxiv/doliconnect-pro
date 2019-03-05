@@ -811,7 +811,7 @@ $action='POST';
 list($year, $month, $day) = explode("-", $current_user->billing_birth);
 $birth = mktime(0, 0, 0, $month, $day, $year);
 
-$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay($delay, null);  
+$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay($delay, null));  
 
 $data = [
     'login' => $current_user->user_login,
