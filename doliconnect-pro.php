@@ -810,23 +810,26 @@ $action='POST';
 
 list($year, $month, $day) = explode("-", $current_user->billing_birth);
 $birth = mktime(0, 0, 0, $month, $day, $year);
+
+$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay($delay, null);  
+
 $data = [
     'login' => $current_user->user_login,
     'company'  => $current_user->billing_company,
     'morphy' => $current_user->billing_type,
-    'civility_id' => $current_user->billing_civility,    
+    'civility_id' => $current_user->civility_id,    
     'lastname' => $current_user->user_lastname,
     'firstname' => $current_user->user_firstname,
-    'address' => $current_user->billing_address,    
-    'zip' => $current_user->billing_zipcode,
-    'town' => $current_user->billing_city,
-    'country_id' => $current_user->billing_country,
-    'email' => $current_user->user_email,
-    'phone' => $current_user->billing_phone,
+    'address' => $thirdparty->address,    
+    'zip' => $thirdparty->zip,
+    'town' => $thirdparty->town,
+    'country_id' => $thirdparty->country_id,
+    'email' => $thirdparty->email,
+    'phone' => $thirdparty->phone,
     'birth' => $birth,
     'typeid' => $type,
     'fk_soc' => constant("DOLIBARR"),
-    //'array_options' => $extrafields,
+    'array_options' => $thirdparty->array_options,
 		'statut'	=> $statut,
 	];
   
