@@ -1458,8 +1458,10 @@ if ( $line->fk_product > 0 ) {
 $product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
 }
 
-echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10"> 
-<h6 class="mb-1">'.$line->libelle.'</h6>
+echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10">';
+if ( get_transient( 'doliconnect_cartline_'.$line->id ) ) {
+echo '<h6>'.$line->libelle.'</h6>';  
+} else { echo '<h6>'.$line->libelle.'</h6>'; }
 <p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
