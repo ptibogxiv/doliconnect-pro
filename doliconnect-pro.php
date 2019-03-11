@@ -1462,7 +1462,7 @@ echo '<div class="w-100 justify-content-between"><div class="row"><div class="co
 if ( get_transient( 'doliconnect_cartline_'.$line->id ) ) {
 echo '<h6>'.$line->libelle.'</h6>';  
 } else { echo '<h6>'.$line->libelle.'</h6>'; }
-<p class="mb-1">'.$line->description.'</p>
+echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
