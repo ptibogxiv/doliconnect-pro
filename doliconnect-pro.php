@@ -993,7 +993,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 
 function doliminicart($orderfo) {
 $item = constant("DOLICONNECT_CART_ITEM");
-echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect' )."</a>)</small></div><ul class='list-group list-group-flush'>";
+echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
 if ( $orderfo->lines != null ) {
 foreach ($orderfo->lines as $line) {
 
