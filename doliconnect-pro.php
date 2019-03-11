@@ -1459,9 +1459,10 @@ $product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
 }
 
 echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10">';
-if ( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
+if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
 echo '<h6>'.$line->libelle.'</h6>';  
-} else { echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
+} else {
+echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
 echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
