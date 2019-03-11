@@ -993,13 +993,13 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 
 function doliminicart($orderfo) {
 $item = constant("DOLICONNECT_CART_ITEM");
-echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
+echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect-pro' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
 if ( $orderfo->lines != null ) {
 foreach ($orderfo->lines as $line) {
 
 //$product = callDoliApi("GET", "/products/".$post->product_id, null, 0);
 
-echo "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect' ).": ".$line->qty."</small></div>";
+echo "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
 
 echo "<span class='text-muted'>".doliprice($line, 'ttc',isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</span></li>";
 }
@@ -1009,7 +1009,7 @@ if ( constant("REMISE_PERCENT") > 0 ) {
 $remise_percent = (0*constant("REMISE_PERCENT"))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
               <div class='text-success'>
-                <h6 class='my-0'>".__( 'Customer discount', 'doliconnect' )."</h6>
+                <h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
                 <small>-".constant("REMISE_PERCENT")."%</small>
               </div>
               <span class='text-success'>-".doliprice($remise_percent, null, isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</span></li>";
