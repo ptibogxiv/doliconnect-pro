@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.5.1
+ * Version: 1.5.2
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1549,7 +1549,7 @@ $product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
 
 echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10">';
 if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
-echo '<h6>'.$line->libelle.'</h6>';  
+echo '<h6>'.$line->libelle.' </h6>';//'.doliproductstock($product).'  
 } else {
 echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
 echo '<p class="mb-1">'.$line->description.'</p>
