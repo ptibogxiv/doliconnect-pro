@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.5.2
+ * Version: 1.5.3
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -994,6 +994,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 function addtodolibasket($product, $quantity, $price, $timestart = null, $timeend = null) {
 global $wpdb,$current_user;
 $delay=HOUR_IN_SECONDS;
+$delay2=MONTH_IN_SECONDS;
 
 if ( !is_null($timestart) || !is_null($timeend) )
 {
@@ -1046,7 +1047,7 @@ $adln = [
 $addline = callDoliApi("POST", "/orders/".$orderid."/lines", $adln, 0);
 $order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
-set_transient( 'doliconnect_cartlinelink_'.$line, esc_url(doliconnecturl('dolicart')), $delay );
+set_transient( 'doliconnect_cartlinelink_'.$line, esc_url(doliconnecturl('dolicart')), $delay2 );
 return $addline;
 
 } elseif ( $orderid > 0 && $line > 0 ) {
@@ -1074,7 +1075,7 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
 $updateline = callDoliApi("PUT", "/orders/".$orderid."/lines/".$line, $ln, 0);
 $order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
-set_transient( 'doliconnect_cartlinelink_'.$line, esc_url(doliconnecturl('dolicart')), $delay );
+set_transient( 'doliconnect_cartlinelink_'.$line, esc_url(doliconnecturl('dolicart')), $delay2 );
 return $updateline;
 
 }
