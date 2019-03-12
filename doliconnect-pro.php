@@ -991,7 +991,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 
 }
 
-function addtodolibasket($product, $quantity, $price, $timestart = null, $timeend = null) {
+function addtodolibasket($product, $quantity, $price, $url = null, $timestart = null, $timeend = null) {
 global $wpdb,$current_user;
 $delay=HOUR_IN_SECONDS;
 $delay2=MONTH_IN_SECONDS;
@@ -1047,7 +1047,9 @@ $adln = [
 $addline = callDoliApi("POST", "/orders/".$orderid."/lines", $adln, 0);
 $order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
-set_transient( 'doliconnect_cartlinelink_'.$addline, esc_url(doliconnecturl('dolicart')), $delay2);
+if ( !empty($url) ) {
+set_transient( 'doliconnect_cartlinelink_'.$addline, esc_url($url), $delay2);
+}
 return $addline;
 
 } elseif ( $orderid > 0 && $line > 0 ) {
@@ -1075,7 +1077,11 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
 $updateline = callDoliApi("PUT", "/orders/".$orderid."/lines/".$line, $ln, 0);
 $order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
-set_transient( 'doliconnect_cartlinelink_'.$line, esc_url(doliconnecturl('dolicart')), $delay2);
+if ( !empty($url) ) {
+set_transient( 'doliconnect_cartlinelink_'.$line, esc_url($url), $delay2);
+} else {
+delete_transient( 'doliconnect_cartlinelink_'.$line );
+}
 return $updateline;
 
 }
