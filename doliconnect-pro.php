@@ -1764,6 +1764,13 @@ echo "</SCRIPT>";
 }
 add_action( 'wp_footer', 'doliconnect_privacy' );
 
+function doliconnect_restrict_display($content) {
+
+return $content;
+}
+
+add_filter( 'the_content', 'doliconnect_restrict_display');
+
 function doliconnect_modal() {
 global $wpdb,$current_user;
 $entity = get_current_blog_id();
