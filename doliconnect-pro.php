@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.5.3
+ * Version: 1.5.4
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -910,7 +910,7 @@ echo ")"; } else { echo "<span class='badge badge-pill badge-primary'>".__( 'Fre
 echo "</small></b><br /><small class='text-justify text-muted '>".$postadh->note."</small></div><div class='col-md-4'>";
 if ( $adherent->datefin != null && $adherent->statut == 1 && $adherent->datefin > $adherent->next_subscription_renew && $adherent->next_subscription_renew > current_time( 'timestamp',1) ) {
 echo "<button class='btn btn-info btn-block' disabled>".sprintf(__('From %s', 'doliconnect-pro'), date_i18n('d/m/Y', $adherent->next_subscription_renew))."</a>";
-} elseif ( $postadh->family =='1' ) {
+} elseif ( $postadh->family == '1' ) {
 echo "<a href='".doliconnecturl('doliaccount')."?module=ticket&type=COM&create' class='btn btn-info btn-block' role='button'>".__( 'Contact us', 'doliconnect-pro' )."</a>";
 } elseif ( ( $postadh->automatic_renew != '1' && $postadh->id == $adherent->typeid ) || ( $postadh->statut == '0' && $postadh->id == $adherent->typeid ) ) {
 echo "<button class='btn btn-secondary btn-block' disabled>".__( 'Non-renewable', 'doliconnect-pro' )."</a>";
