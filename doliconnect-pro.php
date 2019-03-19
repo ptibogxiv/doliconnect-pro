@@ -1790,7 +1790,7 @@ echo "><div class='modal-dialog modal-dialog-centered' role='document'><div clas
 if ( empty(get_option('doliconnectrestrict')) ) {
 echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
 } else {
-echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Restrict to users', 'doliconnect-pro' )."</h5>";
+echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
 }
 
 echo "</div><div class='modal-body'><div id='loginmodal-form'>";
