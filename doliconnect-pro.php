@@ -889,7 +889,7 @@ foreach ($typeadhesion as $postadh) {
 $montant1 = $postadh->price;
 $montant2 = $tx*$postadh->price; 
 
-if ( $postadh->statut == '1' || ( $postadh->statut == '0' && $postadh->id == $adherent->typeid && $adherent->statut == '1' ) ) {
+if ( ( $postadh->subscription == '1' || ( $postadh->subscription != '1' && $adherent->typeid == $postadh->id ) ) && $postadh->statut == '1' || ( $postadh->statut == '0' && $postadh->id == $adherent->typeid && $adherent->statut == '1' ) ) {
 echo "<tr><td><div class='row'><div class='col-md-8'><b>";
 if ($postadh->family =='1') {
 echo "<i class='fas fa-users fa-fw'></i> ";
