@@ -224,11 +224,14 @@ echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.
 } else {
 echo $src->reference;
 }
-if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
+if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
 echo '</h6>';
 echo "<small class='text-muted'>".$src->holder."</small></div>";
-echo "<div class='d-none d-sm-block col-2 align-middle text-right'><img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'></div>";
-echo "</div></label></div></li>";
+echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
+echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
+//echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
+//<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit'><i class='fas fa-trash fa-fw'></i></button></div>";
+echo "</div></div></label></div></li>";
 } }
 
 //NEW CARD
@@ -1765,8 +1768,12 @@ echo "</SCRIPT>";
 add_action( 'wp_footer', 'doliconnect_privacy' );
 
 function doliconnect_restrict_display($content) {
-
+if ( ! empty(get_option('doliconnectrestrict')) && !is_user_logged_in() ) {
+return "private site";
+} else {
 return $content;
+}
+
 }
 
 add_filter( 'the_content', 'doliconnect_restrict_display');
@@ -1783,7 +1790,11 @@ doliconnect_enqueues();
 
 echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
 if ( ! empty(get_option('doliconnectrestrict')) ) {
+if ( !empty( get_background_color() )) {
+echo " style='background-color:#".get_background_color()."' ";
+} else {
 echo " style='background-color:#cccccc' ";
+}
 }
 echo "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
