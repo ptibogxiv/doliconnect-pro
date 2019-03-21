@@ -92,8 +92,8 @@ dolipaymentmodes($listsource, null, $url, $url, $delay);
 }
 
 if ( is_plugin_active( 'wp-plugin-update-server/wp-plugin-update-server.php' ) ) {
-add_action( 'compta_doliconnect_menu', 'pluginupdatelicense_menu', 5, 1);
-add_action( 'compta_doliconnect_pluginupdatelicense', 'pluginupdatelicense_module' );
+add_action( 'customer_doliconnect_menu', 'pluginupdatelicense_menu', 5, 1);
+add_action( 'customer_doliconnect_pluginupdatelicense', 'pluginupdatelicense_module' );
 }  
 
 function pluginupdatelicense_menu( $arg ) {
