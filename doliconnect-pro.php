@@ -92,9 +92,9 @@ dolipaymentmodes($listsource, null, $url, $url, $delay);
 }
 
 if ( is_plugin_active( 'wp-plugin-update-server/wp-plugin-update-server.php' ) ) {
+
 add_action( 'customer_doliconnect_menu', 'pluginupdatelicense_menu', 5, 1);
-add_action( 'customer_doliconnect_pluginupdatelicense', 'pluginupdatelicense_module' );
-}  
+add_action( 'customer_doliconnect_pluginupdatelicense', 'pluginupdatelicense_module' ); 
 
 function pluginupdatelicense_menu( $arg ) {
 echo "<a href='".esc_url( add_query_arg( 'module', 'pluginupdatelicense', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
@@ -137,6 +137,54 @@ echo "<small><div class='float-left'>";
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
+}
+
+add_action( 'supplier_doliconnect_menu', 'product_supplier_menu', 5, 1);
+add_action( 'supplier_doliconnect_product_supplier', 'product_supplier_module' ); 
+
+function product_supplier_menu( $arg ) {
+echo "<a href='".esc_url( add_query_arg( 'module', 'product_supplier', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
+if ($arg=='product_supplier') { echo " active";}
+echo "'>".__( 'Products tracking', 'doliconnect-pro' )."</a>";
+}
+
+function product_supplier_module( $url ) {
+global $wpdb,$current_user;
+$entity = get_current_blog_id();
+$ID = $current_user->ID;
+
+echo "<div class='card shadow-sm'>";
+
+
+echo "<ul class='list-group list-group-flush'>";
+
+$licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wppus_licenses WHERE email = '".$current_user->user_email."'") ;
+// Parcours des resultats obtenus
+foreach ($licenses as $post) {
+echo "<li class='list-group-item'><a href='".site_url()."/wp-update-server/?action=download&package_id=".$post->package_slug."&token=".get_site_option('wppus_package_download_url_token')."&update_license_key=".$post->license_key."&update_license_signature=xyIX4lQKvULMJ3DgqXBKvKHjR6we1jh1T7sR8KCpskJlvMB74sG3TVn6ESUWtHYKMGQaff_yEaC3uYHhCgEdtQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx&update_type=".$post->package_type."&type=".$post->package_type."'>".$post->license_key."</a> / ";
+echo " / ".$post->date_expiry." / ".$post->package_slug." / ".$post->package_type;
+echo base64_encode(hash_hmac('sha256', $post->license_key, get_site_option('wppus_license_hmac_key')) . $post->license_key);
+
+echo '<input class="form-control" type="text" placeholder="Readonly input here…" value="'.$post->license_key.'" readonly>';
+
+echo '<div class="form-group"><label for="exampleFormControlSelect1">Registered Domains</label><select multiple class="form-control" id="exampleFormControlSelect1">';
+foreach ( maybe_unserialize($post->allowed_domains) as $domain ) {
+echo  '<option value="'.$domain.'">'.$domain.'</option>';
+}
+echo '</select></div>';
+
+echo '</li>';
+}
+
+echo "</ul></div>";
+
+echo "<small><div class='float-left'>";
+//echo dolirefresh("/donation/".constant("DOLIBARR"), $url, $delay);
+echo "</div><div class='float-right'>";
+echo dolihelp('ISSUE');
+echo "</div></small>";
+}
+
 }
 
 function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
