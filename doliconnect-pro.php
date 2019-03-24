@@ -1484,11 +1484,11 @@ form.submit();
 });
 
 <?php
-echo "</SCRIPT><div class='card'><ul class='list-group list-group-flush'>"; 
+echo "</SCRIPT><div class='card'>"; 
 
 echo doliconnectuserform(callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay(MONTH_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'full');
 
-echo "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+echo "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 echo "</div></div>";
 
 } else {
@@ -1527,7 +1527,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
  
 if ( isset($_POST['product_update']) ) {
-$result = addtodolibasket($_POST['product_update'], $_POST['product_qty'], $_POST['product_price'], $_POST['product_line']);
+$result = addtodolibasket($_POST['product_update'], $_POST['dolicart_line'], $_POST['product_price'], $_POST['product_line']);
 //echo $_POST['product_update']."/".$_POST['product_qty']."/".$_POST['product_price']."/".$_POST['product_line'];
 if (1==1) {
 if (constant("DOLICONNECT_CART") > 0) {
@@ -1568,16 +1568,16 @@ if ( constant("DOLICONNECT_CART")>0 && $orderfo->lines != null ) {  //&& $timeou
 echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), constant("DOLICONNECT_CART"))." <span class='duration'></span></small></div>";
 }
 
-echo "<form role='form' action='".esc_url(get_permalink())."' id='payment-form' method='post'>";
+echo "<form role='form' action='".esc_url(get_permalink())."' id='cart-form' method='post'>";
 
 echo "<script>";
 ?> 
 
-var form = document.getElementById('payment-form');
+var form = document.getElementById('cart-form');
 form.addEventListener('submit', function(event) {
 
 jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0);     
+jQuery(window).scrollTop(0); 
 console.log("submit");
 form.submit();
 
@@ -1616,7 +1616,7 @@ echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice(
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
 echo "<input type='hidden' name='product_line' value='$line->id'><input type='hidden' name='product_price' value='$line->subprice'><input type='hidden' name='product_update' value='$line->fk_product'>";
-echo "<select class='form-control' name='product_qty' onchange='this.form.submit()'>";
+echo "<select class='form-control' name='dolicart_line' onchange='this.form.submit()'>"; //['".$line->id."']
 if (($product->stock_reel-$line->qty > '0' && $product->type == '0')) {
 if ($product->stock_reel-$line->qty >= '10' ) {
 $m2 = 10;
@@ -1665,24 +1665,7 @@ echo "</li>";
 echo "</ul>";
 
 if ( isset($orderfo) && ($orderfo->lines != null || (get_option('dolishop') && $orderfo->lines != null ) || get_option('dolishop')) ) {
-echo "<div class='card-body'>";
-echo "<form role='form' action='".esc_url(get_permalink())."' id='cart-action-form' method='post'>";
-echo "<script>";
-?> 
-
-var form = document.getElementById('cart-action-form');
-form.addEventListener('submit', function(event) {
-
-jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0); 
-console.log("submit");
-form.submit();
-
-});
-
-<?php
-echo '</SCRIPT>';
-echo "<div class='row' id='button-cart'>";
+echo "<div class='card-body'><div class='row'>";
 if (get_option('dolishop')){
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 }  
