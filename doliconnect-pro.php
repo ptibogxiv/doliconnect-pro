@@ -1488,7 +1488,7 @@ echo "</SCRIPT><div class='card'><ul class='list-group list-group-flush'>";
 
 echo doliconnectuserform(callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay(MONTH_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'full');
 
-echo "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='cart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+echo "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 echo "</div></div>";
 
 } else {
@@ -1509,12 +1509,12 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 <i class='fas fa-check fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td></tr></table><br>";
 
-if ( isset($_POST['cart']) && $_POST['cart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation'])) {
+if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 wp_redirect(esc_url(get_permalink().'?info'));
 exit;                                   
 }
 
-if (isset($_GET['purge_basket'])) {
+if (isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
 $orderdelete = callDoliApi("DELETE", "/orders/".constant("DOLICONNECT_CART"), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, -HOUR_IN_SECONDS);
 if (1==1) {
@@ -1686,13 +1686,11 @@ echo "<div class='row' id='button-cart'>";
 if (get_option('dolishop')){
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 }  
-
 if ( $orderfo->lines != null ){
-echo "<div class='col-12 col-md'><a href='".esc_url(get_permalink())."?purge_basket' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro' )."</b></a></div>";
+echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='purge' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro' )."</b></button></div>";
 }
-
 if ( $orderfo->lines != null ) {
-echo "<div class='col-12 col-md'><input type='hidden' name='cart' value='validation'><button type='submit' class='btn btn-warning w-100' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro' )."</b></button></div>";
+echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='validation' class='btn btn-warning w-100' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro' )."</b></button></div>";
 } 
 echo "</div>";
  
