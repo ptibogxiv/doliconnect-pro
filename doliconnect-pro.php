@@ -1607,9 +1607,9 @@ $product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
 
 echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10">';
 if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
-echo '<h6>'.$line->libelle.' </h6>';//'.doliproductstock($product).'  
+echo '<h6>'.$line->libelle.' </h6> '.doliproductstock($product);
 } else {
-echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
+echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a> '.doliproductstock($product); }
 echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
@@ -2334,7 +2334,7 @@ echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
 }
-if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
+if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
 echo '</h6>';
 echo "<small class='text-muted'>".$src->holder."</small></div>";
 echo "<div class='d-none d-sm-block col-2 align-middle text-right'><img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'></div>";
