@@ -942,9 +942,11 @@ $montant2 = $tx*$postadh->price;
 
 if ( ( $postadh->subscription == '1' || ( $postadh->subscription != '1' && $adherent->typeid == $postadh->id ) ) && $postadh->statut == '1' || ( $postadh->statut == '0' && $postadh->id == $adherent->typeid && $adherent->statut == '1' ) ) {
 echo "<tr><td><div class='row'><div class='col-md-8'><b>";
-if ($postadh->family =='1') {
-echo "<i class='fas fa-users fa-fw'></i> ";
-} else {echo "<i class='fas fa-user fa-fw'></i> ";}
+if ($postadh->morphy == 'mor') {
+echo "<i class='fas fa-user-tie fa-fw'></i> "; 
+} elseif ($postadh->morphy == 'phy') {
+echo "<i class='fas fa-user fa-fw'></i> "; 
+} else {echo "<i class='fas fa-user-friends fa-fw'></i> ";}
 echo $postadh->label." <small>";
 if ( !empty($postadh->subscription) ) {
 if ( ( ($postadh->welcome > '0') && ($adherent->datefin == null )) || (($postadh->welcome > '0') && (current_time( 'timestamp',1) > $adherent->next_subscription_valid) && (current_time( 'timestamp',1) > $adherent->datefin) && $adherent->next_subscription_valid != $adherent->datefin ) ) { 
