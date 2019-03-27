@@ -114,6 +114,7 @@ echo "<ul class='list-group list-group-flush'>";
 
 $licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wppus_licenses WHERE email = '".$current_user->user_email."'") ;
 // Parcours des resultats obtenus
+if ( $licenses != null ) { 
 foreach ($licenses as $post) {
 echo "<li class='list-group-item'><a href='".site_url()."/wp-update-server/?action=download&package_id=".$post->package_slug."&token=".get_site_option('wppus_package_download_url_token')."&update_license_key=".$post->license_key."&update_license_signature=xyIX4lQKvULMJ3DgqXBKvKHjR6we1jh1T7sR8KCpskJlvMB74sG3TVn6ESUWtHYKMGQaff_yEaC3uYHhCgEdtQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx&update_type=".$post->package_type."&type=".$post->package_type."'>".$post->license_key."</a> / ";
 echo " / ".$post->date_expiry." / ".$post->package_slug." / ".$post->package_type;
@@ -128,6 +129,9 @@ echo  '<option value="'.$domain.'">'.$domain.'</option>';
 echo '</select></div>';
 
 echo '</li>';
+}
+} else { 
+echo "<li class='list-group-item list-group-item-light'><center>".__( 'No license', 'doliconnect-pro' )."</center></li>";
 }
 
 echo "</ul></div>";
