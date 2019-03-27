@@ -116,7 +116,7 @@ $licenses = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wppus_licenses WHER
 // Parcours des resultats obtenus
 if ( $licenses != null ) { 
 foreach ($licenses as $post) {
-echo "<li class='list-group-item'><a class='btn btn btn-outline-dark btn-sm btn-block' href='".site_url()."/wp-update-server/?action=download&package_id=".$post->package_slug."&token=".get_site_option('wppus_package_download_url_token')."&update_license_key=".$post->license_key."&update_license_signature=xyIX4lQKvULMJ3DgqXBKvKHjR6we1jh1T7sR8KCpskJlvMB74sG3TVn6ESUWtHYKMGQaff_yEaC3uYHhCgEdtQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx&update_type=".$post->package_type."&type=".$post->package_type."'>".$post->package_slug." <i class='fas fa-file-download'></i></a> / ";
+echo "<li class='list-group-item'><a class='btn btn btn-outline-dark btn-sm btn-block' href='".site_url()."/wp-update-server/?action=download&package_id=".$post->package_slug."&token=".get_site_option('wppus_package_download_url_token')."&update_license_key=".$post->license_key."&update_license_signature=Oj7CWQWGBqmCCKKa42UnxvyJUpLNfLz7w2J2Q9OL0qS57R2La3V5VXOEYjYRfNb16maa7zHWbpfIaHI7OU2ztQ%3D%3D-NGE3MjFiYjVkZDNkZGQ3ZTA3MmIyYTMyMmY1YmY5MzhmODg5OTNmODYzZDMxMWI1MTUwMDU3OTNiM2ZhYTMxNTg4ZjlmNWNiNmE1M2E1MzE5N2Y2NjBlY3wx'>".$post->package_slug." <i class='fas fa-file-download'></i></a> / ";
 echo " / ".$post->date_expiry." / ".$post->package_slug." / ".$post->package_type;
 echo base64_encode(hash_hmac('sha256', $post->license_key, get_site_option('wppus_license_hmac_key')) . $post->license_key);
 
