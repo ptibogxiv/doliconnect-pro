@@ -1758,6 +1758,7 @@ $redirect_to=get_permalink();
 }
 
 echo "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
+
 echo "<script>";
 ?>
 
@@ -1774,6 +1775,7 @@ formmodallogin.submit();
 
 <?php
 echo "</script>";
+
 echo "<div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
