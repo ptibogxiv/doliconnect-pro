@@ -766,7 +766,7 @@ $action='POST';
 list($year, $month, $day) = explode("-", $current_user->billing_birth);
 $birth = mktime(0, 0, 0, $month, $day, $year);
 
-$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay($delay, null));  
+$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay('thirdparty'));  
 
 $data = [
     'login' => $current_user->user_login,
@@ -977,7 +977,7 @@ $orderid=$order;
 define('DOLICONNECT_CART', $orderid);
 }
 
-$orderfo = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
+$orderfo = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
 
 if ( $orderfo->lines != null ) {
 foreach ( $orderfo->lines as $ln ) {
@@ -1002,7 +1002,7 @@ $adln = [
     'subprice' => $price
 	];                 
 $addline = callDoliApi("POST", "/orders/".$orderid."/lines", $adln, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
+$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
 if ( !empty($url) ) {
 set_transient( 'doliconnect_cartlinelink_'.$addline, esc_url($url), $delay2);
@@ -1014,7 +1014,7 @@ return $addline;
 if ( $quantity < 1 ) {
 
 $deleteline = callDoliApi("DELETE", "/orders/".$orderid."/lines/".$line, null, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
+$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
 delete_transient( 'doliconnect_cartlinelink_'.$line );
 
@@ -1032,7 +1032,7 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
     'subprice' => $price
 	];                  
 $updateline = callDoliApi("PUT", "/orders/".$orderid."/lines/".$line, $ln, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay($delay, true));
+$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay($delay, true));
 if ( !empty($url) ) {
 set_transient( 'doliconnect_cartlinelink_'.$line, esc_url($url), $delay2);
@@ -1138,7 +1138,7 @@ $TTC = number_format($orderfo->total_ttc, 2, ',', ' ');
 if ( $orderfo->statut == '1' && !isset($_GET['error']) ) {
 if ( $orderfo->mode_reglement_id == '7 ') 
 {
-$chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, MONTH_IN_SECONDS);
+$chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, dolidelay('constante'));
 
 $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, MONTH_IN_SECONDS);
 
@@ -1146,7 +1146,7 @@ echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( _
 }
 elseif ($orderfo->mode_reglement_id == '2') 
 {
-$vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, MONTH_IN_SECONDS);
+$vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, dolidelay('constante'));
 
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, MONTH_IN_SECONDS);
 
@@ -1252,7 +1252,7 @@ exit;
 
 } elseif ($_POST['modepayment']=='7' || $_POST['modepayment']=='2'or $_POST['modepayment']=='4'){
 
-$warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, MONTH_IN_SECONDS);
+$warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, dolidelay('constante'));
 
 $vld = [
     'idwarehouse' => $warehouse->value,
@@ -1307,7 +1307,7 @@ echo "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'
 doliminicart($orderfo);
 echo "<div class='card'><div class='card-header'>".__( 'Billing', 'doliconnect-pro' )." <small>(<a href='".esc_url(get_permalink(get_option('dolicart'))."?info")."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><div class='card-body'>";
 
-$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS,  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$thirdparty = callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 echo $thirdparty->name."<br>";
 echo $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town.", ".strtoupper($thirdparty->country)."<br>";
@@ -1392,7 +1392,7 @@ form.submit();
 <?php
 echo "</SCRIPT><div class='card'>"; 
 
-echo doliconnectuserform(callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay(DAY_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay(MONTH_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'full');
+echo doliconnectuserform(callDoliApi("GET", "/thirdparties/".constant("DOLIBARR"), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay(MONTH_IN_SECONDS, esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'full');
 
 echo "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 echo "</div></div>";
@@ -1596,7 +1596,7 @@ global $wpdb;
 
 doliconnect_enqueues();
 
-$shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, MONTH_IN_SECONDS);
+$shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante'));
 //echo $shop;
 
 $boutik ="";
@@ -1613,7 +1613,7 @@ foreach ($resultatsc as $categorie) {
 $boutik.= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
 }}}
 
-$catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, MONTH_IN_SECONDS);
+$catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, dolidelay('constante'));
 
 if ( !empty($catoption->value) && is_user_logged_in() ) {
 $boutik.= "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
