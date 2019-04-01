@@ -947,8 +947,8 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 
 }
 
-function addtodolibasket($product, $quantity, $price, $url = null, $timestart = null, $timeend = null) {
-global $wpdb,$current_user;
+function addtodolibasket($product, $quantity = null, $price = null, $url = null, $timestart = null, $timeend = null) {
+global $current_user;
 
 if ( !is_null($timestart) || !is_null($timeend) )
 {
@@ -995,6 +995,7 @@ $adln = [
     'date_start' => $date_start,
     'date_end' => $date_end,
     'qty' => $quantity,
+    'tva_tx' => $prdt->tva_tx, 
     'remise_percent' => constant("REMISE_PERCENT"),
     'subprice' => $price
 	];                 
@@ -1025,6 +1026,7 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
     'date_start' => $date_start,
     'date_end' => $date_end,
     'qty' => $quantity,
+    'tva_tx' => $prdt->tva_tx, 
     'remise_percent' => constant("REMISE_PERCENT"),
     'subprice' => $price
 	];                  
@@ -1603,7 +1605,7 @@ $boutik.= dolibug();
 if ( !isset($_GET['category']) ) {
 $boutik.= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( $shop->value != null ) {
-$resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null,dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
