@@ -1470,7 +1470,7 @@ echo "</script>";
 }
 
 if ( constant("DOLICONNECT_CART")>0 && $orderfo->lines != null ) {  //&& $timeout>'0'                                                                                         
-echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), constant("DOLICONNECT_CART"))." <span class='duration'></span></small></div>";
+//echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), constant("DOLICONNECT_CART"))." <span class='duration'></span></small></div>";
 }
 
 echo "<form role='form' action='".esc_url(get_permalink())."' id='cart-form' method='post'>";
