@@ -1329,7 +1329,7 @@ echo "</div></div>";
 } elseif ( isset($_GET['info']) && constant("DOLICONNECT_CART_ITEM") > 0 ) {
 
 if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
-$thirdparty=$_POST['thirdparty'];
+$thirdparty=$_POST['thirdparty'][''.constant("DOLIBARR").''];
 $ID = $current_user->ID;
 wp_update_user( array( 'ID' => $ID, 'user_email' => sanitize_email($thirdparty['email'])));
 wp_update_user( array( 'ID' => $ID, 'nickname' => sanitize_user($_POST['user_nicename'])));
