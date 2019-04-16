@@ -1571,17 +1571,19 @@ echo "</li>";
 
 echo "</ul>";
 
-if ( isset($orderfo) && ($orderfo->lines != null || (get_option('dolishop') && $orderfo->lines != null ) || get_option('dolishop')) ) {
+if ( get_option('dolishop') ) {
 echo "<div class='card-body'><div class='row'>";
 if (get_option('dolishop')){
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
-}  
+} 
+if ( isset($orderfo) && $orderfo->lines != null ) { 
 if ( $orderfo->lines != null ){
 echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='purge' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro' )."</b></button></div>";
 }
 if ( $orderfo->lines != null ) {
 echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='validation' class='btn btn-warning w-100' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro' )."</b></button></div>";
 } 
+}
 echo "</div>";
  
 echo "</form></div>";
