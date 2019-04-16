@@ -1420,7 +1420,7 @@ if (isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
 $orderdelete = callDoliApi("DELETE", "/orders/".doliconnector($current_user, 'fk_order'), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
-
+doliconnector($current_user, 'fk_order', true);
 wp_redirect(esc_url(get_permalink()));
 exit;
 } else {
@@ -1433,7 +1433,7 @@ $result = addtodolibasket($_POST['product_update'], $_POST['dolicart_line'], $_P
 //echo $_POST['product_update']."/".$_POST['product_qty']."/".$_POST['product_price']."/".$_POST['product_line'];
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
-$orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('order'), true);
+$orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order', true), null, dolidelay('order'), true);
 //echo $orderfo;
 }
 //wp_redirect(esc_url(get_permalink()));
