@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.6.2
+ * Version: 1.6.3
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -961,9 +961,7 @@ $date_start=null;
 $date_end=null;
 }
 
-if ( doliconnector($current_user, 'fk_order') > 0 ) {
-$orderid=doliconnector($current_user, 'fk_order');
-} else {
+if ( empty(doliconnector($current_user, 'fk_order', true)) ) {
 $rdr = [
     'socid' => doliconnector($current_user, 'fk_soc'),
     'date_commande' => mktime(),
@@ -972,11 +970,9 @@ $rdr = [
     'pos_source' => 0,
 	];                  
 $order = callDoliApi("POST", "/orders", $rdr, 0);
-$orderid=$order;
-doliconnector($current_user, 'fk_order', true);
 }
 
-$orderfo = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
+$orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order', true), null, dolidelay('order', true));
 
 if ( $orderfo->lines != null ) {
 foreach ( $orderfo->lines as $ln ) {
@@ -989,7 +985,7 @@ $line=$ln->id;
 
 if (!$line > 0) {$line=null;}
 
-if ( $orderid > 0 && $quantity > 0 && is_null($line) ) {
+if ( doliconnector($current_user, 'fk_order') > 0 && $quantity > 0 && is_null($line) ) {
 $prdt = callDoliApi("GET", "/products/".$product, null, dolidelay('product', true));
 $adln = [
     'fk_product' => $product,
@@ -1001,20 +997,20 @@ $adln = [
     'remise_percent' => constant("REMISE_PERCENT"),
     'subprice' => $price
 	];                 
-$addline = callDoliApi("POST", "/orders/".$orderid."/lines", $adln, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
+$addline = callDoliApi("POST", "/orders/".doliconnector($current_user, 'fk_order')."/lines", $adln, 0);
+$order = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector', true));
 if ( !empty($url) ) {
 set_transient( 'doliconnect_cartlinelink_'.$addline, esc_url($url), dolidelay(MONTH_IN_SECONDS, true));
 }
 return $addline;
 
-} elseif ( $orderid > 0 && $line > 0 ) {
+} elseif ( doliconnector($current_user, 'fk_order') > 0 && $line > 0 ) {
 
 if ( $quantity < 1 ) {
 
-$deleteline = callDoliApi("DELETE", "/orders/".$orderid."/lines/".$line, null, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
+$deleteline = callDoliApi("DELETE", "/orders/".doliconnector($current_user, 'fk_order')."/lines/".$line, null, 0);
+$order = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector', true));
 delete_transient( 'doliconnect_cartlinelink_'.$line );
 
@@ -1032,8 +1028,8 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
     'remise_percent' => constant("REMISE_PERCENT"),
     'subprice' => $price
 	];                  
-$updateline = callDoliApi("PUT", "/orders/".$orderid."/lines/".$line, $ln, 0);
-$order = callDoliApi("GET", "/orders/".$orderid, null, dolidelay('order', true));
+$updateline = callDoliApi("PUT", "/orders/".doliconnector($current_user, 'fk_order')."/lines/".$line, $ln, 0);
+$order = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('order', true));
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector', true));
 if ( !empty($url) ) {
 set_transient( 'doliconnect_cartlinelink_'.$line, esc_url($url), dolidelay(MONTH_IN_SECONDS, true));
