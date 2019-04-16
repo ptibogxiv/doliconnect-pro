@@ -952,8 +952,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 function addtodolibasket($product, $quantity = null, $price = null, $url = null, $timestart = null, $timeend = null) {
 global $current_user;
 
-if ( !is_null($timestart) || !is_null($timeend) )
-{
+if ( !is_null($timestart) || !is_null($timeend) ) {
 $date_start=strftime('%Y-%m-%d 00:00:00',$timestart);
 $date_end=strftime('%Y-%m-%d 00:00:00',$timeend);
 } else {
@@ -983,7 +982,7 @@ $line=$ln->id;
 }
 }}
 
-if (!$line > 0) {$line=null;}
+if (!$line > 0) { $line=null; }
 
 if ( doliconnector($current_user, 'fk_order') > 0 && $quantity > 0 && is_null($line) ) {
 $prdt = callDoliApi("GET", "/products/".$product, null, dolidelay('product', true));
@@ -994,7 +993,7 @@ $adln = [
     'date_end' => $date_end,
     'qty' => $quantity,
     'tva_tx' => $prdt->tva_tx, 
-    'remise_percent' => constant("REMISE_PERCENT"),
+    'remise_percent' => doliconnector($current_user, 'remise_percent'),
     'subprice' => $price
 	];                 
 $addline = callDoliApi("POST", "/orders/".doliconnector($current_user, 'fk_order')."/lines", $adln, 0);
@@ -1025,7 +1024,7 @@ $prdt = callDoliApi("GET", "/products/".$product, null, 0);
     'date_end' => $date_end,
     'qty' => $quantity,
     'tva_tx' => $prdt->tva_tx, 
-    'remise_percent' => constant("REMISE_PERCENT"),
+    'remise_percent' => doliconnector($current_user, 'remise_percent'),
     'subprice' => $price
 	];                  
 $updateline = callDoliApi("PUT", "/orders/".doliconnector($current_user, 'fk_order')."/lines/".$line, $ln, 0);
@@ -1043,7 +1042,7 @@ return $updateline;
 }
 
 function doliminicart($orderfo) {
-$item = constant("DOLICONNECT_CART_ITEM");
+$item = doliconnector($current_user, 'fk_order_nb_item');
 echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect-pro' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
 if ( $orderfo->lines != null ) {
 foreach ($orderfo->lines as $line) {
@@ -1056,12 +1055,12 @@ echo "<span class='text-muted'>".doliprice($line, 'ttc',isset($orderfo->multicur
 }
 }
 
-if ( constant("REMISE_PERCENT") > 0 ) { 
-$remise_percent = (0*constant("REMISE_PERCENT"))/100;
+if ( doliconnector($current_user, 'remise_percent') > 0 ) { 
+$remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
               <div class='text-success'>
                 <h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
-                <small>-".constant("REMISE_PERCENT")."%</small>
+                <small>-".doliconnector($current_user, 'remise_percent')."%</small>
               </div>
               <span class='text-success'>-".doliprice($remise_percent, null, isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</span></li>";
 } 
@@ -1073,8 +1072,8 @@ echo "</ul></div><br>";
 }
 
 function dolicart_shortcode() {
-global $wpdb,$current_user;
-$current_user =  wp_get_current_user();
+global $wpdb, $current_user;
+
 $entity = get_current_blog_id();
 $time = current_time('timestamp');
 
@@ -1164,7 +1163,7 @@ echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error occurred',
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div>";
 
-} elseif (isset($_GET['pay']) && constant("DOLICONNECT_CART_ITEM") > 0) {
+} elseif (isset($_GET['pay']) && doliconnector($current_user, 'fk_order_nb_item') > 0) {
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
@@ -1324,7 +1323,7 @@ echo doliloading('paymentmodes');
 
 echo "</div></div>";
 
-} elseif ( isset($_GET['info']) && constant("DOLICONNECT_CART_ITEM") > 0 ) {
+} elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 ) {
 
 if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 $thirdparty=$_POST['thirdparty'][''.doliconnector($current_user, 'fk_soc').''];
