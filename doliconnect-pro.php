@@ -1599,7 +1599,7 @@ $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null,
 $boutik ="";
 if ( defined("DOLIBUG") ) {
 $boutik.= dolibug();
-} elseif ( is_object($order) && $order->value == 1 ) {
+} elseif ( is_object($order) && $order->value != 1 ) {
 
 echo "<div class='card shadow-sm'><div class='card-body'>";
 echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect").'</h4>';
