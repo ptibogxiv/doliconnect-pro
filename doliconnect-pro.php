@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.6.3
+ * Version: 1.6.4
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1079,6 +1079,8 @@ $time = current_time('timestamp');
 
 doliconnect_enqueues();
 
+$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
+
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
 $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay(20 * MINUTE_IN_SECONDS, true));
 //echo $orderfo;
@@ -1087,6 +1089,13 @@ $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'
 if ( defined("DOLIBUG") ) {
 
 echo dolibug();
+
+} elseif ( is_object($order) && $order->value != 1 ) {
+
+echo "<div class='card shadow-sm'><div class='card-body'>";
+echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect-pro").'</h4>';
+echo '</div></center><br><br><br><br><br></div>';
+echo "</div></div>";
 
 } else {
 
@@ -1602,7 +1611,7 @@ $boutik.= dolibug();
 } elseif ( is_object($order) && $order->value != 1 ) {
 
 echo "<div class='card shadow-sm'><div class='card-body'>";
-echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect").'</h4>';
+echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect-pro").'</h4>';
 echo '</div></center><br><br><br><br><br></div>';
 echo "</div></div>";
 
