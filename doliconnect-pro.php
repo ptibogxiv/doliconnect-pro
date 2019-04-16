@@ -1601,7 +1601,7 @@ $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null,
 //echo $shop;
 
 $boutik ="";
-if (defined("DOLIBUG")) {
+if ( defined("DOLIBUG") ) {
 $boutik.= dolibug();
 } else {
 if ( !isset($_GET['category']) ) {
