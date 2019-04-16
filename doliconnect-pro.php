@@ -350,15 +350,11 @@ echo "<script>";
 if ( $listsource->code_account != null ) {
 ?>
 var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-  stripeAccount: '<?php echo $listsource->code_account; ?>',
-  betas: ['payment_intent_beta_3']
-});
+  stripeAccount: '<?php echo $listsource->code_account; ?>'});
 <?php
 } else {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>', {
-  betas: ['payment_intent_beta_3']
-});
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
 <?php
 }
 ?> 
