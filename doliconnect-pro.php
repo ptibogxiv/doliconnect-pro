@@ -794,7 +794,7 @@ if ($action=='POST') {
 $mbr = callDoliApi("POST", "/adherentsplus", $data, 0);
 $adhesion = callDoliApi("GET", "/adherentsplus/".doliconnector($current_user, 'fk_member', true), null, dolidelay('member', true));
 } else {
-$adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'fk_member'), $data, 0);
+$adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'fk_member', true), $data, 0);
 }
 
 return $adhesion;
@@ -1710,7 +1710,7 @@ return $content;
 add_filter( 'the_content', 'doliconnect_restrict_display');
 
 function doliconnect_modal() {
-global $wpdb,$current_user;
+global $wpdb, $current_user;
 $entity = get_current_blog_id();
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
