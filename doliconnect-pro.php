@@ -1592,12 +1592,20 @@ global $wpdb;
 
 doliconnect_enqueues();
 
+$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
 $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante'));
 //echo $shop;
 
 $boutik ="";
 if ( defined("DOLIBUG") ) {
 $boutik.= dolibug();
+} elseif ( is_object($order) && $order->value == 1 ) {
+
+echo "<div class='card shadow-sm'><div class='card-body'>";
+echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect").'</h4>';
+echo '</div></center><br><br><br><br><br></div>';
+echo "</div></div>";
+
 } else {
 if ( !isset($_GET['category']) ) {
 $boutik.= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
