@@ -2386,6 +2386,24 @@ $ln=null;
 }
 
 $button .="<form id='product-add-form-$product->id' role='form' action='".doliconnecturl('dolishop')."?category=".$category."&product=".$product->id."'  method='post'>";
+
+echo "<script>";
+?>
+
+var form = document.getElementById('product-add-form-<?php echo $product->id; ?>'); 
+
+form.addEventListener('submit', function(event) {
+
+jQuery('#DoliconnectLoadingModal').modal('show');
+jQuery(window).scrollTop(0);
+console.log("submit");
+form.submit();
+
+});
+
+<?php
+echo "</script>";
+
 $button .="<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='product_update[".$product->id."][product]' value='$product->id'>";
 $button .="<script type='text/javascript' language='javascript'>";
 
