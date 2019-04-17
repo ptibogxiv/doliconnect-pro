@@ -1163,7 +1163,7 @@ echo "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has b
 }
 }
 else {
-echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error occurred', 'doliconnect-pro' )."</p>";
+echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurred', 'doliconnect-pro' )."</p>";
 }
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div>";
@@ -1274,7 +1274,7 @@ elseif ($_POST['modepayment'] == 'src_payplug')  {
 
 } else {
 if ($orderfo->id <=0 || $error || !$source) {
-echo "<center><h4>Oups, une erreur est survenue, merci de rÃ©essayer</h4>";
+echo "<center><h4 class='alert-heading'>".__( 'Oops', 'doliconnect-pro' )."</h4><p>".__( 'An error is occured. Please retry!', 'doliconnect-pro' )."</p>";
 echo "<br /><a href='".esc_url(get_permalink())."' class='btn btn-primary'>Retourner sur la page de paiement</a></center>";
 }
 }
@@ -1429,7 +1429,7 @@ doliconnector($current_user, 'fk_order', true);
 wp_redirect(esc_url(get_permalink()));
 exit;
 } else {
-echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us.', 'doliconnect-pro' )."</p></div>"; 
+echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
 }
 }
  
@@ -1444,7 +1444,7 @@ $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'
 //wp_redirect(esc_url(get_permalink()));
 //exit;
 } else {
-echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us.', 'doliconnect-pro' )."</p></div>"; 
+echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
 }
 }
 
