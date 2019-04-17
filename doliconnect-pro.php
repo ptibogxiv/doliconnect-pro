@@ -2358,6 +2358,7 @@ function dolibuttontocart($product, $category=0, $add=0, $time=0) {
 global $current_user;
 
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
+$stock = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_STOCK", null, dolidelay('constante'));
 
 $button = "<div class='jumbotron'>";
 
@@ -2460,12 +2461,10 @@ $price_ttc=$product->price_ttc;
 }
 //$button .=doliprice($price_ttc);
 
-
-
 if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 ) {
 $button .="<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' >";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
-if ( $product->stock_reel-$qty >= '10' ) {
+if ( $product->stock_reel-$qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
 $m2 = 10;
 } elseif ( $product->stock_reel > $line->qty ) {
 $m2 = $product->stock_reel;
