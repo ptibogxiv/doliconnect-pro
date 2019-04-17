@@ -2479,7 +2479,9 @@ if ( $qty > 0 ) {
 $button .="<br /><div class='input-group'><a class='btn btn-block btn-warning' href='".doliconnecturl('dolicart')."' role='button' title='".__( 'Go to cart', 'doliconnect-pro' )."'>".__( 'Go to cart', 'doliconnect-pro' )."</a></div>";
 }
 } elseif ( $add == 1 ) {
-$button .="<div class='input-group'><a class='btn btn-block btn-outline-secondary' href='".wp_login_url( )."&redirect_to=".doliconnecturl('dolishop')."?category=".$_GET[category]."' role='button' title='".__( 'Login', 'doliconnect-pro' )."'>".__( 'Login', 'doliconnect-pro' )."</a></div>";
+$arr_params = array( 'category' => esc_attr($_GET[category]), 'redirect_to' => doliconnecturl('dolishop'));
+$loginurl = esc_url( add_query_arg( $arr_params, wp_login_url( )) );
+$button .="<div class='input-group'><a class='btn btn-block btn-outline-secondary' href='".$loginurl."' role='button' title='".__( 'Login', 'doliconnect-pro' )."'>".__( 'Login', 'doliconnect-pro' )."</a></div>";
 } else {
 $button .="<div class='input-group'><a class='btn btn-block btn-info' href='".doliconnecturl('dolicontact')."?type=COM' role='button' title='".__( 'Login', 'doliconnect-pro' )."'>".__( 'Contact us', 'doliconnect-pro' )."</a></div>";
 }
