@@ -1599,20 +1599,12 @@ global $wpdb;
 
 doliconnect_enqueues();
 
-$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
 $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante'));
 //echo $shop;
 
 $boutik ="";
 if ( defined("DOLIBUG") ) {
 $boutik.= dolibug();
-} elseif ( is_object($order) && $order->value != 1 ) {
-
-echo "<div class='card shadow-sm'><div class='card-body'>";
-echo '<div id="dolibug" ><br><br><br><br><br><center><div class="align-middle"><i class="fas fa-bug fa-3x fa-fw"></i><h4>'.__( "Oops, Order's module is not available", "doliconnect-pro").'</h4>';
-echo '</div></center><br><br><br><br><br></div>';
-echo "</div></div>";
-
 } else {
 if ( !isset($_GET['category']) ) {
 $boutik.= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
@@ -2368,6 +2360,9 @@ echo "</form>";
 }
 
 function dolibuttontocart($product, $category=0, $add=0, $time=0) {
+global $current_user;
+
+$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
 
 $button = "<div class='jumbotron'>";
 
@@ -2420,11 +2415,11 @@ $altdurvalue=60/$product->duration_value;
 }
 
 if ( !empty($product->multiprices_ttc) ) {
-$lvl=constant("PRICE_LEVEL");
+$lvl=doliconnector($current_user, 'price_level');
 $count=1;
 //$button .=$lvl;
 foreach ( $product->multiprices_ttc as $level => $price ) {
-if ( (constant("PRICE_LEVEL") == 0 && $level == 1 ) || constant("PRICE_LEVEL") == $level ) {
+if ( (doliconnector($current_user, 'price_level') == 0 && $level == 1 ) || doliconnector($current_user, 'price_level') == $level ) {
 $button .='<h5 class="mb-1 text-right">'.__( 'Price', 'doliconnect-pro' ).': '.doliprice( $price, $currency);
 if ( empty($time) ) { $button .=' '.$duration; }
 $button .='</h5>';
@@ -2441,8 +2436,8 @@ if ( !empty($altdurvalue) ) { $button .= "<h6 class='mb-1 text-right'>soit ".dol
 
 }
 
-if (constant("PRICE_LEVEL") > 0){
-$level=constant("PRICE_LEVEL");
+if (doliconnector($current_user, 'price_level') > 0){
+$level=doliconnector($current_user, 'price_level');
 $price_min_ttc=$product->multiprices_min_ttc->$level;
 $price_ttc=$product->multiprices_ttc->$level;
 }
@@ -2451,7 +2446,10 @@ $price_min_ttc=$product->price_min_ttc;
 $price_ttc=$product->price_ttc;
 }
 //$button .=doliprice($price_ttc);
-if ( is_user_logged_in() && $add==1 ) {
+
+
+
+if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 ) {
 $button .="<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' >";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$qty >= '10' ) {
