@@ -1466,6 +1466,8 @@ echo "</script>";
 //echo date_i18n('d/m/Y H:i', $orderfo[date_modification]);
 }
 
+$stock = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_STOCK", null, dolidelay('constante'));
+
 if ( doliconnector($current_user, 'fk_order')>0 && $orderfo->lines != null ) {  //&& $timeout>'0'                                                                                         
 //echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), doliconnector($current_user, 'fk_order'))." <span class='duration'></span></small></div>";
 }
@@ -1518,9 +1520,10 @@ echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice(
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
 echo "<input type='hidden' name='product_line' value='$line->id'><input type='hidden' name='product_price' value='$line->subprice'><input type='hidden' name='product_update' value='$line->fk_product'>";
+
 echo "<select class='form-control' name='dolicart_line' onchange='this.form.submit()'>"; //['".$line->id."']
-if (($product->stock_reel-$line->qty > '0' && $product->type == '0')) {
-if ($product->stock_reel-$line->qty >= '10' ) {
+if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
+if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
 $m2 = 10;
 } elseif ($product->stock_reel>$line->qty) {
 $m2 = $product->stock_reel;
