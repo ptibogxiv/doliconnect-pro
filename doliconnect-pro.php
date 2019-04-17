@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.6.5
+ * Version: 1.6.6
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
