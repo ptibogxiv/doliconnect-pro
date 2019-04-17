@@ -1152,6 +1152,7 @@ $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, d
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, dolidelay('constante'));
 
 echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your transfert in the amount of <b>%1$s</b> with reference <b>%2$s</b> at the following account', 'doliconnect-pro' ), doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null), $orderfo->ref ).":";
+echo "<br><b>".__( 'Bank', 'doliconnect' ).": $bank->bank</b>";
 echo "<br><b>IBAN: $bank->iban</b>";
 if ( ! empty($bank->bic) ) { echo "<br><b>BIC/SWIFT : $bank->bic</b>";}
 echo "</p>";
@@ -1225,12 +1226,6 @@ $vld = [
     'notrigger' => 0
 	];
 $validate = callDoliApi("POST", "/orders/".$orderfo->id."/validate", $vld, 0);
-// tout va bien
-//$emailfrom = get_option('admin_email');
-//$subject = "[NOTIFICATION] Demande d'adhÃ©sion";  
-//$body = "Vous recevez cet email pour vous informer d'une demande d'adhÃ©sion en ligne Ã  valider de la part de ".$current_user->user_firstname." ".$current_user->user_lastname."<br /><br /><a href='".get_site_option('dolibarr_public_url')."/adherents/subscription.php?rowid=$input->member_id'>Voir la fiche d'adhÃ©rent sur Dolibarr</a>";
-//$headers = array('Content-Type: text/html; charset=UTF-8','From: '.get_bloginfo('name').' <'.$emailfrom.'>');                      
-//wp_mail($emailfrom, $subject, $body, $headers); 
 
 $src = [
     'source' => "".$source."",
