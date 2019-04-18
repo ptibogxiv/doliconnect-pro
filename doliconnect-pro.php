@@ -1429,7 +1429,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
  
 if ( isset($_POST['product_update']) ) {
-$result = addtodolibasket($_POST['product_update'], $_POST['dolicart_line'], $_POST['product_price'], $_POST['product_line']);
+$result = addtodolibasket($_POST['product_update'], $_POST['updateorderproduct']['qty'], $_POST['updateorderproduct']['price'], $_POST['updateorderproduct']['line']);
 //echo $_POST['product_update']."/".$_POST['product_qty']."/".$_POST['product_price']."/".$_POST['product_line'];
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
@@ -1519,9 +1519,9 @@ echo '<p class="mb-1">'.$line->description.'</p>
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
-echo "<input type='hidden' name='product_line' value='$line->id'><input type='hidden' name='product_price' value='$line->subprice'><input type='hidden' name='product_update' value='$line->fk_product'>";
+echo "<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='updateorderproduct[line]' value='$line->id'><input type='hidden' name='updateorderproduct[price]' value='$line->subprice'>";
 
-echo "<select class='form-control' name='dolicart_line' onchange='this.form.submit()'>"; //['".$line->id."']
+echo "<select class='form-control' name='updateorderproduct[qty]' onchange='this.form.submit()'>"; //['".$line->id."']
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
 $m2 = 10;
