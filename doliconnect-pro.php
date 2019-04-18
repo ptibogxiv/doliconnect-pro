@@ -1429,6 +1429,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
  
 if ( isset($_POST['updateorderproduct']) ) {
+foreach ( $_POST['updateorderproduct'] ) {
 $result = addtodolibasket($_POST['updateorderproduct'][$_POST['product_update']]['product'], $_POST['updateorderproduct'][$_POST['product_update']]['qty'], $_POST['updateorderproduct'][$_POST['product_update']]['price'], $_POST['updateorderproduct'][$_POST['product_update']]['line']);
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
@@ -1440,6 +1441,7 @@ $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'
 //exit;
 } else {
 echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
+}
 }
 }
 
