@@ -1512,14 +1512,14 @@ if ( $line->fk_product > 0 ) {
 $product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
 }
 
-echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-10">';
+echo '<div class="w-100 justify-content-between"><div class="row"><div class="col-8 col-md-8">';
 if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
-echo '<h6>'.$line->libelle.' </h6> '.doliproductstock($product);
+echo '<h6>'.$line->libelle.' </h6>';
 } else {
-echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a> '.doliproductstock($product); }
+echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
 echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
-echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
+echo '</div><div class="col col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 
