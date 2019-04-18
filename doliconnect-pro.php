@@ -1521,11 +1521,9 @@ echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 
-//echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
-
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 
-echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='this.form.submit()'>"; //['".$line->id."']
+echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='this.form.submit()'>";
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
 $m2 = 10;
@@ -1544,8 +1542,6 @@ else {$m2 = 1;}
 		}
 	}
 echo "</select>";
-
-//echo "</form>";
  
 echo "</div></div></li>";
 }
