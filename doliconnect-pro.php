@@ -1430,7 +1430,8 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
  
 if ( isset($_POST['updateorderproduct']) ) {
 foreach ( $_POST['updateorderproduct'] as $productupdate ) {
-$result = addtodolibasket($_POST['updateorderproduct'][$_POST['product_update']]['product'], $_POST['updateorderproduct'][$_POST['product_update']]['qty'], $_POST['updateorderproduct'][$_POST['product_update']]['price'], $productupdate[$_POST['product_update']]['line']);
+$productid=$productupdate['product'];
+$result = addtodolibasket($productid, $productupdate['qty'], $productupdate['price'], $productupdate['line']);
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
@@ -1520,9 +1521,9 @@ echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 
-echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
+//echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
-echo "<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
+echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 
 echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='this.form.submit()'>"; //['".$line->id."']
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
@@ -1543,7 +1544,9 @@ else {$m2 = 1;}
 		}
 	}
 echo "</select>";
-echo "</form>"; 
+
+//echo "</form>";
+ 
 echo "</div></div></li>";
 }
 } else {
