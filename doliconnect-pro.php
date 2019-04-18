@@ -1523,7 +1523,7 @@ echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice(
 
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 
-echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='this.form.submit()'>";
+echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='submit()'>";
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
 $m2 = 10;
