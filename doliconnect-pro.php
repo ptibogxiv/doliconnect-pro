@@ -1428,9 +1428,9 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
 }
  
-if ( isset($_POST['product_update']) ) {
-$result = addtodolibasket($_POST['product_update'], $_POST['updateorderproduct'][$_POST['product_update']]['qty'], $_POST['updateorderproduct'][$_POST['product_update']]['price'], $_POST['updateorderproduct'][$_POST['product_update']]['line']);
-
+if ( isset($_POST['updateorderproduct']) ) {
+$result = addtodolibasket($_POST['updateorderproduct'][$_POST['product_update']]['product'], $_POST['updateorderproduct'][$_POST['product_update']]['qty'], $_POST['updateorderproduct'][$_POST['product_update']]['price'], $_POST['updateorderproduct'][$_POST['product_update']]['line']);
+//echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
 $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order', true), null, dolidelay('order'), true);
@@ -1517,9 +1517,10 @@ echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.
 echo '<p class="mb-1">'.$line->description.'</p>
 <small>'.$dates.'</small>'; 
 echo '</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
+
 echo "<form role='form' action='".esc_url(get_permalink())."' id='qty-form' method='post'>";
 
-echo "<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
+echo "<input type='hidden' name='product_update' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 
 echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='this.form.submit()'>"; //['".$line->id."']
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
