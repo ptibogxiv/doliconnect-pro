@@ -1430,7 +1430,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
  
 if ( isset($_POST['product_update']) ) {
 $result = addtodolibasket($_POST['product_update'], $_POST['updateorderproduct']['qty'], $_POST['updateorderproduct']['price'], $_POST['updateorderproduct']['line']);
-//echo $_POST['product_update']."/".$_POST['product_qty']."/".$_POST['product_price']."/".$_POST['product_line'];
+
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
 $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order', true), null, dolidelay('order'), true);
