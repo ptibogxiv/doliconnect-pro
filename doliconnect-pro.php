@@ -1426,7 +1426,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 if ( isset($_POST['updateorderproduct']) ) {
 foreach ( $_POST['updateorderproduct'] as $productupdate ) {
 $productid=$productupdate['product'];
-$result = addtodolibasket($productid, $productupdate['qty'], $productupdate['price'], $productupdate['line']);
+$result = addtodolibasket($productid, $productupdate['qty'], $productupdate['price'], null, $productupdate['date_start'], $productupdate['date_end']);
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
@@ -1522,6 +1522,7 @@ echo '<p class="mb-1">'.$line->description.'</p>
 echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
+echo "<input type='hidden' name='updateorderproduct[".$product->id."][date_start]' value='$line->date_start'><input type='hidden' name='updateorderproduct[".$product->id."][date_end]' value='$line->date_end'>";
 
 echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='submit()'>";
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
