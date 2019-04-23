@@ -349,9 +349,9 @@ echo doliloading('payment');
 echo "<script>";
 if ( $listsource->code_account != null ) {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-    stripeAccount: '<?php echo $listsource->code_account; ?>'
-    });
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',
+{stripeAccount: '<?php echo $listsource->code_account; ?>'},
+);
 <?php
 } else {
 ?>
@@ -1863,16 +1863,16 @@ doliconnect_enqueues();
 echo "<script src='https://js.stripe.com/v3/'></script><script>";
 if ( $listsource->code_account != null ) {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-    stripeAccount: '<?php echo $listsource->code_account; ?>'
-    });
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',
+{stripeAccount: '<?php echo $listsource->code_account; ?>'},
+);
 <?php
 } else {
 ?>
 var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
 <?php
 }
-?>
+?> 
 
 var mode = '<?php echo $mode; ?>';
 var montant = <?php echo $total*100; ?>;
