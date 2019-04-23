@@ -1855,7 +1855,7 @@ return $connect;
 // ********************************************************
 
 function doligateway($listsource, $ref, $total, $currency, $redirect, $mode) {
-global $current_user,$wpdb;
+global $current_user;
 $currency=strtolower($currency);
 
 doliconnect_enqueues();
