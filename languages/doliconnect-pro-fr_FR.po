@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
 "POT-Creation-Date: 2019-04-23 12:55+0200\n"
-"PO-Revision-Date: 2019-04-23 12:56+0200\n"
+"PO-Revision-Date: 2019-04-23 20:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -55,7 +55,7 @@ msgstr "Titulaire comme sur votre carte de crédit"
 
 #: doliconnect-pro.php:214
 msgid "Bank transfer"
-msgstr "Virement bancaire"
+msgstr "Prélévement bancaire"
 
 #: doliconnect-pro.php:214 doliconnect-pro.php:2279
 msgid "Via SEPA Direct Debit"
