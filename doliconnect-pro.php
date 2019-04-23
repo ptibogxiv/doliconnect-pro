@@ -350,7 +350,8 @@ echo "<script>";
 if ( $listsource->code_account != null ) {
 ?>
 var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-  stripeAccount: '<?php echo $listsource->code_account; ?>'});
+    stripeAccount: '<?php echo $listsource->code_account; ?>'
+    });
 <?php
 } else {
 ?>
@@ -1872,6 +1873,7 @@ var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
 <?php
 }
 ?>
+
 var mode = '<?php echo $mode; ?>';
 var montant = <?php echo $total*100; ?>;
 var monnaie = '<?php echo $currency; ?>';
@@ -2119,45 +2121,8 @@ form.submit();
 
 window.onload=ShowHideDiv; 
 
-var elements = stripe.elements();
-var prButton = elements.create('paymentRequestButton', {
-  paymentRequest: paymentRequest,
-});
-
-paymentRequest.canMakePayment().then(function(result) {
-  if (result) {
-jQuery('#else').show();
-prButton.mount('#payment-request-button');
-  } else {
-document.getElementById('payment-request-button').style.display = 'none';
-  }
-});
-
-paymentRequest.on('token', function(ev) {
-
-ev.complete('success');
-var form = document.getElementById('gateway-form');
-var hiddenInput = document.createElement('input');
-hiddenInput.setAttribute('type', 'hidden');
-hiddenInput.setAttribute('name', 'token');
-hiddenInput.setAttribute('value', ev.token.id);
-form.appendChild(hiddenInput);
-jQuery(window).scrollTop(0);
-jQuery('#else').hide();
-jQuery('#closemodalonlinepay').hide(); 
-jQuery('#payment-form').hide();
-jQuery('#gateway-form').hide(); 
-jQuery('#buttontopay').hide(); 
-jQuery('#payment-request-button').hide();            
-jQuery('#button-source-payment').hide();
-jQuery('#DoliconnectLoadingModal').modal('show');  
-jQuery('#doliloading-paymentmodes').show();
-console.log("submit");
-form.submit();
-});
-
 <?php
-echo '</SCRIPT>';
+echo '</script>';
 echo "<script>";
 ?>
 (function() {
@@ -2177,8 +2142,6 @@ echo "<script>";
 <?php
 echo "</script>";
 
-echo "<div id='payment-request-button'><!-- A Stripe Element will be inserted here. --></div>
-<div id='else' style='display: none' ><br><div style='display:inline-block;width:46%;float:left'><hr width='90%' /></div><div style='display:inline-block;width: 8%;text-align: center;vertical-align:90%'><small class='text-muted'>".__( 'or', 'doliconnect-pro' )."</small></div><div style='display:inline-block;width:46%;float:right' ><hr width='90%'/></div><br></div>";
 echo "<form role='form' action='$redirect' id='gateway-form' method='post' novalidate>";
 echo "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
