@@ -349,9 +349,9 @@ echo doliloading('payment');
 echo "<script>";
 if ( $listsource->code_account != null ) {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',
-{stripeAccount: '<?php echo $listsource->code_account; ?>'},
-);
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
+    stripeAccount: '<?php echo $listsource->code_account; ?>'
+    });
 <?php
 } else {
 ?>
