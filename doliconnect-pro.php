@@ -742,8 +742,7 @@ echo "</script>";
 
 }
 
-function dolimembership( $statut, $type, $delay) {
-global $current_user;
+function dolimembership($current_user, $statut, $type, $delay) {
 
 if ($statut=='1') {
 $statut='-1';
