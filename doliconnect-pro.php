@@ -147,7 +147,7 @@ $counter = new myCounter;
 if ( $listsource->sources != null ) {  
 foreach ( $listsource->sources as $src ) {                                                                                                                       
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>
-<div class='d-none d-md-block'><i ";
+<div class='d-none d-md-block col-md-2 col-lg-1'><i ";
 if ( $src->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
@@ -158,20 +158,20 @@ else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" sty
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
-echo "</div><div><h6 class='my-0'>";
+echo "</div><div class='col-10 col-md-6 col-lg-7'><h6 class='my-0'>";
 if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
 }
 echo "<br>".$src->holder."</h6></div>";
-echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
+echo "<div class='col-1 col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 //echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
 //<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit'><i class='fas fa-trash fa-fw'></i></button></div>";
 echo "</div>";
 if (1 == 1) {
-echo "<div class='btn-group-vertical' role='group'>";
+echo "<div class='col-1 col-md-2 btn-group-vertical' role='group'>";
 if ( $src->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } else {
