@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 1.7.0
+ * Version: 1.7.1
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -147,7 +147,7 @@ $counter = new myCounter;
 if ( $listsource->sources != null ) {  
 foreach ( $listsource->sources as $src ) {                                                                                                                       
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>
-<div class='d-none d-md-block'><i ";
+<div ><i ";
 if ( $src->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
@@ -158,13 +158,13 @@ else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" sty
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
-echo '</div><h6 class="my-0">';
+echo "</div><div><h6 class='my-0'>";
 if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo $src->reference;
 }
-echo "<br>".$src->holder."</h6>";
+echo "<br>".$src->holder."</h6></div>";
 echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 //echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
