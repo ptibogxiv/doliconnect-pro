@@ -1093,7 +1093,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 date_default_timezone_set($tzstring); 
 $time = current_time( 'timestamp', 1);
 
-$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
+$order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 $request = "/orders/".doliconnector($current_user, 'fk_order');
 
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
