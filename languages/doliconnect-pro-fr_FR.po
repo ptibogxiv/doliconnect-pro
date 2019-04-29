@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-04-29 21:10+0200\n"
-"PO-Revision-Date: 2019-04-29 21:11+0200\n"
+"POT-Creation-Date: 2019-04-30 00:18+0200\n"
+"PO-Revision-Date: 2019-04-30 00:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -25,29 +25,33 @@ msgstr ""
 msgid "Manage payment methods"
 msgstr "Gérer les modes de paiement"
 
-#: doliconnect-pro.php:163 doliconnect-pro.php:280 doliconnect-pro.php:2331
+#: doliconnect-pro.php:147
+msgid "New payment method"
+msgstr "Nouveau mode de paiement"
+
+#: doliconnect-pro.php:167 doliconnect-pro.php:280 doliconnect-pro.php:2331
 msgid "Account"
 msgstr "Compte"
 
-#: doliconnect-pro.php:163 doliconnect-pro.php:280 doliconnect-pro.php:2331
+#: doliconnect-pro.php:167 doliconnect-pro.php:280 doliconnect-pro.php:2331
 msgid "Mandate"
 msgstr "Mandat"
 
-#: doliconnect-pro.php:165 doliconnect-pro.php:2333
+#: doliconnect-pro.php:169 doliconnect-pro.php:2333
 msgid "Card"
 msgstr "Carte"
 
-#: doliconnect-pro.php:176 doliconnect-pro.php:178 doliconnect-pro.php:409
+#: doliconnect-pro.php:178 doliconnect-pro.php:180 doliconnect-pro.php:409
 msgid "Favorite"
 msgstr "Favori"
 
-#: doliconnect-pro.php:179 doliconnect-pro.php:409 doliconnect-pro.php:2433
+#: doliconnect-pro.php:181 doliconnect-pro.php:409 doliconnect-pro.php:2433
 msgid "Delete"
 msgstr "Supprimer"
 
-#: doliconnect-pro.php:184
-msgid "No source"
-msgstr "Aucune source"
+#: doliconnect-pro.php:186
+msgid "No payment method"
+msgstr "Aucun moyen de paiement"
 
 #: doliconnect-pro.php:228 doliconnect-pro.php:2279
 msgid "Credit of"
@@ -715,6 +719,9 @@ msgstr "ptibogxiv"
 #. Author URI of the plugin/theme
 msgid "https://www.ptibogxiv.net/en"
 msgstr "https://www.ptibogxiv.net/fr"
+
+#~ msgid "No source"
+#~ msgstr "Aucune source"
 
 #~ msgid "Downloads & licenses"
 #~ msgstr "Téléchargements & Licenses"
