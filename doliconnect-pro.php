@@ -1155,42 +1155,39 @@ wp_redirect($return);
 exit;
 }
 echo "<center><h2>".__( 'Your order has been registered', 'doliconnect-pro' )."</h2>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['ref']."<br />".__( 'Payment method', 'doliconnect-pro' ).": $orderfo->mode_reglement<br /><br />";
-$TTC = doliprice($order, 'ttc', isset($order->multicurrency_code) ? $order->multicurrency_code : null);
+$TTC = doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null);
 
 if ( $orderfo->statut == '1' && !isset($_GET['error']) ) {
-if ( $orderfo->mode_reglement_id == '7 ') 
-{
+if ( $orderfo->mode_reglement_code == 'CHQ') {
+
 $chq = callDoliApi("GET", "/doliconnector/constante/FACTURE_CHQ_NUMBER", null, dolidelay('constante'));
 
 $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, dolidelay('constante'));
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</b> to <b>%3$s</b> at the following address', 'doliconnect-pro' ), doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null), $bank->proprio, $orderfo->ref ).":</p><p><b>$bank->owner_address</b></p>";
-}
-elseif ($orderfo->mode_reglement_id == '2') 
-{
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</b> to <b>%3$s</b> at the following address', 'doliconnect-pro' ), $TTC, $bank->proprio, $orderfo->ref ).":</p><p><b>$bank->owner_address</b></p>";
+
+} elseif ($orderfo->mode_reglement_id == '2') {
+
 $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, dolidelay('constante'));
 
 $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, dolidelay('constante'));
 
-echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your transfert in the amount of <b>%1$s</b> with reference <b>%2$s</b> at the following account', 'doliconnect-pro' ), doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null), $orderfo->ref ).":";
+echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your transfert in the amount of <b>%1$s</b> with reference <b>%2$s</b> at the following account', 'doliconnect-pro' ), $TTC, $orderfo->ref ).":";
 echo "<br><b>".__( 'Bank', 'doliconnect-pro' ).": $bank->bank</b>";
 echo "<br><b>IBAN: $bank->iban</b>";
 if ( ! empty($bank->bic) ) { echo "<br><b>BIC/SWIFT : $bank->bic</b>";}
 echo "</p>";
 
-}
-elseif ($orderfo->mode_reglement_id == '6') 
-{
+} elseif ($orderfo->mode_reglement_id == '6') {
 echo "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has been registered', 'doliconnect-pro' )."<br>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['charge']."</p>";
 }
-}
-else {
+} else {
 echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurred', 'doliconnect-pro' )."</p>";
 }
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div>";
 
-} elseif (isset($_GET['pay']) && doliconnector($current_user, 'fk_order_nb_item') > 0) {
+} elseif ( isset($_GET['pay']) && doliconnector($current_user, 'fk_order_nb_item') > 0 ) {
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
