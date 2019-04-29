@@ -1518,8 +1518,8 @@ if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
 echo '<h6>'.$line->libelle.' </h6>';
 } else {
 echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
-echo '<p class="mb-1">'.$line->description.'</p>
-<small>'.$dates.'</small>'; 
+echo '<small><p class="mb-1">'.$line->description.'</p>
+<i>'.$dates.'</i></small>'; 
 echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null).'</h5>';
 
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
