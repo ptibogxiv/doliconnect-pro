@@ -158,14 +158,14 @@ else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" sty
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
-echo "</div><div class='col-8 col-md-6 col-lg-7'><h6 class='my-0'>";
+echo "</div><div class='col-8 col-xs-7 col-md-6 col-lg-7'><h6 class='my-0'>";
 if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
 }
 echo "<br>".$src->holder."</h6></div>";
-echo "<div class='col-0 col-xs-1 col-md-2 align-middle text-right'>";
+echo "<div class='col-0 col-xs-2 col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 echo "</div>";
 if (1 == 1) {
