@@ -185,8 +185,6 @@ echo "<li class='list-group-item list-group-item-light'><center>".__( 'No source
 }
 echo "</ul></div></form>";
 
-echo "</ul></div></form>";
-
 echo "<small><div class='float-left'>";
 echo dolirefresh($request, $url, dolidelay('source'));
 echo "</div><div class='float-right'>";
