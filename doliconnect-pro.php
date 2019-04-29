@@ -1256,7 +1256,7 @@ $error=$pa->error;
 echo "<center>".$pay->error->message."</center><br >";
 } else {
 //echo $pay;
-$url=$pay->redirect_url.'?validation&id='.$orderfo->id.'&ref='.$orderfo->ref.'&charge='.$pay->charge;
+$url=$pay->redirect_url.'&ref='.$orderfo->ref.'&charge='.$pay->charge;
 $order = callDoliApi("GET", "/orders/".$orderfo->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect( $url );
