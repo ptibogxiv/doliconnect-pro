@@ -144,7 +144,7 @@ class myCounter implements Countable {
 $counter = new myCounter;
 
 if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
-echo '<button type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect' ).'</center></button>';
+echo '<button type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
 }
 
 //SAVED SOURCES
@@ -183,7 +183,7 @@ echo "<button name='delete_source' value='".$src->id."' class='btn btn-light tex
 echo "</li>";
 }
 } else {
-echo "<li class='list-group-item list-group-item-light'><center>".__( 'No payment method', 'doliconnect' )."</center></li>";
+echo "<li class='list-group-item list-group-item-light'><center>".__( 'No payment method', 'doliconnect-pro' )."</center></li>";
 }
 echo "</ul></div></form>";
 
