@@ -165,7 +165,7 @@ echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
 }
 echo "<br>".$src->holder."</h6></div>";
-echo "<div class='col-0 col-xs-2 col-md-2 align-middle text-right'>";
+echo "<div class='d-none d-xs-block col-xs-2 col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 echo "</div>";
 if (1 == 1) {
