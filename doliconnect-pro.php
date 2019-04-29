@@ -62,33 +62,132 @@ echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 
 function paymentmodes_module( $url ) {
 
-if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'setassourcedefault' ) {
-$adh = [
-    'default' => 1
-	];
+if ( isset($_POST['default_source']) ) {
 
-$gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_GET['source']), $adh, dolidelay( 0, true));
+$data = [
+'default' => 1
+];
+
+$gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['default_source']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
-} 
 
-if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'deletesource' ) {
-$gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_GET['source']), null, dolidelay( 0, true));
+} elseif ( isset($_POST['delete_source']) ) {
+
+$gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['delete_source']), null, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
-}
 
-if ( isset($_GET['action']) && isset($_GET['source']) && $_GET['action'] == 'addsource' ) {
-$src = [
+} elseif ( isset($_POST['add_source'])  ) {
+
+$data = [
 'default' => 0
 ];
 
-$gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_GET['source']), $src, dolidelay( 0, true));
+$gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['add_source']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
+
 } 
 
 $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
-dolipaymentmodes($listsource, null, $url, $url, DAY_IN_SECONDS);
+//dolipaymentmodes($listsource, null, $url, $url, DAY_IN_SECONDS);
+
+$request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources";
+doliconnect_enqueues();
+
+if ( isset($object) ) { 
+$currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');  
+$stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
+} else {
+$currency=strtolower('eur');
+$stripeAmount=0;
+}
+
+$lock = dolipaymentmodes_lock();
+
+echo "<form role='form' action='$url' id='source-form' method='post'>";
+
+echo "<script src='https://js.stripe.com/v3/'></script>";
+
+echo "<script>";
+?>
+
+window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
+
+var form = document.getElementById('source-form'); 
+
+form.addEventListener('submit', function(event) {
+
+jQuery('#DoliconnectLoadingModal').modal('show');
+jQuery(window).scrollTop(0);
+console.log("submit");
+form.submit();
+
+});
+
+<?php
+echo "</script>";
+
+echo "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
+
+class myCounter implements Countable {
+	public function count() {
+		static $count = 0;
+		return ++$count;
+	}
+}
+ 
+$counter = new myCounter;
+
+//SAVED SOURCES
+if ( $listsource->sources != null ) {  
+foreach ( $listsource->sources as $src ) {                                                                                                                       
+echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>
+<div class='d-none d-md-block'><i ";
+if ( $src->type == 'sepa_debit' ) {
+echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
+} else {
+
+if ( $src->brand == 'visa' ) { echo 'class="fab fa-cc-visa fa-3x fa-fw" style="color:#172274"'; }
+else if ( $src->brand == 'mastercard' ) { echo 'class="fab fa-cc-mastercard fa-3x fa-fw" style="color:#FF5F01"'; }
+else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" style="color:#2E78BF"'; }
+else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
+}
+echo '></i></center>';
+echo '</div><h6 class="my-0">';
+if ( $src->type == 'sepa_debit' ) {
+echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
+} else {
+echo $src->reference;
+}
+echo "<br>".$src->holder."</h6>";
+echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
+echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
+//echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
+//<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit'><i class='fas fa-trash fa-fw'></i></button></div>";
+echo "</div>";
+if (1 == 1) {
+echo "<div class='btn-group-vertical' role='group'>";
+if ( $src->default_source == '1' ) { 
+echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
+} else {
+echo "<button name='default_source' value='".$src->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>"; }
+echo "<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button></div>";
+}
+echo "</li>";
+} }
+
+echo "</ul></div></form>";
+
+echo "<small><div class='float-left'>";
+echo dolirefresh($request, $url, dolidelay('source'));
+echo "</div><div class='float-right'>";
+echo dolihelp('ISSUE');
+echo "</div></small>";
 
 }
 
