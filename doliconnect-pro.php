@@ -179,7 +179,11 @@ echo "<button name='default_source' value='".$src->id."' class='btn btn-light' t
 echo "<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button></div>";
 }
 echo "</li>";
-} }
+}
+} else {
+echo "<li class='list-group-item list-group-item-light'><center>".__( 'No source', 'doliconnect' )."</center></li>";
+}
+echo "</ul></div></form>";
 
 echo "</ul></div></form>";
 
