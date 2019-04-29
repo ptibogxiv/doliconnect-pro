@@ -143,7 +143,7 @@ class myCounter implements Countable {
  
 $counter = new myCounter;
 
-if ( count($counter) < 5 ) {
+if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
 echo '<button type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect' ).'</center></button>';
 }
 
