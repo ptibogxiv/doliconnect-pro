@@ -1071,7 +1071,6 @@ echo "</ul></div><br>";
 function dolicart_shortcode() {
 global $wpdb, $current_user;
 
-$entity = get_current_blog_id();
 $time = current_time('timestamp');
 
 doliconnect_enqueues();
@@ -1096,9 +1095,9 @@ echo "</div></div>";
 
 } else {
 
-if ( isset($_GET['validation']) && isset($_GET['order']) & isset($_GET['ref']) ) {
+if ( isset($_GET['validation']) && isset($_GET['id']) & isset($_GET['ref']) ) {
 
-$orderfo = callDoliApi("GET", "/orders/".$_GET['order'], null, 0);
+$orderfo = callDoliApi("GET", "/orders/".$_GET['id'], null, dolidelay('order', true));
 
 echo "<table width='100%' style='border: none'><tr style='border: none'><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-shopping-bag fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
@@ -1114,10 +1113,11 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-check fa-fw ";
-if ($orderfo->billed==1 && $orderfo->statut>0){
+
+if ( $orderfo->billed==1 && $orderfo->statut>0 ) {
 echo "text-success";
 }
-elseif ($orderfo->statut>-1) {
+elseif ( $orderfo->statut > -1 ) {
 echo "text-warning";
 }
 else {
@@ -1127,7 +1127,7 @@ echo "text-danger";
 echo "' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td></tr></table><br>"; 
 
-if ((!isset($orderfo->id)) || (doliconnector($current_user, 'fk_soc') != $orderfo->socid) ) {
+if ( ( !isset($orderfo->id) ) || (doliconnector($current_user, 'fk_soc') != $orderfo->socid) ) {
 $return = esc_url(doliconnecturl('doliaccount'));
 $order = callDoliApi("GET", "/orders/".$orderfo->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
@@ -1135,7 +1135,7 @@ wp_redirect($return);
 exit;
 }
 echo "<center><h2>".__( 'Your order has been registered', 'doliconnect-pro' )."</h2>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['ref']."<br />".__( 'Payment method', 'doliconnect-pro' ).": $orderfo->mode_reglement<br /><br />";
-$TTC = number_format($orderfo->total_ttc, 2, ',', ' ');
+$TTC = doliprice($order, 'ttc', isset($order->multicurrency_code) ? $order->multicurrency_code : null);
 
 if ( $orderfo->statut == '1' && !isset($_GET['error']) ) {
 if ( $orderfo->mode_reglement_id == '7 ') 
@@ -1215,7 +1215,7 @@ $orderipdate = callDoliApi("PUT", "/orders/".$orderfo->id, $rdr, 0);
 
 if ( $orderfo->id > 0 ) {
 
-$successurl = doliconnecturl('dolicart')."?validation&id=".$orderfo->id;
+$successurl = doliconnecturl('dolicart')."?validation&module=orders&id=".$orderfo->id;
 $returnurl = doliconnecturl('doliaccount')."?module=orders&id=".$orderfo->id;
 
 if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
