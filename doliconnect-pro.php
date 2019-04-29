@@ -177,8 +177,10 @@ echo "<div class='col-4 col-xs-3 col-md-2 btn-group-vertical' role='group'>";
 if ( $src->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } else {
-echo "<button name='default_source' value='".$src->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>"; }
-echo "<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button></div>";
+echo "<button name='default_source' value='".$src->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
+}
+echo "<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button>";
+echo "</div></li>";
 }
 echo "</li>";
 }
