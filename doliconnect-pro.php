@@ -169,7 +169,7 @@ echo "<div class='col-0 col-xs-1 col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 echo "</div>";
 if (1 == 1) {
-echo "<div class='col-4 col-xs-2 col-md-2 btn-group-vertical' role='group'>";
+echo "<div class='col-4 col-xs-3 col-md-2 btn-group-vertical' role='group'>";
 if ( $src->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } else {
