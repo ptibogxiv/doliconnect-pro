@@ -1166,7 +1166,7 @@ $bank = callDoliApi("GET", "/bankaccounts/".$chq->value, null, dolidelay('consta
 
 echo "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</b> to <b>%3$s</b> at the following address', 'doliconnect-pro' ), $TTC, $bank->proprio, $orderfo->ref ).":</p><p><b>$bank->owner_address</b></p>";
 
-} elseif ($orderfo->mode_reglement_id == 'VIR') {
+} elseif ($orderfo->mode_reglement_code == 'VIR') {
 
 $vir = callDoliApi("GET", "/doliconnector/constante/FACTURE_RIB_NUMBER", null, dolidelay('constante'));
 
