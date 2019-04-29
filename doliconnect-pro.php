@@ -1071,14 +1071,34 @@ echo "</ul></div><br>";
 function dolicart_shortcode() {
 global $wpdb, $current_user;
 
-$time = current_time('timestamp');
-
 doliconnect_enqueues();
 
+$current_offset = get_option('gmt_offset');
+$tzstring = get_option('timezone_string');
+$check_zone_info = true;
+// Remove old Etc mappings. Fallback to gmt_offset.
+if ( false !== strpos($tzstring,'Etc/GMT') )
+	$tzstring = '';
+
+if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
+	$check_zone_info = false;
+	if ( 0 == $current_offset )
+		$tzstring = 'UTC+0';
+	elseif ($current_offset < 0)
+		$tzstring = 'UTC' . $current_offset;
+	else
+		$tzstring = 'UTC+' . $current_offset;
+}
+//define( 'MY_TIMEZONE', (get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : date_default_timezone_get() ) );
+//date_default_timezone_set( MY_TIMEZONE );
+date_default_timezone_set($tzstring); 
+$time = current_time( 'timestamp', 1);
+
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
+$request = "/orders/".doliconnector($current_user, 'fk_order');
 
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
-$orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay(20 * MINUTE_IN_SECONDS, true));
+$orderfo = callDoliApi("GET", $request, null, dolidelay('cart'), true);
 //echo $orderfo;
 }
 
@@ -1431,7 +1451,7 @@ $result = addtodolibasket($productid, $productupdate['qty'], $productupdate['pri
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
-$orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order', true), null, dolidelay('order'), true);
+$orderfo = callDoliApi("GET", $request, null, dolidelay('cart'), true);
 //echo $orderfo;
 }
 //wp_redirect(esc_url(get_permalink()));
@@ -1592,6 +1612,12 @@ echo "</form></div>";
 }
 
 echo "</div>"; 
+
+echo "<small><div class='float-left'>";
+echo dolirefresh($request, get_permalink(), dolidelay('cart'));
+echo "</div><div class='float-right'>";
+echo dolihelp('COM');
+echo "</div></small>";
 
 }}}
 add_shortcode('dolicart', 'dolicart_shortcode');
