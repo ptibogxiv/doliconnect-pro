@@ -160,18 +160,18 @@ else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" sty
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
-echo "</div><div class='col-8 col-xs-7 col-md-6 col-lg-7'><h6 class='my-0'>";
+echo "</div><div class='col-8 col-sm-7 col-md-6 col-lg-7'><h6 class='my-0'>";
 if ( $src->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
 }
 echo "<br>".$src->holder."</h6></div>";
-echo "<div class='d-none d-xs-block col-xs-2 col-md-2 align-middle text-right'>";
+echo "<div class='d-none d-md-block col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
 echo "</div>";
 if (1 == 1) {
-echo "<div class='col-4 col-xs-3 col-md-2 btn-group-vertical' role='group'>";
+echo "<div class='col-4 col-sm-3 col-md-2 btn-group-vertical' role='group'>";
 if ( $src->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } else {
