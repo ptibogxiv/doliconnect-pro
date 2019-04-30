@@ -189,7 +189,7 @@ echo "<li class='list-group-item list-group-item-light'><center>".__( 'No paymen
 }
 echo "</ul></div></form>";
 
-if ( count($counter) < 5 ) {
+if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
 echo "<form class='was-validated' role='form' action='$url' id='addsource-form' method='post'>";
 echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
 <div class='modal-dialog modal-lg modal-dialog-centered' role='document'>
