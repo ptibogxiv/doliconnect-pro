@@ -188,12 +188,13 @@ echo "<li class='list-group-item list-group-item-light'><center>".__( 'No paymen
 echo "</ul></div></form>";
 
 if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
-echo "<form role='form' action='$url' id='addsource-form' method='post'>";
+
 echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
 <div class='modal-dialog modal modal-dialog-centered' role='document'>
 <div class='modal-content'><div class='modal-header'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-</div><div class='modal-body'>";
+</div><div class='modal-body'>"; 
+echo "<form role='form' action='$url' id='addsource-form' method='post'>";
 echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off">
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
