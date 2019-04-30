@@ -150,8 +150,8 @@ echo '<button type="button" class="list-group-item lh-condensed list-group-item-
 //SAVED SOURCES
 if ( $listsource->sources != null ) {  
 foreach ( $listsource->sources as $src ) {                                                                                                                       
-echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>
-<div class='d-none d-md-block col-md-2 col-lg-1'><i ";
+echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>";
+echo "<div class='d-none d-md-block col-md-2 col-lg-1'><i ";
 if ( $src->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
