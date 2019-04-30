@@ -90,8 +90,6 @@ $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk
 $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
-//dolipaymentmodes($listsource, null, $url, $url, DAY_IN_SECONDS);
-
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources";
 doliconnect_enqueues();
 
@@ -196,10 +194,70 @@ echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-la
 <div class='modal-content'><div class='modal-header'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'>";
-
-echo "</div>
-<div class='modal-footer'><button name='add_contact' value='new_contact' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add', 'doliconnect' )."</b></button></form></div>
+echo '<form action="'.$url.'" id="" class="was-validated" enctype="multipart/form-data">'; //onchange="ShowHideDiv()"
+echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
+<label for="card-element"></label>
+<div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
+<div id="card-errors" role="alert"></div>';
+echo '</form>';
+echo "</div><div class='modal-footer'><button name='add_contact' value='new_contact' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add', 'doliconnect' )."</b></button></form></div>
 </div></div></div>";
+
+echo "<script>";
+if ( $listsource->code_account != null ) {
+?>
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
+    stripeAccount: '<?php echo $listsource->code_account; ?>'
+    });
+<?php
+} else {
+?>
+var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
+<?php
+}
+?> 
+
+var style = {
+  base: {
+    color: '#32325d',
+    lineHeight: '18px',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+}; 
+
+//VARIABLES
+var CdDbt = document.getElementById("CdDbt");
+var BkDbt = document.getElementById("BkDbt");  
+var discount = document.getElementById("discount");
+
+var src_chq = document.getElementById("src_chq");
+var src_vir = document.getElementById("src_vir");
+var src_liq = document.getElementById("src_liq");
+var src_pra = document.getElementById("src_pra");
+
+
+
+//CARD
+var elements = stripe.elements();
+var cardElement = elements.create('card', {style: style});
+cardElement.mount('#card-element');
+var displayError = document.getElementById('card-errors');
+displayError.textContent = '';
+document.getElementById("SourceButton").disabled = false;
+document.getElementById('cardholder-name').value = '';
+
+
+<?php
+echo "</script>";
+
 }
 
 echo "<small><div class='float-left'>";
