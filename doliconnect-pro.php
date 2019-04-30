@@ -192,7 +192,7 @@ echo "</ul></div></form>";
 if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
 echo "<form class='was-validated' role='form' action='$url' id='addsource-form' method='post'>";
 echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
-<div class='modal-dialog modal-lg modal-dialog-centered' role='document'>
+<div class='modal-dialog modal modal-dialog-centered' role='document'>
 <div class='modal-content'><div class='modal-header'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'>";
