@@ -1008,7 +1008,7 @@ echo "</td></tr>";
 }
 
 if ( !isset($adherent->datefin) || ( $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
-$typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.libelle&sortorder=ASC&sqlfilters=(t.morphy%3Ais%3Anull)%20or%20(t.morphy%3A%3D%3A'phy')", null, $delay);
+$typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.libelle&sortorder=ASC&sqlfilters=(t.morphy%3Ais%3Anull)%20or%20(t.morphy%3A%3D%3A'".$adherent->morphy."')", null, $delay);
 //echo $typeadhesion;
 
 if ( !isset($typeadhesion->error) ) {
