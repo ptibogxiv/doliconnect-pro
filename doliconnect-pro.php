@@ -1002,7 +1002,7 @@ echo "<table class='table table-striped' id ='subscription-table'>";
 if ( ! empty($adherent) && $adherent->statut != 0 ) {
 echo "<tr><td><div class='row'><div class='col-md-8'><b><i class='fas fa-user-slash'></i> ".__( 'Cancel my subscription', 'doliconnect-pro' );
 
-echo "<small></small></b><br /><small class='text-justify text-muted '></small></div><div class='col-md-4'>";
+echo "<small></small></b><br /><small class='text-justify text-muted '>".__( 'Membership will be resiliate from', 'doliconnect-pro' )." ".date_i18n('d/m/Y', $adherent->datefin)."</small></div><div class='col-md-4'>";
 echo "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'members', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value=''><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='2'><input type='hidden' name='typeadherent' value=''><button class='btn btn-dark btn-block' type='submit'>".__( 'Resiliate', 'doliconnect-pro' )."</button></form>";
 echo "</td></tr>";
 }
