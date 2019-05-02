@@ -1110,7 +1110,11 @@ echo "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', '
 }
 }
 echo "</div></div></td></tr>"; 
-}}
+}
+} else { 
+echo "<li class='list-group-item list-group-item-light'><center>".__( 'No available membership type', 'doliconnect' )."</center></li>";
+}
+
 }
 echo "</table>";
 
