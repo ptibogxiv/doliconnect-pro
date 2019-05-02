@@ -971,7 +971,7 @@ $adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'f
 return $adhesion;
 }
 
-function dolimembership_modal( $adherent = null ) {
+function dolimembership_modal( $adherent = null, $delay) {
 
 doliconnect_enqueues();
 
@@ -1008,7 +1008,7 @@ echo "</td></tr>";
 }
 
 if ( !isset($adherent->datefin) || ( $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
-$typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.family,t.libelle&sortorder=ASC", null);
+$typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.libelle&sortorder=ASC", null, $delay);
 //echo $typeadhesion;
 
 if ( !isset($typeadhesion->error) ) {
