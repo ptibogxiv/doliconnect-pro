@@ -195,7 +195,7 @@ echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-la
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'>"; 
 echo "<form role='form' action='$url' id='addsource-form' method='post'>";
-echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off">
+echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
 <div id="card-errors" role="alert"></div>';
@@ -236,12 +236,6 @@ var style = {
 var CdDbt = document.getElementById("CdDbt");
 var BkDbt = document.getElementById("BkDbt");  
 var discount = document.getElementById("discount");
-
-var src_chq = document.getElementById("src_chq");
-var src_vir = document.getElementById("src_vir");
-var src_liq = document.getElementById("src_liq");
-var src_pra = document.getElementById("src_pra");
-
 
 
 //CARD
