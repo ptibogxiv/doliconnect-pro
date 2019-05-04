@@ -436,7 +436,7 @@ echo '</div></div></label></div></li>';
 
 if ( $listsource->CHQ != null ) {
 echo "<li id='ChqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_chq' ";
+<input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='CHQ' ";
 if ( $listsource->sources == null && $listsource->card != 1 && $listsource->RIB == null ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_chq'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-money-check fa-3x fa-fw" style="color:Tan"></i></center>';
