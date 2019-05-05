@@ -398,7 +398,7 @@ echo '</li>';
 if ( (! empty($object) && empty(dolikiosk())) || (! empty($object) && !empty(get_option('doliconnectbeta')) && current_user_can( 'administrator' )) ) {
 //PAYMENT REQUEST API
 echo "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
-<input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_pra' ";
+<input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
 //if ($listsource["sources"] == null) {echo " checked";}
 echo " ><label class='custom-control-label w-100' for='src_pra'>";
 echo "<div class='row' id='googlepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
@@ -417,7 +417,7 @@ if ( ! empty($object) ) {
 
 if ( $listsource->PAYPAL != null && get_option('doliconnectbeta') == '1' && current_user_can( 'administrator' ) ) {
 echo "<li id='PaypalForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='src_paypal' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_paypal' ";
+<input id='src_paypal' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PAYPAL' ";
 echo " ><label class='custom-control-label w-100' for='src_paypal'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fab fa-paypal fa-3x fa-fw" style="color:#2997D8"></i></center>';
 echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>PayPal</h6><small class='text-muted'>".__( 'Redirect to Paypal', 'doliconnect-pro' )."</small>";
