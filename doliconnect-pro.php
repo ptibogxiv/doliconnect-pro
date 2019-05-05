@@ -1758,9 +1758,7 @@ echo "<br><br><br><br><br></li>";
 
 if ( isset($orderfo) ) {
 echo "<li class='list-group-item list-group-item-info'>";
-echo "<b>".__( 'Total excl. tax', 'doliconnect').": ".doliprice($orderfo, 'ht', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b><br />";
-echo "<b>".__( 'Total tax', 'doliconnect').": ".doliprice($orderfo, 'tva', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b><br />";
-echo "<b>".__( 'Total incl. tax', 'doliconnect').": ".doliprice($orderfo, 'ttc', isset($orderfo->multicurrency_code) ? $orderfo->multicurrency_code : null)."</b>";
+echo dolitotal($orderfo);
 echo "</li>";
 }
 
