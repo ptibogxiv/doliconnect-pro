@@ -1516,7 +1516,8 @@ $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 
 if ( !empty($object->paymentintent) ) {
 dolipaymentmodes($listsource, $object, esc_url(get_permalink())."?pay", esc_url(get_permalink())."?pay");
 } else {
-doligateway($listsource, 'Total', $object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc, $object->multicurrency_code, esc_url(get_permalink())."?pay", 'full');
+if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
+doligateway($listsource, $ref, $object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc, $object->multicurrency_code, esc_url(get_permalink())."?pay", 'full');
 echo doliloading('paymentmodes');
 }
 
