@@ -1271,7 +1271,12 @@ date_default_timezone_set($tzstring);
 $time = current_time( 'timestamp', 1);
 
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+
+if (isset($_GET['module']) && $_GET['module'] == 'orders' && isset($_GET['id'])) {
+$request = "/orders/".esc_attr($_GET['id']);
+} else {
 $request = "/orders/".doliconnector($current_user, 'fk_order');
+}
 
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
 $object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
@@ -1517,7 +1522,7 @@ echo doliloading('paymentmodes');
 
 echo "</div></div>";
 
-} elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 ) {
+} elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->socid == doliconnector($current_user, 'fk_soc')) {
 
 if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 $thirdparty=$_POST['thirdparty'][''.doliconnector($current_user, 'fk_soc').''];
@@ -1605,7 +1610,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 <i class='fas fa-check fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td></tr></table><br>";
 
-if (isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
+if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
 $orderdelete = callDoliApi("DELETE", "/orders/".doliconnector($current_user, 'fk_order'), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
