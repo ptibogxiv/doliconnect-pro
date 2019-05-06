@@ -1234,7 +1234,7 @@ $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
               <div class='text-success'>
                 <h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
-                <small>-".doliconnector($current_user, 'remise_percent')."%</small>
+                <small>-".number_format(100*doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)/doliprice($object, 'ht', isset($object->multicurrency_code) ? $object->multicurrency_code : null), 2)."%</small>
               </div>
               <span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
