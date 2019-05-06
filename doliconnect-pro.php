@@ -1619,7 +1619,7 @@ $orderdelete = callDoliApi("DELETE", "/".$module."/".doliconnector($current_user
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
 doliconnector($current_user, 'fk_order', true);
-wp_redirect(esc_url(get_permalink()));
+wp_redirect(doliconnecturl('dolicart'));
 exit;
 } else {
 echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
@@ -1645,7 +1645,7 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
 }
 
 if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) && $object->lines != null ) {
-wp_redirect(esc_url(get_permalink().'?info'));
+wp_redirect(doliconnecturl('dolicart').'?info');
 exit;                                   
 }
 
