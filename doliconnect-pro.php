@@ -1369,7 +1369,7 @@ echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurre
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div></div></div>";
 
-} elseif ( isset($_GET['pay']) && doliconnector($current_user, 'fk_order_nb_item') > 0 ) {
+} elseif ( isset($_GET['pay']) && (doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices') ) ) {
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
