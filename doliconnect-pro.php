@@ -1273,10 +1273,12 @@ $time = current_time( 'timestamp', 1);
 
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
-if (isset($_GET['module']) && $_GET['module'] == 'orders' && isset($_GET['id'])) {
+if (isset($_GET['module']) && ($_GET['module'] == 'orders' || $_GET['module'] == 'invoices') && isset($_GET['id'])) {
 $request = "/".esc_attr($_GET['module'])."/".esc_attr($_GET['id'])."?contact_list=0";
+$module=esc_attr($_GET['module']);
 } else {
 $request = "/orders/".doliconnector($current_user, 'fk_order')."?contact_list=0";
+$module='orders';
 }
 
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
@@ -1299,7 +1301,7 @@ echo "</div></div>";
 
 if ( isset($_GET['validation']) && isset($_GET['id']) & isset($_GET['ref']) ) {
 
-$object = callDoliApi("GET", "/orders/".$_GET['id'], null, dolidelay('order', true));
+$object = callDoliApi("GET", "/".$module."/".$_GET['id'], null, dolidelay('order', true));
 
 echo "<table width='100%' style='border: none'><tr style='border: none'><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-shopping-bag fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
@@ -1331,7 +1333,7 @@ echo "' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 
 if ( ( !isset($object->id) ) || (doliconnector($current_user, 'fk_soc') != $object->socid) ) {
 $return = esc_url(doliconnecturl('doliaccount'));
-$order = callDoliApi("GET", "/orders/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect($return);
 exit;
@@ -1410,7 +1412,7 @@ $rdr = [
     'demand_reason_id' => 1,
     'mode_reglement_id' => $source
 	];                  
-$orderipdate = callDoliApi("PUT", "/orders/".$object->id, $rdr, 0);
+$orderipdate = callDoliApi("PUT", "/".$module."/".$object->id, $rdr, 0);
 
 if ( $object->id > 0 ) {
 
@@ -1425,7 +1427,7 @@ $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
 	];
-$validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
+$validate = callDoliApi("POST", "/".$module."/".$object->id."/validate", $vld, 0);
 
 $src = [
     'source' => "".$source."",
@@ -1440,7 +1442,7 @@ echo "<center>".$pay->error->message."</center><br >";
 } else {
 //echo $pay;
 $url=$pay->redirect_url.'&ref='.$object->ref.'&charge='.$pay->charge;
-$order = callDoliApi("GET", "/orders/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect( $url );
 exit;
@@ -1454,9 +1456,9 @@ $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
 	];
-$validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
+$validate = callDoliApi("POST", "/".$module."/".$object->id."/validate", $vld, 0);
 
-$object = callDoliApi("GET", "/orders/".$object->id, null);
+$object = callDoliApi("GET", "/".$module."/".$object->id, null);
 
 $successurl2 = $successurl."&ref=".$object->ref;
 
@@ -1475,7 +1477,7 @@ echo "<br /><a href='".doliconnecturl('dolicart')."' class='btn btn-primary'>Ret
 }
 }                                  
 } elseif ( !$object->id > 0 && $object->lines == null ) {
-$order = callDoliApi("GET", "/orders/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect(doliconnecturl('dolicart'));
 exit;
@@ -1613,7 +1615,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 </div></td></tr></table><br>";
 
 if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
-$orderdelete = callDoliApi("DELETE", "/orders/".doliconnector($current_user, 'fk_order'), null);
+$orderdelete = callDoliApi("DELETE", "/".$module."/".doliconnector($current_user, 'fk_order'), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
 doliconnector($current_user, 'fk_order', true);
