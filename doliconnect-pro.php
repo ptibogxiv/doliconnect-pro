@@ -1274,9 +1274,9 @@ $time = current_time( 'timestamp', 1);
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if (isset($_GET['module']) && $_GET['module'] == 'orders' && isset($_GET['id'])) {
-$request = "/orders/".esc_attr($_GET['id']);
+$request = "/orders/".esc_attr($_GET['id'])."?contact_list=0";
 } else {
-$request = "/orders/".doliconnector($current_user, 'fk_order');
+$request = "/orders/".doliconnector($current_user, 'fk_order')."?contact_list=0";
 }
 
 if ( doliconnector($current_user, 'fk_order') > 0 ) {
@@ -1696,75 +1696,7 @@ echo '</script>';
 
 echo "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-group-flush'>";
 
-if ( isset($object) && $object->lines != null && !empty($object->id) ) {
-
-foreach ($object->lines as $line) {
-echo "<li class='list-group-item'>";
-
-$dates = null;     
-if ( $line->date_start != '' && $line->date_end !='')
-{
-$start = date_i18n('d/m/Y', $line->date_start);
-$end = date_i18n('d/m/Y', $line->date_end);
-$dates =" <i>(Du $start au $end)</i>";
-}
-
-if ( $line->fk_product > 0 ) {
-$product = callDoliApi("GET", "/products/".$line->fk_product, null, 0);
-}
-
-echo '<div class="w-100 justify-content-between"><div class="row align-items-center"><div class="col-8 col-md-8">';
-if ( false === get_transient( 'doliconnect_cartlinelink_'.$line->id ) ) {
-echo '<h6>'.$line->libelle.' </h6>';
-} else {
-echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
-echo '<small><p class="mb-1">'.$line->description.'</p>
-<i>'.$dates.'</i></small>'; 
-echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'subprice', isset($object->multicurrency_code) ? $object->multicurrency_code : null).'</h5>';
-
-if ( $object->statut == 0 ) {
-echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
-echo "<input type='hidden' name='updateorderproduct[".$product->id."][date_start]' value='$line->date_start'><input type='hidden' name='updateorderproduct[".$product->id."][date_end]' value='$line->date_end'>";
-echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='submit()'>";
-if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
-if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
-$m2 = 10;
-} elseif ($product->stock_reel>$line->qty) {
-$m2 = $product->stock_reel;
-} else { $m2 = $line->qty; }
-} else {
-if ($line->qty>1){$m2=$line->qty;}
-else {$m2 = 1;}
-}
-	for($i=0;$i<=$m2;$i++){
-		if ($i==$line->qty){
-			echo "<option value='$i' selected='selected'>$i</option>";
-		}else{
-			echo "<option value='$i' >$i</option>";
-		}
-	}
-echo "</select>";
-} else {
-echo '<h5 class="mb-1">x'.$line->qty.'</h5>';
-}
- 
-echo "</div></div></li>";
-}
-} else {
-echo "<li class='list-group-item list-group-item-light'><br><br><br><br><br><center><h5>".__( 'Your basket is empty.', 'doliconnect-pro' )."</h5><br/><small>".dolihelp('COM')."</small></center>";
-if ( !is_user_logged_in() ) {
-echo '<center>'.__( 'If you already have an account,', 'doliconnect-pro' ).' ';
-
-if ( get_option('doliloginmodal') == '1' ) {
-       
-echo '<a href="#" data-toggle="modal" data-target="#DoliconnectLogin" data-dismiss="modal" title="'.__('Sign in', 'ptibogxivtheme').'" role="button">'.__( 'log in', 'doliconnect-pro' ).'</a> ';
-} else {
-echo "<a href='".wp_login_url( doliconnecturl('dolicart') )."?redirect_to=".doliconnecturl('dolicart')."' >".__( 'log in', 'doliconnect-pro' ).'</a> ';
-}
-echo __( 'to see your basket.', 'doliconnect-pro' ).'</center>';
-}
-echo "<br><br><br><br><br></li>";
-} 
+echo doliline($object, 'cart');
 
 if ( isset($object) ) {
 echo "<li class='list-group-item list-group-item-info'>";
