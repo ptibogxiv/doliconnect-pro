@@ -1628,12 +1628,11 @@ echo "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'd
  
 if ( isset($_POST['updateorderproduct']) ) {
 foreach ( $_POST['updateorderproduct'] as $productupdate ) {
-$productid=$productupdate['product'];
-$result = addtodolibasket($productid, $productupdate['qty'], $productupdate['price'], null, $productupdate['date_start'], $productupdate['date_end']);
+$result = addtodolibasket($productupdate['product'], $productupdate['qty'], $productupdate['price'], null, $productupdate['date_start'], $productupdate['date_end']);
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
-$object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
+$object = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('cart'), true);
 //echo $object;
 }
 //wp_redirect(esc_url(get_permalink()));
