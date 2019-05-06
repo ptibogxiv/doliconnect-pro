@@ -1675,7 +1675,7 @@ if ( doliconnector($current_user, 'fk_order')>0 && $object->lines != null ) {  /
 //echo "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), doliconnector($current_user, 'fk_order'))." <span class='duration'></span></small></div>";
 }
 
-echo "<form role='form' action='".esc_url(get_permalink())."' id='cart-form' method='post'>";
+echo "<form role='form' action='".doliconnecturl('dolicart')."' id='cart-form' method='post'>";
 
 echo "<script>";
 ?> 
@@ -1758,7 +1758,7 @@ if ( get_option('doliloginmodal') == '1' ) {
        
 echo '<a href="#" data-toggle="modal" data-target="#DoliconnectLogin" data-dismiss="modal" title="'.__('Sign in', 'ptibogxivtheme').'" role="button">'.__( 'log in', 'doliconnect-pro' ).'</a> ';
 } else {
-echo "<a href='".wp_login_url( get_permalink() )."?redirect_to=".get_permalink()."' >".__( 'log in', 'doliconnect-pro' ).'</a> ';
+echo "<a href='".wp_login_url( doliconnecturl('dolicart') )."?redirect_to=".doliconnecturl('dolicart')."' >".__( 'log in', 'doliconnect-pro' ).'</a> ';
 }
 echo __( 'to see your basket.', 'doliconnect-pro' ).'</center>';
 }
@@ -1794,7 +1794,7 @@ echo "</form></div>";
 echo "</div>"; 
 
 echo "<small><div class='float-left'>";
-echo dolirefresh($request, get_permalink(), dolidelay('cart'));
+echo dolirefresh($request, doliconnecturl('dolicart'), dolidelay('cart'));
 echo "</div><div class='float-right'>";
 echo dolihelp('COM');
 echo "</div></small>";
