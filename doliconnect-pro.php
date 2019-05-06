@@ -1273,11 +1273,11 @@ $time = current_time( 'timestamp', 1);
 
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
-if (isset($_GET['module']) && ($_GET['module'] == 'orders' || $_GET['module'] == 'invoices') && isset($_GET['id'])) {
+if (7==5 && isset($_GET['module']) && ($_GET['module'] == 'orders' || $_GET['module'] == 'invoices') && isset($_GET['id']) && isset($_GET['ref']) ) {
 $request = "/".esc_attr($_GET['module'])."/".esc_attr($_GET['id'])."?contact_list=0";
 $module=esc_attr($_GET['module']);
 } else {
-$request = "/orders/".doliconnector($current_user, 'fk_order')."?contact_list=0";
+$request = "/orders/".doliconnector($current_user, 'fk_order');
 $module='orders';
 }
 
@@ -1632,7 +1632,7 @@ $result = addtodolibasket($productupdate['product'], $productupdate['qty'], $pro
 //echo var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
-$object = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'), null, dolidelay('cart'), true);
+$object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
 //echo $object;
 }
 //wp_redirect(esc_url(get_permalink()));
