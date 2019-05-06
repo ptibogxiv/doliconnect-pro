@@ -950,7 +950,7 @@ $data = [
     'phone' => $thirdparty->phone,
     'birth' => $birth,
     'typeid' => $type,
-    'fk_soc' => doliconnector($current_user, 'fk_soc'),
+    'socid' => doliconnector($current_user, 'fk_soc'),
     'array_options' => $thirdparty->array_options,
 		'statut'	=> $statut,
 	];
