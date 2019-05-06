@@ -1274,7 +1274,7 @@ $time = current_time( 'timestamp', 1);
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if (isset($_GET['module']) && $_GET['module'] == 'orders' && isset($_GET['id'])) {
-$request = "/".esc_attr($_GET['module']."/".esc_attr($_GET['id'])."?contact_list=0";
+$request = "/".esc_attr($_GET['module'])."/".esc_attr($_GET['id'])."?contact_list=0";
 } else {
 $request = "/orders/".doliconnector($current_user, 'fk_order')."?contact_list=0";
 }
