@@ -1217,13 +1217,14 @@ return $updateline;
 function doliminicart($object) {
 $item = doliconnector($current_user, 'fk_order_nb_item');
 echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect-pro' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
+$remise=array();
 if ( $object->lines != null ) {
 foreach ($object->lines as $line) {
 
 //$product = callDoliApi("GET", "/products/".$post->product_id, null, 0);
 
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
-
+$remise[$line->id]+=$line->subprice-$line->price;
 echo "<span class='text-muted'>".doliprice($line, 'ttc',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 }
@@ -1235,8 +1236,9 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
                 <h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
                 <small>-".doliconnector($current_user, 'remise_percent')."%</small>
               </div>
-              <span class='text-success'>-".doliprice($remise_percent, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
+              <span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 } 
+echo var_dump($remise);
 //$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
               <span>Total </span>
