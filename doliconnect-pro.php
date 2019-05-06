@@ -1469,14 +1469,14 @@ elseif ($_POST['modepayment'] == 'src_payplug')  {
 } else {
 if ($object->id <=0 || $error || !$source) {
 echo "<center><h4 class='alert-heading'>".__( 'Oops', 'doliconnect-pro' )."</h4><p>".__( 'An error is occured. Please retry!', 'doliconnect-pro' )."</p>";
-echo "<br /><a href='".esc_url(get_permalink())."' class='btn btn-primary'>Retourner sur la page de paiement</a></center>";
+echo "<br /><a href='".doliconnecturl('dolicart')."' class='btn btn-primary'>Retourner sur la page de paiement</a></center>";
 }
 }
 }                                  
 } elseif ( !$object->id > 0 && $object->lines == null ) {
 $order = callDoliApi("GET", "/orders/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect(esc_url(get_permalink()));
+wp_redirect(doliconnecturl('dolicart'));
 exit;
 }
 
@@ -1500,7 +1500,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 
 echo "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 doliminicart($object);
-echo "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' )." <small>(<a href='".esc_url(get_permalink(get_option('dolicart'))."?info")."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><div class='card-body'>";
+echo "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' )." <small>(<a href='".doliconnecturl('dolicart')."?info")."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><div class='card-body'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
@@ -1514,10 +1514,10 @@ $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 
 //echo $listsource;
 
 if ( !empty($object->paymentintent) ) {
-dolipaymentmodes($listsource, $object, esc_url(get_permalink())."?pay", esc_url(get_permalink())."?pay");
+dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
-doligateway($listsource, $ref, $object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc, $object->multicurrency_code, esc_url(get_permalink())."?pay", 'full');
+doligateway($listsource, $ref, $object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc, $object->multicurrency_code, doliconnecturl('dolicart')."?pay", 'full');
 echo doliloading('paymentmodes');
 }
 
@@ -1571,7 +1571,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 echo "<div class='row' id='informations-form'><div class='col-12 col-md-4 d-none d-sm-none d-md-block'>";
 doliminicart($object);
 echo "</div><div class='col-12 col-md-8'>";
-echo "<form role='form' class='was-validated' action='".esc_url(get_permalink())."?info' method='post'>";
+echo "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' method='post'>";
 echo "<script>";
 ?> 
 
