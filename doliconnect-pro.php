@@ -1720,9 +1720,9 @@ echo '<small><p class="mb-1">'.$line->description.'</p>
 <i>'.$dates.'</i></small>'; 
 echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null).'</h5>';
 
+if ( $object->statut == 0 ) {
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][date_start]' value='$line->date_start'><input type='hidden' name='updateorderproduct[".$product->id."][date_end]' value='$line->date_end'>";
-
 echo "<select class='form-control' name='updateorderproduct[".$product->id."][qty]' onchange='submit()'>";
 if ( ($product->stock_reel-$line->qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$line->qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
@@ -1742,6 +1742,9 @@ else {$m2 = 1;}
 		}
 	}
 echo "</select>";
+} else {
+echo '<h5 class="mb-1">x'.$line->qty.'</h5>';
+}
  
 echo "</div></div></li>";
 }
@@ -1771,7 +1774,7 @@ echo "</ul>";
 
 if ( get_option('dolishop') ) {
 echo "<div class='card-body'><div class='row'>";
-if (get_option('dolishop')){
+if ( get_option('dolishop') && $object->statut == 0 ) {
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 } 
 if ( isset($object) && $object->lines != null ) { 
