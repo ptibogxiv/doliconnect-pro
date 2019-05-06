@@ -1217,15 +1217,15 @@ return $updateline;
 function doliminicart($object) {
 $item = doliconnector($current_user, 'fk_order_nb_item');
 echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect-pro' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
-$remise=array();
+$remise=0;
 if ( $object->lines != null ) {
 foreach ($object->lines as $line) {
 
 //$product = callDoliApi("GET", "/products/".$post->product_id, null, 0);
 
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
-$remise[$line->id]+=$line->subprice-$line->price;
-echo "<span class='text-muted'>".doliprice($line, 'ttc',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
+$remise+=$line->subprice-$line->price;
+echo "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 }
 
@@ -1237,8 +1237,7 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
                 <small>-".doliconnector($current_user, 'remise_percent')."%</small>
               </div>
               <span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
-} 
-echo var_dump($remise);
+}
 //$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
               <span>Total </span>
@@ -1721,7 +1720,7 @@ echo '<h6>'.$line->libelle.' </h6>';
 echo '<a class="h6" href="'.esc_url( get_transient( 'doliconnect_cartlinelink_'.$line->id ) ).'" >'.$line->libelle.'</a>'; }
 echo '<small><p class="mb-1">'.$line->description.'</p>
 <i>'.$dates.'</i></small>'; 
-echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null).'</h5>';
+echo '</div><div class="col d-none d-md-block col-md-2 text-right">'.doliproductstock($product).'</div><div class="col-4 col-md-2 text-right"><h5 class="mb-1">'.doliprice($line, 'subprice', isset($object->multicurrency_code) ? $object->multicurrency_code : null).'</h5>';
 
 if ( $object->statut == 0 ) {
 echo "<input type='hidden' name='updateorderproduct[".$product->id."][product]' value='$product->id'><input type='hidden' name='updateorderproduct[".$product->id."][line]' value='$line->id'><input type='hidden' name='updateorderproduct[".$product->id."][price]' value='$line->subprice'>";
