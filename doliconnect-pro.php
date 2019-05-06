@@ -1775,7 +1775,7 @@ if (get_option('dolishop')){
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 } 
 if ( isset($object) && $object->lines != null ) { 
-if ( $object->lines != null ){
+if ( $object->lines != null && $object->statut == 0 ) {
 echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='purge' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro' )."</b></button></div>";
 }
 if ( $object->lines != null ) {
