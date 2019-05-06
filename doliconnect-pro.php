@@ -1231,19 +1231,17 @@ echo "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->mult
 }
 }
 
-if ( doliconnector($current_user, 'remise_percent') > 0 ) { 
+if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) { 
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
-              <div class='text-success'>
-                <h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
-                <small>-".number_format(100*doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)/doliprice($subprice, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null))." %</small>
-              </div>
-              <span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
+<div class='text-success'><h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
+<small>-".number_format(100*doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)/doliprice($subprice, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null))." %</small>
+</div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 //$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
-              <span>Total </span>
-              <strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>
+<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
 echo "</ul></div><br>";
 }
 
