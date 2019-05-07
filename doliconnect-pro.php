@@ -1215,21 +1215,23 @@ return $updateline;
 }
 
 function doliminicart($object) {
-$item = doliconnector($current_user, 'fk_order_nb_item');
-echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $item, 'doliconnect-pro' ), $item)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
 $remise=0;
 $subprice=0;
+$qty=0;
+
 if ( $object->lines != null ) {
 foreach ($object->lines as $line) {
-
 //$product = callDoliApi("GET", "/products/".$post->product_id, null, 0);
-
-echo "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
+$list .= "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
 $remise+=$line->subprice-$line->price;
 $subprice+=$line->subprice;
-echo "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
+$qty+=$line->qty;
+$list .= "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 }
+
+echo "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $qty, 'doliconnect-pro' ), $qty)." <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small></div><ul class='list-group list-group-flush'>";
+echo $list;
 
 if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) { 
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
@@ -1240,7 +1242,7 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
 }
 //$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
-<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>
+<span>".__( 'Total to pay', 'doliconnect-pro' )."$qty</span>
 <strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
 echo "</ul></div><br>";
 }
