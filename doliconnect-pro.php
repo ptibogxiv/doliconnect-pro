@@ -1803,7 +1803,7 @@ add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
 
 // ********************************************************
 
-function doliconnect_privacy() {
+function doliconnect_privacy($arg) {
 global $wpdb,$current_user;
 
 if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
@@ -1849,7 +1849,7 @@ echo "</SCRIPT>";
 }
 
 }
-add_action( 'wp_footer', 'doliconnect_privacy' );
+add_action( 'wp_footer', 'doliconnect_privacy', 10, 1);
 
 function doliconnect_restrict_display($content) {
 if ( ! empty(get_option('doliconnectrestrict')) && !is_user_logged_in() ) {
@@ -1860,9 +1860,9 @@ return $content;
 
 }
 
-add_filter( 'the_content', 'doliconnect_restrict_display');
+add_filter( 'the_content', 'doliconnect_restrict_display', 10, 1);
 
-function doliconnect_modal() {
+function doliconnect_modal($arg) {
 global $wpdb, $current_user;
 $entity = get_current_blog_id();
 $year = strftime("%Y", current_time( 'timestamp', 1));
@@ -1974,7 +1974,7 @@ echo "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-
 en cours d'integration
 </div></div></div></div>";}
 }
-add_action( 'wp_footer', 'doliconnect_modal' );
+add_action( 'wp_footer', 'doliconnect_modal', 10, 1);
 // ********************************************************
 function socialconnect( $url ) {
  
