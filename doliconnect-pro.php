@@ -1320,7 +1320,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-check fa-fw ";
 
-if ( $object->billed==1 && $object->statut>0 ) {
+if ( $object->billed == 1 && $object->statut > 0 ) {
 echo "text-success";
 }
 elseif ( $object->statut > -1 ) {
@@ -1739,7 +1739,8 @@ echo "</div><div class='float-right'>";
 echo dolihelp('COM');
 echo "</div></small>";
 
-}}}
+}
+}}
 add_shortcode('dolicart', 'dolicart_shortcode');
 // ********************************************************
 function dolishop_shortcode($atts) {
