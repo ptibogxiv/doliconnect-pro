@@ -194,13 +194,14 @@ echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-la
 <div class='modal-content'><div class='modal-header'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'>"; 
-echo "<form role='form' action='$url' id='addsource-form' method='post'>";
+//echo "<form role='form' action='$url' id='addsource-form' method='post'>";
 echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
 <div id="card-errors" role="alert"></div>';
-echo "</div><div class='modal-footer'><button name='add_contact' value='new_contact' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add', 'doliconnect' )."</b></button></form></div>
-</div></div></div>";
+echo "</div><div class='modal-footer'><button name='add_card' value='add_card' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add', 'doliconnect' )."</b></button>";
+//echo "</form>";
+echo "</div></div></div></div>";
 
 echo "<script>";
 if ( $listsource->code_account != null ) {
@@ -237,7 +238,6 @@ var CdDbt = document.getElementById("CdDbt");
 var BkDbt = document.getElementById("BkDbt");  
 var discount = document.getElementById("discount");
 
-
 //CARD
 var elements = stripe.elements();
 var cardElement = elements.create('card', {style: style});
@@ -246,6 +246,19 @@ var displayError = document.getElementById('card-errors');
 displayError.textContent = '';
 document.getElementById("SourceButton").disabled = false;
 document.getElementById('cardholder-name').value = '';
+
+stripe.createPaymentMethod(
+  'card',
+  cardElement
+).then(function(result) {
+  if (result.error) {
+    // Show error in payment form
+    
+  } else {
+    // Send paymentMethod.id to server
+
+  }
+});
 
 
 <?php
