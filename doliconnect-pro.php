@@ -272,7 +272,10 @@ event.preventDefault();
         	{
         stripe.createPaymentMethod(
   'card',
-  cardElement
+  cardElement, {
+  billing_details: {
+    name: cardholderName.value
+  },
 ).then(function(result) {
   if (result.error) {
     // Show error in payment form
