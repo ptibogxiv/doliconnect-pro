@@ -276,7 +276,9 @@ event.preventDefault();
 ).then(function(result) {
   if (result.error) {
     // Show error in payment form
-    
+				console.log("Error occured when adding card");
+				var displayError = document.getElementById('card-errors');
+				displayError.textContent = '<?php echo __( "Oops, an error occurred while adding the card", 'doliconnect-pro' ); ?>';    
   } else {
     // Action
     
