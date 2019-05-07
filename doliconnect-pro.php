@@ -270,8 +270,18 @@ event.preventDefault();
         	}
         else
         	{
-          
-          
+        stripe.createPaymentMethod(
+  'card',
+  cardElement
+).then(function(result) {
+  if (result.error) {
+    // Show error in payment form
+    
+  } else {
+    // Action
+    
+  }
+});         
           }
 });
 
