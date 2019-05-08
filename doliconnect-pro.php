@@ -317,7 +317,7 @@ echo "</div></small>";
 function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
 global $current_user;
 
-$request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources";
+$request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
 doliconnect_enqueues();
 
 if ( isset($object) ) { 
@@ -376,8 +376,8 @@ class myCounter implements Countable {
 $counter = new myCounter;
 
 //SAVED SOURCES
-if ( $listsource->sources != null ) {  
-foreach ( $listsource->sources as $src ) {                                                                                                                       
+if ( $listsource->paymentmethods != null ) {  
+foreach ( $listsource->paymentmethods as $src ) {                                                                                                                       
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='$src->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$src->id' ";
 if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expiration) ) { echo " disabled "; }
@@ -517,7 +517,7 @@ echo "</li>";
 
 echo "</ul><div class='card-body'>";
 
-if ( $listsource->sources == null ) { echo "<input type='hidden' name='defaultsource' value='nosavedsource'>"; }  
+if ( $listsource->paymentmethods == null ) { echo "<input type='hidden' name='defaultsource' value='nosavedsource'>"; }  
 
 if ( empty($object) ) {
 echo "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
@@ -1464,7 +1464,7 @@ $src = [
 'token' => $_POST['stripeSource'],
 'default' => $_POST['setasdefault']
 ];
-$addsource = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", $src, dolidelay('source'));
+$addsource = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."paymentmethods", $src, dolidelay('source'));
 }
 
 }
@@ -1580,7 +1580,7 @@ echo $current_user->user_email."<br>".$thirdparty->phone;
 
 echo "</div></div></div><div class='col-12 col-md-8'>";
 
-$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
 if ( !empty($object->paymentintent) || get_option('doliconnectbeta') =='1' ) {
@@ -2440,8 +2440,8 @@ class myCounter implements Countable {
 $counter = new myCounter;
 
 //SAVED SOURCES
-if ( $listsource->sources != null ) {  
-foreach ( $listsource->sources as $src ) {                                                                                                                       
+if ( $listsource->paymentmethods != null ) {  
+foreach ( $listsource->paymentmethods as $src ) {                                                                                                                       
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='$src->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$src->id' ";
 if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expiration) ) { echo " disabled "; }
