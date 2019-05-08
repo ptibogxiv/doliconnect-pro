@@ -1583,7 +1583,12 @@ if ( !empty($object->paymentintent) || get_option('doliconnectbeta') =='1' ) {
 dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
-doligateway($listsource, $ref, $object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc, $object->multicurrency_code, doliconnecturl('dolicart')."?pay", 'full');
+if ( isset($object->resteapayer) ) { 
+$montant=$object->resteapayer;
+} else { 
+$montant=$object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc;
+}
+doligateway($listsource, $ref, $montant, $object->multicurrency_code, doliconnecturl('dolicart')."?pay", 'full');
 echo doliloading('paymentmodes');
 }
 
