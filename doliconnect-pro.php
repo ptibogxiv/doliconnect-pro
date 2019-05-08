@@ -1294,9 +1294,17 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
 </div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 //$total=$subtotal-$remise_percent;            
-echo "<li class='list-group-item d-flex justify-content-between'>
-<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>
-<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+echo "<li class='list-group-item d-flex justify-content-between'>";
+if ( isset($object->resteapayer) ) { 
+echo "<span>".__( 'Already paid', 'doliconnect-pro' )."</span>";
+echo "<strong>".doliprice($object->total_ttc-$object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+echo "<li class='list-group-item d-flex justify-content-between'>";
+echo "<span>".__( 'Remains to be paid', 'doliconnect-pro' )."</span>";
+echo "<strong>".doliprice($object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+} else {
+echo "<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>";
+echo "<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+}
 echo "</ul></div><br>";
 }
 
