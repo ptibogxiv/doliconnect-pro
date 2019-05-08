@@ -39,11 +39,11 @@ load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FI
 
 function doliconnectpro_run() {
 
-add_action( 'user_doliconnect_menu', 'paymentmodes_menu', 4, 1);
-add_action( 'user_doliconnect_paymentmodes', 'paymentmodes_module');
+add_action( 'user_doliconnect_menu', 'paymentmethods_menu', 4, 1);
+add_action( 'user_doliconnect_paymentmethods', 'paymentmethods_module');
 
 function dolipaymentmodes_lock() {
-return apply_filters( 'doliconnect_paymentmodes_lock', null);
+return apply_filters( 'doliconnect_paymentmethods_lock', null);
 }
 
 //function example_callback( $string ) {
@@ -52,45 +52,45 @@ return apply_filters( 'doliconnect_paymentmodes_lock', null);
 //}
 //add_filter( 'doliconnect_paymentmodes_lock', 'example_callback', 10, 1);
 
-function paymentmodes_menu( $arg ) {
+function paymentmethods_menu( $arg ) {
 global $current_user;
 
-echo "<a href='".esc_url( add_query_arg( 'module', 'paymentmodes', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
-if ($arg=='paymentmodes') { echo " active";}
+echo "<a href='".esc_url( add_query_arg( 'module', 'paymentmethods', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
+if ($arg=='paymentmethods') { echo " active";}
 echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 }
 
-function paymentmodes_module( $url ) {
+function paymentmethods_module( $url ) {
 
-if ( isset($_POST['default_source']) ) {
+if ( isset($_POST['default_paymentmethod']) ) {
 
 $data = [
 'default' => 1
 ];
 
-$gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['default_source']), $data, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
+$gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['default_paymentmethod']), $data, dolidelay( 0, true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
 
-} elseif ( isset($_POST['delete_source']) ) {
+} elseif ( isset($_POST['delete_paymentmethod']) ) {
 
-$gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['delete_source']), null, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
+$gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['delete_paymentmethod']), null, dolidelay( 0, true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
 
-} elseif ( isset($_POST['add_source'])  ) {
+} elseif ( isset($_POST['add_paymentmethod'])  ) {
 
 $data = [
 'default' => 0
 ];
 
-$gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources/".sanitize_text_field($_POST['add_source']), $data, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', true));
+$gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['add_paymentmethod']), $data, dolidelay( 0, true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
 
 } 
 
-$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources", null, dolidelay('source', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
-$request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/sources";
+$request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
 doliconnect_enqueues();
 
 if ( isset($object) ) { 
@@ -103,7 +103,7 @@ $stripeAmount=0;
 
 $lock = dolipaymentmodes_lock();
 
-echo "<form role='form' action='$url' id='source-form' method='post'>";
+echo "<form role='form' action='$url' id='paymentmethods-form' method='post'>";
 
 echo "<script src='https://js.stripe.com/v3/'></script>";
 
@@ -116,7 +116,7 @@ window.setTimeout(function() {
     });
 }, 5000);
 
-var form = document.getElementById('source-form'); 
+var form = document.getElementById('paymentmethods-form'); 
 
 form.addEventListener('submit', function(event) {
 
@@ -146,38 +146,38 @@ echo '<button type="button" class="list-group-item lh-condensed list-group-item-
 }
 
 //SAVED SOURCES
-if ( $listsource->sources != null ) {  
-foreach ( $listsource->sources as $src ) {                                                                                                                       
+if ( $listpaymentmethods->paymentmethods != null ) {  
+foreach ( $listpaymentmethods->paymentmethods as $method ) {                                                                                                                       
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>";
 echo "<div class='d-none d-md-block col-md-2 col-lg-1'><i ";
-if ( $src->type == 'sepa_debit' ) {
+if ( $method->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
 
-if ( $src->brand == 'visa' ) { echo 'class="fab fa-cc-visa fa-3x fa-fw" style="color:#172274"'; }
-else if ( $src->brand == 'mastercard' ) { echo 'class="fab fa-cc-mastercard fa-3x fa-fw" style="color:#FF5F01"'; }
-else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" style="color:#2E78BF"'; }
+if ( $method->brand == 'visa' ) { echo 'class="fab fa-cc-visa fa-3x fa-fw" style="color:#172274"'; }
+else if ( $method->brand == 'mastercard' ) { echo 'class="fab fa-cc-mastercard fa-3x fa-fw" style="color:#FF5F01"'; }
+else if ( $method->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" style="color:#2E78BF"'; }
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
 echo "</div><div class='col-8 col-sm-7 col-md-6 col-lg-7'><h6 class='my-0'>";
-if ( $src->type == 'sepa_debit' ) {
-echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
+if ( $method->type == 'sepa_debit' ) {
+echo __( 'Account', 'doliconnect-pro' ).' '.$method->reference.'<small> <a href="'.$method->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$method->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
-echo __( 'Card', 'doliconnect-pro' ).' '.$src->reference;
+echo __( 'Card', 'doliconnect-pro' ).' '.$method->reference;
 }
-echo "<br>".$src->holder."</h6></div>";
+echo "<br>".$method->holder."</h6></div>";
 echo "<div class='d-none d-md-block col-md-2 align-middle text-right'>";
-echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
+echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
 echo "</div>";
 if (1 == 1) {
 echo "<div class='col-4 col-sm-3 col-md-2 btn-group-vertical' role='group'>";
-if ( $src->default_source == '1' ) { 
+if ( $method->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } else {
-echo "<button name='default_source' value='".$src->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
+echo "<button name='default_paymentmethod' value='".$method->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
 }
-echo "<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button>";
+echo "<button name='delete_paymentmethod' value='".$method->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button>";
 echo "</div></li>";
 }
 echo "</li>";
@@ -190,29 +190,28 @@ echo "</ul></div></form>";
 if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
 
 echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
-<div class='modal-dialog modal modal-dialog-centered' role='document'>
-<div class='modal-content'><div class='modal-header'>
-<h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+<div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
+<h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button id='CloseModalAddPaymentMethod' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'>"; 
 echo "<form role='form' action='$url' id='newpaymentmethod-form' method='post'>";
 echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
 <div id="card-errors" role="alert"></div>';
-echo "</div><div class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block'><b>".__( 'Add', 'doliconnect' )."</b></button>";
-echo "</form>";
+echo doliloading('AddPaymentMethod-modal');
+echo "</div><div class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
 echo "</div></div></div></div>";
 
 echo "<script>";
-if ( $listsource->code_account != null ) {
+if ( $listpaymentmethods->code_account != null ) {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-    stripeAccount: '<?php echo $listsource->code_account; ?>'
+var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>',{
+    stripeAccount: '<?php echo $listpaymentmethods->code_account; ?>'
     });
 <?php
 } else {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
+var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>');
 <?php
 }
 ?> 
@@ -259,7 +258,7 @@ var cardButton = document.getElementById('buttontoaddcard');
 var form = document.getElementById('newpaymentmethod-form');
 
 cardButton.addEventListener('click', function(event) {
-console.log("We click on buttontopay");
+console.log("We click on buttontoaddcard");
 event.preventDefault();
 
         if (cardholderName.value == '')
@@ -284,9 +283,19 @@ event.preventDefault();
 				var displayError = document.getElementById('card-errors');
 				displayError.textContent = '<?php echo __( "Oops, an error occurred while adding the card", 'doliconnect-pro' ); ?>';    
   } else {
-    // Action
+	      var hiddenInput = document.createElement('input');
+	      hiddenInput.setAttribute('type', 'hidden');
+	      hiddenInput.setAttribute('name', 'add_paymentmethod');
+	      hiddenInput.setAttribute('value', result.paymentMethod.id);
+	      form.appendChild(hiddenInput); 
 
-jQuery('#newpaymentmethod-form').submit();    
+jQuery(window).scrollTop(0);
+jQuery('#CloseModalAddPaymentMethod').hide(); 
+jQuery('#newpaymentmethod-form').hide();
+jQuery('#buttontoaddcard').hide();  
+jQuery('#doliloading-AddPaymentMethod-modal').show();
+ 
+        jQuery('#newpaymentmethod-form').submit();  
   }
 });         
           }
