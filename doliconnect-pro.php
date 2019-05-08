@@ -1479,19 +1479,19 @@ $orderipdate = callDoliApi("PUT", "/".$module."/".$object->id, $rdr, 0);
 
 if ( $object->id > 0 ) {
 
-$successurl = doliconnecturl('dolicart')."?validation&module=orders&id=".$object->id;
-$returnurl = doliconnecturl('doliaccount')."?module=orders&id=".$object->id;
+$successurl = doliconnecturl('dolicart')."?validation&module=".$module."&id=".$object->id;
+$returnurl = doliconnecturl('doliaccount')."?module=".$module."&id=".$object->id;
 
 if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, dolidelay('constante'));
-
+if (!isset(['module'])) {
 $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
 	];
-$validate = callDoliApi("POST", "/".$module."/".$object->id."/validate", $vld, 0);
-
+$validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
+}
 $src = [
     'source' => "".$source."",
     'url' => "".$successurl.""
@@ -1514,18 +1514,18 @@ exit;
 } elseif ( $_POST['modepayment']=='7' || $_POST['modepayment']=='2'or $_POST['modepayment']=='4' ) {
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, dolidelay('constante'));
-
+if (!isset(['module'])) {
 $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
 	];
-$validate = callDoliApi("POST", "/".$module."/".$object->id."/validate", $vld, 0);
-
+$validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
+}
 $object = callDoliApi("GET", "/".$module."/".$object->id, null);
 
 $successurl2 = $successurl."&ref=".$object->ref;
 
-$order = callDoliApi("GET", "/orders/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect($successurl2);
 exit;
