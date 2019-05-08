@@ -1496,7 +1496,7 @@ $src = [
     'source' => "".$source."",
     'url' => "".$successurl.""
 	];
-$pay = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/pay/order/".$object->id, $src, 0);
+$pay = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/pay/".$module."/".$object->id, $src, 0);
 //echo $pay;
 
 if (isset($pay->error)){
