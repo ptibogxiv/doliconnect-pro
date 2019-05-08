@@ -1485,7 +1485,7 @@ $returnurl = doliconnecturl('doliaccount')."?module=".$module."&id=".$object->id
 if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, dolidelay('constante'));
-if (!isset(['module'])) {
+if (!isset($_GET['module'])) {
 $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
@@ -1514,7 +1514,7 @@ exit;
 } elseif ( $_POST['modepayment']=='7' || $_POST['modepayment']=='2'or $_POST['modepayment']=='4' ) {
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/PAYPLUG_ID_WAREHOUSE", null, dolidelay('constante'));
-if (!isset(['module'])) {
+if (!isset($_GET['module'])) {
 $vld = [
     'idwarehouse' => $warehouse->value,
     'notrigger' => 0
