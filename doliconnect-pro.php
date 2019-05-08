@@ -1295,7 +1295,7 @@ echo "<li class='list-group-item d-flex justify-content-between bg-light'>
 }
 //$total=$subtotal-$remise_percent;            
 echo "<li class='list-group-item d-flex justify-content-between'>
-<span>".__( 'Total to pay', 'doliconnect-pro' )."$qty</span>
+<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>
 <strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
 echo "</ul></div><br>";
 }
@@ -1336,10 +1336,10 @@ $request = "/orders/".doliconnector($current_user, 'fk_order');
 $module='orders';
 }
 
-if ( doliconnector($current_user, 'fk_order') > 0 ) {
+//if ( doliconnector($current_user, 'fk_order') > 0 ) {
 $object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
 //echo $object;
-}
+//}
 
 if ( defined("DOLIBUG") ) {
 
@@ -1426,7 +1426,7 @@ echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurre
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div></div></div>";
 
-} elseif ( isset($_GET['pay']) && (doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices') ) ) {
+} elseif ( isset($_GET['pay']) && (doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices' && $object->paye != 1) ) ) {
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
@@ -1531,11 +1531,11 @@ echo "<br /><a href='".doliconnecturl('dolicart')."' class='btn btn-primary'>Ret
 }
 }
 }                                  
-} elseif ( !$object->id > 0 && $object->lines == null ) {
-$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
-$dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect(doliconnecturl('dolicart'));
-exit;
+} elseif ( !is_object($object) && empty($object->lines) ) {
+//$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
+//$dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
+//wp_redirect(doliconnecturl('dolicart'));
+//exit;
 }
 
 //header('Refresh: 300; URL='.esc_url(get_permalink()).'');
