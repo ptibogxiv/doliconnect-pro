@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-05-09 20:31+0200\n"
-"PO-Revision-Date: 2019-05-09 20:33+0200\n"
+"POT-Creation-Date: 2019-05-09 20:40+0200\n"
+"PO-Revision-Date: 2019-05-09 20:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -30,8 +30,8 @@ msgid "New payment method"
 msgstr "Nouveau mode de paiement"
 
 #: doliconnect-pro.php:147
-msgid "Create payment methods needs Dolibarr v10 minimum"
-msgstr "Créer des modes de paiement nécessite Dolibarr v10 minimum"
+msgid "Register payment methods needs Dolibarr v10 minimum"
+msgstr "Enregistrer les modes de paiement nécessite Dolibarr v10 minimum"
 
 #: doliconnect-pro.php:167 doliconnect-pro.php:404 doliconnect-pro.php:2468
 msgid "Account"
