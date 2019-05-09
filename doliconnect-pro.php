@@ -166,6 +166,7 @@ echo __( 'Account', 'doliconnect-pro' ).' '.$method->reference.'<small> <a href=
 } else {
 echo __( 'Card', 'doliconnect-pro' ).' '.$method->reference;
 }
+if ( !empty($method->expiration) ) { echo " - ".date("m/Y", strtotime($method->expiration.'/1')); }
 echo "<br>".$method->holder."</h6></div>";
 echo "<div class='d-none d-md-block col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
