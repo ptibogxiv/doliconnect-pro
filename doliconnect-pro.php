@@ -69,12 +69,12 @@ $data = [
 ];
 
 $gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['default_paymentmethod']), $data, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
 
 } elseif ( isset($_POST['delete_paymentmethod']) ) {
 
 $gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['delete_paymentmethod']), null, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
 
 } elseif ( isset($_POST['add_paymentmethod'])  ) {
 
@@ -83,11 +83,11 @@ $data = [
 ];
 
 $gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['add_paymentmethod']), $data, dolidelay( 0, true));
-$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', true));
+$gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
 
 } 
 
-$listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
@@ -307,7 +307,7 @@ echo "</script>";
 }
 
 echo "<small><div class='float-left'>";
-echo dolirefresh($request, $url, dolidelay('source'));
+echo dolirefresh($request, $url, dolidelay('paymentmethods'));
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
@@ -539,7 +539,7 @@ echo "</div></div>";
 
 if ( empty($object) ) {
 echo "<small><div class='float-left'>";
-echo dolirefresh($request, $url, dolidelay('source'));
+echo dolirefresh($request, $url, dolidelay('paymentmethods'));
 echo "</div><div class='float-right'>";
 echo dolihelp('ISSUE');
 echo "</div></small>";
@@ -1366,7 +1366,7 @@ echo "</div></div>";
 
 if ( isset($_GET['validation']) && isset($_GET['id']) & isset($_GET['ref']) ) {
 
-$object = callDoliApi("GET", "/".$module."/".$_GET['id'], null, dolidelay('order', true));
+$object = callDoliApi("GET", "/".$module."/".$_GET['id'], null, dolidelay('cart', true));
 
 echo "<table width='100%' style='border: none'><tr style='border: none'><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-shopping-bag fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
@@ -1436,7 +1436,7 @@ echo "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurre
 echo "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 echo  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div></div></div>";
 
-} elseif ( isset($_GET['pay']) && (doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices' && $object->paye != 1) ) ) {
+} elseif ( isset($_GET['pay']) && ((doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices' && $object->paye != 1) )) && $object->socid == doliconnector($current_user, 'fk_soc') ) {
 
 if ( isset($_POST['source']) && $_POST['source'] == 'validation' && !isset($_GET['info']) && isset($_GET['pay']) && !isset($_GET['validation'])) {
 
@@ -1464,7 +1464,7 @@ $src = [
 'token' => $_POST['stripeSource'],
 'default' => $_POST['setasdefault']
 ];
-$addsource = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."paymentmethods", $src, dolidelay('source'));
+$addsource = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."paymentmethods", $src, dolidelay('paymentmethods'));
 }
 
 }
@@ -1580,7 +1580,7 @@ echo $current_user->user_email."<br>".$thirdparty->phone;
 
 echo "</div></div></div><div class='col-12 col-md-8'>";
 
-$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('source',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
 if ( !empty($object->paymentintent) || get_option('doliconnectbeta') =='1' ) {
@@ -1788,7 +1788,7 @@ echo "<div class='card-body'><div class='row'>";
 if ( get_option('dolishop') && $object->statut == 0 ) {
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 } 
-if ( isset($object) && $object->lines != null ) { 
+if ( isset($object) && $object->lines != null && (doliconnector($current_user, 'fk_soc') == $object->socid) ) { 
 if ( $object->lines != null && $object->statut == 0 ) {
 echo "<div class='col-12 col-md'><button type='submit' name='dolicart' value='purge' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro' )."</b></button></div>";
 }
