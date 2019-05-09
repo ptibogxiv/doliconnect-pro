@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-05-09 20:40+0200\n"
-"PO-Revision-Date: 2019-05-09 20:41+0200\n"
+"POT-Creation-Date: 2019-05-10 00:53+0200\n"
+"PO-Revision-Date: 2019-05-10 00:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -25,84 +25,96 @@ msgstr ""
 msgid "Manage payment methods"
 msgstr "Gérer les modes de paiement"
 
-#: doliconnect-pro.php:145 doliconnect-pro.php:199
+#: doliconnect-pro.php:73 doliconnect-pro.php:88
+msgid "Congratulations!"
+msgstr "Félicitations!"
+
+#: doliconnect-pro.php:73
+msgid "You changed your default payment method"
+msgstr "Vous avez modifié votre mode de paiement par défaut"
+
+#: doliconnect-pro.php:88
+msgid "You have a new payment method"
+msgstr "Vous avez un nouveau mode de paiement"
+
+#: doliconnect-pro.php:133 doliconnect-pro.php:189
 msgid "New payment method"
 msgstr "Nouveau mode de paiement"
 
-#: doliconnect-pro.php:147
+#: doliconnect-pro.php:135
 msgid "Register payment methods needs Dolibarr v10 minimum"
 msgstr "Enregistrer des modes de paiement nécessite Dolibarr v10 minimum"
 
-#: doliconnect-pro.php:167 doliconnect-pro.php:404 doliconnect-pro.php:2468
+#: doliconnect-pro.php:157 doliconnect-pro.php:394 doliconnect-pro.php:2458
 msgid "Account"
 msgstr "Compte"
 
-#: doliconnect-pro.php:167 doliconnect-pro.php:404 doliconnect-pro.php:2468
+#: doliconnect-pro.php:157 doliconnect-pro.php:394 doliconnect-pro.php:2458
 msgid "Mandate"
 msgstr "Mandat"
 
-#: doliconnect-pro.php:169 doliconnect-pro.php:2470
+#: doliconnect-pro.php:159 doliconnect-pro.php:2460
 msgid "Card"
 msgstr "Carte"
 
-#: doliconnect-pro.php:179 doliconnect-pro.php:181 doliconnect-pro.php:183
-#: doliconnect-pro.php:533
+#: doliconnect-pro.php:169 doliconnect-pro.php:171 doliconnect-pro.php:173
+#: doliconnect-pro.php:523
 msgid "Favorite"
 msgstr "Favori"
 
-#: doliconnect-pro.php:185 doliconnect-pro.php:533 doliconnect-pro.php:2570
+#: doliconnect-pro.php:175 doliconnect-pro.php:523 doliconnect-pro.php:2560
 msgid "Delete"
 msgstr "Supprimer"
 
-#: doliconnect-pro.php:191
+#: doliconnect-pro.php:181
 msgid "No payment method"
 msgstr "Aucun moyen de paiement"
 
-#: doliconnect-pro.php:202
+#: doliconnect-pro.php:192
 msgid "Owner as on your card"
 msgstr "Titulaire comme sur votre carte"
 
-#: doliconnect-pro.php:207 doliconnect-pro.php:2716
+#: doliconnect-pro.php:197 doliconnect-pro.php:2706
 msgid "Add"
 msgstr "Ajouter"
 
-#: doliconnect-pro.php:273
+#: doliconnect-pro.php:267
 msgid "Need an owner as on your card"
 msgstr "Nécessite un titulaire comme sur votre carte"
 
-#: doliconnect-pro.php:289
+#: doliconnect-pro.php:283
 msgid "Oops, an error occurred while adding the card"
 msgstr "Oops, une erreur s’est produite lors de l’ajout de la carte"
 
-#: doliconnect-pro.php:352 doliconnect-pro.php:2416
+#: doliconnect-pro.php:342 doliconnect-pro.php:2406
 msgid "Credit of"
 msgstr "Crédit de"
 
-#: doliconnect-pro.php:354 doliconnect-pro.php:2418
+#: doliconnect-pro.php:344 doliconnect-pro.php:2408
 msgid "Debit of"
 msgstr "Débit de"
 
-#: doliconnect-pro.php:356
+#: doliconnect-pro.php:346
 msgid "Soon available"
 msgstr "Bientôt disponible"
 
-#: doliconnect-pro.php:424 doliconnect-pro.php:2484
+#: doliconnect-pro.php:414 doliconnect-pro.php:2474
 msgid "Credit card"
 msgstr "Carte bancaire"
 
-#: doliconnect-pro.php:428
+#: doliconnect-pro.php:418
 msgid "Owner as on your credit card"
 msgstr "Titulaire comme sur votre carte de crédit"
 
-#: doliconnect-pro.php:441
+#: doliconnect-pro.php:431
 msgid "Bank transfer"
 msgstr "Prélévement bancaire"
 
-#: doliconnect-pro.php:441 doliconnect-pro.php:2502
+#: doliconnect-pro.php:431 doliconnect-pro.php:2492
 msgid "Via SEPA Direct Debit"
 msgstr "Via SEPA Direct Debit"
 
-#: doliconnect-pro.php:446 doliconnect-pro.php:2507
+#: doliconnect-pro.php:436 doliconnect-pro.php:2497
 #, php-format
 msgid ""
 "By providing your IBAN and confirming this form, you are authorizing %s and "
@@ -122,165 +134,165 @@ msgstr ""
 "doit être présentée dans les 8 semaines suivant la date de débit de votre "
 "compte."
 
-#: doliconnect-pro.php:448
+#: doliconnect-pro.php:438
 msgid "Owner as on your bank account"
 msgstr "Titulaire comme sur votre compte bancaire"
 
-#: doliconnect-pro.php:464
+#: doliconnect-pro.php:454
 msgid "Google Pay"
 msgstr "Google Pay"
 
-#: doliconnect-pro.php:465 doliconnect-pro.php:469
+#: doliconnect-pro.php:455 doliconnect-pro.php:459
 msgid "Pay in one clic"
 msgstr "Payez en un clic"
 
-#: doliconnect-pro.php:468
+#: doliconnect-pro.php:458
 msgid "Apple Pay"
 msgstr "Apple Pay"
 
-#: doliconnect-pro.php:481
+#: doliconnect-pro.php:471
 msgid "Redirect to Paypal"
 msgstr "Rediriger vers PayPal"
 
-#: doliconnect-pro.php:491
+#: doliconnect-pro.php:481
 msgid "Transfer"
 msgstr "Virement bancaire"
 
-#: doliconnect-pro.php:491 doliconnect-pro.php:501 doliconnect-pro.php:2534
-#: doliconnect-pro.php:2544
+#: doliconnect-pro.php:481 doliconnect-pro.php:491 doliconnect-pro.php:2524
+#: doliconnect-pro.php:2534
 msgid "See your receipt"
 msgstr "Voir votre reçu"
 
-#: doliconnect-pro.php:501 doliconnect-pro.php:2544
+#: doliconnect-pro.php:491 doliconnect-pro.php:2534
 msgid "Check"
 msgstr "Chèque"
 
-#: doliconnect-pro.php:511 doliconnect-pro.php:2554
+#: doliconnect-pro.php:501 doliconnect-pro.php:2544
 msgid "Cash"
 msgstr "Espèces"
 
-#: doliconnect-pro.php:511 doliconnect-pro.php:2554
+#: doliconnect-pro.php:501 doliconnect-pro.php:2544
 msgid "Go to reception desk"
 msgstr "Aller à la réception"
 
-#: doliconnect-pro.php:519 doliconnect-pro.php:2560
+#: doliconnect-pro.php:509 doliconnect-pro.php:2550
 msgid "Save this payment method"
 msgstr "Enregistrer ce mode de paiement"
 
-#: doliconnect-pro.php:520
+#: doliconnect-pro.php:510
 msgid "Set as default mode"
 msgstr "Définir comme mode par défaut"
 
-#: doliconnect-pro.php:529 doliconnect-pro.php:2566
+#: doliconnect-pro.php:519 doliconnect-pro.php:2556
 msgid "Recharge"
 msgstr "Recharger"
 
-#: doliconnect-pro.php:530
+#: doliconnect-pro.php:520
 msgid "Add a card"
 msgstr "Ajouter une carte"
 
-#: doliconnect-pro.php:531
+#: doliconnect-pro.php:521
 msgid "Add an account"
 msgstr "Ajouter un compte"
 
-#: doliconnect-pro.php:535 doliconnect-pro.php:2572
+#: doliconnect-pro.php:525 doliconnect-pro.php:2562
 msgid "No gateway"
 msgstr "Aucun mode de paiement"
 
-#: doliconnect-pro.php:540 doliconnect-pro.php:1104 doliconnect-pro.php:1137
-#: doliconnect-pro.php:2575
+#: doliconnect-pro.php:530 doliconnect-pro.php:1094 doliconnect-pro.php:1127
+#: doliconnect-pro.php:2565
 msgid "Pay"
 msgstr "Payer"
 
-#: doliconnect-pro.php:1031
+#: doliconnect-pro.php:1021
 msgid "Subscription"
 msgstr "Adhésion"
 
-#: doliconnect-pro.php:1033
+#: doliconnect-pro.php:1023
 #, php-format
 msgid "Available from %s to %s"
 msgstr "Valable du %s au %s"
 
-#: doliconnect-pro.php:1045
+#: doliconnect-pro.php:1035
 msgid "An entry fee can be applied to you depending on the type"
 msgstr "Un droit d'entrée peut vous être appliqué selon le type"
 
-#: doliconnect-pro.php:1046
+#: doliconnect-pro.php:1036
 #, php-format
 msgid "From %s, a welcome fee can be apply"
 msgstr "À partir du %s, des frais de bienvenue peuvent être appliqués"
 
-#: doliconnect-pro.php:1055
+#: doliconnect-pro.php:1045
 msgid "Cancel my subscription"
 msgstr "Annuler mon abonnement"
 
-#: doliconnect-pro.php:1057
+#: doliconnect-pro.php:1047
 msgid "Will be terminated"
 msgstr "Sera résilié"
 
-#: doliconnect-pro.php:1059
+#: doliconnect-pro.php:1049
 #, php-format
 msgid "from the %s"
 msgstr "à partir du %s"
 
-#: doliconnect-pro.php:1060
+#: doliconnect-pro.php:1050
 msgid "immediately"
 msgstr "immédiatement"
 
-#: doliconnect-pro.php:1062
+#: doliconnect-pro.php:1052
 msgid "Resiliate"
 msgstr "Résilier"
 
-#: doliconnect-pro.php:1088
+#: doliconnect-pro.php:1078
 msgid "then"
 msgstr "puis"
 
-#: doliconnect-pro.php:1088 doliconnect-pro.php:1091
+#: doliconnect-pro.php:1078 doliconnect-pro.php:1081
 msgid "yearly"
 msgstr "par an"
 
-#: doliconnect-pro.php:1094
+#: doliconnect-pro.php:1084
 msgid "Free"
 msgstr "Gratuit"
 
-#: doliconnect-pro.php:1097
+#: doliconnect-pro.php:1087
 #, php-format
 msgid "From %s"
 msgstr "A partir du %s"
 
-#: doliconnect-pro.php:1099 doliconnect-pro.php:2734
+#: doliconnect-pro.php:1089 doliconnect-pro.php:2724
 msgid "Contact us"
 msgstr "Contactez-nous"
 
-#: doliconnect-pro.php:1101
+#: doliconnect-pro.php:1091
 msgid "Non-renewable"
 msgstr "Non renouvelable"
 
-#: doliconnect-pro.php:1107 doliconnect-pro.php:1108 doliconnect-pro.php:1111
-#: doliconnect-pro.php:1112 doliconnect-pro.php:1139 doliconnect-pro.php:1140
+#: doliconnect-pro.php:1097 doliconnect-pro.php:1098 doliconnect-pro.php:1101
+#: doliconnect-pro.php:1102 doliconnect-pro.php:1129 doliconnect-pro.php:1130
 msgid "Renew"
 msgstr "Renouveler"
 
-#: doliconnect-pro.php:1119 doliconnect-pro.php:1121 doliconnect-pro.php:1123
-#: doliconnect-pro.php:1128 doliconnect-pro.php:1130
+#: doliconnect-pro.php:1109 doliconnect-pro.php:1111 doliconnect-pro.php:1113
+#: doliconnect-pro.php:1118 doliconnect-pro.php:1120
 msgid "Subscribe"
 msgstr "Souscrire"
 
-#: doliconnect-pro.php:1144 doliconnect-pro.php:1148 doliconnect-pro.php:1153
-#: doliconnect-pro.php:1156 doliconnect-pro.php:1157 doliconnect-pro.php:1161
-#: doliconnect-pro.php:1164
+#: doliconnect-pro.php:1134 doliconnect-pro.php:1138 doliconnect-pro.php:1143
+#: doliconnect-pro.php:1146 doliconnect-pro.php:1147 doliconnect-pro.php:1151
+#: doliconnect-pro.php:1154
 msgid "Ask us"
 msgstr "Nous demander"
 
-#: doliconnect-pro.php:1147
+#: doliconnect-pro.php:1137
 msgid "Request submitted"
 msgstr "Demande soumise"
 
-#: doliconnect-pro.php:1171
+#: doliconnect-pro.php:1161
 msgid "No available membership type"
 msgstr "Aucun type d’adhésion disponible"
 
-#: doliconnect-pro.php:1179
+#: doliconnect-pro.php:1169
 msgid ""
 "Note: the admins reserve the right to change your membership (type/status) "
 "in relation to your personal situation when you finalize your order. A "
@@ -291,58 +303,58 @@ msgstr ""
 "votre commande. Une validation de l'adhésion peut être nécessaire selon les "
 "cas."
 
-#: doliconnect-pro.php:1283
+#: doliconnect-pro.php:1273
 msgid "Quantity"
 msgstr "Quantité"
 
-#: doliconnect-pro.php:1291
+#: doliconnect-pro.php:1281
 msgid "Cart"
 msgstr "Panier"
 
-#: doliconnect-pro.php:1291
+#: doliconnect-pro.php:1281
 #, php-format
 msgid "%s item"
 msgid_plural "%s items"
 msgstr[0] "%s article"
 msgstr[1] "%s articles"
 
-#: doliconnect-pro.php:1292 doliconnect-pro.php:1577
+#: doliconnect-pro.php:1282 doliconnect-pro.php:1567
 msgid "update"
 msgstr "modifier"
 
-#: doliconnect-pro.php:1299
+#: doliconnect-pro.php:1289
 msgid "Customer discount"
 msgstr "Remise client"
 
-#: doliconnect-pro.php:1306
+#: doliconnect-pro.php:1296
 msgid "Already paid"
 msgstr "Déjà payé"
 
-#: doliconnect-pro.php:1309
+#: doliconnect-pro.php:1299
 msgid "Remains to be paid"
 msgstr "Reste à payer"
 
-#: doliconnect-pro.php:1312
+#: doliconnect-pro.php:1302
 msgid "Total to pay"
 msgstr "Total à payer"
 
-#: doliconnect-pro.php:1366
+#: doliconnect-pro.php:1356
 msgid "Oops, Order's module is not available"
 msgstr "Oops, le module de commande n’est pas disponible"
 
-#: doliconnect-pro.php:1411
+#: doliconnect-pro.php:1401
 msgid "Your order has been registered"
 msgstr "Votre commande a été enregistrée"
 
-#: doliconnect-pro.php:1411 doliconnect-pro.php:1436
+#: doliconnect-pro.php:1401 doliconnect-pro.php:1426
 msgid "Reference"
 msgstr "Référence"
 
-#: doliconnect-pro.php:1411
+#: doliconnect-pro.php:1401
 msgid "Payment method"
 msgstr "Mode de paiement"
 
-#: doliconnect-pro.php:1421
+#: doliconnect-pro.php:1411
 #, php-format
 msgid ""
 "Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</"
@@ -351,7 +363,7 @@ msgstr ""
 "Veuillez envoyer votre chèque d'un montant de <b>%1$s</b> avec la référence "
 "<b>%2$s</b> à <b>%3$s</b> à l'adresse suivante"
 
-#: doliconnect-pro.php:1429
+#: doliconnect-pro.php:1419
 #, php-format
 msgid ""
 "Please send your transfert in the amount of <b>%1$s</b> with reference <b>"
@@ -360,211 +372,211 @@ msgstr ""
 "Veuillez envoyer votre virement d'un montant de <b>%1$s</b> avec la "
 "référence <b>%2$s</b> sur le compte suivant"
 
-#: doliconnect-pro.php:1430
+#: doliconnect-pro.php:1420
 msgid "Bank"
 msgstr "Banque"
 
-#: doliconnect-pro.php:1436
+#: doliconnect-pro.php:1426
 msgid "Your payment has been registered"
 msgstr "Votre paiement a été enregistré"
 
-#: doliconnect-pro.php:1439
+#: doliconnect-pro.php:1429
 msgid "An error is occurred"
 msgstr "Une erreur s’est produite"
 
-#: doliconnect-pro.php:1442
+#: doliconnect-pro.php:1432
 msgid "See my order"
 msgstr "Voir ma commande"
 
-#: doliconnect-pro.php:1544
+#: doliconnect-pro.php:1534
 msgid "Oops"
 msgstr "Oups"
 
-#: doliconnect-pro.php:1544
+#: doliconnect-pro.php:1534
 msgid "An error is occured. Please retry!"
 msgstr "Une erreur s’est produite. S’il vous plaît réessayer!"
 
-#: doliconnect-pro.php:1576
+#: doliconnect-pro.php:1566
 msgid "Contacts"
 msgstr "Contacts"
 
-#: doliconnect-pro.php:1677
+#: doliconnect-pro.php:1667
 msgid "Validate"
 msgstr "Valider"
 
-#: doliconnect-pro.php:1706 doliconnect-pro.php:1722
+#: doliconnect-pro.php:1696 doliconnect-pro.php:1712
 msgid "Oops!"
 msgstr "Oups!"
 
-#: doliconnect-pro.php:1706 doliconnect-pro.php:1722
+#: doliconnect-pro.php:1696 doliconnect-pro.php:1712
 msgid "An error is occured. Please contact us!"
 msgstr "Une erreur s'est produite. Veuillez nous contacter!"
 
-#: doliconnect-pro.php:1794
+#: doliconnect-pro.php:1784
 msgid "Continue shopping"
 msgstr "Continuer vos achats"
 
-#: doliconnect-pro.php:1798
+#: doliconnect-pro.php:1788
 msgid "Empty the basket"
 msgstr "Vider le panier"
 
-#: doliconnect-pro.php:1801
+#: doliconnect-pro.php:1791
 msgid "Process"
 msgstr "Finaliser"
 
-#: doliconnect-pro.php:1909
+#: doliconnect-pro.php:1899
 msgid "I approve"
 msgstr "J'approuve"
 
-#: doliconnect-pro.php:1910
+#: doliconnect-pro.php:1900
 msgid "I refuse"
 msgstr "Je refuse"
 
-#: doliconnect-pro.php:1964
+#: doliconnect-pro.php:1954
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: doliconnect-pro.php:1966
+#: doliconnect-pro.php:1956
 msgid "Access restricted to users"
 msgstr "Accès restreint aux utilisateurs"
 
-#: doliconnect-pro.php:2009
+#: doliconnect-pro.php:1999
 msgid "Email"
 msgstr "Adresse électronique"
 
-#: doliconnect-pro.php:2013
+#: doliconnect-pro.php:2003
 msgid "Password"
 msgstr "Mot de passe"
 
-#: doliconnect-pro.php:2022
+#: doliconnect-pro.php:2012
 msgid "Create an account"
 msgstr "Créer un compte"
 
-#: doliconnect-pro.php:2026
+#: doliconnect-pro.php:2016
 msgid "Forgot password?"
 msgstr "Mot de passe oublié?"
 
-#: doliconnect-pro.php:2044 doliconnect-pro.php:2727
+#: doliconnect-pro.php:2034 doliconnect-pro.php:2717
 msgid "Sign in"
 msgstr "Connexion"
 
-#: doliconnect-pro.php:2068
+#: doliconnect-pro.php:2058
 msgid "Sign in with"
 msgstr "Se connecter avec"
 
-#: doliconnect-pro.php:2072 doliconnect-pro.php:2404
+#: doliconnect-pro.php:2062 doliconnect-pro.php:2394
 msgid "or"
 msgstr "ou"
 
-#: doliconnect-pro.php:2420
+#: doliconnect-pro.php:2410
 msgid "Automatic use"
 msgstr "Utilisation automatique"
 
-#: doliconnect-pro.php:2488 doliconnect-pro.php:2509
+#: doliconnect-pro.php:2478 doliconnect-pro.php:2499
 msgid "Owner"
 msgstr "Titulaire"
 
-#: doliconnect-pro.php:2489
+#: doliconnect-pro.php:2479
 msgid "As on your credit card"
 msgstr "Comme sur votre carte de crédit"
 
-#: doliconnect-pro.php:2502
+#: doliconnect-pro.php:2492
 msgid "Bank levy"
 msgstr "Prélèvement bancaire"
 
-#: doliconnect-pro.php:2510
+#: doliconnect-pro.php:2500
 msgid "As on your bank account"
 msgstr "Tel que sur votre compte bancaire"
 
-#: doliconnect-pro.php:2524
+#: doliconnect-pro.php:2514
 msgid "Pay with your Paypal account"
 msgstr "Payer avec votre compte PayPal"
 
-#: doliconnect-pro.php:2534
+#: doliconnect-pro.php:2524
 msgid "Bank Transfer"
 msgstr "Virement bancaire"
 
-#: doliconnect-pro.php:2561
+#: doliconnect-pro.php:2551
 msgid "Set as default payment mode"
 msgstr "Définir comme mode de paiement par défaut"
 
-#: doliconnect-pro.php:2567
+#: doliconnect-pro.php:2557
 msgid "Add credit card"
 msgstr "Ajouter une carte bancaire"
 
-#: doliconnect-pro.php:2568
+#: doliconnect-pro.php:2558
 msgid "Add bank account"
 msgstr "Ajouter un compte bancaire"
 
-#: doliconnect-pro.php:2639
+#: doliconnect-pro.php:2629
 msgid "for"
 msgstr "pour"
 
-#: doliconnect-pro.php:2641
+#: doliconnect-pro.php:2631
 msgid "years"
 msgstr "années"
 
-#: doliconnect-pro.php:2642
+#: doliconnect-pro.php:2632
 msgid "months"
 msgstr "mois"
 
-#: doliconnect-pro.php:2643
+#: doliconnect-pro.php:2633
 msgid "days"
 msgstr "jours"
 
-#: doliconnect-pro.php:2644
+#: doliconnect-pro.php:2634
 msgid "hours"
 msgstr "heures"
 
-#: doliconnect-pro.php:2645
+#: doliconnect-pro.php:2635
 msgid "minutes"
 msgstr "minutes"
 
-#: doliconnect-pro.php:2647
+#: doliconnect-pro.php:2637
 msgid "year"
 msgstr "an"
 
-#: doliconnect-pro.php:2648
+#: doliconnect-pro.php:2638
 msgid "month"
 msgstr "mois"
 
-#: doliconnect-pro.php:2649
+#: doliconnect-pro.php:2639
 msgid "day"
 msgstr "jour"
 
-#: doliconnect-pro.php:2650 doliconnect-pro.php:2669 doliconnect-pro.php:2678
+#: doliconnect-pro.php:2640 doliconnect-pro.php:2659 doliconnect-pro.php:2668
 msgid "hour"
 msgstr "heure"
 
-#: doliconnect-pro.php:2651
+#: doliconnect-pro.php:2641
 msgid "minute"
 msgstr "minute"
 
-#: doliconnect-pro.php:2666 doliconnect-pro.php:2675
+#: doliconnect-pro.php:2656 doliconnect-pro.php:2665
 msgid "Price"
 msgstr "Tarif"
 
-#: doliconnect-pro.php:2670
+#: doliconnect-pro.php:2660
 msgid "You benefit from the rate"
 msgstr "Vous bénéficiez du tarif"
 
-#: doliconnect-pro.php:2714
+#: doliconnect-pro.php:2704
 msgid "Update"
 msgstr "Modifier"
 
-#: doliconnect-pro.php:2720
+#: doliconnect-pro.php:2710
 msgid "Go to cart"
 msgstr "Aller au panier"
 
-#: doliconnect-pro.php:2727 doliconnect-pro.php:2729
+#: doliconnect-pro.php:2717 doliconnect-pro.php:2719
 msgid "log in"
 msgstr "connectez-vous"
 
-#: doliconnect-pro.php:2734
+#: doliconnect-pro.php:2724
 msgid "Login"
 msgstr "Connexion"
 
-#: doliconnect-pro.php:2737
+#: doliconnect-pro.php:2727
 msgid "Loading"
 msgstr "Chargement"
 

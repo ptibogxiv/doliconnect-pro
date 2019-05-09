@@ -70,6 +70,7 @@ $data = [
 
 $gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['default_paymentmethod']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
+$msg = "<div class='alert alert-success'><h4 class='alert-heading'>".__( 'Congratulations!', 'doliconnect-pro' )."</h4><p>".__( 'You changed your default payment method', 'doliconnect-pro' )."</p></div>";
 
 } elseif ( isset($_POST['delete_paymentmethod']) ) {
 
@@ -84,7 +85,7 @@ $data = [
 
 $gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['add_paymentmethod']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
-
+$msg = "<div class='alert alert-success'><h4 class='alert-heading'>".__( 'Congratulations!', 'doliconnect-pro' )."</h4><p>".__( 'You have a new payment method', 'doliconnect-pro' )."</p></div>";
 } 
 
 $listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
@@ -93,17 +94,11 @@ $listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($curren
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
 doliconnect_enqueues();
 
-if ( isset($object) ) { 
-$currency=strtolower($object->multicurrency_code?$object->multicurrency_code:'eur');  
-$stripeAmount=($object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc)*100;
-} else {
-$currency=strtolower('eur');
-$stripeAmount=0;
-}
-
 $lock = dolipaymentmodes_lock();
 
 echo "<form role='form' action='$url' id='paymentmethods-form' method='post'>";
+
+if ( isset($msg) ) { echo $msg; }
 
 echo "<script src='https://js.stripe.com/v3/'></script>";
 
