@@ -132,26 +132,19 @@ echo "</script>";
 
 echo "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
-class myCounter implements Countable {
-	public function count() {
-		static $count = 0;
-		return ++$count;
-	}
-}
- 
-$counter = new myCounter;
-
 $dolibarr = callDoliApi("GET", "/status", null, 10 * MINUTE_IN_SECONDS);
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
-if ( count($counter) < 5 && is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
-echo '<button type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
+if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+echo '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
 } else {
 echo "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( 'Register payment methods needs Dolibarr v10 minimum', 'doliconnect-pro' )."</b></li>";
 }
 
 //SAVED SOURCES
-if ( $listpaymentmethods->paymentmethods != null ) {  
-foreach ( $listpaymentmethods->paymentmethods as $method ) {                                                                                                                       
+if ( $listpaymentmethods->paymentmethods != null ) {
+$i=0;  
+foreach ( $listpaymentmethods->paymentmethods as $method ) {
+$i++;                                                                                                                       
 echo "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>";
 echo "<div class='d-none d-md-block col-md-2 col-lg-1'><i ";
 if ( $method->type == 'sepa_debit' ) {
@@ -194,19 +187,19 @@ echo "<li class='list-group-item list-group-item-light'><center>".__( 'No paymen
 }
 echo "</ul></div></form>";
 
-if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
+if ( $i < 5 && is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
 echo "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
-<h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button id='CloseModalAddPaymentMethod' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-</div><div class='modal-body'>"; 
+<h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button id='CloseAddPaymentMethod' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+</div><div class='modal-body'><div id='BodyAddPaymentMethod'>"; 
 echo "<form role='form' action='$url' id='newpaymentmethod-form' method='post'>";
 echo '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
-<div id="card-errors" role="alert"></div>';
-echo doliloading('AddPaymentMethod-modal');
-echo "</div><div class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
+<div id="card-errors" role="alert"></div></div>';
+echo doliloading('addnewpaymentmethod');
+echo "</div><div id='FooterAddPaymentMethod' class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
 echo "</div></div></div></div>";
 
 echo "<script>";
@@ -239,9 +232,6 @@ var style = {
   }
 }; 
 
-//VARIABLES
- 
-
 // Create an instance of Elements
 var elements = stripe.elements();
 var cardElement = elements.create('card', {style: style});
@@ -267,9 +257,16 @@ var form = document.getElementById('newpaymentmethod-form');
 cardButton.addEventListener('click', function(event) {
 console.log("We click on buttontoaddcard");
 event.preventDefault();
-
+jQuery('#CloseAddPaymentMethod').hide();
+jQuery('#FooterAddPaymentMethod').hide();
+jQuery('#BodyAddPaymentMethod').hide();   
+jQuery('#doliloading-addnewpaymentmethod').show();
         if (cardholderName.value == '')
         	{
+jQuery('#CloseAddPaymentMethod').show();
+jQuery('#FooterAddPaymentMethod').show();
+jQuery('#BodyAddPaymentMethod').show();   
+jQuery('#doliloading-addnewpaymentmethod').hide();         
 				console.log("Field Card holder is empty");
 				var displayError = document.getElementById('card-errors');
 				displayError.textContent = '<?php echo __( 'Need an owner as on your card', 'doliconnect-pro' ); ?>';
@@ -297,12 +294,8 @@ event.preventDefault();
 	      form.appendChild(hiddenInput); 
 
 jQuery(window).scrollTop(0);
-jQuery('#CloseModalAddPaymentMethod').hide(); 
-jQuery('#newpaymentmethod-form').hide();
-jQuery('#buttontoaddcard').hide();  
-jQuery('#doliloading-AddPaymentMethod-modal').show();
- 
-        jQuery('#newpaymentmethod-form').submit();  
+console.log("submit");
+jQuery('#newpaymentmethod-form').submit();  
   }
 });         
           }
@@ -1968,7 +1961,7 @@ echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'dolic
 echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
 }
 
-echo "</div><div class='modal-body'><div id='loginmodal-form'>";
+echo "</div><div class='modal-body'><div id='BodyModalLogin'>";
 echo "<b>".get_option('doliaccountinfo')."</b>";
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
@@ -1996,7 +1989,7 @@ form.addEventListener('submit', function(event) {
 jQuery(window).scrollTop(0);
 jQuery('#CloseModalLogin').hide(); 
 jQuery('#FooterModalLogin').hide();
-jQuery('#loginmodal-form').hide(); 
+jQuery('#BodyModalLogin').hide(); 
 jQuery('#doliloading-login-modal').show(); 
 console.log("submit");
 formmodallogin.submit();
