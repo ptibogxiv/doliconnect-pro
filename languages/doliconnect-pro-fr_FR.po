@@ -31,7 +31,7 @@ msgstr "Nouveau mode de paiement"
 
 #: doliconnect-pro.php:147
 msgid "Register payment methods needs Dolibarr v10 minimum"
-msgstr "Enregistrer les modes de paiement nécessite Dolibarr v10 minimum"
+msgstr "Enregistrer des modes de paiement nécessite Dolibarr v10 minimum"
 
 #: doliconnect-pro.php:167 doliconnect-pro.php:404 doliconnect-pro.php:2468
 msgid "Account"
