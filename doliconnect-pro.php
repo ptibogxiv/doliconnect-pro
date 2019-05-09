@@ -143,6 +143,8 @@ $counter = new myCounter;
 
 if ( count($counter) < 5 && get_option('doliconnectbeta') =='1' ) {
 echo '<button type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
+} else {
+echo "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( 'Create payment methods needs Dolibarr v10 minimum', 'doliconnect-pro' )."</b></li>";
 }
 
 //SAVED SOURCES
@@ -171,18 +173,20 @@ echo "<br>".$method->holder."</h6></div>";
 echo "<div class='d-none d-md-block col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
 echo "</div>";
-if (1 == 1) {
+
 echo "<div class='col-4 col-sm-3 col-md-2 btn-group-vertical' role='group'>";
 if ( $method->default_source == '1' ) { 
 echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
-} else {
+} elseif ( current_time( 'timestamp', 1) < strtotime($method->expiration.'/1') ) {
 echo "<button name='default_paymentmethod' value='".$method->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
+} else {
+echo "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-ban fa-1x fa-fw'></i></button>";
 }
 echo "<button name='delete_paymentmethod' value='".$method->id."' class='btn btn-light text-danger' type='submit' title='".__( 'Delete', 'doliconnect' )."'><i class='fas fa-trash fa-fw'></i></button>";
 echo "</div></li>";
 }
 echo "</li>";
-}
+
 } else {
 echo "<li class='list-group-item list-group-item-light'><center>".__( 'No payment method', 'doliconnect-pro' )."</center></li>";
 }
