@@ -1775,7 +1775,7 @@ echo "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-grou
 
 echo doliline($object, 'cart');
 
-if ( isset($object) ) {
+if ( isset($object) && (doliconnector($current_user, 'fk_soc') == $object->socid) ) {
 echo "<li class='list-group-item list-group-item-info'>";
 echo dolitotal($object);
 echo "</li>";
@@ -1783,9 +1783,9 @@ echo "</li>";
 
 echo "</ul>";
 
-if ( get_option('dolishop') ) {
+if ( !empty(get_option('dolishop')) ) {
 echo "<div class='card-body'><div class='row'>";
-if ( get_option('dolishop') && $object->statut == 0 ) {
+if ( get_option('dolishop') ) {
 echo "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
 } 
 if ( isset($object) && $object->lines != null && (doliconnector($current_user, 'fk_soc') == $object->socid) ) { 
