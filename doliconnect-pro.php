@@ -131,8 +131,8 @@ $dolibarr = callDoliApi("GET", "/status", null, 10 * MINUTE_IN_SECONDS);
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 echo '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
-} else {
-echo "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( 'Register payment methods needs Dolibarr v10 minimum', 'doliconnect-pro' )."</b></li>";
+} elseif ( current_user_can( 'administrator' ) ) {
+echo "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".sprintf( esc_html__( "Register payment methods needs Dolibarr 10.0.0 minimum, your's %s", 'doliconnect-pro'), $versiondoli[0])."</b></li>";
 }
 
 //SAVED SOURCES
