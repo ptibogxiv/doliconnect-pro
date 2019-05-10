@@ -130,7 +130,7 @@ echo "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 $dolibarr = callDoliApi("GET", "/status", null, null);
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
-echo '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
+echo '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource" ><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
 } elseif ( current_user_can( 'administrator' ) ) {
 echo "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".sprintf( esc_html__( "Register payment methods needs Dolibarr 10.0.0 minimum, your's %s", 'doliconnect-pro'), $versiondoli[0])."</b></li>";
 }
@@ -198,6 +198,13 @@ echo "</div><div id='FooterAddPaymentMethod' class='modal-footer'><button name='
 echo "</div></div></div></div>";
 
 echo "<script>";
+?>
+//function HideAddButtonPaymentMethod() {
+//document.getElementById("ButtonAddPaymentMethod").disabled = true;
+//}
+
+//window.onload=HideAddButtonPaymentMethod;
+<?php
 if ( $listpaymentmethods->code_account != null ) {
 ?>
 var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>',{
@@ -209,7 +216,7 @@ var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>',{
 var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>');
 <?php
 }
-?> 
+?>
 
 var style = {
   base: {
@@ -434,8 +441,8 @@ echo '<div id="iban-errors" role="alert"></div>';
 echo '</li>';
 }
 
-if ( (! empty($object) && empty(dolikiosk())) || (! empty($object) && !empty(get_option('doliconnectbeta')) && current_user_can( 'administrator' )) ) {
 //PAYMENT REQUEST API
+if ( ! empty($object) ) {
 echo "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
 //if ($listsource["sources"] == null) {echo " checked";}
@@ -715,99 +722,9 @@ document.getElementById("PayButton").style.display = "block";
 document.getElementById("payment-request-button").style.display = "none";  
 }
 
-if ( document.getElementById("defaultbtn") ) {
-document.getElementById("defaultbtn").addEventListener('click', function(event) {
-
-jQuery('#DoliconnectLoadingModal').modal('show'); 
-
-window.location = "<?php echo $url."&action=setassourcedefault&source="; ?>" + document.querySelector('input[name=modepayment]:checked').value;
-
-
-});
-}
-
-if ( document.getElementById("deletebtn") ) {
-document.getElementById("deletebtn").addEventListener('click', function(event) {
-
-jQuery('#DoliconnectLoadingModal').modal('show');
-
-window.location = "<?php echo $url."&action=deletesource&source="; ?>" + document.querySelector('input[name=modepayment]:checked').value;
-
-});
-}
-
-if ( document.getElementById("CardButton") ) {
-document.getElementById("CardButton").addEventListener('click', function(event) {
-
-jQuery('#payment-form').hide();
-jQuery('#doliloading-payment').show(); 
-
-stripe.createSource(cardElement, {
-owner: {
-  name: cardholderName.value
-  }
-      }
-    ).then(function(result) {
-    if (result.error) {
-    
-jQuery('#doliloading-payment').hide();
-jQuery('#payment-form').show();  
-
-var errorElement = document.getElementById('card-errors');
-errorElement.textContent = result.error.message; 
-
-    } else {
-    
-jQuery('#DoliconnectLoadingModal').modal('show');    
-     
-window.location = "<?php echo $url."&action=addsource&source="; ?>" + result.source.id;
-
-    }
-  });
-
-});
-}
-
-if ( document.getElementById("BankButton") ) {
-document.getElementById("BankButton").addEventListener('click', function(event) {
-
-jQuery('#payment-form').hide();
-jQuery('#doliloading-payment').show(); 
-
-stripe.createSource(ibanElement, { 
-   type: 'sepa_debit',
-    currency: 'eur',
-    owner: {
-      name: ibanholderName.value,
-    },
-    mandate: {
-      notification_method: 'manual',
-    }
-      }
-    ).then(function(result) {
-    if (result.error) {
-    
-jQuery('#doliloading-payment').hide();
-jQuery('#payment-form').show();  
-
-var errorElement = document.getElementById('iban-errors');
-errorElement.textContent = result.error.message; 
-
-    } else {
-    
-jQuery('#DoliconnectLoadingModal').modal('show');    
-     
-window.location = "<?php echo $url."&action=addsource&source="; ?>" + result.source.id;
-
-    }
-  });
-
-});
-}
-
 //startpayment
 var PayButton = document.getElementById('PayButton');
-var clientSecret = '<?php echo $object->paymentintent; ?>';
+var clientSecret = '';
 
 stripe.retrievePaymentIntent(clientSecret).then(function(result) {
 
@@ -925,11 +842,6 @@ paymentRequest.canMakePayment().then(function(result) {
   if (result) {
   
   jQuery('#PraForm').show();
-  
-  if ( result.applePay ) {
-  document.getElementById('applepay').style.display = 'block';
-  document.getElementById('googlepay').style.display = 'none';
-  }
   
   if ( src_pra.checked ) {
   prButton.mount('#payment-request-button');  
