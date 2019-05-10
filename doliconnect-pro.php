@@ -309,7 +309,7 @@ echo "</div></small>";
 
 }
 
-function dolipaymentmodes($listsource, $object, $redirect, $url, $delay) {
+function dolipaymentmodes($listsource, $object, $redirect, $url) {
 global $current_user;
 
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
@@ -1578,7 +1578,7 @@ echo "</div></div></div><div class='col-12 col-md-8'>";
 $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //echo $listsource;
 
-if ( !empty($object->paymentintent) || get_option('doliconnectbeta') =='1' ) {
+if ( !empty($object->paymentintent) || (get_option('doliconnectbeta') =='1' && current_user_can( 'administrator' ))) {
 dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
