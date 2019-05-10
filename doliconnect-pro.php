@@ -159,7 +159,7 @@ echo __( 'Account', 'doliconnect-pro' ).' '.$method->reference.'<small> <a href=
 echo __( 'Card', 'doliconnect-pro' ).' '.$method->reference;
 }
 if ( !empty($method->expiration) ) { echo " - ".date("m/Y", strtotime($method->expiration.'/1')); }
-echo "<br>".$method->holder."</h6></div>";
+echo "</h6><small class='text-muted'>".$method->holder."</small></div>";
 echo "<div class='d-none d-md-block col-md-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
 echo "</div>";
@@ -391,11 +391,11 @@ echo '</div><div class="col-9 col-sm-7 col-md-8 col-xl-8 align-middle"><h6 class
 if ( $method->type == 'sepa_debit' ) {
 echo __( 'Account', 'doliconnect-pro' ).' '.$method->reference.'<small> <a href="'.$method->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$method->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
-echo $method->reference;
+echo __( 'Card', 'doliconnect-pro' ).' '.$method->reference;
 }
+if ( !empty($method->expiration) ) { echo " - ".date("m/Y", strtotime($method->expiration.'/1')); }
 if ( $method->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i><input type='hidden' name='defaultsource' value='$method->id'>"; }
-echo '</h6>';
-echo "<small class='text-muted'>".$method->holder."</small></div>";
+echo "</h6><small class='text-muted'>".$method->holder."</small></div>";
 echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
 echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
 //echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
