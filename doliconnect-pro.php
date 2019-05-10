@@ -127,7 +127,7 @@ echo "</script>";
 
 echo "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
-$dolibarr = callDoliApi("GET", "/status", null, 10 * MINUTE_IN_SECONDS);
+$dolibarr = callDoliApi("GET", "/status", null, null);
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 echo '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource"><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
@@ -309,7 +309,7 @@ echo "</div></small>";
 
 }
 
-function dolipaymentmodes($listsource, $object, $redirect, $url) {
+function dolipaymentmodes($listpaymentmethods, $object, $redirect, $url) {
 global $current_user;
 
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
@@ -338,12 +338,12 @@ if ( !empty($object) && !current_user_can( 'administrator' ) ) { echo " disabled
 echo " ><label class='custom-control-label w-100' for='discount'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo "<center><i class='fas fa-piggy-bank fa-3x fa-fw' style='color:HotPink'></i></center>";
 echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>";
-if ( $listsource->discount >= 0 ) {
+if ( $listpaymentmethods->discount >= 0 ) {
 echo __( 'Credit of', 'doliconnect-pro' );
 } else {
 echo __( 'Debit of', 'doliconnect-pro' );
 }
-echo " ".doliprice($listsource->discount)."</h6><small class='text-muted'>".__( 'Soon available', 'doliconnect-pro' )."</small>";
+echo " ".doliprice($listpaymentmethods->discount)."</h6><small class='text-muted'>".__( 'Soon available', 'doliconnect-pro' )."</small>";
 echo '</div></div></label></div></li>';
 //if ( empty($object) && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' )){
 //echo '<li class="list-group-item list-group-item-secondary" id="Recharge" style="display: none">';
@@ -361,55 +361,46 @@ echo '</div></div></label></div></li>';
 //}
 }
 
-class myCounter implements Countable {
-	public function count() {
-		static $count = 0;
-		return ++$count;
-	}
-}
- 
-$counter = new myCounter;
-
 //SAVED SOURCES
-if ( $listsource->paymentmethods != null ) {  
-foreach ( $listsource->paymentmethods as $src ) {                                                                                                                       
+if ( $listpaymentmethods->paymentmethods != null ) {  
+foreach ( $listpaymentmethods->paymentmethods as $method ) {                                                                                                                       
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='$src->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$src->id' ";
-if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expiration) ) { echo " disabled "; }
-elseif ( !empty($src->default_source) ) { echo " checked "; }
-echo " ><label class='custom-control-label w-100' for='$src->id'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
+<input id='$method->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$method->id' ";
+if ( date('Y/n') >= $method->expiration && !empty($object) && !empty($method->expiration) ) { echo " disabled "; }
+elseif ( !empty($method->default_source) ) { echo " checked "; }
+echo " ><label class='custom-control-label w-100' for='$method->id'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i ';
-if ( $src->type == 'sepa_debit' ) {
+if ( $method->type == 'sepa_debit' ) {
 echo 'class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"';
 } else {
 
-if ( $src->brand == 'visa' ) { echo 'class="fab fa-cc-visa fa-3x fa-fw" style="color:#172274"'; }
-else if ( $src->brand == 'mastercard' ) { echo 'class="fab fa-cc-mastercard fa-3x fa-fw" style="color:#FF5F01"'; }
-else if ( $src->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" style="color:#2E78BF"'; }
+if ( $method->brand == 'visa' ) { echo 'class="fab fa-cc-visa fa-3x fa-fw" style="color:#172274"'; }
+else if ( $method->brand == 'mastercard' ) { echo 'class="fab fa-cc-mastercard fa-3x fa-fw" style="color:#FF5F01"'; }
+else if ( $method->brand == 'amex' ) { echo 'class="fab fa-cc-amex fa-3x fa-fw" style="color:#2E78BF"'; }
 else {echo 'class="fab fa-cc-amex fa-3x fa-fw"';}
 }
 echo '></i></center>';
 echo '</div><div class="col-9 col-sm-7 col-md-8 col-xl-8 align-middle"><h6 class="my-0">';
-if ( $src->type == 'sepa_debit' ) {
-echo __( 'Account', 'doliconnect-pro' ).' '.$src->reference.'<small> <a href="'.$src->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$src->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
+if ( $method->type == 'sepa_debit' ) {
+echo __( 'Account', 'doliconnect-pro' ).' '.$method->reference.'<small> <a href="'.$method->mandate_url.'" title="'.__( 'Mandate', 'doliconnect-pro' ).' '.$method->mandate_reference.'" target="_blank"><i class="fas fa-info-circle"></i></a></small>';
 } else {
-echo $src->reference;
+echo $method->reference;
 }
-if ( $src->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i><input type='hidden' name='defaultsource' value='$src->id'>"; }
+if ( $method->default_source == '1' ) { echo " <i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i><input type='hidden' name='defaultsource' value='$method->id'>"; }
 echo '</h6>';
-echo "<small class='text-muted'>".$src->holder."</small></div>";
+echo "<small class='text-muted'>".$method->holder."</small></div>";
 echo "<div class='d-none d-sm-block col-2 align-middle text-right'>";
-echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'>";
+echo "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->country).'.png')."' class='img-fluid' alt='$method->country'>";
 //echo "<div class='btn-group-vertical' role='group'><a class='btn btn-light text-primary' href='#' role='button'><i class='fas fa-edit fa-fw'></i></a>
-//<button name='delete_source' value='".$src->id."' class='btn btn-light text-danger' type='submit'><i class='fas fa-trash fa-fw'></i></button></div>";
+//<button name='delete_source' value='".$method->id."' class='btn btn-light text-danger' type='submit'><i class='fas fa-trash fa-fw'></i></button></div>";
 echo "</div></div></label></div></li>";
 } }
 
 //NEW CARD
-if ( count($counter) < 5 && $listsource->code_client != null && !empty($listsource->card) ) {      
+if ( count($counter) < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->card) ) {      
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='CdDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newcard' ";
-if ( empty($listsource->sources) ) { echo " checked"; }
+if ( empty($listpaymentmethods->sources) ) { echo " checked"; }
 echo "><label class='custom-control-label w-100' for='CdDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 echo "</label></div></li>";
@@ -423,7 +414,7 @@ echo '</form></li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($counter) < 5 && $listsource->code_client != null && !empty($listsource->sepa_direct_debit) ) {    
+if ( count($counter) < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->sepa_direct_debit) ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
@@ -463,7 +454,7 @@ echo '</label></div></li>';
 //alternative payment modes & offline
 if ( ! empty($object) ) {
 
-if ( $listsource->PAYPAL != null && get_option('doliconnectbeta') == '1' && current_user_can( 'administrator' ) ) {
+if ( $listpaymentmethods->PAYPAL != null && get_option('doliconnectbeta') == '1' && current_user_can( 'administrator' ) ) {
 echo "<li id='PaypalForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_paypal' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PAYPAL' ";
 echo " ><label class='custom-control-label w-100' for='src_paypal'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
@@ -472,20 +463,20 @@ echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'
 echo '</div></div></label></div></li>';
 }
 
-if ( $listsource->RIB != null ) {
+if ( $listpaymentmethods->RIB != null ) {
 echo "<li id='VirForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_vir' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='VIR' ";
-if ( $listsource->sources == null && empty($listsource->card) ) { echo " checked"; }
+if ( $listpaymentmethods->sources == null && empty($listpaymentmethods->card) ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_vir'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-university fa-3x fa-fw" style="color:DarkGrey"></i></center>';
 echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Transfer', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
 echo '</div></div></label></div></li>';
 }
 
-if ( $listsource->CHQ != null ) {
+if ( $listpaymentmethods->CHQ != null ) {
 echo "<li id='ChqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='CHQ' ";
-if ( $listsource->sources == null && $listsource->card != 1 && $listsource->RIB == null ) { echo " checked"; }
+if ( $listpaymentmethods->sources == null && $listpaymentmethods->card != 1 && $listpaymentmethods->RIB == null ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_chq'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-money-check fa-3x fa-fw" style="color:Tan"></i></center>';
 echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Check', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'See your receipt', 'doliconnect-pro' )."</small>";
@@ -495,7 +486,7 @@ echo '</div></div></label></div></li>';
 if ( ! empty(dolikiosk()) ) {
 echo "<li id='LiqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_liq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='LIQ' ";
-if ( $listsource->sources == null && empty($listsource->card) && $listsource->CHQ == null && $listsource->RIB == null ) { echo " checked"; }
+if ( $listpaymentmethods->sources == null && empty($listpaymentmethods->card) && $listpaymentmethods->CHQ == null && $listpaymentmethods->RIB == null ) { echo " checked"; }
 echo " ><label class='custom-control-label w-100' for='src_liq'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 echo '<center><i class="fas fa-money-bill-alt fa-3x fa-fw" style="color:#85bb65"></i></center>';
 echo "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Cash', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'Go to reception desk', 'doliconnect-pro' )."</small>";
@@ -512,16 +503,16 @@ echo "</li>";
 
 echo "</ul><div class='card-body'>";
 
-if ( $listsource->paymentmethods == null ) { echo "<input type='hidden' name='defaultsource' value='nosavedsource'>"; }  
+if ( $listpaymentmethods->paymentmethods == null ) { echo "<input type='hidden' name='defaultsource' value='nosavedsource'>"; }  
 
 if ( empty($object) ) {
 echo "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
 echo "<button id='DiscountButton' style='display: none' class='btn btn-warning btn-block' type='submit' disabled><b>".__( 'Recharge', 'doliconnect-pro' )."</b></button>";
 echo "<button id='CardButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add a card', 'doliconnect-pro' )."</b></button>";
 echo "<button id='BankButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add an account', 'doliconnect-pro' )."</b></button>";
-if ( $listsource->code_client != null ) {
+if ( $listpaymentmethods->code_client != null ) {
 echo "<div id='DeleteButton' class='btn-group d-flex' role='group'><button id='defaultbtn' class='btn btn-warning w-100' type='submit'><b>".__( 'Favorite', 'doliconnect-pro' )."</b></button><button id='deletebtn' class='btn btn-danger w-100' type='submit'><b>".__( 'Delete', 'doliconnect-pro' )."</b></button></div>";
-} elseif ( $listsource->code_client == null && $listsource->CHQ == null && $listsource->RIB == null ) {
+} elseif ( $listpaymentmethods->code_client == null && $listpaymentmethods->CHQ == null && $listpaymentmethods->RIB == null ) {
 echo "<center>".__( 'No gateway', 'doliconnect-pro' )."</center>";
 }
 } else {
@@ -564,15 +555,15 @@ echo '<div id="payment-error" class="card text-white bg-danger" style="display: 
 echo doliloading('payment');  
 
 echo "<script>";
-if ( $listsource->code_account != null ) {
+if ( $listpaymentmethods->code_account != null ) {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>',{
-    stripeAccount: '<?php echo $listsource->code_account; ?>'
+var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>',{
+    stripeAccount: '<?php echo $listpaymentmethods->code_account; ?>'
     });
 <?php
 } else {
 ?>
-var stripe = Stripe('<?php echo $listsource->publishable_key; ?>');
+var stripe = Stripe('<?php echo $listpaymentmethods->publishable_key; ?>');
 <?php
 }
 ?> 
