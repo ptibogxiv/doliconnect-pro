@@ -1906,14 +1906,16 @@ echo "<script>";
 ?>
 
 var form = document.getElementById('loginmodal-form');
-form.addEventListener('submit', function(event) { 
-jQuery(window).scrollTop(0);
+form.addEventListener('submit', function(event) {
+
 jQuery('#CloseModalLogin').hide(); 
 jQuery('#FooterModalLogin').hide();
 jQuery('#BodyModalLogin').hide(); 
-jQuery('#doliloading-login-modal').show(); 
+jQuery('#doliloading-login-modal').show();
+jQuery(window).scrollTop(0); 
 console.log("submit");
 form.submit();
+
 });
 
 <?php
@@ -1929,7 +1931,6 @@ echo "</div></div><div class='form-group'>
 <input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro' )."' name='pwd' value ='' required>";
 echo "</div></div>";
 
-//if ( function_exists('dolikiosk') && empty(dolikiosk()) ) {
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
 } 
@@ -1937,22 +1938,11 @@ echo "<div><div class='float-left'><small>";
 if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register') == '1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
 echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'>".__( 'Create an account', 'doliconnect-pro' )."</a>";
 }
-//<input type='checkbox' class='custom-control-input' value='forever' id='remembermemodal' name='rememberme'>";
-//echo "<label class='custom-control-label' for='remembermemodal'> ".__( 'Remember me', 'doliconnect-pro' )."</label>";
+
 echo "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'>".__( 'Forgot password?', 'doliconnect-pro' )."</a></small></div></div>"; 
 if (get_site_option('doliconnect_mode')=='one') {
 restore_current_blog();
 }
-//}
-
-//<small>";
-//if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register')=='1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) 
-//{echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'><i class='fas fa-user-plus'></i> ".__( 'Create an account', 'doliconnect-pro' )."</a> | ";
-//}
-//echo "<a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'><i class='fas fa-user-shield'></i> ".__( 'Forgot password?', 'doliconnect-pro' )."</a>";
-//echo " | ";
-//echo dolihelp('ISSUE');
-///echo "</small>
 
 echo "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
 echo doliloading('login-modal');
