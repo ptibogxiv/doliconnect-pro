@@ -61,6 +61,7 @@ echo "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
 }
 
 function paymentmethods_module( $url ) {
+global $current_user;
 
 if ( isset($_POST['default_paymentmethod']) ) {
 
