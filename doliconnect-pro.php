@@ -864,7 +864,6 @@ echo "</script>";
 }
 
 function dolimembership($current_user, $statut, $type, $delay) {
-
 if ($statut=='1') {
 $statut='-1';
 $action='POST';
