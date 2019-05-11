@@ -1968,7 +1968,9 @@ en cours d'integration
 add_action( 'wp_footer', 'doliconnect_modal', 10, 1);
 // ********************************************************
 function socialconnect( $url ) {
- 
+$connect = null;
+
+if ( isset($_GET["provider"]) && $_GET["provider"] != null ) {  
 include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/autoload.php');
 include( plugin_dir_path( __DIR__ ) . 'doliconnect-pro/lib/hybridauth/src/config.php');
 
@@ -1984,7 +1986,7 @@ $connect .= "<a href='".doliconnecturl('doliaccount')."?provider=".$name."' oncl
 if (!empty($hybridauth->getProviders())) {
 $connect .= '<div><div style="display:inline-block;width:46%;float:left"><hr width="90%" /></div><div style="display:inline-block;width: 8%;text-align: center;vertical-align:90%"><small class="text-muted">'.__( 'or', 'doliconnect-pro' ).'</small></div><div style="display:inline-block;width:46%;float:right" ><hr width="90%"/></div></div>';
 }
-
+}
 return $connect;
 }
 // ********************************************************
