@@ -1711,7 +1711,9 @@ echo "</div></small>";
 }}
 add_shortcode('dolicart', 'dolicart_shortcode');
 // ********************************************************
-function dolishop_shortcode($atts) {
+function dolishop_display($content) {
+
+if ( doliconnectid('dolishop') == get_the_ID() ) {
 global $wpdb;
 
 doliconnect_enqueues();
@@ -1766,8 +1768,13 @@ $boutik.= "</tbody></table>";
 }
 }
 return $boutik;
+} else {
+return $content;
 }
-add_shortcode('dolishop', 'dolishop_shortcode');
+
+}
+
+add_filter( 'the_content', 'dolishop_display', 10, 1);
 
 }
 add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
