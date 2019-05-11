@@ -405,7 +405,7 @@ echo "</div></div></label></div></li>";
 } }
 
 //NEW CARD
-if ( count($counter) < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->card) ) {      
+if ( $i < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->card) ) {      
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='CdDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newcard' ";
 if ( empty($listpaymentmethods->sources) ) { echo " checked"; }
@@ -422,7 +422,7 @@ echo '</form></li>';
 }
 
 //NEW SEPA DIRECT DEBIT
-if ( count($counter) < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->sepa_direct_debit) ) {    
+if ( $i < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->sepa_direct_debit) ) {    
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
 //if ($listsource["sources"]==null) {echo " checked";}
