@@ -1167,11 +1167,14 @@ return $updateline;
 }
 
 function doliminicart($object) {
+global $current_user;
+
 $remise=0;
 $subprice=0;
 $qty=0;
 
 if ( $object->lines != null ) {
+$list = null;
 foreach ($object->lines as $line) {
 //$product = callDoliApi("GET", "/products/".$post->product_id, null, 0);
 $list .= "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
@@ -1191,7 +1194,7 @@ if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) {
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 echo "<li class='list-group-item d-flex justify-content-between bg-light'>
 <div class='text-success'><h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
-<small>-".number_format(100*doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)/doliprice($subprice, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null))." %</small>
+<small>-".number_format(100*$remise/$subprice, 0)." %</small>
 </div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 //$total=$subtotal-$remise_percent;            
@@ -1499,7 +1502,7 @@ echo "</div></div>";
 
 } elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->socid == doliconnector($current_user, 'fk_soc')) {
 
-if ( isset($_GET['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
+if ( isset($_GET['info']) && isset($_POST['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 $thirdparty=$_POST['thirdparty'][''.doliconnector($current_user, 'fk_soc').''];
 $ID = $current_user->ID;
 if ( $thirdparty['morphy'] == 'phy' ) {
@@ -1910,7 +1913,7 @@ jQuery('#FooterModalLogin').hide();
 jQuery('#BodyModalLogin').hide(); 
 jQuery('#doliloading-login-modal').show(); 
 console.log("submit");
-formmodallogin.submit();
+form.submit();
 });
 
 <?php
