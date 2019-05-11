@@ -1471,7 +1471,7 @@ echo "<table width='100%' style='border: none'><tr style='border: none'><td widt
 echo "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 doliminicart($object);
 echo "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
-if ( !isset($object->resteapayer) ) {" <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+if ( !isset($object->resteapayer) ) { echo " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 echo "</div><div class='card-body'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
