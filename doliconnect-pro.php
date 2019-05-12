@@ -1076,7 +1076,7 @@ echo "</div><div id='subscription-footer' class='modal-footer border-0'><small c
 function addtodolibasket($product, $quantity = null, $price = null, $url = null, $timestart = null, $timeend = null) {
 global $current_user;
 
-if (!is_null($timestart) && $timeend > 0 ) {
+if (!is_null($timestart) && $timestart > 0 ) {
 $date_start=strftime('%Y-%m-%d 00:00:00', $timestart);
 } else {
 $date_start=null;
