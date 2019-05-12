@@ -1861,12 +1861,10 @@ return $content;
 
 add_filter( 'the_content', 'doliconnect_restrict_display', 10, 1);
 
-function doliconnect_modal($arg) {
-global $wpdb, $current_user;
-$entity = get_current_blog_id();
+function doliconnect_modal() {
+global $current_user;
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
-// modal for login
 if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
 
 doliconnect_enqueues();
@@ -1887,7 +1885,7 @@ echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'dolic
 echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
 }
 
-echo "</div><div class='modal-body'><div id='BodyModalLogin'>";
+echo "</div><div class='modal-body'><div id='loginmodal-form'>";
 echo "<b>".get_option('doliaccountinfo')."</b>";
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
@@ -1911,16 +1909,14 @@ echo "<script>";
 ?>
 
 var form = document.getElementById('loginmodal-form');
-form.addEventListener('submit', function(event) {
-
+form.addEventListener('submit', function(event) { 
+jQuery(window).scrollTop(0);
 jQuery('#CloseModalLogin').hide(); 
 jQuery('#FooterModalLogin').hide();
-jQuery('#BodyModalLogin').hide(); 
-jQuery('#doliloading-login-modal').show();
-jQuery(window).scrollTop(0); 
+jQuery('#loginmodal-form').hide(); 
+jQuery('#doliloading-login-modal').show(); 
 console.log("submit");
-form.submit();
-
+formmodallogin.submit();
 });
 
 <?php
@@ -1963,7 +1959,7 @@ echo "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-
 en cours d'integration
 </div></div></div></div>";}
 }
-add_action( 'wp_footer', 'doliconnect_modal', 10, 1);
+add_action( 'wp_footer', 'doliconnect_modal' );
 // ********************************************************
 function socialconnect( $url ) {
 $connect = null;
