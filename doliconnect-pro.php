@@ -2355,7 +2355,8 @@ $counter = new myCounter;
 
 //SAVED SOURCES
 if ( $listsource->paymentmethods != null ) {  
-foreach ( $listsource->paymentmethods as $src ) {                                                                                                                       
+foreach ( $listsource->paymentmethods as $src ) {
+if (strpos($src->id, 'pm') === false) {                                                                                                                       
 echo "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='$src->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$src->id' ";
 if ( date('Y/n') >= $src->expiration && !empty($object) && !empty($src->expiration) ) { echo " disabled "; }
@@ -2383,6 +2384,7 @@ echo '</h6>';
 echo "<small class='text-muted'>".$src->holder."</small></div>";
 echo "<div class='d-none d-sm-block col-2 align-middle text-right'><img src='".plugins_url('doliconnect/images/flag/'.strtolower($src->country).'.png')."' class='img-fluid' alt='$src->country'></div>";
 echo "</div></label></div></li>";
+}
 } }
 
 if ( count($counter) < 5 && $listsource->code_client!=null && $listsource->card == 1 ) {      
