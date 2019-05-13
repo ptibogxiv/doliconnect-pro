@@ -1705,7 +1705,7 @@ return $content;
 
 }
 
-add_filter( 'the_content', 'dolicart_display', 10, 1);
+add_filter( 'the_content', 'dolicart_display',  -1000);
 // ********************************************************
 function dolishop_display($content) {
 
@@ -1769,7 +1769,7 @@ return $content;
 
 }
 
-add_filter( 'the_content', 'dolishop_display', 10, 1);
+add_filter( 'the_content', 'dolishop_display', -1000);
 
 }
 add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
