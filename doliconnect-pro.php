@@ -1538,22 +1538,11 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 print "<div class='row' id='informations-form'><div class='col-12 col-md-4 d-none d-sm-none d-md-block'>";
 doliminicart($object);
 print "</div><div class='col-12 col-md-8'>";
-print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' method='post'>";
-print "<script>";
-?> 
+print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
 
-var form = document.getElementById('informations-form');
-form.addEventListener('submit', function(event) {
+print doliloaderscript('doliconnect-infoscartform');
 
-jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0);    
-console.log("submit");
-form.submit();
-
-});
-
-<?php
-print "</SCRIPT><div class='card'>"; 
+print "<div class='card'>"; 
 
 print doliconnectuserform(callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
 
