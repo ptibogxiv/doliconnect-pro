@@ -164,7 +164,7 @@ print "</ul></div></form>";
 
 if ( $i < 5 && is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
-print "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true'>
+print "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button id='CloseAddPaymentMethod' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'><div id='BodyAddPaymentMethod'>"; 
@@ -1854,22 +1854,7 @@ $redirect_to=get_permalink();
 
 print "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
 
-print "<script>";
-?>
-
-var form = document.getElementById('loginmodal-form');
-form.addEventListener('submit', function(event) { 
-jQuery(window).scrollTop(0);
-jQuery('#Closeloginmodal-form').hide(); 
-jQuery('#Footerloginmodal-form').hide();
-jQuery('#loginmodal-form').hide(); 
-jQuery('#doliloading-loginmodal-form').show(); 
-console.log("submit");
-formmodallogin.submit();
-});
-
-<?php
-print "</script>";
+print dolimodalloaderscript('loginmodal-form');
 
 print "<div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
