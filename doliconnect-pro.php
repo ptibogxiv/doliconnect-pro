@@ -1641,23 +1641,9 @@ if ( doliconnector($current_user, 'fk_order')>0 && $object->lines != null ) {  /
 //print "<div id='timer' class='text-center'><small>".sprintf( esc_html__('Your basket #%s is reserved for', 'doliconnect-pro'), doliconnector($current_user, 'fk_order'))." <span class='duration'></span></small></div>";
 }
 
-print "<form role='form' action='".doliconnecturl('dolicart')."' id='cart-form' method='post'>";
+print "<form role='form' action='".doliconnecturl('dolicart')."' id='doliconnect-basecartform' method='post'>";
 
-print "<script>";
-?> 
-
-var form = document.getElementById('cart-form');
-form.addEventListener('submit', function(event) {
-
-jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0); 
-console.log("submit");
-form.submit();
-
-});
-
-<?php
-print '</script>';
+print doliloaderscript('doliconnect-basecartform');
 
 print "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-group-flush'>";
 
