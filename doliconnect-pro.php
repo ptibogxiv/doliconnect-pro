@@ -1880,9 +1880,12 @@ restore_current_blog();
 }
 
 print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
-print doliloading('loginmodal-form');
+
+print "</div>".doliloading('loginmodal-form');
+
 print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
-print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
+print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div>
+</div></div></div>";}
 
 // modal for CGU
 if (get_option('dolicgvcgu')){
