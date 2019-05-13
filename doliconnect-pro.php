@@ -1809,7 +1809,7 @@ if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_us
 
 doliconnect_enqueues();
 
-echo "<script>";
+print "<script>";
 ?>
 function DoliconnectShowPrivacyDiv() {
 jQuery('#DoliconnectPrivacyModal').modal('show');
@@ -1817,15 +1817,15 @@ jQuery('#DoliconnectPrivacyModal').modal('show');
 
 window.onload=DoliconnectShowPrivacyDiv;
 <?php
-echo "</SCRIPT>";
+print "</SCRIPT>";
 
-echo '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
+print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - V'.get_the_modified_date( $d, get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
-//echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-echo '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
-echo apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
-echo '</div>    
+//print '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+print '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
+print apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
+print '</div>    
       <div class="modal-footer">
         <button type="button" class="btn btn-success" >'.__( 'I approve', 'doliconnect-pro' ).'</button>
         <a href="'.wp_logout_url( get_permalink() ).'" type="button" class="btn btn-danger">'.__( 'I refuse', 'doliconnect-pro' ).'</a>
@@ -1836,7 +1836,7 @@ echo '</div>
 }
 
 if ( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) )) {
-echo "<script>";
+print "<script>";
 ?>
 function DoliconnectShowLoginDiv() {
 jQuery('#DoliconnectLogin').modal('show');
@@ -1844,7 +1844,7 @@ jQuery('#DoliconnectLogin').modal('show');
 
 window.onload=DoliconnectShowLoginDiv;
 <?php
-echo "</SCRIPT>";
+print "</SCRIPT>";
 }
 
 }
@@ -1869,27 +1869,27 @@ if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
 
 doliconnect_enqueues();
 
-echo "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
+print "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
 if ( ! empty(get_option('doliconnectrestrict')) ) {
 if ( !empty( get_background_color() )) {
-echo " style='background-color:#".get_background_color()."' ";
+print " style='background-color:#".get_background_color()."' ";
 } else {
-echo " style='background-color:#cccccc' ";
+print " style='background-color:#cccccc' ";
 }
 }
-echo "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
+print "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
 if ( empty(get_option('doliconnectrestrict')) ) {
-echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
 } else {
-echo "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
+print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
 }
 
-echo "</div><div class='modal-body'><div id='loginmodal-form'>";
-echo "<b>".get_option('doliaccountinfo')."</b>";
+print "</div><div class='modal-body'><div id='loginmodal-form'>";
+print "<b>".get_option('doliaccountinfo')."</b>";
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
-echo socialconnect ( get_permalink() );
+print socialconnect ( get_permalink() );
 }
 
 if ( function_exists('secupress_get_module_option') && secupress_get_module_option('move-login_slug-login', $slug, 'users-login' )) {
@@ -1903,9 +1903,9 @@ $redirect_to=doliconnecturl('doliaccount');
 $redirect_to=get_permalink();
 }
 
-echo "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
+print "<form name='loginmodal-form' action='$login_url' method='post' class='was-validated'>";
 
-echo "<script>";
+print "<script>";
 ?>
 
 var form = document.getElementById('loginmodal-form');
@@ -1920,39 +1920,39 @@ formmodallogin.submit();
 });
 
 <?php
-echo "</script>";
+print "</script>";
 
-echo "<div class='form-group'>
+print "<div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
 <input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro' )."' name='log' value='' required>";
-echo "</div></div><div class='form-group'>
+print "</div></div><div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
 <input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro' )."' name='pwd' value ='' required>";
-echo "</div></div>";
+print "</div></div>";
 
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
 } 
-echo "<div><div class='float-left'><small>";
+print "<div><div class='float-left'><small>";
 if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register') == '1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
-echo "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'>".__( 'Create an account', 'doliconnect-pro' )."</a>";
+print "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro' )."'>".__( 'Create an account', 'doliconnect-pro' )."</a>";
 }
 
-echo "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'>".__( 'Forgot password?', 'doliconnect-pro' )."</a></small></div></div>"; 
+print "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro' )."'>".__( 'Forgot password?', 'doliconnect-pro' )."</a></small></div></div>"; 
 if (get_site_option('doliconnect_mode')=='one') {
 restore_current_blog();
 }
 
-echo "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
-echo doliloading('login-modal');
-echo "</div><div id='FooterModalLogin' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
-echo "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
+print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
+print doliloading('login-modal');
+print "</div><div id='FooterModalLogin' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
+print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
 
 // modal for CGU
 if (get_option('dolicgvcgu')){
-echo "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content'><div class='modal-header'>
+print "<div class='modal fade' id='cgvumention' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content'><div class='modal-header'>
 <h5 class='modal-title' id='exampleModalLongTitle'>Conditions Generales d'Utilisation</h5>
 <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>
 <div class='modal-body'>
@@ -2550,12 +2550,12 @@ $currency=$orderfo->multicurrency_code;
 if ( $product->type == '1' && !is_null($product->duration_unit) && '0' < ($product->duration_value)) {$duration =__( 'for', 'doliconnect-pro' ).' '.$product->duration_value.' ';
 if ( $product->duration_value > 1 ) {
 if ( $product->duration_unit == 'y' ) { $duration .=__( 'years', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == 'm' )  {$duration .=__( 'months', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == 'd' )  {$duration .=__( 'days', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == 'h' )  {$duration .=__( 'hours', 'doliconnect-pro' ); }
-elseif ( $product->duration_unit == 'i' )  {$duration .=__( 'minutes', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'm' )  { $duration .=__( 'months', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'd' )  { $duration .=__( 'days', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'h' )  { $duration .=__( 'hours', 'doliconnect-pro' ); }
+elseif ( $product->duration_unit == 'i' )  { $duration .=__( 'minutes', 'doliconnect-pro' ); }
 } else {
-if ( $product->duration_unit == 'y' ) {$duration .=__( 'year', 'doliconnect-pro' );}
+if ( $product->duration_unit == 'y' ) { $duration .=__( 'year', 'doliconnect-pro' );}
 elseif ( $product->duration_unit == 'm' )  { $duration .=__( 'month', 'doliconnect-pro' ); }
 elseif ( $product->duration_unit == 'd' )  { $duration .=__( 'day', 'doliconnect-pro' ); }
 elseif ( $product->duration_unit == 'h' )  { $duration .=__( 'hour', 'doliconnect-pro' ); }
