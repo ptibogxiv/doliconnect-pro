@@ -1766,7 +1766,7 @@ jQuery('#DoliconnectPrivacyModal').modal('show');
 
 window.onload=DoliconnectShowPrivacyDiv;
 <?php
-print "</SCRIPT>";
+print "</script>";
 
 print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
@@ -1793,7 +1793,7 @@ jQuery('#DoliconnectLogin').modal('show');
 
 window.onload=DoliconnectShowLoginDiv;
 <?php
-print "</SCRIPT>";
+print "</script>";
 }
 
 }
@@ -1829,7 +1829,7 @@ print " style='background-color:#cccccc' ";
 print "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
 if ( empty(get_option('doliconnectrestrict')) ) {
-print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='CloseModalLogin' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
+print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro' )."</h5><button id='Closeloginmodal-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>";
 } else {
 print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro' )."</h5>";
 }
@@ -1860,10 +1860,10 @@ print "<script>";
 var form = document.getElementById('loginmodal-form');
 form.addEventListener('submit', function(event) { 
 jQuery(window).scrollTop(0);
-jQuery('#CloseModalLogin').hide(); 
-jQuery('#FooterModalLogin').hide();
+jQuery('#Closeloginmodal-form').hide(); 
+jQuery('#Footerloginmodal-form').hide();
 jQuery('#loginmodal-form').hide(); 
-jQuery('#doliloading-login-modal').show(); 
+jQuery('#doliloading-loginmodal-form').show(); 
 console.log("submit");
 formmodallogin.submit();
 });
@@ -1895,8 +1895,8 @@ restore_current_blog();
 }
 
 print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
-print doliloading('login-modal');
-print "</div><div id='FooterModalLogin' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
+print doliloading('loginmodal-form');
+print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
 print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div></div></div></div>";}
 
 // modal for CGU
