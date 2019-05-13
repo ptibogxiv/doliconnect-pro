@@ -1193,8 +1193,10 @@ print "<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? 
 }
 print "</ul></div><br>";
 }
+// ********************************************************
+function dolicart_display($content) {
 
-function dolicart_shortcode() {
+if ( doliconnectid('dolicart') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) )  {
 global $wpdb, $current_user;
 
 doliconnect_enqueues();
@@ -1696,14 +1698,7 @@ print dolihelp('COM');
 print "</div></small>";
 
 }
-}}
-add_shortcode('dolicart', 'dolicart_shortcode');
-// ********************************************************
-function dolicart_display($content) {
-
-if ( doliconnectid('dolicart') == get_the_ID() && (get_option('doliconnectbeta') =='1' && current_user_can( 'administrator' )) ) {
-
-return $content;
+}
 } else {
 return $content;
 }
@@ -1714,7 +1709,7 @@ add_filter( 'the_content', 'dolicart_display', 10, 1);
 // ********************************************************
 function dolishop_display($content) {
 
-if ( doliconnectid('dolishop') == get_the_ID() ) {
+if ( doliconnectid('dolishop') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) ) {
 global $wpdb;
 
 doliconnect_enqueues();
