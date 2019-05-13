@@ -103,28 +103,7 @@ if ( isset($msg) ) { print $msg; }
 
 print "<script src='https://js.stripe.com/v3/'></script>";
 
-print "<script>";
-?>
-
-window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 5000);
-
-var form = document.getElementById('paymentmethods-form'); 
-
-form.addEventListener('submit', function(event) {
-
-jQuery('#DoliconnectLoadingModal').modal('show');
-jQuery(window).scrollTop(0);
-console.log("submit");
-form.submit();
-
-});
-
-<?php
-print "</script>";
+print doliloaderscript('paymentmethods-form');
 
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
