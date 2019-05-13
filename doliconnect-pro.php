@@ -1752,7 +1752,7 @@ add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
 // ********************************************************
 
 function doliconnect_privacy($arg) {
-global $wpdb,$current_user;
+global $wpdb, $current_user;
 
 if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
 
