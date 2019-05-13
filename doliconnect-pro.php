@@ -1881,7 +1881,7 @@ restore_current_blog();
 
 print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
 
-print "</div>".doliloading('loginmodal-form');
+print "".doliloading('loginmodal-form');
 
 print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
 print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div>
