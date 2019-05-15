@@ -37,7 +37,7 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
 
 load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-function doliconnectpro_run() {
+//function doliconnectpro_run() {
 
 add_action( 'user_doliconnect_menu', 'paymentmethods_menu', 4, 1);
 add_action( 'user_doliconnect_paymentmethods', 'paymentmethods_module');
@@ -1196,7 +1196,7 @@ print "</ul></div><br>";
 // ********************************************************
 function dolicart_display($content) {
 
-if ( doliconnectid('dolicart') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) )  {
+if ( is_page(doliconnectid('dolicart')) )  {
 global $wpdb, $current_user;
 
 doliconnect_enqueues();
@@ -1686,7 +1686,7 @@ add_filter( 'the_content', 'dolicart_display');
 
 function dolishop_display($content) {
 
-if ( doliconnectid('dolishop') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) ) {
+if ( is_page(doliconnectid('dolishop')) ) {
 global $wpdb;
 
 doliconnect_enqueues();
@@ -1707,7 +1707,8 @@ $resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&li
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
 print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
-}}}
+}}
+}
 
 $catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, dolidelay('constante'));
 
@@ -1750,8 +1751,8 @@ return $content;
 
 add_filter( 'the_content', 'dolishop_display');
 
-}
-add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
+//}
+//add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
 
 // ********************************************************
 
