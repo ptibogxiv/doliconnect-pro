@@ -1693,7 +1693,9 @@ $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null,
 //print $shop;
 
 if ( defined("DOLIBUG") ) {
+
 print dolibug();
+
 } else {
 if ( !isset($_GET['category']) ) {
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
