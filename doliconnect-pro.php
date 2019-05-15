@@ -1196,7 +1196,7 @@ print "</ul></div><br>";
 // ********************************************************
 function dolicart_display($content) {
 
-if ( is_page(doliconnectid('dolicart')) )  {
+if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolicart')) )  {
 global $wpdb, $current_user;
 
 doliconnect_enqueues();
@@ -1686,8 +1686,7 @@ add_filter( 'the_content', 'dolicart_display');
 
 function dolishop_display($content) {
 
-if ( is_page(doliconnectid('dolishop')) ) {
-global $wpdb;
+if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolishop')) ) {
 
 doliconnect_enqueues();
 
@@ -1762,9 +1761,9 @@ add_filter( 'the_content', 'dolishop_display');
 // ********************************************************
 
 function doliconnect_privacy($arg) {
-global $wpdb, $current_user;
+global $current_user;
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ($current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ( $current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
 
 doliconnect_enqueues();
 
