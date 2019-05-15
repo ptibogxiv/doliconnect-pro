@@ -1196,7 +1196,7 @@ print "</ul></div><br>";
 // ********************************************************
 function dolicart_display($content) {
 
-if ( doliconnectid('dolicart') > 0 && doliconnectid('dolicart') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) )  {
+if ( doliconnectid('dolicart') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) )  {
 global $wpdb, $current_user;
 
 doliconnect_enqueues();
@@ -1680,11 +1680,13 @@ return $content;
 
 }
 
-add_filter( 'the_content', 'dolicart_display', -1000);
+add_filter( 'the_content', 'dolicart_display');
+
 // ********************************************************
+
 function dolishop_display($content) {
 
-if ( doliconnectid('dolishop') > 0 && doliconnectid('dolishop') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) ) {
+if ( doliconnectid('dolishop') == get_the_ID() && !isset($_GET['action']) && !isset($_GET['edit']) ) {
 global $wpdb;
 
 doliconnect_enqueues();
@@ -1696,9 +1698,9 @@ if ( defined("DOLIBUG") ) {
 
 print dolibug();
 
-} else {
-if ( !isset($_GET['category']) ) {
+} else { 
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
+if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
 $resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
@@ -1713,8 +1715,8 @@ if ( !empty($catoption->value) && is_user_logged_in() ) {
 print "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
 }
 
-print "</ul></div>";
 } else {
+
 if ( isset($_GET['product']) ) {
 addtodolibasket(esc_attr($_GET['product']), esc_attr($_POST['product_update'][$_GET['product']]['qty']), esc_attr($_POST['product_update'][$_GET['product']]['price']));
 //print $_POST['product_update'][$_GET['product']][product];
@@ -1739,14 +1741,14 @@ exit;
 print "</tbody></table>";
 }
 }
-
+print "</ul></div>";
 } else {
 return $content;
 }
 
 }
 
-add_filter( 'the_content', 'dolishop_display', -1000);
+add_filter( 'the_content', 'dolishop_display');
 
 }
 add_action( 'plugins_loaded', 'doliconnectpro_run', 10, 0 );
