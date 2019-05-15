@@ -1196,7 +1196,7 @@ print "</ul></div><br>";
 // ********************************************************
 function dolicart_display($content) {
 
-if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolicart')) )  {
+if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolicart')) && !empty(doliconnectid('dolicart')) )  {
 global $wpdb, $current_user;
 
 doliconnect_enqueues();
@@ -1689,7 +1689,7 @@ add_filter( 'the_content', 'dolicart_display');
 
 function dolishop_display($content) {
 
-if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolishop')) ) {
+if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolishop')) && !empty(doliconnectid('dolishop')) ) {
 
 doliconnect_enqueues();
 
