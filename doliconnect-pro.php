@@ -178,42 +178,29 @@ print "</div><div id='FooterAddPaymentMethod' class='modal-footer'><button name=
 print "</div></div></div></div>";
 
 print "<script>";
-?>
-//function HideAddButtonPaymentMethod() {
-//document.getElementById("ButtonAddPaymentMethod").disabled = true;
-//}
-
-//window.onload=HideAddButtonPaymentMethod;
-<?php
 if ( $listpaymentmethods->code_account != null ) {
-?>
-var stripe = Stripe('<?php print $listpaymentmethods->publishable_key; ?>',{
-    stripeAccount: '<?php print $listpaymentmethods->code_account; ?>'
-    });
-<?php
+print 'var stripe = Stripe("'.print $listpaymentmethods->publishable_key.'",{
+    stripeAccount: "'.$listpaymentmethods->code_account.'"
+    });';
 } else {
-?>
-var stripe = Stripe('<?php print $listpaymentmethods->publishable_key; ?>');
-<?php
+print 'var stripe = Stripe("'.$listpaymentmethods->publishable_key.'");';
 }
-?>
-
-var style = {
+print 'var style = {
   base: {
-    color: '#32325d',
-    lineHeight: '18px',
-    fontSmoothing: 'antialiased',
-    fontSize: '16px',
-    '::placeholder': {
-      color: '#aab7c4'
+    color: "#32325d",
+    lineHeight: "18px",
+    fontSmoothing: "antialiased",
+    fontSize: "16px",
+    "::placeholder": {
+      color: "#aab7c4"
     }
   },
   invalid: {
-    color: '#fa755a',
-    iconColor: '#fa755a'
+    color: "#fa755a",
+    iconColor: "#fa755a"
   }
-}; 
-
+};'; 
+?>
 // Create an instance of Elements
 var elements = stripe.elements();
 var cardElement = elements.create('card', {style: style});
