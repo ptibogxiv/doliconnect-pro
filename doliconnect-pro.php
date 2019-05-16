@@ -1153,31 +1153,32 @@ $list .= "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->
 }
 }
 
-print "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $qty, 'doliconnect-pro' ), $qty);
-if (!isset($object->resteapayer)) { print " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
-print "</div><ul class='list-group list-group-flush'>";
-print $list;
+$cart = "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $qty, 'doliconnect-pro' ), $qty);
+if ( !isset($object->resteapayer) ) { $cart .= " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+$cart .= "</div><ul class='list-group list-group-flush'>";
+$cart .= $list;
 
 if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) { 
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
-print "<li class='list-group-item d-flex justify-content-between bg-light'>
+$cart .= "<li class='list-group-item d-flex justify-content-between bg-light'>
 <div class='text-success'><h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
 <small>-".number_format(100*$remise/$subprice, 0)." %</small>
 </div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 //$total=$subtotal-$remise_percent;            
-print "<li class='list-group-item d-flex justify-content-between'>";
+$cart .= "<li class='list-group-item d-flex justify-content-between'>";
 if ( isset($object->resteapayer) ) { 
-print "<span>".__( 'Already paid', 'doliconnect-pro' )."</span>";
-print "<strong>".doliprice($object->total_ttc-$object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
-print "<li class='list-group-item d-flex justify-content-between'>";
-print "<span>".__( 'Remains to be paid', 'doliconnect-pro' )."</span>";
-print "<strong>".doliprice($object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+$cart .= "<span>".__( 'Already paid', 'doliconnect-pro' )."</span>";
+$cart .= "<strong>".doliprice($object->total_ttc-$object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+$cart .= "<li class='list-group-item d-flex justify-content-between'>";
+$cart .= "<span>".__( 'Remains to be paid', 'doliconnect-pro' )."</span>";
+$cart .= "<strong>".doliprice($object->resteapayer, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
 } else {
-print "<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>";
-print "<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+$cart .= "<span>".__( 'Total to pay', 'doliconnect-pro' )."</span>";
+$cart .= "<strong>".doliprice($object, 'ttc', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
 }
-print "</ul></div><br>";
+$cart .= "</ul></div><br>";
+return $cart;
 }
 // ********************************************************
 function dolicart_display($content) {
@@ -1439,7 +1440,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td></tr></table><br>";
 
 print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
-doliminicart($object);
+print doliminicart($object);
 print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 print "</div><div class='card-body'>";
@@ -1522,7 +1523,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td></tr></table><br>";
 
 print "<div class='row' id='informations-form'><div class='col-12 col-md-4 d-none d-sm-none d-md-block'>";
-doliminicart($object);
+print doliminicart($object);
 print "</div><div class='col-12 col-md-8'>";
 print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
 
