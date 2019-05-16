@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.6.2
+ * Version: 3.6.3
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1603,24 +1603,19 @@ exit;
 
 if ( isset($object) ) {
 $timeout=$object->date_modification-current_time('timestamp',1)+1200;
-
-
-print "<script>";
-?>
-var tmp=<?php print ($timeout)*10; ?>;
- 
-var chrono=setInterval(function (){
-     min=Math.floor(tmp/600);
-     sec=Math.floor((tmp-min*600)/10);
-     dse=tmp-((min*60)+sec)*10;
-     tmp--;
-     jQuery('#duration').text(min+'mn '+sec+'sec');
-},100);
-<?php
-print "</script>";
+//print "<script>";
+//var tmp=<?php print ($timeout)*10;
+// 
+//var chrono=setInterval(function (){
+//     min=Math.floor(tmp/600);
+//     sec=Math.floor((tmp-min*600)/10);
+//     dse=tmp-((min*60)+sec)*10;
+//     tmp--;
+//     jQuery('#duration').text(min+'mn '+sec+'sec');
+//},100);
+//print "</script>";
 //header('Refresh: 120; URL='.esc_url(get_permalink()).'');
 //header('Refresh: '.$timeout.'; URL='.esc_url(get_permalink()).'');
-
 //print date_i18n('d/m/Y H:i', $object[date_modification]);
 }
 
