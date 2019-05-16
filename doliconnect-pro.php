@@ -1471,8 +1471,8 @@ $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 
 
 $dolibarr = callDoliApi("GET", "/status", null, null);
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
-if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 && current_user_can( 'administrator' )) {
-dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
+if ( is_object($dolibarr)  && current_user_can( 'administrator' ) && defined("DOLICONNECT_DEMO") && ''.constant("DOLICONNECT_DEMO").'' == $current_user->ID ) { //&& version_compare($versiondoli[0], '10.0.0') >= 0
+print dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
 if ( isset($object->resteapayer) ) { 
