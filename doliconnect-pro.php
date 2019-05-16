@@ -200,50 +200,51 @@ print 'var style = {
     iconColor: "#fa755a"
   }
 };'; 
-?>
+
 // Create an instance of Elements
-var elements = stripe.elements();
-var cardElement = elements.create('card', {style: style});
-cardElement.mount('#card-element');
+print 'var elements = stripe.elements();';
+print 'var cardElement = elements.create("card", {style: style});';
+print 'cardElement.mount("#card-element");';
 
 // Handle real-time validation errors from the card Element.
-cardElement.addEventListener('change', function(event) {
-  var displayError = document.getElementById('card-errors');
+print 'cardElement.addEventListener("change", function(event) {
+  var displayError = document.getElementById("card-errors");
   if (event.error) {
-    console.log("Show event error (like 'Incorrect card number', ...)");
+    console.log("Show event error");
     displayError.textContent = event.error.message;
   } else {
     console.log("Reset error message");
-    displayError.textContent = '';
+    displayError.textContent = "";
   }
-});
+});';
 
 // Handle form submission
-var cardholderName = document.getElementById('cardholder-name');
-var cardButton = document.getElementById('buttontoaddcard');
-var form = document.getElementById('newpaymentmethod-form');
+print 'var cardholderName = document.getElementById("cardholder-name");';
+print 'var cardButton = document.getElementById("buttontoaddcard");';
+print 'var form = document.getElementById("newpaymentmethod-form");';
 
-cardButton.addEventListener('click', function(event) {
+// Actions
+print 'cardButton.addEventListener("click", function(event) {
 console.log("We click on buttontoaddcard");
 event.preventDefault();
-jQuery('#CloseAddPaymentMethod').hide();
-jQuery('#FooterAddPaymentMethod').hide();
-jQuery('#BodyAddPaymentMethod').hide();   
-jQuery('#doliloading-addnewpaymentmethod').show();
-        if (cardholderName.value == '')
+jQuery("#CloseAddPaymentMethod").hide();
+jQuery("#FooterAddPaymentMethod").hide();
+jQuery("#BodyAddPaymentMethod").hide();   
+jQuery("#doliloading-addnewpaymentmethod").show();
+        if (cardholderName.value == "")
         	{
-jQuery('#CloseAddPaymentMethod').show();
-jQuery('#FooterAddPaymentMethod').show();
-jQuery('#BodyAddPaymentMethod').show();   
-jQuery('#doliloading-addnewpaymentmethod').hide();         
+jQuery("#CloseAddPaymentMethod").show();
+jQuery("#FooterAddPaymentMethod").show();
+jQuery("#BodyAddPaymentMethod").show();   
+jQuery("#doliloading-addnewpaymentmethod").hide();         
 				console.log("Field Card holder is empty");
-				var displayError = document.getElementById('card-errors');
-				displayError.textContent = '<?php print __( 'Need an owner as on your card', 'doliconnect-pro' ); ?>';
+				var displayError = document.getElementById("card-errors");
+				displayError.textContent = "'.__( "Need an owner as on your card", "doliconnect-pro").'";
         	}
         else
         	{
         stripe.createPaymentMethod(
-  'card',
+  "card",
   cardElement, {
   billing_details: {
     name: cardholderName.value
@@ -253,24 +254,22 @@ jQuery('#doliloading-addnewpaymentmethod').hide();
   if (result.error) {
     // Show error in payment form
 				console.log("Error occured when adding card");
-				var displayError = document.getElementById('card-errors');
-				displayError.textContent = '<?php print __( "Oops, an error occurred while adding the card", 'doliconnect-pro' ); ?>';    
+				var displayError = document.getElementById("card-errors");
+				displayError.textContent = "'.__( "Oops, an error occurred while adding the card", "doliconnect-pro").'";    
   } else {
-	      var hiddenInput = document.createElement('input');
-	      hiddenInput.setAttribute('type', 'hidden');
-	      hiddenInput.setAttribute('name', 'add_paymentmethod');
-	      hiddenInput.setAttribute('value', result.paymentMethod.id);
+	      var hiddenInput = document.createElement("input");
+	      hiddenInput.setAttribute("type", "hidden");
+	      hiddenInput.setAttribute("name", "add_paymentmethod");
+	      hiddenInput.setAttribute("value", result.paymentMethod.id);
 	      form.appendChild(hiddenInput); 
 
 jQuery(window).scrollTop(0);
 console.log("submit");
-jQuery('#newpaymentmethod-form').submit();  
+jQuery("#newpaymentmethod-form").submit();  
   }
 });         
           }
-});
-
-<?php
+});';
 print "</script>";
 
 }
