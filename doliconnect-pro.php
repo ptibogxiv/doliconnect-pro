@@ -1715,7 +1715,7 @@ $resultatso = callDoliApi("GET", "/products?sortfield=t.label&sortorder=ASC&cate
 if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
 $content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td><td><b>$product->label</b> ";
-print doliproductstock($product);
+$content .= doliproductstock($product);
 $content .= "<br />$product->description</td><td width='300px'><center>";
 $content .= dolibuttontocart($product, esc_attr($_GET['category']), 1);
 $content .= "</center></td></tr>"; 
