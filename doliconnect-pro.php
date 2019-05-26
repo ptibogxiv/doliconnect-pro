@@ -1525,15 +1525,8 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 print "<div class='row' id='informations-form'><div class='col-12 col-md-4 d-none d-sm-none d-md-block'>";
 print doliminicart($object);
 print "</div><div class='col-12 col-md-8'>";
-print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
-
-print doliloaderscript('doliconnect-infoscartform');
-
-print "<div class='card'>";
-
+  
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))); 
- 
-print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
 
 print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog' aria-labelledby='updatethirdpartyTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-lg modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
@@ -1550,6 +1543,14 @@ print "</div>".doliloading('updatethirdparty-form');
 
 print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect' )."</b></button></form></div>
 </div></div></div>";
+
+print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
+
+print doliloaderscript('doliconnect-infoscartform');
+
+print "<div class='card'>";
+
+print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
 
 print "<ul class='list-group list-group-flush'>";
 
