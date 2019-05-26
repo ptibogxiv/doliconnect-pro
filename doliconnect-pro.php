@@ -107,7 +107,7 @@ print doliloaderscript('paymentmethods-form');
 
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
-$dolibarr = callDoliApi("GET", "/status", null, null);
+$dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 print '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource" ><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
@@ -1531,7 +1531,7 @@ print doliloaderscript('doliconnect-infoscartform');
 
 print "<div class='card'>";
 
-$dolibarr = callDoliApi("GET", "/status", null, null);
+$dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
