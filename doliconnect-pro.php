@@ -1530,7 +1530,7 @@ $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, '
 
 print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog' aria-labelledby='updatethirdpartyTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-lg modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
-<h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Update thirdparty', 'doliconnect' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+<h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Update thirdparty', 'doliconnect-pro' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'><div id='updatethirdparty-form'>";
 
 print "<form class='was-validated' role='form' action='".doliconnecturl('dolicart')."?info' name='updatethirdparty-form' method='post'>";
@@ -1541,7 +1541,7 @@ print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_
 
 print "</div>".doliloading('updatethirdparty-form');
 
-print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect' )."</b></button></form></div>
+print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect-pro' )."</b></button></form></div>
 </div></div></div>";
 
 print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
@@ -1555,7 +1555,7 @@ print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_
 print "<ul class='list-group list-group-flush'>";
 
 print "<li class='list-group-item'>";
-print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect' ).'</center></button></div>';
+print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</li>";
 
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
