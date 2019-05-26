@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.6.4
+ * Version: 3.6.5
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1529,9 +1529,19 @@ print "<form role='form' class='was-validated' action='".doliconnecturl('dolicar
 
 print doliloaderscript('doliconnect-infoscartform');
 
-print "<div class='card'>"; 
+print "<div class='card'>";
+
+$dolibarr = callDoliApi("GET", "/status", null, null);
+$versiondoli = explode("-", $dolibarr->success->dolibarr_version);
+if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+
+print "soon a new form";
+
+} else {
 
 print doliconnectuserform(callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
+
+}
 
 print "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
