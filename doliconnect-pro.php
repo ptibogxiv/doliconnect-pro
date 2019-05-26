@@ -1534,7 +1534,6 @@ print "<div class='card'>";
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))); 
  
 print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
-print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect' ).'</center></button></div>';
 
 print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog' aria-labelledby='updatethirdpartyTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-lg modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
@@ -1552,6 +1551,12 @@ print "</div>".doliloading('updatethirdparty-form');
 print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect' )."</b></button></form></div>
 </div></div></div>";
 
+print "<ul class='list-group list-group-flush'>";
+
+print "<li class='list-group-item'>";
+print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect' ).'</center></button></div>';
+print "</li>";
+
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
@@ -1560,11 +1565,11 @@ print "soon a new form";
 
 } else {
 
-print "<li class='list-group-item list-group-item-info'>Prochainement, vous pourrez choisir une adresse de livraison dans votre carnet d'adresse</li>";
+print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> Prochainement, vous pourrez choisir une adresse de livraison dans votre carnet d'adresse</li>";
 
 }
 
-print "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+print "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
 
 } else {
