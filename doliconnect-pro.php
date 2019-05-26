@@ -1531,6 +1531,26 @@ print doliloaderscript('doliconnect-infoscartform');
 
 print "<div class='card'>";
 
+$thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))); 
+ 
+print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
+
+print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog' aria-labelledby='updatethirdpartyTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
+<div class='modal-dialog modal-lg modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
+<h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Update thirdparty', 'doliconnect' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+</div><div class='modal-body'><div id='updatethirdparty-form'>";
+
+print "<form class='was-validated' role='form' action='$url' name='updatethirdparty-form' method='post'>";
+
+print dolimodalloaderscript('updatethirdparty-form');
+
+print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
+
+print "</div>".doliloading('updatethirdparty-form');
+
+print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect' )."</b></button></form></div>
+</div></div></div>";
+
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
@@ -1539,7 +1559,7 @@ print "soon a new form";
 
 } else {
 
-print doliconnectuserform(callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null))), dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
+print "<li class='list-group-item list-group-item-info'>Prochainement, vous pourrez choisir une adresse de livraison</li>";
 
 }
 
