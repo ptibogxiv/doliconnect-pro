@@ -1561,7 +1561,7 @@ $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
-print "soon a new form";
+print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></li>";
 
 } else {
 
