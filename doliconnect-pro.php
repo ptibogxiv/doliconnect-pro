@@ -1563,10 +1563,6 @@ if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
 print "<li class='list-group-item'>soon contact form</li>";
 
-} else {
-
-print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> Prochainement, vous pourrez choisir une adresse de livraison dans votre carnet d'adresse</li>";
-
 }
 
 print "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
