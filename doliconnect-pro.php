@@ -1530,7 +1530,7 @@ $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, '
 
 print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog' aria-labelledby='updatethirdpartyTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-lg modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
-<h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Update thirdparty', 'doliconnect-pro' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+<h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Billing address', 'doliconnect-pro' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'><div id='updatethirdparty-form'>";
 
 print "<form class='was-validated' role='form' action='".doliconnecturl('dolicart')."?info' name='updatethirdparty-form' method='post'>";
@@ -1554,7 +1554,10 @@ print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_
 
 print "<ul class='list-group list-group-flush'>";
 
-print "<li class='list-group-item'>";
+print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."<h6>";
+print $thirdparty->name."<br>";
+print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
+print $thirdparty->email." - ".$thirdparty->phone;
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</li>";
 
