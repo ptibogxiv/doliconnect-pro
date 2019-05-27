@@ -1475,7 +1475,8 @@ print "</div></div>";
 
 } elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->socid == doliconnector($current_user, 'fk_soc')) {
 
-if ( isset($_GET['info']) && isset($_POST['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
+if ( isset($_GET['info']) && !isset($_GET['pay']) && !isset($_GET['validation']) && isset($_POST['update_thirdparty']) && $_POST['update_thirdparty'] == 'validation' ) {
+
 $thirdparty=$_POST['thirdparty'][''.doliconnector($current_user, 'fk_soc').''];
 $ID = $current_user->ID;
 if ( $thirdparty['morphy'] == 'phy' ) {
@@ -1494,14 +1495,17 @@ if ( $thirdparty['morphy'] == 'mor' ) { update_user_meta( $ID, 'billing_company'
 update_user_meta( $ID, 'billing_birth', $thirdparty['birth']);
 
 do_action('wp_dolibarr_sync', $thirdparty);
-
-// UPDATE INFO USER
+                                   
+} elseif ( isset($_GET['info']) && isset($_POST['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 
 wp_redirect(esc_url(get_permalink().'?pay'));
-exit;                                   
+exit;
+                                   
 } elseif ( !$object->id > 0 && $object->lines == null ) {
+
 wp_redirect(esc_url(get_permalink()));
 exit;
+
 }
 //header('Refresh: 300; URL='.esc_url(get_permalink()).'');
 $ID = $current_user->ID;
@@ -1541,35 +1545,33 @@ print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_
 
 print "</div>".doliloading('updatethirdparty-form');
 
-print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='update' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect-pro' )."</b></button></form></div>
+print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='validation' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect-pro' )."</b></button></form></div>
 </div></div></div>";
 
 print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
 
 print doliloaderscript('doliconnect-infoscartform');
 
-print "<div class='card'>";
-
-print doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
-
-print "<ul class='list-group list-group-flush'>";
+print "<div class='card'><ul class='list-group list-group-flush'>";
 
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."<h6>";
 print $thirdparty->name."<br>";
 print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
 print $thirdparty->email." - ".$thirdparty->phone;
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
-print "</li>";
+print "</li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."<h6>";
 
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
-print "<li class='list-group-item'>soon contact form</li>";
+print "soon contact form";
 
+} else {
+print "Prochainement, modifier votre adresse de livraison depuis votre carnet d'adresse";
 }
 
-print "</ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+print "</li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
 
 } else {
