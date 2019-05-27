@@ -1454,7 +1454,7 @@ print $current_user->user_email."<br>".$thirdparty->phone;
 print "</small></div></div><br>";
 
 if ( ! empty($object->note_public) ) {
-print "<div class='card'><div class='card-header'>".__( 'Your message', 'doliconnect-pro' );
+print "<div class='card'><div class='card-header'>".__( 'Message', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 print "</div><div class='card-body'><small class='text-muted'>";
 
@@ -1587,7 +1587,7 @@ print "soon contact form";
 } else {
 print "Prochainement, modifier votre adresse de livraison depuis votre carnet d'adresse";
 }
-print "</small></li><li class='list-group-item'><h6>".__( 'Your message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print "</small></li><li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print "<textarea class='form-control' id='note_public' name='note_public' rows='3'>".$object->note_public."</textarea>";
 print "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
