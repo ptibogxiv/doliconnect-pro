@@ -1441,9 +1441,9 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 
 print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 print doliminicart($object);
-print "<div class='card'><div class='card-header'>".__( 'Billing address', 'doliconnect-pro' );
+print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
-print "</div><div class='card-body'><small class='text-muted'>";
+print "</div><ul class='list-group list-group-flush'><li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
@@ -1451,19 +1451,15 @@ print $thirdparty->name."<br>";
 print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town.", ".strtoupper($thirdparty->country)."<br>";
 print $current_user->user_email."<br>".$thirdparty->phone;   
 
-print "</small></div></div><br>";
+print "</small></li>";
 
 if ( ! empty($object->note_public) ) {
-print "<div class='card'><div class='card-header'>".__( 'Message', 'doliconnect-pro' );
-if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
-print "</div><div class='card-body'><small class='text-muted'>";
-
+print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print $object->note_public;
-
-print "</small></div></div>";
+print "</small></li>";
 }
 
-print "</div><div class='col-12 col-md-8'>";
+print "</ul></div></div><div class='col-12 col-md-8'>";
 
 $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //print $listsource;
