@@ -1443,7 +1443,7 @@ print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block
 print doliminicart($object);
 print "<div class='card'><div class='card-header'>".__( 'Billing address', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
-print "</div><div class='card-body'>";
+print "</div><div class='card-body'><small class='text-muted'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
@@ -1451,7 +1451,7 @@ print $thirdparty->name."<br>";
 print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town.", ".strtoupper($thirdparty->country)."<br>";
 print $current_user->user_email."<br>".$thirdparty->phone;   
 
-print "</div></div></div><div class='col-12 col-md-8'>";
+print "</small></div></div></div><div class='col-12 col-md-8'>";
 
 $listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //print $listsource;
@@ -1557,7 +1557,7 @@ print "<div class='card'><ul class='list-group list-group-flush'>";
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."<h6>";
 print $thirdparty->name."<br>";
 print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
-print $thirdparty->email." - ".$thirdparty->phone;
+print $thirdparty->email."<br>".$thirdparty->phone;
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."<h6>";
 
