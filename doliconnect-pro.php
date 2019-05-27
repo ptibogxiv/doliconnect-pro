@@ -1441,7 +1441,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 
 print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 print doliminicart($object);
-print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
+print "<div class='card'><div class='card-header'>".__( 'Billing address', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 print "</div><div class='card-body'>";
 
