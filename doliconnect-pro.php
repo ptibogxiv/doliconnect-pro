@@ -1554,12 +1554,12 @@ print doliloaderscript('doliconnect-infoscartform');
 
 print "<div class='card'><ul class='list-group list-group-flush'>";
 
-print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6>";
+print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print $thirdparty->name."<br>";
 print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
 print $thirdparty->email."<br>".$thirdparty->phone;
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
-print "</li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6>";
+print "</small></li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
@@ -1570,9 +1570,9 @@ print "soon contact form";
 } else {
 print "Prochainement, modifier votre adresse de livraison depuis votre carnet d'adresse";
 }
-print "</li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6>";
+print "</small></li><li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
-print "</li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+print "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
 
 } else {
