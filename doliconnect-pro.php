@@ -1195,7 +1195,7 @@ $check_zone_info = true;
 if ( false !== strpos($tzstring,'Etc/GMT') )
 	$tzstring = '';
 
-if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
+if ( empty($tzstring) ) {
 	$check_zone_info = false;
 	if ( 0 == $current_offset )
 		$tzstring = 'UTC+0';
@@ -1204,8 +1204,6 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 	else
 		$tzstring = 'UTC+' . $current_offset;
 }
-//define( 'MY_TIMEZONE', (get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : date_default_timezone_get() ) );
-//date_default_timezone_set( MY_TIMEZONE );
 date_default_timezone_set($tzstring); 
 $time = current_time( 'timestamp', 1);
 
