@@ -1154,7 +1154,7 @@ $list .= "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->
 }
 
 $cart = "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $qty, 'doliconnect-pro' ), $qty);
-if ( !isset($object->resteapayer) ) { $cart .= " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+if ( !isset($object->resteapayer) && $object->statut == 0 ) { $cart .= " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 $cart .= "</div><ul class='list-group list-group-flush'>";
 $cart .= $list;
 
@@ -1442,7 +1442,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 print doliminicart($object);
 print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
-if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+if ( !isset($object->resteapayer) && $object->statut == 0 ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 print "</div><ul class='list-group list-group-flush'><li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
