@@ -1736,7 +1736,8 @@ $content .= dolibug();
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
-$resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$request = "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')";
+$resultatsc = callDoliApi("GET", $request, null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
@@ -1759,7 +1760,8 @@ wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnectu
 exit;
 }
 print "<table class='table' width='100%'>";
-$resultatso = callDoliApi("GET", "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)", null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$request = "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)";
+$resultatso = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //$content .= $resultatso;
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
@@ -1777,6 +1779,12 @@ $content .= "</tbody></table>";
 }
 }
 $content .= "</ul></div>";
+
+$content .= "<small><div class='float-left'>";
+$content .= dolirefresh($request, doliconnecturl('dolishop'), dolidelay('product'));
+$content .= "</div><div class='float-right'>";
+$content .= dolihelp('COM');
+$content .= "</div></small>";
 
 return $content;
 
