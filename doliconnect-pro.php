@@ -1154,7 +1154,7 @@ $list .= "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->
 }
 
 $cart = "<div class='card'><div class='card-header'>".__( 'Cart', 'doliconnect-pro' )." - ".sprintf( _n( '%s item', '%s items', $qty, 'doliconnect-pro' ), $qty);
-if ( !isset($object->resteapayer) && $object->statut == 0 ) { $cart .= " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+if ( !isset($object->resteapayer) ) { $cart .= " <small>(<a href='".doliconnecturl('dolicart')."' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 $cart .= "</div><ul class='list-group list-group-flush'>";
 $cart .= $list;
 
@@ -1195,7 +1195,7 @@ $check_zone_info = true;
 if ( false !== strpos($tzstring,'Etc/GMT') )
 	$tzstring = '';
 
-if ( empty($tzstring) ) {
+if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 	$check_zone_info = false;
 	if ( 0 == $current_offset )
 		$tzstring = 'UTC+0';
@@ -1204,6 +1204,8 @@ if ( empty($tzstring) ) {
 	else
 		$tzstring = 'UTC+' . $current_offset;
 }
+//define( 'MY_TIMEZONE', (get_option( 'timezone_string' ) ? get_option( 'timezone_string' ) : date_default_timezone_get() ) );
+//date_default_timezone_set( MY_TIMEZONE );
 date_default_timezone_set($tzstring); 
 $time = current_time( 'timestamp', 1);
 
@@ -1213,7 +1215,7 @@ if ( isset($_GET['module']) && ($_GET['module'] == 'orders' || $_GET['module'] =
 $request = "/".esc_attr($_GET['module'])."/".esc_attr($_GET['id'])."?contact_list=0";
 $module=esc_attr($_GET['module']);
 } else {
-$request = "/orders/".doliconnector($current_user, 'fk_order');
+$request = "/orders/".doliconnector($current_user, 'fk_order')."?contact_list=0";
 $module='orders';
 }
 
@@ -1237,7 +1239,7 @@ print "</div></div>";
 
 if ( isset($_GET['validation']) && isset($_GET['id']) & isset($_GET['ref']) ) {
 
-$object = callDoliApi("GET", "/".$module."/".$_GET['id'], null, dolidelay('cart', true));
+$object = callDoliApi("GET", "/".$module."/".$_GET['id']."?contact_list=0", null, dolidelay('cart', true));
 
 print "<table width='100%' style='border: none'><tr style='border: none'><td width='50px' style='border: none'><div class='fa-3x'>
 <i class='fas fa-shopping-bag fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
@@ -1269,7 +1271,7 @@ print "' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 
 if ( ( !isset($object->id) ) || (doliconnector($current_user, 'fk_soc') != $object->socid) ) {
 $return = esc_url(doliconnecturl('doliaccount'));
-$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect($return);
 exit;
@@ -1304,7 +1306,7 @@ print "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has 
 } else {
 print "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurred', 'doliconnect-pro' )."</p>";
 }
-print "<br /><a href='".doliconnecturl('doliaccount')."?module=".$_GET['module']."&id=".$_GET['id']."&ref=".$_GET['ref'];
+print "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
 print  "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div></div></div>";
 
 } elseif ( isset($_GET['pay']) && ((doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices' && $object->paye != 1) )) && $object->socid == doliconnector($current_user, 'fk_soc') ) {
@@ -1355,7 +1357,7 @@ if ( $object->id > 0 ) {
 $successurl = doliconnecturl('dolicart')."?validation&module=".$module."&id=".$object->id;
 $returnurl = doliconnecturl('doliaccount')."?module=".$module."&id=".$object->id;
 
-if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ) {
+if ( ($_POST['modepayment']!='7' && $_POST['modepayment']!='2' && $_POST['modepayment']!='4' && $_POST['modepayment']!='src_payplug' && $_POST['modepayment']!='src_paypal') && $source ){
 
 $warehouse = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_ID_WAREHOUSE", null, dolidelay('constante'));
 if (!isset($_GET['module'])) {
@@ -1394,16 +1396,16 @@ $vld = [
 	];
 $validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
 }
-$object = callDoliApi("GET", "/".$module."/".$object->id, null);
+$object = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null);
 
 $successurl2 = $successurl."&ref=".$object->ref;
 
-$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
+$order = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
 wp_redirect($successurl2);
 exit;
-
-} elseif ($_POST['modepayment'] == 'src_payplug')  {
+}
+elseif ($_POST['modepayment'] == 'src_payplug')  {
 
 } else {
 if ($object->id <=0 || $error || !$source) {
@@ -1440,7 +1442,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block'>";
 print doliminicart($object);
 print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
-if ( !isset($object->resteapayer) && $object->statut == 0 ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
+if ( !isset($object->resteapayer) ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
 print "</div><ul class='list-group list-group-flush'><li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
@@ -1548,7 +1550,7 @@ print "<div class='modal fade' id='updatethirdparty' tabindex='-1' role='dialog'
 <h5 class='modal-title' id='updatethirdpartyTitle'>".__( 'Billing address', 'doliconnect-pro' )."</h5><button id='Closeupdatethirdparty-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 </div><div class='modal-body'><div id='updatethirdparty-form'>";
 
-print "<form class='was-validated' role='form' action='".doliconnecturl('dolicart')."?info' name='updatethirdparty-form' method='post'>";
+print "<form class='was-validated' role='form' action='".doliconnecturl('dolicart')."?info' name='updatethirdparty-form' method='post'>"; 
 
 print dolimodalloaderscript('updatethirdparty-form');
 
@@ -1559,7 +1561,7 @@ print "</div>".doliloading('updatethirdparty-form');
 print "</div><div id='Footerupdatethirdparty-form' class='modal-footer'><button name='update_thirdparty' value='validation' class='btn btn-warning btn-block' type='submit'><b>".__( 'Update', 'doliconnect-pro' )."</b></button></form></div>
 </div></div></div>";
 
-print "<form role='form' class='was-validated' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>";
+print "<form role='form' action='".doliconnecturl('dolicart')."?info' id ='doliconnect-infoscartform' method='post'>"; //class='was-validated'
 
 print doliloaderscript('doliconnect-infoscartform');
 
@@ -1567,8 +1569,8 @@ print "<div class='card'><ul class='list-group list-group-flush'>";
 
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print $thirdparty->name."<br>";
-print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
-print $thirdparty->email."<br>".$thirdparty->phone;
+print $thirdparty->address." ".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
+print $thirdparty->email." ".$thirdparty->phone;
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</small></li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
@@ -1576,7 +1578,21 @@ $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
-print "soon contact form";
+print '<div class="custom-control custom-radio">
+<input type="radio" id="shipping0" name="shipping" class="custom-control-input" value="" checked>
+<label class="custom-control-label" for="shipping0">'.__( "Same address that billing", "doliconnect-pro").'</label>
+</div>';
+
+$listcontact = callDoliApi("GET", "/contacts?sortfield=t.rowid&sortorder=ASC&limit=100&thirdparty_ids=".doliconnector($current_user, 'fk_soc')."&includecount=1&sqlfilters=t.statut=1", null, dolidelay('contact', true));
+
+foreach ($listcontact as $contact) {
+print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="shipping" class="custom-control-input" value="'.$contact->id.'" ';
+if ( !empty($contact->default) ) { print "checked"; }
+print '><label class="custom-control-label" for="customRadio2">'.($contact->civility ? $contact->civility : $contact->civility_code)." ".$contact->firstname." ".$contact->lastname;
+if ( !empty($contact->poste) ) { print ", ".$contact->poste; }
+print "<br><small class='text-muted'>".$contact->address." ".$contact->zip." ".$contact->town." - ".$contact->country."<br>".$contact->email." ".$contact->phone_pro."</small>";
+print '</label></div>';
+}
 
 } else {
 print "Prochainement, modifier votre adresse de livraison depuis votre carnet d'adresse";
@@ -1736,8 +1752,7 @@ $content .= dolibug();
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
-$request = "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')";
-$resultatsc = callDoliApi("GET", $request, null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
@@ -1760,8 +1775,7 @@ wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnectu
 exit;
 }
 print "<table class='table' width='100%'>";
-$request = "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)";
-$resultatso = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+$resultatso = callDoliApi("GET", "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)", null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //$content .= $resultatso;
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
@@ -1779,12 +1793,6 @@ $content .= "</tbody></table>";
 }
 }
 $content .= "</ul></div>";
-
-$content .= "<small><div class='float-left'>";
-$content .= dolirefresh($request, doliconnecturl('dolishop'), dolidelay('product'));
-$content .= "</div><div class='float-right'>";
-$content .= dolihelp('COM');
-$content .= "</div></small>";
 
 return $content;
 
