@@ -1448,10 +1448,10 @@ print "</div><ul class='list-group list-group-flush'><li class='list-group-item'
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 print $thirdparty->name."<br>";
-print $thirdparty->address."<br>".$thirdparty->zip." ".$thirdparty->town.", ".strtoupper($thirdparty->country)."<br>";
-print $current_user->user_email."<br>".$thirdparty->phone;   
 
-print "</small></li>";
+print doliaddress($thirdparty);
+
+print "</li>";
 
 if ( ! empty($object->note_public) ) {
 print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
@@ -1569,8 +1569,7 @@ print "<div class='card'><ul class='list-group list-group-flush'>";
 
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print $thirdparty->name."<br>";
-print $thirdparty->address." ".$thirdparty->zip." ".$thirdparty->town." ".$thirdparty->country."<br>";
-print $thirdparty->email." ".$thirdparty->phone;
+print doliaddress($thirdparty);
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</small></li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
@@ -1585,12 +1584,11 @@ print '<div class="custom-control custom-radio">
 
 $listcontact = callDoliApi("GET", "/contacts?sortfield=t.rowid&sortorder=ASC&limit=100&thirdparty_ids=".doliconnector($current_user, 'fk_soc')."&includecount=1&sqlfilters=t.statut=1", null, dolidelay('contact', true));
 
-foreach ($listcontact as $contact) {
+foreach ( $listcontact as $contact ) {
 print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="shipping" class="custom-control-input" value="'.$contact->id.'" ';
 if ( !empty($contact->default) ) { print "checked"; }
-print '><label class="custom-control-label" for="customRadio2">'.($contact->civility ? $contact->civility : $contact->civility_code)." ".$contact->firstname." ".$contact->lastname;
-if ( !empty($contact->poste) ) { print ", ".$contact->poste; }
-print "<br><small class='text-muted'>".$contact->address." ".$contact->zip." ".$contact->town." - ".$contact->country."<br>".$contact->email." ".$contact->phone_pro."</small>";
+print '><label class="custom-control-label" for="customRadio2">';
+print doliaddress($contact);
 print '</label></div>';
 }
 
