@@ -1692,7 +1692,6 @@ print "</li>";
 
 print "</ul>";
 
-if ( !empty(get_option('dolishop')) ) {
 print "<div class='card-body'><div class='row'>";
 if ( get_option('dolishop') ) {
 print "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
@@ -1708,7 +1707,6 @@ print "<div class='col-12 col-md'><button type='submit' name='dolicart' value='v
 print "</div>";
  
 print "</form></div>";
-}
 
 print "</div>"; 
 
