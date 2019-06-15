@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.6.5
+ * Version: 3.6.6
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1692,6 +1692,7 @@ print "</li>";
 
 print "</ul>";
 
+if ( get_option('dolishop') || (!get_option('dolishop') && isset($object) && $object->lines != null) ) {
 print "<div class='card-body'><div class='row'>";
 if ( get_option('dolishop') ) {
 print "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro' )."</b></a></div>";
@@ -1704,11 +1705,10 @@ if ( $object->lines != null ) {
 print "<div class='col-12 col-md'><button type='submit' name='dolicart' value='validation' class='btn btn-warning w-100' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro' )."</b></button></div>";
 } 
 }
-print "</div>";
- 
-print "</form></div>";
+print "</div></div>";
+}
 
-print "</div>"; 
+print "</form></div>"; 
 
 print "<small><div class='float-left'>";
 print dolirefresh($request, doliconnecturl('dolicart'), dolidelay('cart'));
