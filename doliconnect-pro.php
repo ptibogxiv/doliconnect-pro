@@ -1456,7 +1456,20 @@ print $thirdparty->name."<br>";
 
 print doliaddress($thirdparty);
 
-print "</li>";
+print "</small></li>";
+
+if (!empty($object->contacts_ids) && is_array($object->contacts_ids)) {
+
+foreach ($object->contacts_ids as $contact) {
+if ('SHIPPING' == $contact->code) {
+print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print $contact->libelle."<br/>";
+print doliaddress($contact);
+print "</small></li>";
+}
+}
+
+}
 
 if ( ! empty($object->note_public) ) {
 print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
@@ -1518,7 +1531,7 @@ $order_shipping= callDoliApi("POST", "/".$module."/".$object->id."/contact/".$_P
 $data = [
     'note_public' => $_POST['note_public']
 	];
-$order= callDoliApi("PUT", $request, $data, dolidelay('order'));
+$order= callDoliApi("PUT", $request, $data, 0);
 
 wp_redirect(doliconnecturl('dolicart').'?pay');
 exit;
@@ -1593,9 +1606,19 @@ print '<div class="custom-control custom-radio">
 
 $listcontact = callDoliApi("GET", "/contacts?sortfield=t.rowid&sortorder=ASC&limit=100&thirdparty_ids=".doliconnector($current_user, 'fk_soc')."&includecount=1&sqlfilters=t.statut=1", null, dolidelay('contact', true));
 
+if (!empty($object->contacts_ids) && is_array($object->contacts_ids)) {
+
+foreach ($object->contacts_ids as $contact) {
+if ('SHIPPING' == $contact->code) {
+$contactshipping = $contact->id;
+}
+}
+
+}
+
 foreach ( $listcontact as $contact ) {
 print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="contact_shipping" class="custom-control-input" value="'.$contact->id.'" ';
-if ( !empty($contact->default) ) { print "checked"; }
+if ( !empty($contact->default) || $contactshipping == $contact->id ) { print "checked"; }
 print '><label class="custom-control-label" for="customRadio2">';
 print doliaddress($contact);
 print '</label></div>';
