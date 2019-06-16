@@ -1165,6 +1165,11 @@ $cart .= "<li class='list-group-item d-flex justify-content-between bg-light'>
 <small>-".number_format(100*$remise/$subprice, 0)." %</small>
 </div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
+
+$cart .= "<li class='list-group-item d-flex justify-content-between'>";
+$cart .= "<span>".__( 'Total VAT', 'doliconnect-pro' )."</span>";
+$cart .= "<strong>".doliprice($object, 'tva', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+
 //$total=$subtotal-$remise_percent;            
 $cart .= "<li class='list-group-item d-flex justify-content-between'>";
 if ( isset($object->resteapayer) ) { 
@@ -1506,17 +1511,21 @@ do_action('wp_dolibarr_sync', $thirdparty);
                                    
 } elseif ( isset($_GET['info']) && isset($_POST['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 
+if ($_POST['contact_shipping']) {
+$order_shipping= callDoliApi("POST", "/".$module."/".$object->id."/contact/".$_POST['contact_shipping']."/SHIPPING", null, dolidelay('order'));
+}
+
 $data = [
     'note_public' => $_POST['note_public']
 	];
 $order= callDoliApi("PUT", $request, $data, dolidelay('order'));
 
-wp_redirect(esc_url(get_permalink().'?pay'));
+wp_redirect(doliconnecturl('dolicart').'?pay');
 exit;
                                    
 } elseif ( !$object->id > 0 && $object->lines == null ) {
 
-wp_redirect(esc_url(get_permalink()));
+wp_redirect(doliconnecturl('dolicart'));
 exit;
 
 }
@@ -1578,14 +1587,14 @@ $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
 
 print '<div class="custom-control custom-radio">
-<input type="radio" id="shipping0" name="shipping" class="custom-control-input" value="" checked>
+<input type="radio" id="shipping0" name="contact_shipping" class="custom-control-input" value="" checked>
 <label class="custom-control-label" for="shipping0">'.__( "Same address that billing", "doliconnect-pro").'</label>
 </div>';
 
 $listcontact = callDoliApi("GET", "/contacts?sortfield=t.rowid&sortorder=ASC&limit=100&thirdparty_ids=".doliconnector($current_user, 'fk_soc')."&includecount=1&sqlfilters=t.statut=1", null, dolidelay('contact', true));
 
 foreach ( $listcontact as $contact ) {
-print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="shipping" class="custom-control-input" value="'.$contact->id.'" ';
+print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="contact_shipping" class="custom-control-input" value="'.$contact->id.'" ';
 if ( !empty($contact->default) ) { print "checked"; }
 print '><label class="custom-control-label" for="customRadio2">';
 print doliaddress($contact);
