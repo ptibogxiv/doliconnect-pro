@@ -1778,7 +1778,7 @@ if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolishop')) && !
 
 doliconnect_enqueues();
 
-$shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante'));
+$shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 //$content .= $shop;
 
 if ( defined("DOLIBUG") ) {
@@ -1807,7 +1807,7 @@ $content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doli
 }}
 }
 
-$catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, dolidelay('constante'));
+$catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !empty($catoption->value) && is_user_logged_in() ) {
 $content .= "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
