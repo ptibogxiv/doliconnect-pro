@@ -1817,12 +1817,23 @@ $resultatso = callDoliApi("GET", "/products?sortfield=t.label&sortorder=ASC&cate
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
-$content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td><td><b>".$product->label."</b> ";
+$content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td>";
+
+if ( function_exists('pll_the_languages') ) { 
+$lang = pll_current_language('locale');
+$content .= "<td><b>".($product->multilangs->$lang->label ? $product->multilangs->$lang->label : $product->label)."</b> ";
 $content .= doliproductstock($product);
-$content .= "<br />".$product->description."</td><td width='300px'><center>";
-$content .= dolibuttontocart($product, esc_attr($_GET['category']), 1);
+$content .= "<br />".($product->multilangs->$lang->description ? $product->multilangs->$lang->description : $product->description)."</td>";
+} else {
+$content .= "<td><b>".$product->label."</b> ";
+$content .= doliproductstock($product);
+$content .= "<br />".$product->description."</td>";
+}
+
+$content .= "<td width='300px'><center>".dolibuttontocart($product, esc_attr($_GET['category']), 1);
 $content .= "</center></td></tr>"; 
-}}else{
+}
+} else {
 wp_redirect(esc_url(get_permalink()));
 exit;
 }
