@@ -1789,11 +1789,21 @@ $content .= dolibug();
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
-$resultatsc = callDoliApi("GET", "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')", null, dolidelay('order', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+
+$request = "/categories?sortfield=t.rowid&sortorder=ASC&limit=100&type=product&sqlfilters=(t.fk_parent='".$shop->value."')";
+
+$resultatsc = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
+
+if ( function_exists('pll_the_languages') ) { 
+$lang = pll_current_language('locale');
+$content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".($categorie->multilangs->$lang->label ? $categorie->multilangs->$lang->label : $categorie->label)."<br />".($categorie->multilangs->$lang->description ? $categorie->multilangs->$lang->description : $categorie->description)."</a>"; 
+} else {
 $content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
+}
+
 }}
 }
 
@@ -1841,6 +1851,12 @@ $content .= "</tbody></table>";
 }
 }
 $content .= "</ul></div>";
+
+$content .= "<small><div class='float-left'>";
+$content .= dolirefresh($request, $url, dolidelay('product'));
+$content .= "</div><div class='float-right'>";
+$content .= dolihelp('COM');
+$content .= "</div></small>";
 
 return $content;
 
