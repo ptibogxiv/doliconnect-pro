@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
 "POT-Creation-Date: 2019-06-16 14:57+0200\n"
-"PO-Revision-Date: 2019-06-16 14:57+0200\n"
+"PO-Revision-Date: 2019-06-17 15:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -421,7 +421,7 @@ msgstr "Modifier"
 
 #: doliconnect-pro.php:1583
 msgid "Shipping address"
-msgstr "Adresse de livraison"
+msgstr "Adresse d’expédition"
 
 #: doliconnect-pro.php:1591
 msgid "Same address that billing"

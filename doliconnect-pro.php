@@ -1448,26 +1448,37 @@ print "<div class='row'><div class='col-12 col-md-4  d-none d-sm-none d-md-block
 print doliminicart($object);
 print "<div class='card'><div class='card-header'>".__( 'Contacts', 'doliconnect-pro' );
 if ( !isset($object->resteapayer) && $object->statut == 0 ) { print " <small>(<a href='".doliconnecturl('dolicart')."?info' >".__( 'update', 'doliconnect-pro' )."</a>)</small>"; }
-print "</div><ul class='list-group list-group-flush'><li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print "</div><ul class='list-group list-group-flush'>";
 
 $thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
-
-print $thirdparty->name."<br>";
-
-print doliaddress($thirdparty);
-
-print "</small></li>";
 
 if (!empty($object->contacts_ids) && is_array($object->contacts_ids)) {
 
 foreach ($object->contacts_ids as $contact) {
+if ('BILLING' == $contact->code) {
+print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print dolicontact($contact->id, $_GET["refresh"]);
+print "</small></li>";
+} else {
+print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print doliaddress($thirdparty, $_GET["refresh"]);
+print "</small></li>";
+}
 if ('SHIPPING' == $contact->code) {
 print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print dolicontact($contact->id, $_GET["refresh"]);
 print "</small></li>";
+} else {
+print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print doliaddress($thirdparty, $_GET["refresh"]);
+print "</small></li>";
 }
 }
 
+} else {
+print "<li class='list-group-item'><h6>".__( 'Billing and shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+print doliaddress($thirdparty, $_GET["refresh"]);
+print "</small></li>";
 }
 
 if ( ! empty($object->note_public) ) {
@@ -1589,7 +1600,6 @@ print doliloaderscript('doliconnect-infoscartform');
 print "<div class='card'><ul class='list-group list-group-flush'>";
 
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
-print $thirdparty->name."<br>";
 print doliaddress($thirdparty);
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</small></li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
