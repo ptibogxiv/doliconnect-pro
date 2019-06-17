@@ -1817,9 +1817,9 @@ $resultatso = callDoliApi("GET", "/products?sortfield=t.label&sortorder=ASC&cate
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
-$content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td><td><b>$product->label</b> ";
+$content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td><td><b>".$product->label."</b> ";
 $content .= doliproductstock($product);
-$content .= "<br />$product->description</td><td width='300px'><center>";
+$content .= "<br />".$product->description."</td><td width='300px'><center>";
 $content .= dolibuttontocart($product, esc_attr($_GET['category']), 1);
 $content .= "</center></td></tr>"; 
 }}else{
@@ -2620,7 +2620,7 @@ $price_ttc=$product->price_ttc;
 }
 //$button .=doliprice($price_ttc);
 
-if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 ) {
+if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 && doliconnectid('dolicart') > 0 ) {
 $button .="<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' >";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
@@ -2649,7 +2649,7 @@ $button .="</button></div></div>";
 if ( $qty > 0 ) {
 $button .="<br /><div class='input-group'><a class='btn btn-block btn-warning' href='".doliconnecturl('dolicart')."' role='button' title='".__( 'Go to cart', 'doliconnect-pro' )."'>".__( 'Go to cart', 'doliconnect-pro' )."</a></div>";
 }
-} elseif ( $add == 1 ) {
+} elseif ( $add == 1 && doliconnectid('dolicart') > 0 ) {
 $arr_params = array( 'redirect_to' => doliconnecturl('dolishop'));
 $loginurl = esc_url( add_query_arg( $arr_params, wp_login_url( )) );
 
