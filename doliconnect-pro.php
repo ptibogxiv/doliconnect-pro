@@ -1463,8 +1463,7 @@ if (!empty($object->contacts_ids) && is_array($object->contacts_ids)) {
 foreach ($object->contacts_ids as $contact) {
 if ('SHIPPING' == $contact->code) {
 print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
-print $contact->libelle."<br/>";
-print doliaddress($contact);
+print dolicontact($contact->id, $_GET["refresh"]);
 print "</small></li>";
 }
 }
@@ -1620,7 +1619,7 @@ foreach ( $listcontact as $contact ) {
 print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="contact_shipping" class="custom-control-input" value="'.$contact->id.'" ';
 if ( !empty($contact->default) || $contactshipping == $contact->id ) { print "checked"; }
 print '><label class="custom-control-label" for="customRadio2">';
-print doliaddress($contact);
+print dolicontact($contact->id, $_GET["refresh"]);
 print '</label></div>';
 }
 
