@@ -1599,14 +1599,22 @@ print doliloaderscript('doliconnect-infoscartform');
 
 print "<div class='card'><ul class='list-group list-group-flush'>";
 
-print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
-print doliaddress($thirdparty);
-print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
-print "</small></li><li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
-
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
+
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+print "<li class='list-group-item'><h6>".__( 'Billing and shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+} else {
+print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+}
+
+print doliaddress($thirdparty);
+print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
+print "</small></li>";
+
+if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+
+print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
 print '<div class="custom-control custom-radio">
 <input type="radio" id="shipping0" name="contact_shipping" class="custom-control-input" value="" checked>
@@ -1633,10 +1641,13 @@ print dolicontact($contact->id, $_GET["refresh"]);
 print '</label></div>';
 }
 
-} else {
-print "Prochainement, modifier votre adresse de livraison depuis votre carnet d'adresse";
+print "</small></li>";
+
+} elseif ( current_user_can( 'administrator' ) ) {
+print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".sprintf( esc_html__( "Add shipping contact needs Dolibarr %s but your version is %s", 'doliconnect-pro'), '10.0.0',$versiondoli[0])."</b></li>";
 }
-print "</small></li><li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
+
+print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print "<textarea class='form-control' id='note_public' name='note_public' rows='3' placeholder='".__( 'Enter a message here that you want to send us', 'doliconnect-pro' )."'>".$object->note_public."</textarea>";
 print "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 print "</div></div>";
