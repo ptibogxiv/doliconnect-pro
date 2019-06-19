@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.6.6
+ * Version: 3.6.7
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -2663,7 +2663,7 @@ $price_ttc=$product->price_ttc;
 
 if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 && doliconnectid('dolicart') > 0 ) {
 $button .= "<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' ";
-if ( empty($product->stock_reel) ) { $button .= " disabled"; }
+if ( empty($product->stock_reel) && $product->type == '0') ) { $button .= " disabled"; }
 $button .= ">";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
@@ -2683,7 +2683,7 @@ $button .= "<OPTION value='$i' >$i</OPTION>";
 		}
 	}
 $button .= "</SELECT><DIV class='input-group-append'><BUTTON class='btn btn-outline-secondary' type='submit' ";
-if ( empty($product->stock_reel) ) { $button .= " disabled"; }
+if ( empty($product->stock_reel) && $product->type == '0') ) { $button .= " disabled"; }
 $button .= ">";
 if ( $qty > 0 ) {
 $button .= __( 'Update', 'doliconnect-pro' )."";
