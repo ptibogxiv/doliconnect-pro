@@ -71,8 +71,7 @@ $data = [
 
 $gateway = callDoliApi("PUT", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['default_paymentmethod']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
-$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='alert-heading'>".__( 'Congratulations!', 'doliconnect-pro' )."</h4><p>".__( 'You changed your default payment method', 'doliconnect-pro' )."</p></div>";
-
+$msg = dolialert ('success', __( 'You changed your default payment method', 'doliconnect-pro' ));
 } elseif ( isset($_POST['delete_paymentmethod']) ) {
 
 $gateway = callDoliApi("DELETE", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['delete_paymentmethod']), null, dolidelay( 0, true));
@@ -86,7 +85,7 @@ $data = [
 
 $gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['add_paymentmethod']), $data, dolidelay( 0, true));
 $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', true));
-$msg = "<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><h4 class='alert-heading'>".__( 'Congratulations!', 'doliconnect-pro' )."</h4><p>".__( 'You have a new payment method', 'doliconnect-pro' )."</p></div>";
+$msg = dolialert ('success', __( 'You have a new payment method', 'doliconnect-pro' ));
 } 
 
 $listpaymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
