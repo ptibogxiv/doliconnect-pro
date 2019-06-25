@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
 "POT-Creation-Date: 2019-06-25 10:41+0200\n"
-"PO-Revision-Date: 2019-06-25 10:42+0200\n"
+"PO-Revision-Date: 2019-06-25 11:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -23,24 +23,24 @@ msgstr ""
 
 #: doliconnect-pro.php:60
 msgid "Manage payment methods"
-msgstr ""
+msgstr "Manage payment methods"
 
 #: doliconnect-pro.php:74
 msgid "You changed your default payment method"
-msgstr ""
+msgstr "You changed your default payment method"
 
 #: doliconnect-pro.php:88
 msgid "You have a new payment method"
-msgstr ""
+msgstr "You have a new payment method"
 
 #: doliconnect-pro.php:112 doliconnect-pro.php:168
 msgid "New payment method"
-msgstr ""
+msgstr "New payment method"
 
 #: doliconnect-pro.php:114
 #, php-format
 msgid "Register payment methods needs Dolibarr %s but your version is %s"
-msgstr ""
+msgstr "Register payment methods needs Dolibarr %s but your version is %s"
 
 #: doliconnect-pro.php:136 doliconnect-pro.php:357 doliconnect-pro.php:2452
 msgid "Account"
@@ -48,11 +48,11 @@ msgstr "Account"
 
 #: doliconnect-pro.php:136 doliconnect-pro.php:357 doliconnect-pro.php:2452
 msgid "Mandate"
-msgstr ""
+msgstr "Mandate"
 
 #: doliconnect-pro.php:138 doliconnect-pro.php:359 doliconnect-pro.php:2454
 msgid "Card"
-msgstr ""
+msgstr "Card"
 
 #: doliconnect-pro.php:148 doliconnect-pro.php:150 doliconnect-pro.php:152
 #: doliconnect-pro.php:486
@@ -69,7 +69,7 @@ msgstr ""
 
 #: doliconnect-pro.php:171
 msgid "Owner as on your card"
-msgstr ""
+msgstr "Owner as on your card"
 
 #: doliconnect-pro.php:176 doliconnect-pro.php:2690
 msgid "Add"

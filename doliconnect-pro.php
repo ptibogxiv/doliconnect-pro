@@ -53,15 +53,13 @@ return apply_filters( 'doliconnect_paymentmethods_lock', null);
 //add_filter( 'doliconnect_paymentmodes_lock', 'example_callback', 10, 1);
 
 function paymentmethods_menu( $arg ) {
-global $current_user;
-
 print "<a href='".esc_url( add_query_arg( 'module', 'paymentmethods', doliconnecturl('doliaccount')) )."' class='list-group-item list-group-item-action";
 if ($arg=='paymentmethods') { print " active";}
-print "'>".__( 'Manage payment methods', 'doliconnect-pro' )."</a>";
+print "'>".__( 'Manage payment methods', 'doliconnect-pro')."</a>";
 }
 
 function paymentmethods_module( $url ) {
-global $current_user;
+global $wpdb,$current_user;
 
 if ( isset($_POST['default_paymentmethod']) ) {
 
