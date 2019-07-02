@@ -1794,7 +1794,7 @@ if ( defined("DOLIBUG") ) {
 $content .= dolibug();
 
 } else { 
-print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
+$content .= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
 
@@ -1829,7 +1829,7 @@ addtodolibasket(esc_attr($_GET['product']), esc_attr($_POST['product_update'][$_
 wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnecturl('dolishop')) ) );
 exit;
 }
-print "<table class='table' width='100%'>";
+$content .= "<table class='table' width='100%'>";
 
 $request = "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)";
 
