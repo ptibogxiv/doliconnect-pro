@@ -176,11 +176,11 @@ print "</div></div></div></div>";
 
 print "<script>";
 if ( $listpaymentmethods->code_account != null ) {
-print 'var stripe = Stripe("'.print $listpaymentmethods->publishable_key.'",{
-    stripeAccount: "'.$listpaymentmethods->code_account.'"
-    });';
+print "var stripe = Stripe('".$listpaymentmethods->publishable_key."', {
+  stripeAccount: '".$listpaymentmethods->code_account."'
+});";
 } else {
-print 'var stripe = Stripe("'.$listpaymentmethods->publishable_key.'");';
+print "var stripe = Stripe('".$listpaymentmethods->publishable_key."');";
 }
 print 'var style = {
   base: {
