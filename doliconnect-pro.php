@@ -78,7 +78,7 @@ $gateway = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk
 } elseif ( isset($_POST['add_paymentmethod'])  ) {
 
 $data = [
-'default' => 0
+'default' => $_POST['default']
 ];
 
 $gateway = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods/".sanitize_text_field($_POST['add_paymentmethod']), $data, dolidelay( 0, true));
@@ -169,7 +169,12 @@ print "<form role='form' action='$url' id='newpaymentmethod-form' method='post'>
 print '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
-<div id="card-errors" role="alert"></div></div>';
+<div id="card-errors" role="alert"></div>';
+print "<small><div class='custom-control custom-checkbox my-1 mr-sm-2'><input type='checkbox' class='custom-control-input' value='1' id='default' name='default'";
+if (empty($i)) { print " checked disabled"; }
+print "><label class='custom-control-label' for='default'> ".__( 'Set as default payment mode', 'doliconnect-pro' )."</label></div>";
+if (empty($i)) { print "<input type='hidden' name='default' value='1'>"; }
+print '</small></div>';
 print doliloading('addnewpaymentmethod');
 print "</div><div id='FooterAddPaymentMethod' class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
 print "</div></div></div></div>";
