@@ -378,8 +378,8 @@ if ( empty($listpaymentmethods->sources) ) { $paymentmethod .= " checked"; }
 $paymentmethod .= "><label class='custom-control-label w-100' for='CdDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 $paymentmethod .= "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 $paymentmethod .= "</label></div></li>";
-                                                                                       //style="display: none"
-$paymentmethod .= '<li class="list-group-item list-group-item-secondary" id="CardForm" ><form action="'.$url.'" id="" class="was-validated" enctype="multipart/form-data">'; //onchange="ShowHideDiv()"
+
+$paymentmethod .= '<li class="list-group-item list-group-item-secondary" id="CardForm" style="display: none"><form action="'.$url.'" id="" class="was-validated" enctype="multipart/form-data">'; //onchange="ShowHideDiv()"
 $paymentmethod .= '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
@@ -553,7 +553,8 @@ $paymentmethod .= 'var style = {
 };';
 
 //VARIABLES
-$paymentmethod .= 'var CdDbt = document.getElementById("CdDbt");
+$paymentmethod .= '//VARIABLES
+var CdDbt = document.getElementById("CdDbt");
 var BkDbt = document.getElementById("BkDbt");  
 var discount = document.getElementById("discount");
 
@@ -563,7 +564,6 @@ var src_liq = document.getElementById("src_liq");
 var src_pra = document.getElementById("src_pra");';
 
 $paymentmethod .= 'function ShowHideDiv() {
-
 //CARD
 if ( CdDbt && CdDbt.checked ) {
 var elements = stripe.elements();
@@ -589,6 +589,23 @@ if ( document.getElementById("CardButton") ) { document.getElementById("CardButt
 });
 }
 
+var cardholderName = document.getElementById("cardholder-name");
+var ibanholderName = document.getElementById("ibanholder-name");
+var selectedSource = document.querySelector("input[name=modepayment]:checked").value;
+var defaultSource = document.querySelector("input[name=defaultsource]").value;
+
+if (document.getElementById("defaultbtn")) {
+if (selectedSource == defaultSource) {
+document.getElementById("defaultbtn").disabled = true; 
+} else {
+document.getElementById("defaultbtn").disabled = false; 
+}
+}
+
+if (CdDbt) {
+document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
+document.getElementById("CardButton").style.display = CdDbt.checked ? "block" : "none"; 
+}
 
 }
 window.onload=ShowHideDiv;
