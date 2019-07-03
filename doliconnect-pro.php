@@ -164,19 +164,19 @@ if ( $i < 5 && is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0'
 print "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
 <h5 class='modal-title' id='addsourceTitle'>".__( 'New payment method', 'doliconnect-pro' )."</h5><button id='CloseAddPaymentMethod' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
-</div><div class='modal-body'><div id='BodyAddPaymentMethod'>"; 
+</div><div id='BodyAddPaymentMethod'><ul class='list-group list-group-flush'><li class='list-group-item'>"; 
 print "<form role='form' action='$url' id='newpaymentmethod-form' method='post'>";
 print '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
 <div id="card-errors" role="alert"></div>';
-print "<small><div class='custom-control custom-checkbox my-1 mr-sm-2'><input type='checkbox' class='custom-control-input' value='1' id='default' name='default'";
+print "</li><li class='list-group-item'><small><div class='custom-control custom-checkbox my-1 mr-sm-2'><input type='checkbox' class='custom-control-input' value='1' id='default' name='default'";
 if (empty($i)) { print " checked disabled"; }
 print "><label class='custom-control-label' for='default'> ".__( 'Set as default payment mode', 'doliconnect-pro' )."</label></div>";
 if (empty($i)) { print "<input type='hidden' name='default' value='1'>"; }
-print '</small></div>';
+print '</small></li></ul></div>';
 print doliloading('addnewpaymentmethod');
-print "</div><div id='FooterAddPaymentMethod' class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
+print "<div id='FooterAddPaymentMethod' class='modal-footer'><button name='add_card' id='buttontoaddcard' value='add_card' class='btn btn-warning btn-block' type='submit' title='".__( 'Add', 'doliconnect' )."'><b>".__( 'Add', 'doliconnect' )."</b></button></form>";
 print "</div></div></div></div>";
 
 print "<script>";
