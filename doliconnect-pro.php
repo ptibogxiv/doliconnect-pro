@@ -379,7 +379,7 @@ $paymentmethod .= "><label class='custom-control-label w-100' for='CdDbt'><div c
 $paymentmethod .= "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 $paymentmethod .= "</label></div></li>";
 
-$paymentmethod .= '<li class="list-group-item list-group-item-secondary" id="CardForm" style="display: none"><form action="'.$url.'" id="" class="was-validated" enctype="multipart/form-data">'; //onchange="ShowHideDiv()"
+$paymentmethod .= '<li class="list-group-item list-group-item-secondary" id="CardForm" style="display: none"><form action="'.$url.'" >'; //onchange="ShowHideDiv()"
 $paymentmethod .= '<input id="cardholder-name" name="cardholder-name" value="" type="text" class="form-control" placeholder="'.__( 'Owner as on your credit card', 'doliconnect-pro' ).'" autocomplete="off" required>
 <label for="card-element"></label>
 <div class="form-control" id="card-element"><!-- a Stripe Element will be inserted here. --></div>
@@ -590,17 +590,6 @@ if ( document.getElementById("CardButton") ) { document.getElementById("CardButt
 }
 
 var cardholderName = document.getElementById("cardholder-name");
-var ibanholderName = document.getElementById("ibanholder-name");
-var selectedSource = document.querySelector("input[name=modepayment]:checked").value;
-var defaultSource = document.querySelector("input[name=defaultsource]").value;
-
-if (document.getElementById("defaultbtn")) {
-if (selectedSource == defaultSource) {
-document.getElementById("defaultbtn").disabled = true; 
-} else {
-document.getElementById("defaultbtn").disabled = false; 
-}
-}
 
 if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
