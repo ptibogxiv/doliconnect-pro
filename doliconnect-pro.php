@@ -374,7 +374,7 @@ $paymentmethod .= "</div></div></label></div></li>";
 if ( $i < 5 && $listpaymentmethods->code_client != null && !empty($listpaymentmethods->card) ) {      
 $paymentmethod .= "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='CdDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newcard' ";
-if ( empty($listpaymentmethods->sources) ) { $paymentmethod .= " checked"; }
+if ( empty($i) && empty($listpaymentmethods->paymentmethods) ) { $paymentmethod .= " checked"; }
 $paymentmethod .= "><label class='custom-control-label w-100' for='CdDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 $paymentmethod .= "<center><i class='fas fa-credit-card fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Credit card', 'doliconnect-pro' )."</h6><small class='text-muted'>Visa, MasterCard, Amex...</small></div></div>";
 $paymentmethod .= "</label></div></li>";
@@ -1511,7 +1511,7 @@ $content .= "<div class='card shadow-sm' id='cart-form'><ul class='list-group li
 
 $content .= doliline($object, 'cart');
 
-if ( isset($object) && (doliconnector($current_user, 'fk_soc') == $object->socid) ) {
+if ( is_object($object) && (doliconnector($current_user, 'fk_soc') == $object->socid) ) {
 $content .= "<li class='list-group-item list-group-item-info'>";
 $content .= dolitotal($object);
 $content .= "</li>";
