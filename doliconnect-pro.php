@@ -588,12 +588,11 @@ var cardholderName = document.getElementById("cardholder-name");
 
 if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
-document.getElementById("CardButton").style.display = CdDbt.checked ? "block" : "none"; 
 }
 
-if (document.getElementById("CdDbt").checked) {
-paymentRequest.show();
-}
+//if (document.getElementById("CdDbt").checked) {
+//paymentRequest.show();
+//}
 
 }
 window.onload=ShowHideDiv;
@@ -1132,7 +1131,7 @@ $bank = callDoliApi("GET", "/bankaccounts/".$vir->value, null, dolidelay('consta
 $content .= "<div class='alert alert-info' role='alert'><p align='justify'>".sprintf( __( 'Please send your transfert in the amount of <b>%1$s</b> with reference <b>%2$s</b> at the following account', 'doliconnect-pro' ), $TTC, $object->ref ).":";
 $content .= "<br><b>".__( 'Bank', 'doliconnect-pro' ).": $bank->bank</b>";
 $content .= "<br><b>IBAN: $bank->iban</b>";
-if ( ! empty($bank->bic) ) { print "<br><b>BIC/SWIFT : $bank->bic</b>";}
+if ( ! empty($bank->bic) ) { $content .= "<br><b>BIC/SWIFT : $bank->bic</b>";}
 $content .= "</p>";
 
 } elseif ($object->mode_reglement_id == '6') {
