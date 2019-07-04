@@ -310,6 +310,10 @@ $paymentmethod .= "<div id='payment-errors' class='alert alert-danger' role='ale
 
 $paymentmethod .= "<div id='payment-form'><div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
+if (empty($listpaymentmethods->stripe)) {
+$paymentmethod .= "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( "Stripe's in sandbox mode", 'doliconnect-pro')."</b></li>";
+}
+
 if ( empty($object) ) { //$  &&  ( listsource->discount != 0 || $listsource->discount_product != null )
 $paymentmethod .= "<li id='DiscountForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='discount' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='discount' ";
@@ -418,11 +422,11 @@ $paymentmethod .= "<li id='PraForm' class='list-group-item list-group-item-actio
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
 //if ($listsource["sources"] == null) {print " checked";}
 $paymentmethod .= " ><label class='custom-control-label w-100' for='src_pra'>";
-$paymentmethod .= "<div class='row' id='googlepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
-$paymentmethod .= '<center><i class="fab fa-google fa-3x fa-fw" style="color:Black"></i></center>';
-$paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Google Pay', 'doliconnect-pro' )."</h6>";
-$paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
-$paymentmethod .= "<div class='row' id='applepay' style='display: none'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
+//$paymentmethod .= "<div class='row' id='googlepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
+//$paymentmethod .= '<center><i class="fab fa-google fa-3x fa-fw" style="color:Black"></i></center>';
+//$paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Google Pay', 'doliconnect-pro' )."</h6>";
+//$paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
+$paymentmethod .= "<div class='row' id='applepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 $paymentmethod .= '<center><i class="fab fa-apple-pay fa-3x fa-fw" style="color:Black"></i></center>';
 $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Apple Pay', 'doliconnect-pro' )."</h6>";
 $paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
