@@ -587,19 +587,14 @@ if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
 }
 
-//if (document.getElementById("CdDbt").checked) {
-//paymentRequest.show();
-//}
-
-var cardholderName = document.getElementById("cardholder-name");
 var cardButton = document.getElementById("pay-Button");
-var clientSecret = cardButton.dataset.secret;
+var clientSecret = pi_1Eigk7K034Aqz8l50u90F9Vt;
 
 cardButton.addEventListener("click", function(ev) {
   stripe.handleCardPayment(
     clientSecret, cardElement, {
       payment_method_data: {
-        billing_details: {name: cardholderName.value}
+        billing_details: {name: "testeur"}
       }
     }
   ).then(function(result) {
