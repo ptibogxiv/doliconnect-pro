@@ -104,6 +104,10 @@ print doliloaderscript('paymentmethods-form');
 
 print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 
+if (empty($listpaymentmethods->stripe)) {
+print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( "Stripe's in sandbox mode", 'doliconnect-pro')."</b></li>";
+}
+
 $dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
 $versiondoli = explode("-", $dolibarr->success->dolibarr_version);
 if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
@@ -415,7 +419,7 @@ $paymentmethod .= "<li id='PraForm' class='list-group-item list-group-item-actio
 //if ($listsource["sources"] == null) {print " checked";}
 $paymentmethod .= " ><label class='custom-control-label w-100' for='src_pra'>";
 $paymentmethod .= "<div class='row' id='googlepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
-$paymentmethod .= '<center><i class="fab fa-google fa-3x fa-fw" style="color:Black"></i></center>'; //<img src="' . plugins_url( 'images/googlepay.svg', __FILE__ ) . '" >
+$paymentmethod .= '<center><i class="fab fa-google fa-3x fa-fw" style="color:Black"></i></center>';
 $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Google Pay', 'doliconnect-pro' )."</h6>";
 $paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
 $paymentmethod .= "<div class='row' id='applepay' style='display: none'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
@@ -604,9 +608,10 @@ window.onload=ShowHideDiv;
 ';
 
 //PAYMENT REQUEST API
-$paymentmethod .= 'var paymentRequest = stripe.paymentRequest({
-  country: "US",
-  currency: "usd",
+$paymentmethod .= '
+var paymentRequest = stripe.paymentRequest({
+  country: "FR",
+  currency: "eur",
   total: {
     label: "Demo total",
     amount: 1000,
