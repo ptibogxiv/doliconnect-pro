@@ -1361,7 +1361,7 @@ $content .= "<form class='was-validated' role='form' action='".doliconnecturl('d
 
 $content .= dolimodalloaderscript('updatethirdparty-form');
 
-$content .= doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'thirdparty', 'cart');
+$content .= doliconnectuserform( $thirdparty, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null), true), 'contact');
 
 $content .= "</div>".doliloading('updatethirdparty-form');
 
@@ -1532,7 +1532,13 @@ if ( $object->lines != null ) {
 $content .= "<div class='col-12 col-md'><button type='submit' name='dolicart' value='validation' class='btn btn-warning w-100' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro')."</b></button></div>";
 } 
 }
-$content .= "</div></div>";
+$content .= "</div>";
+$content .= "<ul class='list-group list-group-horizontal-lg mw-100'>
+<a href='".doliconnecturl('dolishop')."' class='list-group-item list-group-item-info list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro')."</b></a>
+<button type='button' type='submit' name='dolicart' value='purge' class='list-group-item list-group-item-secondary list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro')."</b></button>
+<button type='button' type='submit' name='dolicart' value='validation' class='list-group-item list-group-item-warning list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro')."</b></button>
+</ul>";
+$content .= "</div>";
 }
 
 $content .= "</form></div>"; 
