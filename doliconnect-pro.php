@@ -409,7 +409,7 @@ $paymentmethod .= '</li>';
 }
 
 //PAYMENT REQUEST API
-if ( ! empty($object) ) {
+if ( ! empty($object) && get_option('doliconnectbeta')=='1' ) {
 $paymentmethod .= "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
 //if ($listsource["sources"] == null) {print " checked";}
@@ -423,6 +423,9 @@ $paymentmethod .= '<center><i class="fab fa-apple-pay fa-3x fa-fw" style="color:
 $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Apple Pay', 'doliconnect-pro' )."</h6>";
 $paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
 $paymentmethod .= '</label></div></li>';
+$paymentmethod .= '<div id="payment-request-button">
+<!-- A Stripe Element will be inserted here. -->
+</div>';
 }
 
 //alternative payment modes & offline
@@ -600,6 +603,57 @@ document.getElementById("CardButton").style.display = CdDbt.checked ? "block" : 
 window.onload=ShowHideDiv;
 ';
 
+//PAYMENT REQUEST API
+$paymentmethod .= 'var paymentRequest = stripe.paymentRequest({
+  country: "US",
+  currency: "usd",
+  total: {
+    label: "Demo total",
+    amount: 1000,
+  },
+  requestPayerName: true,
+  requestPayerEmail: true,
+});
+
+var elements = stripe.elements();
+var prButton = elements.create("paymentRequestButton", {
+  paymentRequest: paymentRequest,
+});
+
+// Check the availability of the Payment Request API first.
+paymentRequest.canMakePayment().then(function(result) {
+  if (result) {
+    prButton.mount("#payment-request-button");
+  } else {
+    document.getElementById("payment-request-button").style.display = "none";
+  }
+});
+
+paymentRequest.on("paymentmethod", function(ev) {
+  stripe.confirmPaymentIntent(clientSecret, {
+    payment_method: ev.paymentMethod.id,
+  }).then(function(confirmResult) {
+    if (confirmResult.error) {
+      // Report to the browser that the payment failed, prompting it to
+      // re-show the payment interface, or show an error message and close
+      // the payment interface.
+      ev.complete("fail");
+    } else {
+      // Report to the browser that the confirmation was successful, prompting
+      // it to close the browser payment method collection interface.
+      ev.complete("success");
+      // Let Stripe.js handle the rest of the payment flow.
+      stripe.handleCardPayment(clientSecret).then(function(result) {
+        if (result.error) {
+          // The payment failed -- ask your customer for a new payment method.
+        } else {
+          // The payment has succeeded.
+        }
+      });
+    }
+  });
+});
+';
 
 $paymentmethod .= "</script>";
 
