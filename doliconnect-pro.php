@@ -489,10 +489,7 @@ if ( $listpaymentmethods->paymentmethods == null ) { $paymentmethod .= "<input t
 
 $paymentmethod .= "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
 $paymentmethod .= "<div id='payment-request-button'><!-- A Stripe Element will be inserted here. --></div>";
-$paymentmethod .= "<button id='PayButton' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object, 'ttc',$currency)."</b></button>";
-$paymentmethod .= '<div id="payment-request-button">
-<!-- A Stripe Element will be inserted here. -->
-</div>';
+$paymentmethod .= "<button id='pay-Button' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object, 'ttc',$currency)."</b></button>";
 
 $paymentmethod .= "</div></div>";
 
@@ -572,14 +569,14 @@ var displayError = document.getElementById("card-errors");
 displayError.textContent = "";
 document.getElementById("cardholder-name").value = "";
 
-if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = false; }
+if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = false; }
 cardElement.addEventListener("change", function(ev) { 
   if (ev.error) {
     displayError.textContent = ev.error.message;
-if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = true; }
+if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = true; }
   } else {
     displayError.textContent = "";
-if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = false; }
+if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = false; }
   }
 });
 }
@@ -593,6 +590,26 @@ document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "n
 //if (document.getElementById("CdDbt").checked) {
 //paymentRequest.show();
 //}
+
+var cardholderName = document.getElementById("cardholder-name");
+var cardButton = document.getElementById("pay-Button");
+var clientSecret = cardButton.dataset.secret;
+
+cardButton.addEventListener("click", function(ev) {
+  stripe.handleCardPayment(
+    clientSecret, cardElement, {
+      payment_method_data: {
+        billing_details: {name: cardholderName.value}
+      }
+    }
+  ).then(function(result) {
+    if (result.error) {
+      // Display error.message in your UI.
+    } else {
+      // The payment has succeeded. Display a success message.
+    }
+  });
+});
 
 }
 window.onload=ShowHideDiv;
