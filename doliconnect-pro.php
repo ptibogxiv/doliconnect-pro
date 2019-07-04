@@ -431,9 +431,6 @@ $paymentmethod .= '<center><i class="fab fa-apple-pay fa-3x fa-fw" style="color:
 $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Apple Pay', 'doliconnect-pro' )."</h6>";
 $paymentmethod .= "<small class='text-muted'>".__( 'Pay in one clic', 'doliconnect-pro' )."</small></div></div>";
 $paymentmethod .= '</label></div></li>';
-$paymentmethod .= '<div id="payment-request-button">
-<!-- A Stripe Element will be inserted here. -->
-</div>';
 }
 
 //alternative payment modes & offline
@@ -490,21 +487,12 @@ $paymentmethod .= "</ul><div class='card-body'>";
 
 if ( $listpaymentmethods->paymentmethods == null ) { $paymentmethod .= "<input type='hidden' name='defaultsource' value='nosavedsource'>"; }  
 
-if ( empty($object) ) {
-$paymentmethod .= "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
-$paymentmethod .= "<button id='DiscountButton' style='display: none' class='btn btn-warning btn-block' type='submit' disabled><b>".__( 'Recharge', 'doliconnect-pro' )."</b></button>";
-$paymentmethod .= "<button id='CardButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add a card', 'doliconnect-pro' )."</b></button>";
-$paymentmethod .= "<button id='BankButton' style='display: none' class='btn btn-warning btn-block' type='submit'><b>".__( 'Add an account', 'doliconnect-pro' )."</b></button>";
-if ( $listpaymentmethods->code_client != null ) {
-$paymentmethod .= "<div id='DeleteButton' class='btn-group d-flex' role='group'><button id='defaultbtn' class='btn btn-warning w-100' type='submit'><b>".__( 'Favorite', 'doliconnect-pro' )."</b></button><button id='deletebtn' class='btn btn-danger w-100' type='submit'><b>".__( 'Delete', 'doliconnect-pro' )."</b></button></div>";
-} elseif ( $listpaymentmethods->code_client == null && $listpaymentmethods->CHQ == null && $listpaymentmethods->RIB == null ) {
-$paymentmethod .= "<center>".__( 'No gateway', 'doliconnect-pro' )."</center>";
-}
-} else {
 $paymentmethod .= "<input type='hidden' name='source' value='validation'><input type='hidden' name='cart' value='validation'><input type='hidden' name='info' value='validation'>";
 $paymentmethod .= "<div id='payment-request-button'><!-- A Stripe Element will be inserted here. --></div>";
-$paymentmethod .= "<button id='PayButton' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object, 'ttc',$currency)."</b></button><div id='CardButton' style='display: none'></div><div id='BankButton' style='display: none'></div><div id='DiscountButton' style='display: none'></div><div id='DeleteButton' style='display: none'></div>";
-}
+$paymentmethod .= "<button id='PayButton' class='btn btn-danger btn-block' type='submit'><b>".__( 'Pay', 'doliconnect-pro' )." ".doliprice($object, 'ttc',$currency)."</b></button>";
+$paymentmethod .= '<div id="payment-request-button">
+<!-- A Stripe Element will be inserted here. -->
+</div>';
 
 $paymentmethod .= "</div></div>";
 
@@ -582,20 +570,16 @@ var cardElement = elements.create("card", {style: style});
 cardElement.mount("#card-element");
 var displayError = document.getElementById("card-errors");
 displayError.textContent = "";
-document.getElementById("CardButton").disabled = false;
 document.getElementById("cardholder-name").value = "";
 
 if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = false; }
-if ( document.getElementById("CardButton") ) { document.getElementById("CardButton").disabled = false; }
 cardElement.addEventListener("change", function(ev) { 
   if (ev.error) {
     displayError.textContent = ev.error.message;
 if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = true; }
-if ( document.getElementById("CardButton") ) { document.getElementById("CardButton").disabled = true; }
   } else {
     displayError.textContent = "";
 if ( document.getElementById("PayButton") ) { document.getElementById("PayButton").disabled = false; }
-if ( document.getElementById("CardButton") ) { document.getElementById("CardButton").disabled = false; }
   }
 });
 }
@@ -605,6 +589,10 @@ var cardholderName = document.getElementById("cardholder-name");
 if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
 document.getElementById("CardButton").style.display = CdDbt.checked ? "block" : "none"; 
+}
+
+if (document.getElementById("CdDbt").checked) {
+paymentRequest.show();
 }
 
 }
