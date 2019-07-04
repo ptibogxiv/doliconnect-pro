@@ -624,8 +624,10 @@ var prButton = elements.create("paymentRequestButton", {
 paymentRequest.canMakePayment().then(function(result) {
   if (result) {
     prButton.mount("#payment-request-button");
+    document.getElementById("PraForm").style.display = "block";
   } else {
     document.getElementById("payment-request-button").style.display = "none";
+    document.getElementById("PraForm").style.display = "none";
   }
 });
 
