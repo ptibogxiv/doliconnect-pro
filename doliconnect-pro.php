@@ -1358,6 +1358,12 @@ doligateway($listsource, $ref, $montant, $object->multicurrency_code, doliconnec
 $content .= doliloading('paymentmodes');
 }
 
+$content .= "<small><div class='float-left'>";
+$content .= dolirefresh( $request, doliconnecturl('dolicart')."?pay", dolidelay('cart'));
+$content .= "</div><div class='float-right'>";
+$content .= dolihelp('ISSUE');
+$content .= "</div></small>";
+
 $content .= "</div></div>";
 
 } elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->socid == doliconnector($current_user, 'fk_soc')) {
@@ -1504,6 +1510,13 @@ $content .= "<li class='list-group-item list-group-item-info'><i class='fas fa-i
 $content .= "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 $content .= "<textarea class='form-control' id='note_public' name='note_public' rows='3' placeholder='".__( 'Enter a message here that you want to send us', 'doliconnect-pro' )."'>".$object->note_public."</textarea>";
 $content .= "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+
+$content .= "<small><div class='float-left'>";
+$content .= dolirefresh( $request, doliconnecturl('dolicart')."?info", dolidelay('cart'));
+$content .= "</div><div class='float-right'>";
+$content .= dolihelp('ISSUE');
+$content .= "</div></small>";
+
 $content .= "</div></div>";
 
 } else {
@@ -1612,11 +1625,11 @@ $content .= "<div class='col-12 col-md'><button type='submit' name='dolicart' va
 } 
 }
 $content .= "</div>";
-$content .= "<ul class='list-group list-group-horizontal-lg mw-100'>
-<a href='".doliconnecturl('dolishop')."' class='list-group-item list-group-item-info list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro')."</b></a>
-<button type='button' type='submit' name='dolicart' value='purge' class='list-group-item list-group-item-secondary list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro')."</b></button>
-<button type='button' type='submit' name='dolicart' value='validation' class='list-group-item list-group-item-warning list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro')."</b></button>
-</ul>";
+//$content .= "<ul class='list-group list-group-horizontal-lg mw-100'>
+//<a href='".doliconnecturl('dolishop')."' class='list-group-item list-group-item-info list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro')."</b></a>
+//<button type='button' type='submit' name='dolicart' value='purge' class='list-group-item list-group-item-secondary list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro')."</b></button>
+//<button type='button' type='submit' name='dolicart' value='validation' class='list-group-item list-group-item-warning list-group-item-action' role='button' aria-pressed='true'><b>".__( 'Process', 'doliconnect-pro')."</b></button>
+//</ul>";
 $content .= "</div>";
 }
 
