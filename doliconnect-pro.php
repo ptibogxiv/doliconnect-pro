@@ -1446,8 +1446,11 @@ $content .= "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconne
 } else {
 $content .= "<li class='list-group-item'><h6>".__( 'Billing and shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 }
+$content .= '<div class="custom-control custom-radio">
+<input type="radio" id="billing0" name="contact_billing" class="custom-control-input" value="" checked>
+<label class="custom-control-label" for="billing0">'.doliaddress($thirdparty).'</label>
+</div>';
 
-$content .= doliaddress($thirdparty);
 $content .= '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 $content .= "</small></li>";
 
