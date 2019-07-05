@@ -259,6 +259,10 @@ jQuery("#doliloading-addnewpaymentmethod").hide();
 ).then(function(result) {
   if (result.error) {
     // Show error in payment form
+jQuery("#CloseAddPaymentMethod").show();
+jQuery("#FooterAddPaymentMethod").show();
+jQuery("#BodyAddPaymentMethod").show();   
+jQuery("#doliloading-addnewpaymentmethod").hide(); 
 				console.log("Error occured when adding card");
 				var displayError = document.getElementById("card-errors");
 				displayError.textContent = "'.__( "Oops, an error occurred while adding the card", "doliconnect-pro").'";    
