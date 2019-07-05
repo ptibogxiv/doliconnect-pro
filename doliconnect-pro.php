@@ -621,7 +621,7 @@ window.onload=ShowHideDiv;
 //PAYMENT REQUEST API
 $paymentmethod .= '
 var montant = '.($object->total_ttc*100).';
-var currency = "'.strtolower(isset($object->multicurrency_code) ? $object->multicurrency_code : 'eur').'";
+var currency = "'.strtolower(isset($object->multicurrency_code) ? $object->multicurrency_code : 'EUR').'";
 
 var paymentRequest = stripe.paymentRequest({
   country: "FR",
