@@ -245,7 +245,7 @@ jQuery("#BodyAddPaymentMethod").show();
 jQuery("#doliloading-addnewpaymentmethod").hide();         
 				console.log("Field Card holder is empty");
 				var displayError = document.getElementById("card-errors");
-				displayError.textContent = "'.__( "Need an owner as on your card", "doliconnect-pro").'";
+				displayError.textContent = "'.__( "We need an owner as on your card.", "doliconnect-pro").'";
         	}
         else
         	{
@@ -265,7 +265,7 @@ jQuery("#BodyAddPaymentMethod").show();
 jQuery("#doliloading-addnewpaymentmethod").hide(); 
 				console.log("Error occured when adding card");
 				var displayError = document.getElementById("card-errors");
-				displayError.textContent = "'.__( "Oops, an error occurred while adding the card", "doliconnect-pro").'";    
+				displayError.textContent = "'.__( "Your card number seems to be wrong.", "doliconnect-pro").'";    
   } else {
 	      var hiddenInput = document.createElement("input");
 	      hiddenInput.setAttribute("type", "hidden");
