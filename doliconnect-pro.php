@@ -587,6 +587,14 @@ if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
 }
 
+if (src_pra && src_pra.checked) {
+  document.getElementById("pay-Button").style.display = "none";
+  document.getElementById("payment-request-button").style.display = "block";
+} else {
+  document.getElementById("pay-Button").style.display = "block";
+  document.getElementById("payment-request-button").style.display = "none";
+}
+
 var cardButton = document.getElementById("pay-Button");
 var clientSecret = pi_1Eigk7K034Aqz8l50u90F9Vt;
 
