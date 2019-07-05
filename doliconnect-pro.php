@@ -619,10 +619,10 @@ var paymentRequest = stripe.paymentRequest({
     label: "Demo total",
     amount: 1000,
   },
-  requestPayerName: true,
-  requestPayerEmail: true,
 });
-
+//requestPayerName: true,
+//requestPayerEmail: true,
+  
 var elements = stripe.elements();
 var prButton = elements.create("paymentRequestButton", {
   paymentRequest: paymentRequest,
