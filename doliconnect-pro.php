@@ -606,11 +606,10 @@ if (src_pra && src_pra.checked) {
   document.getElementById("payment-request-button").style.display = "none";
 }
 
-var cardButton = document.getElementById("pay-Button");
+var payButton = document.getElementById("pay-Button");
 var clientSecret = "pi_1EsbE5K034Aqz8l5NX8h8HJb_secret_iMvcVOn83jFwktgDOAPrTtUFz";
 
-cardButton.addEventListener("click", function(ev) {
-
+payButton.addEventListener("click", function(ev) {
 console.log("We click on buttontoaddcard");
 event.preventDefault();
 document.getElementById("pay-Button").disabled = true; 
@@ -623,7 +622,6 @@ document.getElementById("pay-Button").disabled = true;
         	}
         else
         	{
-
   stripe.handleCardPayment(
     clientSecret, cardElement, {
       payment_method_data: {
