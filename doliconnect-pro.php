@@ -580,6 +580,7 @@ cardholderName.value = "";
 var displayError = document.getElementById("card-errors");
 displayError.textContent = "";
 cardElement.addEventListener("change", function(event) {
+document.getElementById("pay-Button").disabled = false;
   if (event.error) {
     console.log("Show event error");
     displayError.textContent = event.error.message;
@@ -612,13 +613,13 @@ cardButton.addEventListener("click", function(ev) {
 
 console.log("We click on buttontoaddcard");
 event.preventDefault();
-jQuery("#DoliconnectLoadingModal").modal("show");
+document.getElementById("pay-Button").disabled = true; 
         if (cardholderName.value == "")
-        	{
-jQuery("#DoliconnectLoadingModal").modal("hide");         
+        	{        
 				console.log("Field Card holder is empty");
 				var displayError = document.getElementById("card-errors");
 				displayError.textContent = "'.__( "We need an owner as on your card.", "doliconnect-pro").'";
+        document.getElementById("pay-Button").disabled = false;    
         	}
         else
         	{
