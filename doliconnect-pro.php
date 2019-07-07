@@ -146,7 +146,7 @@ print "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->co
 print "</div>";
 
 print "<div class='col-4 col-sm-3 col-md-2 btn-group-vertical' role='group'>";
-if ( !empty($method->default_source) ) { 
+if ( $i == 1 || !empty($method->default_source) ) { 
 print "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } elseif ( current_time( 'timestamp', 1) < strtotime($method->expiration.'/1') ) {
 print "<button name='default_paymentmethod' value='".$method->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
@@ -424,7 +424,7 @@ $paymentmethod .= '</li>';
 if ( ! empty($object) && get_option('doliconnectbeta')=='1' ) {
 $paymentmethod .= "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
-//if ($listsource["sources"] == null) {print " checked";}
+//if ($listsource["sources"] == null) { $paymentmethod .= " checked";}
 $paymentmethod .= " ><label class='custom-control-label w-100' for='src_pra'>";
 //$paymentmethod .= "<div class='row' id='googlepay'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 //$paymentmethod .= '<center><i class="fab fa-google fa-3x fa-fw" style="color:Black"></i></center>';
@@ -1499,7 +1499,7 @@ $contactshipping = $contact->id;
 
 foreach ( $listcontact as $contact ) {
 $content .= '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="contact_shipping" class="custom-control-input" value="'.$contact->id.'" ';
-if ( !empty($contact->default) || $contactshipping == $contact->id ) { print "checked"; }
+if ( !empty($contact->default) || $contactshipping == $contact->id ) { $content .= "checked"; }
 $content .= '><label class="custom-control-label" for="customRadio2">';
 $content .= dolicontact($contact->id, $_GET["refresh"]);
 $content .= '</label></div>';
