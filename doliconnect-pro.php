@@ -602,9 +602,22 @@ if (src_pra && src_pra.checked) {
 }
 
 var cardButton = document.getElementById("pay-Button");
-var clientSecret = "pi_1Eigk7K034Aqz8l50u90F9Vt";
+var clientSecret = "pi_1EsbE5K034Aqz8l5NX8h8HJb_secret_iMvcVOn83jFwktgDOAPrTtUFz";
 
 cardButton.addEventListener("click", function(ev) {
+
+console.log("We click on buttontoaddcard");
+event.preventDefault();
+jQuery("#DoliconnectLoadingModal").modal("show");
+        if (cardholderName.value == "")
+        	{
+jQuery("#DoliconnectLoadingModal").modal("hide");         
+				console.log("Field Card holder is empty");
+				var displayError = document.getElementById("card-errors");
+				displayError.textContent = "'.__( "We need an owner as on your card.", "doliconnect-pro").'";
+        	}
+        else
+        	{
 
   stripe.handleCardPayment(
     clientSecret, cardElement, {
@@ -615,15 +628,15 @@ cardButton.addEventListener("click", function(ev) {
   ).then(function(result) {
     if (result.error) {
     // Show error in payment form
-jQuery("#DoliconnectLoadingModal").modal("hide");  
-jQuery("#doliloading-paymentmodes").hide();
+jQuery("#DoliconnectLoadingModal").modal("hide");
 console.log("Error occured when adding card");
 var displayError = document.getElementById("card-errors");
 displayError.textContent = "'.__( "Your card number seems to be wrong.", "doliconnect-pro").'";    
     } else {
       // The payment has succeeded. Display a success message.
     }
-  });
+  }); 
+}
 });
 
 }
