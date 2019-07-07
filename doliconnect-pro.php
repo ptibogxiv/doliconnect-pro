@@ -625,7 +625,7 @@ document.getElementById("pay-Button").disabled = true;
   stripe.handleCardPayment(
     clientSecret, cardElement, {
       payment_method_data: {
-        billing_details: {name: "testeur"}
+        billing_details: {name: cardholderName}
       }
     }
   ).then(function(result) {
