@@ -575,7 +575,9 @@ var cardElement = elements.create("card", {style: style});
 cardElement.mount("#card-element");';
 
 // Handle real-time validation errors from the card Element.
-$paymentmethod .= 'var displayError = document.getElementById("card-errors");
+$paymentmethod .= 'var cardholderName = document.getElementById("cardholder-name");
+cardholderName.value = "";
+var displayError = document.getElementById("card-errors");
 displayError.textContent = "";
 cardElement.addEventListener("change", function(event) {
   if (event.error) {
@@ -587,7 +589,7 @@ cardElement.addEventListener("change", function(event) {
   }
 });
 
-var cardholderName = document.getElementById("cardholder-name");
+
 }';
 
 $paymentmethod .= '
