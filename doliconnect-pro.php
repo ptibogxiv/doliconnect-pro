@@ -568,27 +568,27 @@ var src_pra = document.getElementById("src_pra");';
 $paymentmethod .= 'function ShowHideDiv() {
 //CARD
 if ( CdDbt && CdDbt.checked ) {
+// Create an instance of Elements
 var elements = stripe.elements();
 var cardElement = elements.create("card", {style: style});
-cardElement.mount("#card-element");
-var displayError = document.getElementById("card-errors");
-displayError.textContent = "";
-document.getElementById("cardholder-name").value = "";
+cardElement.mount("#card-element");';
 
-if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = false; }
-cardElement.addEventListener("change", function(ev) { 
-  if (ev.error) {
-    displayError.textContent = ev.error.message;
-if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = true; }
+// Handle real-time validation errors from the card Element.
+$paymentmethod .= 'cardElement.addEventListener("change", function(event) {
+  var displayError = document.getElementById("card-errors");
+  if (event.error) {
+    console.log("Show event error");
+    displayError.textContent = event.error.message;
   } else {
+    console.log("Reset error message");
     displayError.textContent = "";
-if ( document.getElementById("pay-Button") ) { document.getElementById("pay-Button").disabled = false; }
   }
 });
-}
 
 var cardholderName = document.getElementById("cardholder-name");
+}';
 
+$paymentmethod .= '
 if (CdDbt) {
 document.getElementById("CardForm").style.display = CdDbt.checked ? "block" : "none";
 }
