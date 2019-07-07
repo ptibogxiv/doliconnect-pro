@@ -263,9 +263,9 @@ jQuery("#CloseAddPaymentMethod").show();
 jQuery("#FooterAddPaymentMethod").show();
 jQuery("#BodyAddPaymentMethod").show();   
 jQuery("#doliloading-addnewpaymentmethod").hide(); 
-				console.log("Error occured when adding card");
-				var displayError = document.getElementById("card-errors");
-				displayError.textContent = "'.__( "Your card number seems to be wrong.", "doliconnect-pro").'";    
+console.log("Error occured when adding card");
+var displayError = document.getElementById("card-errors");
+displayError.textContent = "'.__( "Your card number seems to be wrong.", "doliconnect-pro").'";    
   } else {
 	      var hiddenInput = document.createElement("input");
 	      hiddenInput.setAttribute("type", "hidden");
@@ -602,9 +602,10 @@ if (src_pra && src_pra.checked) {
 }
 
 var cardButton = document.getElementById("pay-Button");
-var clientSecret = pi_1Eigk7K034Aqz8l50u90F9Vt;
+var clientSecret = "pi_1Eigk7K034Aqz8l50u90F9Vt";
 
 cardButton.addEventListener("click", function(ev) {
+
   stripe.handleCardPayment(
     clientSecret, cardElement, {
       payment_method_data: {
@@ -613,7 +614,12 @@ cardButton.addEventListener("click", function(ev) {
     }
   ).then(function(result) {
     if (result.error) {
-      // Display error.message in your UI.
+    // Show error in payment form
+jQuery("#DoliconnectLoadingModal").modal("hide");  
+jQuery("#doliloading-paymentmodes").hide();
+console.log("Error occured when adding card");
+var displayError = document.getElementById("card-errors");
+displayError.textContent = "'.__( "Your card number seems to be wrong.", "doliconnect-pro").'";    
     } else {
       // The payment has succeeded. Display a success message.
     }
