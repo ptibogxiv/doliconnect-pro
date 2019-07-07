@@ -213,8 +213,9 @@ print 'var cardElement = elements.create("card", {style: style});';
 print 'cardElement.mount("#card-element");';
 
 // Handle real-time validation errors from the card Element.
-print 'cardElement.addEventListener("change", function(event) {
-  var displayError = document.getElementById("card-errors");
+print 'var displayError = document.getElementById("card-errors");
+displayError.textContent = "";
+cardElement.addEventListener("change", function(event) {
   if (event.error) {
     console.log("Show event error");
     displayError.textContent = event.error.message;
@@ -574,8 +575,9 @@ var cardElement = elements.create("card", {style: style});
 cardElement.mount("#card-element");';
 
 // Handle real-time validation errors from the card Element.
-$paymentmethod .= 'cardElement.addEventListener("change", function(event) {
-  var displayError = document.getElementById("card-errors");
+$paymentmethod .= 'var displayError = document.getElementById("card-errors");
+displayError.textContent = "";
+cardElement.addEventListener("change", function(event) {
   if (event.error) {
     console.log("Show event error");
     displayError.textContent = event.error.message;
