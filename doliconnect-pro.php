@@ -349,12 +349,14 @@ $paymentmethod .= '</div></div></label></div></li>';
 }
 
 //SAVED SOURCES
-if ( $listpaymentmethods->paymentmethods != null ) {  
-foreach ( $listpaymentmethods->paymentmethods as $method ) {                                                                                                                       
+if ( $listpaymentmethods->paymentmethods != null ) {
+$i=0;    
+foreach ( $listpaymentmethods->paymentmethods as $method ) {
+$i++;                                                                                                                         
 $paymentmethod .= "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='$method->id' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='$method->id' ";
 if ( date('Y/n') >= $method->expiration && !empty($object) && !empty($method->expiration) ) { $paymentmethod .= " disabled "; }
-elseif ( !empty($method->default_source) ) { $paymentmethod .= " checked "; }
+elseif ( $i == 1 || !empty($method->default_source) ) { $paymentmethod .= " checked "; }
 $paymentmethod .= " ><label class='custom-control-label w-100' for='$method->id'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
 $paymentmethod .= '<center><i ';
 if ( $method->type == 'sepa_debit' ) {
