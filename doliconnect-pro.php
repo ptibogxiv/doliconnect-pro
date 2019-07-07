@@ -1086,7 +1086,7 @@ $module='orders';
 
 //if ( doliconnector($current_user, 'fk_order') > 0 ) {
 $object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
-//print $object;
+//$content .= $object;
 //}
 
 if ( defined("DOLIBUG") ) {
@@ -1236,13 +1236,13 @@ $src = [
     'url' => "".$successurl.""
 	];
 $pay = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/pay/".$module."/".$object->id, $src, 0);
-//print $pay;
+//$content .= $pay;
 
 if (isset($pay->error)){
 $error=$pa->error;
 $content .= "<center>".$pay->error->message."</center><br >";
 } else {
-//print $pay;
+//$content .= $pay;
 $url=$pay->redirect_url.'&ref='.$object->ref.'&charge='.$pay->charge;
 $order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
@@ -1348,11 +1348,11 @@ $content .= "</small></li>";
 
 $content .= "</ul></div></div><div class='col-12 col-md-8'>";
 
-$listsource = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
-//print $listsource;
+$paymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods", null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+//$content .= $listsource;
 
 if ( current_user_can( 'administrator' ) && get_option('doliconnectbeta') =='1'  ) {
-$content .= dolipaymentmodes($listsource, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
+$content .= dolipaymentmodes($paymentmethods, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
 if ( isset($object->resteapayer) ) { 
@@ -1360,7 +1360,7 @@ $montant=$object->resteapayer;
 } else { 
 $montant=$object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc;
 }
-doligateway($listsource, $ref, $montant, $object->multicurrency_code, doliconnecturl('dolicart')."?pay", 'full');
+doligateway($paymentmethods, $ref, $montant, $object->multicurrency_code, doliconnecturl('dolicart')."?pay", 'full');
 $content .= doliloading('paymentmodes');
 }
 
