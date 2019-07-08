@@ -1399,7 +1399,7 @@ $content .= "</div></div>";
 
 if ( isset($_GET['info']) && !isset($_GET['pay']) && !isset($_GET['validation']) && isset($_POST['update_thirdparty']) && $_POST['update_thirdparty'] == 'validation' ) {
 
-$thirdparty=$_POST['thirdparty'][''.doliconnector($current_user, 'fk_soc').''];
+$thirdparty=$_POST['contact'][''.doliconnector($current_user, 'fk_soc').''];
 $ID = $current_user->ID;
 if ( $thirdparty['morphy'] == 'phy' ) {
 $thirdparty['name'] = ucfirst(strtolower($thirdparty['firstname']))." ".strtoupper($thirdparty['lastname']);
