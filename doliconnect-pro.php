@@ -564,7 +564,23 @@ var discount = document.getElementById("discount");
 var src_chq = document.getElementById("src_chq");
 var src_vir = document.getElementById("src_vir");
 var src_liq = document.getElementById("src_liq");
-var src_pra = document.getElementById("src_pra");';
+var src_pra = document.getElementById("src_pra");
+
+var montant = '.($object->total_ttc*100).';
+var ref = '.($object->ref).';
+var currency = "'.strtolower(isset($object->multicurrency_code) ? $object->multicurrency_code : 'EUR').'";
+
+var paymentRequest = stripe.paymentRequest({
+  country: "FR",
+  currency: currency,
+  total: {
+    label: "Demo total",
+    amount: montant,
+  },
+});
+//requestPayerName: true,
+//requestPayerEmail: true,
+';
 
 $paymentmethod .= 'function ShowHideDiv() {
 //CARD
@@ -648,20 +664,6 @@ window.onload=ShowHideDiv;
 
 //PAYMENT REQUEST API
 $paymentmethod .= '
-var montant = '.($object->total_ttc*100).';
-var currency = "'.strtolower(isset($object->multicurrency_code) ? $object->multicurrency_code : 'EUR').'";
-
-var paymentRequest = stripe.paymentRequest({
-  country: "FR",
-  currency: currency,
-  total: {
-    label: "Demo total",
-    amount: montant,
-  },
-});
-//requestPayerName: true,
-//requestPayerEmail: true,
-  
 var elements = stripe.elements();
 var prButton = elements.create("paymentRequestButton", {
   paymentRequest: paymentRequest,
