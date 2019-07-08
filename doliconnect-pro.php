@@ -1691,7 +1691,7 @@ if ( in_the_loop() && is_main_query() && is_page(doliconnectid('dolishop')) && !
 doliconnect_enqueues();
 
 $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
-//$content .= $shop;
+//print $shop;
 
 if ( defined("DOLIBUG") ) {
 
@@ -1729,7 +1729,7 @@ print "<a href='".esc_url( add_query_arg( 'category', $catoption->value, dolicon
 
 if ( isset($_GET['product']) ) {
 addtodolibasket(esc_attr($_GET['product']), esc_attr($_POST['product_update'][$_GET['product']]['qty']), esc_attr($_POST['product_update'][$_GET['product']]['price']));
-//$content .= $_POST['product_update'][$_GET['product']][product];
+//print $_POST['product_update'][$_GET['product']][product];
 wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnecturl('dolishop')) ) );
 exit;
 }
@@ -1738,7 +1738,7 @@ print "<table class='table' width='100%'>";
 $request = "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)";
 
 $resultatso = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
-//$content .= $resultatso;
+//print $resultatso;
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
