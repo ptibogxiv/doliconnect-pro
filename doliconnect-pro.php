@@ -1521,7 +1521,7 @@ $contactshipping = $contact->id;
 }
 
 }
-
+if ( !isset($listcontact->error) && $listcontact != null ) {
 foreach ( $listcontact as $contact ) {
 print '<div class="custom-control custom-radio"><input type="radio" id="customRadio2" name="contact_shipping" class="custom-control-input" value="'.$contact->id.'" ';
 if ( !empty($contact->default) || $contactshipping == $contact->id ) { print "checked"; }
@@ -1529,7 +1529,7 @@ print '><label class="custom-control-label" for="customRadio2">';
 print dolicontact($contact->id, $_GET["refresh"]);
 print '</label></div>';
 }
-
+}
 print "</small></li>";
 
 } elseif ( current_user_can( 'administrator' ) ) {
