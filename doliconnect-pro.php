@@ -1697,10 +1697,10 @@ $shop = callDoliApi("GET", "/doliconnector/constante/DOLICONNECT_CATSHOP", null,
 
 if ( defined("DOLIBUG") ) {
 
-$content .= dolibug();
+print dolibug();
 
 } else { 
-$content .= "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
+print "<div class='card shadow-sm'><ul class='list-group list-group-flush'>";
 if ( !isset($_GET['category']) ) {
 if ( $shop->value != null ) {
 
@@ -1713,9 +1713,9 @@ foreach ($resultatsc as $categorie) {
 
 if ( function_exists('pll_the_languages') ) { 
 $lang = pll_current_language('locale');
-$content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".($categorie->multilangs->$lang->label ? $categorie->multilangs->$lang->label : $categorie->label)."<br />".($categorie->multilangs->$lang->description ? $categorie->multilangs->$lang->description : $categorie->description)."</a>"; 
+print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".($categorie->multilangs->$lang->label ? $categorie->multilangs->$lang->label : $categorie->label)."<br />".($categorie->multilangs->$lang->description ? $categorie->multilangs->$lang->description : $categorie->description)."</a>"; 
 } else {
-$content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
+print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
 }
 
 }}
@@ -1724,7 +1724,7 @@ $content .= "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doli
 $catoption = callDoliApi("GET", "/doliconnector/constante/ADHERENT_MEMBER_CATEGORY", null, dolidelay('constante', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
 
 if ( !empty($catoption->value) && is_user_logged_in() ) {
-$content .= "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
+print "<a href='".esc_url( add_query_arg( 'category', $catoption->value, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action' >Produits/Services lies a l'adhesion</a>";
 }
 
 } else {
@@ -1735,7 +1735,7 @@ addtodolibasket(esc_attr($_GET['product']), esc_attr($_POST['product_update'][$_
 wp_redirect( esc_url( add_query_arg( 'category', $_GET['category'], doliconnecturl('dolishop')) ) );
 exit;
 }
-$content .= "<table class='table' width='100%'>";
+print "<table class='table' width='100%'>";
 
 $request = "/products?sortfield=t.label&sortorder=ASC&category=".$_GET['category']."&sqlfilters=(t.tosell=1)";
 
@@ -1744,42 +1744,40 @@ $resultatso = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(i
 
 if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
-$content .= "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td>";
+print "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td>";
 
 if ( function_exists('pll_the_languages') ) { 
 $lang = pll_current_language('locale');
-$content .= "<td><b>".($product->multilangs->$lang->label ? $product->multilangs->$lang->label : $product->label)."</b> ";
-$content .= doliproductstock($product);
-$content .= "<br />".($product->multilangs->$lang->description ? $product->multilangs->$lang->description : $product->description)."</td>";
+print "<td><b>".($product->multilangs->$lang->label ? $product->multilangs->$lang->label : $product->label)."</b> ";
+print doliproductstock($product);
+print "<br />".($product->multilangs->$lang->description ? $product->multilangs->$lang->description : $product->description)."</td>";
 } else {
-$content .= "<td><b>".$product->label."</b> ";
-$content .= doliproductstock($product);
-$content .= "<br />".$product->description."</td>";
+print "<td><b>".$product->label."</b> ";
+print doliproductstock($product);
+print "<br />".$product->description."</td>";
 }
 
-$content .= "<td width='300px'><center>".dolibuttontocart($product, esc_attr($_GET['category']), 1);
-$content .= "</center></td></tr>"; 
+print "<td width='300px'><center>".dolibuttontocart($product, esc_attr($_GET['category']), 1);
+print "</center></td></tr>"; 
 }
 } else {
 wp_redirect(esc_url(get_permalink()));
 exit;
 }
-$content .= "</tbody></table>";
+print "</tbody></table>";
 }
 }
-$content .= "</ul></div>";
+print "</ul></div>";
 
-$content .= "<small><div class='float-left'>";
-$content .= dolirefresh($request, $url, dolidelay('product'));
-$content .= "</div><div class='float-right'>";
-$content .= dolihelp('COM');
-$content .= "</div></small>";
-
-return $content;
+print "<small><div class='float-left'>";
+print dolirefresh($request, $url, dolidelay('product'));
+print "</div><div class='float-right'>";
+print dolihelp('COM');
+print "</div></small>";
 
 } else {
 
-return $content;
+print $content;
 
 }
 
