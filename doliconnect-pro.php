@@ -1537,7 +1537,7 @@ print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-ci
 }
 
 print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
-print "<textarea class='form-control' id='note_public' name='note_public' rows='3' placeholder='".__( 'Enter a message here that you want to send us', 'doliconnect-pro' )."'>".$object->note_public."</textarea>";
+print "<textarea class='form-control' id='note_public' name='note_public' rows='3' placeholder='".__( 'Enter a message here that you want to send us about your order', 'doliconnect-pro' )."'>".$object->note_public."</textarea>";
 print "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 
 print "<small><div class='float-left'>";
