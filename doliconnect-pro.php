@@ -1775,7 +1775,7 @@ print "</div></small>";
 
 } else {
 
-print $content;
+return $content;
 
 }
 
