@@ -146,7 +146,7 @@ print "<img src='".plugins_url('doliconnect/images/flag/'.strtolower($method->co
 print "</div>";
 
 print "<div class='col-4 col-sm-3 col-md-2 btn-group-vertical' role='group'>";
-if ( $countmethods == 1 || !empty($method->default_source) ) { 
+if ( $i == 1 || !empty($method->default_source) ) { 
 print "<button class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."' disabled><i class='fas fa-star fa-1x fa-fw' style='color:Gold'></i></button>";
 } elseif ( current_time( 'timestamp', 1) < strtotime($method->expiration.'/1') ) {
 print "<button name='default_paymentmethod' value='".$method->id."' class='btn btn-light' type='submit' title='".__( 'Favorite', 'doliconnect-pro' )."'><i class='far fa-star fa-1x fa-fw'></i></button>";
