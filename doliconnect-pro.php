@@ -2480,7 +2480,7 @@ $orderfo = callDoliApi("GET", "/orders/".doliconnector($current_user, 'fk_order'
 //$button .=$orderfo;
 }
 
-if ( $orderfo->lines != null ) {
+if ( isset($orderfo) && $orderfo->lines != null ) {
 foreach ($orderfo->lines as $line) {
 if  ($line->fk_product == $product->id) {
 //$button = var_dump($line);
@@ -2503,7 +2503,8 @@ $button .="<script type='text/javascript' language='javascript'>";
 
 $button .="</script>";
 
-$currency=$orderfo->multicurrency_code;
+
+$currency=isset($orderfo->multicurrency_code)?$orderfo->multicurrency_code:'eur';
 
 if ( $product->type == '1' && !is_null($product->duration_unit) && '0' < ($product->duration_value)) {$duration =__( 'for', 'doliconnect-pro' ).' '.$product->duration_value.' ';
 if ( $product->duration_value > 1 ) {
@@ -2570,8 +2571,8 @@ $m2 = 10;
 $m2 = $product->stock_reel;
 } else { $m2 = $qty; }
 } else {
-if ( $line->qty > 1 ){ $m2 = $qty; }
-else {$m2 = 1;}
+if ( isset($line) && $line->qty > 1 ) { $m2 = $qty; }
+else { $m2 = 1; }
 }
 for ( $i=0;$i<=$m2;$i++ ) {
 		if ( $i == $qty ) {
