@@ -1600,7 +1600,7 @@ wp_redirect(doliconnecturl('dolicart').'?info');
 exit;                                   
 }
 
-if ( isset($object) ) {
+if ( isset($object) && is_object($object) ) {
 $timeout=$object->date_modification-current_time('timestamp',1)+1200;
 //print "<script>";
 //var tmp=<?php print ($timeout)*10;
@@ -1632,7 +1632,7 @@ print "<div class='card shadow-sm' id='cart-form'><ul class='list-group list-gro
 
 print doliline($object, 'cart');
 
-if ( is_object($object) && (doliconnector($current_user, 'fk_soc') == $object->socid) ) {
+if ( isset($object) && is_object($object) && (doliconnector($current_user, 'fk_soc') == $object->socid) ) {
 print "<li class='list-group-item list-group-item-info'>";
 print dolitotal($object);
 print "</li>";
@@ -1645,7 +1645,7 @@ print "<div class='card-body'><div class='row'>";
 if ( get_option('dolishop') ) {
 print "<div class='col-12 col-md'><a href='".doliconnecturl('dolishop')."' class='btn btn-outline-info w-100' role='button' aria-pressed='true'><b>".__( 'Continue shopping', 'doliconnect-pro')."</b></a></div>";
 } 
-if ( isset($object) && $object->lines != null && (doliconnector($current_user, 'fk_soc') == $object->socid) ) { 
+if ( isset($object) && is_object($object) && $object->lines != null && (doliconnector($current_user, 'fk_soc') == $object->socid) ) { 
 if ( $object->lines != null && $object->statut == 0 ) {
 print "<div class='col-12 col-md'><button type='submit' name='dolicart' value='purge' class='btn btn-outline-secondary w-100' role='button' aria-pressed='true'><b>".__( 'Empty the basket', 'doliconnect-pro')."</b></button></div>";
 }
@@ -1768,7 +1768,7 @@ print "</tbody></table>";
 print "</ul></div>";
 
 print "<small><div class='float-left'>";
-print dolirefresh($request, $url, dolidelay('product'));
+print dolirefresh($request, get_permalink(), dolidelay('product'));
 print "</div><div class='float-right'>";
 print dolihelp('COM');
 print "</div></small>";
