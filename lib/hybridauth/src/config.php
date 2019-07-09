@@ -5,7 +5,7 @@
 
 $config = [
     //Location where to redirect users once they authenticate with a provider
-    'callback' => doliconnecturl('doliaccount')."?provider=".$_GET["provider"],
+    'callback' => doliconnecturl('doliaccount')."?provider=".(isset($_GET["provider"])?$_GET["provider"]:null),
 
     //Providers specifics
     'providers' => [
