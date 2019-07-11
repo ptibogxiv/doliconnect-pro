@@ -293,7 +293,7 @@ print "</div></small>";
 
 }
 
-function dolipaymentmodes($listpaymentmethods, $object, $redirect, $url) {
+function dolipaymentmodes($paymentintent, $listpaymentmethods, $object, $redirect, $url) {
 global $current_user;
 
 $request = "/doliconnector/".doliconnector($current_user, 'fk_soc')."/paymentmethods";
@@ -611,7 +611,7 @@ if (src_pra && src_pra.checked) {
 }
 
 var payButton = document.getElementById("pay-Button");
-var clientSecret = "pi_1EsbE5K034Aqz8l5NX8h8HJb_secret_iMvcVOn83jFwktgDOAPrTtUFz";
+var clientSecret = "'.$paymentintent->stripe->client_secret.'";
 
 payButton.addEventListener("click", function(ev) {
 console.log("We click on buttontoaddcard");
@@ -1375,7 +1375,9 @@ $paymentmethods = callDoliApi("GET", "/doliconnector/".doliconnector($current_us
 //print $listsource;
 
 if ( current_user_can( 'administrator' ) && get_option('doliconnectbeta') =='1'  ) {
-print dolipaymentmodes($paymentmethods, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
+$paymentintent = callDoliApi("GET", "/doliconnector/paymentintent/".substr($module, 0, -1)."/".$object->id, null, dolidelay('paymentmethods',  esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)));
+//print $listsource;
+print dolipaymentmodes($paymentintent, $paymentmethods, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
 if ( isset($object->resteapayer) ) { 
