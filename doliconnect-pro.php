@@ -116,9 +116,9 @@ print '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item 
 print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".sprintf( esc_html__( "Register payment methods needs Dolibarr %s but your version is %s", 'doliconnect-pro'), '10.0.0',$versiondoli[0])."</b></li>";
 }
 
-//SAVED SOURCES
-if ( $listpaymentmethods->paymentmethods != null ) {
+//SAVED SOURCES 
 $i=0;
+if ( $listpaymentmethods->paymentmethods != null ) {
 foreach ( $listpaymentmethods->paymentmethods as $method ) {
 $i++;                                                                                                                       
 print "<li class='list-group-item d-flex justify-content-between lh-condensed list-group-item-action'>";
