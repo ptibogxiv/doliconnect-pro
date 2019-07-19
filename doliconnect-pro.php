@@ -1928,7 +1928,10 @@ print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='su
 print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div>";
 print "</div></div></div>";
 
+//if( !array_key_exists( 'login_footer' , $GLOBALS['wp_filter']) ) { 
 do_action( 'login_footer' );
+//}
+
 }
 
 // modal for CGU
