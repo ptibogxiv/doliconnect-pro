@@ -1905,6 +1905,8 @@ print "</div></div><div class='form-group'>
 <input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro' )."' name='pwd' value ='' required>";
 print "</div></div>";
 
+do_action( 'login_form' );
+
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
 } 
@@ -1923,8 +1925,11 @@ print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
 print "".doliloading('loginmodal-form');
 
 print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
-print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div>
-</div></div></div>";}
+print "><b>".__( 'Sign in', 'doliconnect-pro' )."</b></button></form></div>";
+print "</div></div></div>";
+
+do_action( 'login_footer' );
+}
 
 // modal for CGU
 if (get_option('dolicgvcgu')){
