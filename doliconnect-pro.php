@@ -1857,6 +1857,8 @@ if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
 
 doliconnect_enqueues();
 
+do_action( 'login_head' );
+
 print "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
 if ( ! empty(get_option('doliconnectrestrict')) ) {
 if ( !empty( get_background_color() )) {
