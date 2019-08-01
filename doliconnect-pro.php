@@ -1746,16 +1746,9 @@ if ( !isset($resultatso->error) && $resultatso != null ) {
 foreach ($resultatso as $product) {
 print "<tr class='table-light'><td><center><i class='fa fa-plus-circle fa-2x fa-fw'></i></center></td>";
 
-if ( function_exists('pll_the_languages') ) { 
-$lang = pll_current_language('locale');
-print "<td><b>".($product->multilangs->$lang->label ? $product->multilangs->$lang->label : $product->label)."</b> ";
+print "<td><b>".doliproduct($product, 'label')."</b> ";
 print doliproductstock($product);
-print "<br />".($product->multilangs->$lang->description ? $product->multilangs->$lang->description : $product->description)."</td>";
-} else {
-print "<td><b>".$product->label."</b> ";
-print doliproductstock($product);
-print "<br />".$product->description."</td>";
-}
+print "<br />".doliproduct($product, 'description')."</td>";
 
 print "<td width='300px'><center>".dolibuttontocart($product, esc_attr($_GET['category']), 1);
 print "</center></td></tr>"; 
