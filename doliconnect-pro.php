@@ -1711,12 +1711,7 @@ $resultatsc = callDoliApi("GET", $request, null, dolidelay('product', esc_attr(i
 if ( !isset($resultatsc ->error) && $resultatsc != null ) {
 foreach ($resultatsc as $categorie) {
 
-if ( function_exists('pll_the_languages') ) { 
-$lang = pll_current_language('locale');
-print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".($categorie->multilangs->$lang->label ? $categorie->multilangs->$lang->label : $categorie->label)."<br />".($categorie->multilangs->$lang->description ? $categorie->multilangs->$lang->description : $categorie->description)."</a>"; 
-} else {
-print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".$categorie->label."<br />".$categorie->description."</a>"; 
-}
+print "<a href='".esc_url( add_query_arg( 'category', $categorie->id, doliconnecturl('dolishop')) )."' class='list-group-item list-group-item-action'>".doliproduct($categorie, 'label')."<br />".doliproduct($categorie, 'description')."</a>"; 
 
 }}
 }
