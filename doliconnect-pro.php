@@ -845,7 +845,7 @@ elseif ( ( $postadh->statut == '0' && $postadh->id == $adherent->typeid ) ) {
 print "<button class='btn btn-secondary btn-block' disabled>".__( 'Non-renewable', 'doliconnect-pro' )."</a>";
 } 
 elseif ( ( $postadh->automatic_renew != '1' && $postadh->id == $adherent->typeid ) ) { 
-print "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'members', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='5'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-warning btn-block' type='submit'>".__( 'Renew', 'doliconnect-pro' )."</button></form>";
+print "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'members', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='3'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-warning btn-block' type='submit'>".__( 'Renew', 'doliconnect-pro' )."</button></form>";
 } 
 elseif ( ($postadh->automatic == '1' ) && ($postadh->id == $adherent->typeid) ) {
 if ( $adherent->statut == '1' ) {
