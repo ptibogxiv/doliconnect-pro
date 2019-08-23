@@ -844,8 +844,8 @@ print "<a href='".doliconnecturl('doliaccount')."?module=ticket&type=COM&create'
 elseif ( ( $postadh->statut == '0' && $postadh->id == $adherent->typeid ) ) { 
 print "<button class='btn btn-secondary btn-block' disabled>".__( 'Non-renewable', 'doliconnect-pro' )."</a>";
 } 
-elseif ( ( $postadh->automatic_renew != '1' && $postadh->id == $adherent->typeid ) ) { 
-print "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'members', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='3'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-warning btn-block' type='submit'>".__( 'Renew', 'doliconnect-pro' )."</button></form>";
+elseif ( ( $postadh->automatic_renew != '1' && $postadh->id == $adherent->typeid ) ) { //to do add security for avoid loop  in revali
+print "<form id='subscription-form' action='".esc_url( add_query_arg( 'module', 'members', doliconnecturl('doliaccount')) )."' method='post'><input type='hidden' name='cotisation' value='$montantdata'><input type='hidden' name='timestamp_start' value='".$adherent->next_subscription_date_start."'><input type='hidden' name='timestamp_end' value='".$adherent->next_subscription_date_end."'><input type='hidden' name='update_membership' value='4'><input type='hidden' name='typeadherent' value='$postadh->id'><button class='btn btn-warning btn-block' type='submit'>".__( 'Renew', 'doliconnect-pro' )."</button></form>";
 } 
 elseif ( ($postadh->automatic == '1' ) && ($postadh->id == $adherent->typeid) ) {
 if ( $adherent->statut == '1' ) {
@@ -1140,7 +1140,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
-<i class='fas fa-user fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
+<i class='fas fa-user-check fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
@@ -1322,7 +1322,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
-<i class='fas fa-user fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
+<i class='fas fa-user-check fa-fw text-success' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
@@ -1455,7 +1455,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar bg-success w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
-<i class='fas fa-user fa-fw text-warning' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
+<i class='fas fa-user-check fa-fw text-warning' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar progress-bar-striped progress-bar-animated w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
@@ -1564,7 +1564,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar progress-bar-striped progress-bar-animated w-100' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
-<i class='fas fa-user fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
+<i class='fas fa-user-check fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td><td style='border: none'><div class='progress'>
 <div class='progress-bar w-0' role='progressbar' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'></div>
 </div></td><td width='50px' style='border: none'><div class='fa-3x'>
