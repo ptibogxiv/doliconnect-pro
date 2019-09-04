@@ -1262,8 +1262,7 @@ $vld = [
 $validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
 }
 $src = [
-    'source' => "".$source."",
-    'url' => "".$successurl.""
+    'source' => "".$source.""
 	];
 $pay = callDoliApi("POST", "/doliconnector/".doliconnector($current_user, 'fk_soc')."/pay/".$module."/".$object->id, $src, 0);
 //print $pay;
