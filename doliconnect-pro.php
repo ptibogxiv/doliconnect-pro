@@ -424,7 +424,7 @@ $paymentmethod .= '</li>';
 }
 
 //PAYMENT REQUEST API
-if ( ! empty($object) && get_option('doliconnectbeta')=='1' ) {
+if ( ! empty($object) && get_option('doliconnectbeta')=='1' && !empty($listpaymentmethods->payment_request_api) ) {  
 $paymentmethod .= "<li id='PraForm' class='list-group-item list-group-item-action flex-column align-items-start' style='display: none'><div class='custom-control custom-radio'>
 <input id='src_pra' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='PRA' ";
 //if ($listsource["sources"] == null) { $paymentmethod .= " checked";}
