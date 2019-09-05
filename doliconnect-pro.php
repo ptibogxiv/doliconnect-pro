@@ -1195,7 +1195,9 @@ if ( ! empty($bank->bic) ) { print "<br><b>BIC/SWIFT : $bank->bic</b>";}
 print "</p>";
 
 } elseif ($object->mode_reglement_id == '6') {
-print "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has been registered', 'doliconnect-pro' )."<br>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['charge']."</p>";
+print "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has been registered', 'doliconnect-pro' );
+if (isset($_GET['charge'])) "<br>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['charge'];
+print "</p>";
 }
 } else {
 print "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurred', 'doliconnect-pro' )."</p>";
@@ -1759,7 +1761,7 @@ function doliconnect_modal() {
 global $current_user;
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
-if ( !is_user_logged_in() && get_option('doliloginmodal') == '1' ) {
+if ( !is_user_logged_in() && (get_option('doliloginmodal') == '1' || !empty(get_option('doliconnectrestrict'))) ) {
 
 doliconnect_enqueues();
 
