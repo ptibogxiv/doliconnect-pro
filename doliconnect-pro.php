@@ -1200,7 +1200,7 @@ print "<div class='alert alert-success' role='alert'><p>".__( 'Your payment has 
 } else {
 print "<div class='alert alert-danger' role='alert'><p>".__( 'An error is occurred', 'doliconnect-pro' )."</p>";
 }
-print "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['order']."&ref=".$_GET['ref'];
+print "<br /><a href='".doliconnecturl('doliaccount')."?module=orders&id=".$_GET['id']."&ref=".$_GET['ref'];
 print "' class='btn btn-primary'>".__( 'See my order', 'doliconnect-pro' )."</a></center></div></div></div>";
 
 } elseif ( isset($_GET['pay']) && ((doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->statut == 0 && !isset($_GET['module']) ) || ( ($_GET['module'] == 'orders' && $object->billed != 1 ) || ($_GET['module'] == 'invoices' && $object->paye != 1) )) && $object->socid == doliconnector($current_user, 'fk_soc') ) {
@@ -1272,10 +1272,11 @@ $error=$pa->error;
 print "<center>".$pay->error->message."</center><br >";
 } else {
 //print $pay;
-$url=$pay->redirect_url.'&ref='.$object->ref.'&charge='.$pay->charge;
-$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
+$object = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
+
+$successurl2 = $successurl."&ref=".$object->ref;
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect( $url );
+wp_redirect( $successurl2 );
 exit;
 }
 
@@ -1289,7 +1290,7 @@ $vld = [
 	];
 $validate = callDoliApi("POST", "/orders/".$object->id."/validate", $vld, 0);
 }
-$object = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null);
+$object = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
 
 $successurl2 = $successurl."&ref=".$object->ref;
 
