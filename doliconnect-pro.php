@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.9.0
+ * Version: 3.9.1
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -2388,7 +2388,8 @@ function dolibuttontocart($product, $category=0, $add=0, $time=0) {
 global $current_user;
 
 $order = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_COMMANDE", null, dolidelay('constante'));
-$stock = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_STOCK", null, dolidelay('constante'));
+$enablestock = callDoliApi("GET", "/doliconnector/constante/MAIN_MODULE_STOCK", null, dolidelay('constante'));
+$stockservices = callDoliApi("GET", "/doliconnector/constante/STOCK_SUPPORTS_SERVICES", null, dolidelay('constante'));
 
 $button = "<div class='jumbotron'>";
 
@@ -2469,7 +2470,7 @@ $button .= "<div class='input-group'><select class='form-control' name='product_
 if ( empty($product->stock_reel) && $product->type == '0' ) { $button .= " disabled"; }
 $button .= ">";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
-if ( $product->stock_reel-$qty >= '10' || (is_object($stock) && $stock->value != 1) ) {
+if ( $product->stock_reel-$qty >= '10' || (is_object($enablestock) && $enablestock->value != 1) ) {
 $m2 = 10;
 } elseif ( $product->stock_reel > $line->qty ) {
 $m2 = $product->stock_reel;
@@ -2486,7 +2487,7 @@ $button .= "<OPTION value='$i' >$i</OPTION>";
 		}
 	}
 $button .= "</SELECT><DIV class='input-group-append'><BUTTON class='btn btn-outline-secondary' type='submit' ";
-if ( empty($product->stock_reel) && $product->type == '0' ) { $button .= " disabled"; }
+if ( empty($product->stock_reel) && $product->type == '0' && (is_object($enablestock) && $enablestock->value != 1)) { $button .= " disabled"; }
 $button .= ">";
 if ( $qty > 0 ) {
 $button .= __( 'Update', 'doliconnect-pro' )."";
