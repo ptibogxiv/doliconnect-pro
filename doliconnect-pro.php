@@ -2468,7 +2468,7 @@ $price_ttc=$product->price_ttc;
 
 if ( is_user_logged_in() && $add==1 && is_object($order) && $order->value == 1 && doliconnectid('dolicart') > 0 ) {
 $button .= "<div class='input-group'><select class='form-control' name='product_update[".$product->id."][qty]' ";
-if ( empty($product->stock_reel) && $product->type == '0' ) { $button .= " disabled"; }
+if ( empty($product->stock_reel) && $product->type == '0' && (is_object($enablestock) && $enablestock->value == 1)) { $button .= " disabled"; }
 $button .= ">";
 if ( ($product->stock_reel-$qty > '0' && $product->type == '0') ) {
 if ( $product->stock_reel-$qty >= '10' || (is_object($enablestock) && $enablestock->value != 1) ) {
@@ -2488,7 +2488,7 @@ $button .= "<OPTION value='$i' >$i</OPTION>";
 		}
 	}
 $button .= "</SELECT><DIV class='input-group-append'><BUTTON class='btn btn-outline-secondary' type='submit' ";
-if ( empty($product->stock_reel) && $product->type == '0' && (is_object($enablestock) && $enablestock->value != 1)) { $button .= " disabled"; }
+if ( empty($product->stock_reel) && $product->type == '0' && (is_object($enablestock) && $enablestock->value == 1)) { $button .= " disabled"; }
 $button .= ">";
 if ( $qty > 0 ) {
 $button .= __( 'Update', 'doliconnect-pro' )."";
