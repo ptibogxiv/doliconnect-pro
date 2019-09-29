@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 3.9.3
+ * Version: 3.9.4
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -1116,7 +1116,7 @@ $module='orders';
 
 //if ( doliconnector($current_user, 'fk_order') > 0 ) {
 $object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
-//print $object;
+//print var_dump($object);
 //}
 
 if ( defined("DOLIBUG") ) {
@@ -1167,7 +1167,7 @@ if ( ( !isset($object->id) ) || (doliconnector($current_user, 'fk_soc') != $obje
 $return = esc_url(doliconnecturl('doliaccount'));
 $order = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect($return);
+wp_safe_redirect($return);
 exit;
 }
 print "<div class='card shadow-sm' id='cart-form'><div class='card-body'><center><h2>".__( 'Your order has been registered', 'doliconnect-pro' )."</h2>".__( 'Reference', 'doliconnect-pro' ).": ".$_GET['ref']."<br />".__( 'Payment method', 'doliconnect-pro' ).": $object->mode_reglement<br /><br />";
@@ -1278,7 +1278,7 @@ $object = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null
 
 $successurl2 = $successurl."&ref=".$object->ref;
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect( $successurl2 );
+wp_safe_redirect( $successurl2 );
 exit;
 }
 
@@ -1298,7 +1298,7 @@ $successurl2 = $successurl."&ref=".$object->ref;
 
 $order = callDoliApi("GET", "/".$module."/".$object->id."?contact_list=0", null, 0);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-wp_redirect($successurl2);
+wp_safe_redirect($successurl2);
 exit;
 }
 elseif ($_POST['modepayment'] == 'src_payplug')  {
@@ -1313,7 +1313,7 @@ print "<br /><a href='".doliconnecturl('dolicart')."' class='btn btn-primary'>Re
 } elseif ( !is_object($object) && empty($object->lines) ) {
 //$order = callDoliApi("GET", "/".$module."/".$object->id, null, 0);
 //$dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, 0);
-//wp_redirect(doliconnecturl('dolicart'));
+//wp_safe_redirect(doliconnecturl('dolicart'));
 //exit;
 }
 
@@ -1432,20 +1432,22 @@ do_action('wp_dolibarr_sync', $thirdparty);
 } elseif ( isset($_GET['info']) && isset($_POST['info']) && $_POST['info'] == 'validation' && !isset($_GET['pay']) && !isset($_GET['validation']) ) {
 
 if ($_POST['contact_shipping']) {
-$order_shipping= callDoliApi("POST", "/".$module."/".$object->id."/contact/".$_POST['contact_shipping']."/SHIPPING", null, dolidelay('order'));
+$order_shipping= callDoliApi("POST", "/".$module."/".$object->id."/contact/".$_POST['contact_shipping']."/SHIPPING", null, dolidelay('order', true));
 }
 
+if ( isset($_POST['note_public']) && $_POST['note_public'] != $object->note_public) {
 $data = [
     'note_public' => $_POST['note_public']
 	];
-$order= callDoliApi("PUT", $request, $data, 0);
+$object = callDoliApi("PUT", "/".$module."/".$object->id, $data, dolidelay('order', true));
+}
 
-wp_redirect(doliconnecturl('dolicart').'?pay');
+wp_safe_redirect(doliconnecturl('dolicart').'?pay');
 exit;
                                    
 } elseif ( !$object->id > 0 && $object->lines == null ) {
 
-wp_redirect(doliconnecturl('dolicart'));
+wp_safe_redirect(doliconnecturl('dolicart'));
 exit;
 
 }
@@ -1549,7 +1551,9 @@ print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-ci
 
 print "<li class='list-group-item'><h6>".__( 'Message', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 print "<textarea class='form-control' id='note_public' name='note_public' rows='3' placeholder='".__( 'Enter a message here that you want to send us about your order', 'doliconnect-pro' )."'>".$object->note_public."</textarea>";
-print "</small></li></ul><div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+print "</small></li></ul>";
+
+print "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
 
 print "<small><div class='float-left'>";
 print dolirefresh( $request, doliconnecturl('dolicart')."?info", dolidelay('cart'));
@@ -1582,7 +1586,7 @@ $orderdelete = callDoliApi("DELETE", "/".$module."/".doliconnector($current_user
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
 doliconnector($current_user, 'fk_order', true);
-wp_redirect(doliconnecturl('dolicart'));
+wp_safe_redirect(doliconnecturl('dolicart'));
 exit;
 } else {
 print "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
@@ -1598,7 +1602,7 @@ if (doliconnector($current_user, 'fk_order') > 0) {
 $object = callDoliApi("GET", $request, null, dolidelay('cart'), true);
 //print $object;
 }
-//wp_redirect(esc_url(get_permalink()));
+//wp_safe_redirect(esc_url(get_permalink()));
 //exit;
 } else {
 print "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', 'doliconnect-pro' )."</strong> ".__( 'An error is occured. Please contact us!', 'doliconnect-pro' )."</p></div>"; 
@@ -1607,7 +1611,7 @@ print "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', '
 }
 
 if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) && $object->lines != null ) {
-wp_redirect(doliconnecturl('dolicart').'?info');
+wp_safe_redirect(doliconnecturl('dolicart').'?info');
 exit;                                   
 }
 
