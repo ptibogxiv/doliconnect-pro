@@ -1053,7 +1053,7 @@ $cart .= $list;
 if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) { 
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 $cart .= "<li class='list-group-item d-flex justify-content-between bg-light'>
-<div class='text-success'><h6 class='my-0'>".__( 'Customer discount', 'doliconnect-pro' )."</h6>
+<div class='text-success'><h6 class='my-0'>".__( 'Total discount', 'doliconnect-pro' )."</h6>
 <small>-".number_format(100*$remise/$subprice, 0)." %</small>
 </div><span class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
