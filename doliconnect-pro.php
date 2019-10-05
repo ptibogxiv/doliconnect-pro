@@ -1041,7 +1041,7 @@ $list .= "<li class='list-group-item d-flex justify-content-between lh-condensed
 $remise+=$line->subprice-$line->price;
 $subprice+=$line->subprice;
 $qty+=$line->qty;
-$list .= "<span class='text-muted'>".doliprice($line, 'subprice',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
+$list .= "<span class='text-muted'>".doliprice($line, 'total_ttc',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
 }
 }
 
