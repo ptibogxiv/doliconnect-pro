@@ -1400,13 +1400,13 @@ doligateway($paymentmethods, $ref, $montant, $object->multicurrency_code, dolico
 print doliloading('paymentmodes');
 }
 
+print "</div></div>";
+
 print "<small><div class='float-left'>";
 print dolirefresh( $request, doliconnecturl('dolicart')."?pay", dolidelay('cart'));
 print "</div><div class='float-right'>";
 print dolihelp('ISSUE');
 print "</div></small>";
-
-print "</div></div>";
 
 } elseif ( isset($_GET['info']) && doliconnector($current_user, 'fk_order_nb_item') > 0 && $object->socid == doliconnector($current_user, 'fk_soc')) {
 
@@ -1556,14 +1556,13 @@ print "<textarea class='form-control' id='note_public' name='note_public' rows='
 print "</small></li></ul>";
 
 print "<div class='card-body'><input type='hidden' name='info' value='validation'><input type='hidden' name='dolicart' value='validation'><center><button class='btn btn-warning btn-block' type='submit'><b>".__( 'Validate', 'doliconnect-pro' )."</b></button></center></div></div></form>";
+print "</div></div>";
 
 print "<small><div class='float-left'>";
 print dolirefresh( $request, doliconnecturl('dolicart')."?info", dolidelay('cart'));
 print "</div><div class='float-right'>";
 print dolihelp('ISSUE');
 print "</div></small>";
-
-print "</div></div>";
 
 } else {
 
