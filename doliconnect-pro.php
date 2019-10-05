@@ -452,7 +452,7 @@ $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6
 $paymentmethod .= '</div></div></label></div></li>';
 }
 
-if ( $listpaymentmethods->RIB != null ) {
+if ( isset($listpaymentmethods->RIB) && $listpaymentmethods->RIB != null ) {
 $paymentmethod .= "<li id='VirForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_vir' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='VIR' ";
 if ( $listpaymentmethods->paymentmethods == null && empty($listpaymentmethods->card) ) { $paymentmethod .= " checked"; }
@@ -462,7 +462,7 @@ $paymentmethod .= "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6
 $paymentmethod .= '</div></div></label></div></li>';
 }
 
-if ( $listpaymentmethods->CHQ != null ) {
+if ( isset($listpaymentmethods->CHQ) && $listpaymentmethods->CHQ != null ) {
 $paymentmethod .= "<li id='ChqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='CHQ' ";
 if ( $listpaymentmethods->paymentmethods == null && $listpaymentmethods->card != 1 && $listpaymentmethods->RIB == null ) { $paymentmethod .= " checked"; }
@@ -2326,7 +2326,7 @@ print '</li>';
 }
 
 if ( $mode != 'manage' ) {
-if ( $listsource->PAYPAL != null && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' ) ) {
+if ( isset($listsource->PAYPAL) && $listsource->PAYPAL != null && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' ) ) {
 print "<li id='PaypalForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_paypal' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_paypal' ";
 print " ><label class='custom-control-label w-100' for='src_paypal'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
@@ -2335,7 +2335,7 @@ print "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0
 print '</div></div></label></div></li>';
 }
 
-if ( $listsource->RIB != null ) {
+if ( isset($listsource->RIB) && $listsource->RIB != null ) {
 print "<li id='VirForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_vir' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='2' ";
 if ( $listsource->paymentmethods == null && $listsource->card != 1 ) { print " checked"; }
@@ -2345,7 +2345,7 @@ print "</div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0
 print '</div></div></label></div></li>';
 }
 
-if ( $listsource->CHQ != null ) {
+if ( isset($listsource->CHQ) && $listsource->CHQ != null ) {
 print "<li id='ChqForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
 <input id='src_chq' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='7' ";
 if ( $listsource->paymentmethods == null && $listsource->card != 1 && $listsource->RIB == null ) { print " checked"; }
