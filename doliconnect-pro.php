@@ -1053,14 +1053,14 @@ $cart .= $list;
 if ( doliconnector($current_user, 'remise_percent') > 0 && $remise > 0 ) { 
 $remise_percent = (0*doliconnector($current_user, 'remise_percent'))/100;
 $cart .= "<li class='list-group-item d-flex justify-content-between bg-light'>
-<div class='text-success'><small class='my-0'>".__( 'Total discount', 'doliconnect-pro' )."</small><br>
-<small>-".number_format(100*$remise/$subprice, 0)." %</small>
-</div><small class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</small></li>";
+<div class='text-success'><small class='my-0'>".__( 'Discount', 'doliconnect-pro' )."</small>";
+//$cart .= "<br><small>-".number_format(100*$remise/$subprice, 0)." %</small>";
+$cart .= "</div><small class='text-success'>-".doliprice($remise, null, isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</small></li>";
 }
 
-$cart .= "<li class='list-group-item d-flex justify-content-between'>";
-$cart .= "<span>".__( 'Total VAT', 'doliconnect-pro' )."</span>";
-$cart .= "<strong>".doliprice($object, 'tva', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</strong></li>";
+$cart .= "<li class='list-group-item d-flex justify-content-between bg-light'>";
+$cart .= "<small>".__( 'VAT', 'doliconnect-pro' )."</small>";
+$cart .= "<small>".doliprice($object, 'tva', isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</small></li>";
 
 //$total=$subtotal-$remise_percent;            
 $cart .= "<li class='list-group-item d-flex justify-content-between'>";
