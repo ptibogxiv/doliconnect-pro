@@ -928,7 +928,7 @@ print "</div><div id='subscription-footer' class='modal-footer border-0'><small 
 
 }
 
-function addtodolibasket($product, $quantity = null, $price = null, $url = null, $timestart = null, $timeend = null) {
+function addtodolibasket($product, $quantity = null, $price = null, $remise_percent = null, $timestart = null, $timeend = null, $url = null) {
 global $current_user;
 
 if (!is_null($timestart) && $timestart > 0 ) {
@@ -978,7 +978,7 @@ $adln = [
     'date_end' => $date_end,
     'qty' => $quantity,
     'tva_tx' => $prdt->tva_tx, 
-    'remise_percent' => doliconnector($current_user, 'remise_percent'),
+    'remise_percent' => isset($remise_percent) ? $remise_percent : doliconnector($current_user, 'remise_percent'),
     'subprice' => $price
 	];                 
 $addline = callDoliApi("POST", "/orders/".doliconnector($current_user, 'fk_order')."/lines", $adln, 0);
@@ -1586,9 +1586,7 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) && $object->lines != null ) {
 wp_safe_redirect(doliconnecturl('dolicart').'?info');
 exit;                                   
-}
-
-if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
+} elseif ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
 $orderdelete = callDoliApi("DELETE", "/".$module."/".doliconnector($current_user, 'fk_order'), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
 if (1==1) {
@@ -1602,7 +1600,7 @@ print "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', '
  
 if ( isset($_POST['updateorderproduct']) ) {
 foreach ( $_POST['updateorderproduct'] as $productupdate ) {
-$result = addtodolibasket($productupdate['product'], $productupdate['qty'], $productupdate['price'], null, $productupdate['date_start'], $productupdate['date_end']);
+$result = addtodolibasket($productupdate['product'], $productupdate['qty'], $productupdate['price'], $productupdate['remise_percent'], $productupdate['date_start'], $productupdate['date_end']);
 //print var_dump($_POST['updateorderproduct']);
 if (1==1) {
 if (doliconnector($current_user, 'fk_order') > 0) {
