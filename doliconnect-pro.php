@@ -944,12 +944,14 @@ $date_end=null;
 }
 
 if ( empty(doliconnector($current_user, 'fk_order', true)) ) {
+$thirdparty = callDoliApi("GET", "/thirdparties/".doliconnector($current_user, 'fk_soc'), null, dolidelay('thirdparty'));
 $rdr = [
     'socid' => doliconnector($current_user, 'fk_soc'),
     'date_commande' => mktime(),
     'demand_reason_id' => 1,
+    'cond_reglement_id' => $thirdparty->cond_reglement_id,
     'module_source' => 'doliconnect',
-    'pos_source' => 0,
+    'pos_source' => get_current_blog_id(),
 	];                  
 $order = callDoliApi("POST", "/orders", $rdr, 0);
 }
