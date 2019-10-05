@@ -1583,6 +1583,11 @@ print "<table width='100%' style='border: none'><tr style='border: none'><td wid
 <i class='fas fa-check fa-fw text-dark' data-fa-transform='shrink-3.5' data-fa-mask='fas fa-circle' ></i>
 </div></td></tr></table><br>";
 
+if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) && $object->lines != null ) {
+wp_safe_redirect(doliconnecturl('dolicart').'?info');
+exit;                                   
+}
+
 if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'purge' ) {
 $orderdelete = callDoliApi("DELETE", "/".$module."/".doliconnector($current_user, 'fk_order'), null);
 $dolibarr = callDoliApi("GET", "/doliconnector/".$current_user->ID, null, dolidelay('doliconnector'), true);
@@ -1612,10 +1617,7 @@ print "<div class='alert alert-warning' role='alert'><p><strong>".__( 'Oops!', '
 }
 }
 
-if ( isset($_POST['dolicart']) && $_POST['dolicart'] == 'validation' && !isset($_GET['user']) && !isset($_GET['pay']) && !isset($_GET['validation']) && $object->lines != null ) {
-wp_safe_redirect(doliconnecturl('dolicart').'?info');
-exit;                                   
-}
+
 
 if ( isset($object) && is_object($object) ) {
 $timeout=$object->date_modification-current_time('timestamp',1)+1200;
