@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect Pro\n"
-"POT-Creation-Date: 2019-10-06 14:52+0200\n"
-"PO-Revision-Date: 2019-10-06 14:52+0200\n"
+"POT-Creation-Date: 2019-10-06 16:29+0200\n"
+"PO-Revision-Date: 2019-10-06 16:30+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -573,6 +573,11 @@ msgid "Login"
 msgstr "Connexion"
 
 #: doliconnect-pro.php:2524
+#, php-format
+msgid "you get %u %% discount"
+msgstr "vous bénéficiez de %u %% de réduction"
+
+#: doliconnect-pro.php:2526
 msgid "Loading"
 msgstr "Chargement"
 
