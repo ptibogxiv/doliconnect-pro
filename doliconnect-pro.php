@@ -1009,7 +1009,7 @@ $prdt = callDoliApi("GET", "/products/".$product."?includestockdata=1", null, 0)
     'date_end' => $date_end,
     'qty' => $quantity,
     'tva_tx' => $prdt->tva_tx, 
-    'remise_percent' => doliconnector($current_user, 'remise_percent'),
+    'remise_percent' => isset($remise_percent) ? $remise_percent : doliconnector($current_user, 'remise_percent'),
     'subprice' => $price
 	];                  
 $updateline = callDoliApi("PUT", "/orders/".doliconnector($current_user, 'fk_order')."/lines/".$line, $ln, 0);
