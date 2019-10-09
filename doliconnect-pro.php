@@ -108,9 +108,7 @@ if (empty($listpaymentmethods->stripe)) {
 print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".__( "Stripe's in sandbox mode", 'doliconnect-pro')."</b></li>";
 }
 
-$dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
-$versiondoli = explode("-", $dolibarr->success->dolibarr_version);
-if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+if ( doliversion('10.0.0') ) {
 print '<button id="ButtonAddPaymentMethod" type="button" class="list-group-item lh-condensed list-group-item-action list-group-item-primary" data-toggle="modal" data-target="#addsource" ><center><i class="fas fa-plus-circle"></i> '.__( 'New payment method', 'doliconnect-pro' ).'</center></button>';
 } elseif ( current_user_can( 'administrator' ) ) {
 print "<li class='list-group-item list-group-item-info'><i class='fas fa-info-circle'></i> <b>".sprintf( esc_html__( "Register payment methods needs Dolibarr %s but your version is %s", 'doliconnect-pro'), '10.0.0',$versiondoli[0])."</b></li>";
@@ -163,7 +161,7 @@ print "<li class='list-group-item list-group-item-light'><center>".__( 'No payme
 }
 print "</ul></div></form>";
 
-if ( $i < 5 && is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+if ( $i < 5 && doliversion('10.0.0') ) {
 
 print "<div class='modal fade' id='addsource' tabindex='-1' role='dialog' aria-labelledby='addsourceTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
 <div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>
@@ -1500,10 +1498,7 @@ print doliloaderscript('doliconnect-infoscartform');
 
 print "<div class='card'><ul class='list-group list-group-flush'>";
 
-$dolibarr = callDoliApi("GET", "/status", null, dolidelay('dolibarr'));
-$versiondoli = explode("-", $dolibarr->success->dolibarr_version);
-
-if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+if ( doliversion('10.0.0') ) {
 print "<li class='list-group-item'><h6>".__( 'Billing address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 } else {
 print "<li class='list-group-item'><h6>".__( 'Billing and shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
@@ -1516,7 +1511,7 @@ print '<div class="custom-control custom-radio">
 print '<div class="float-right"><button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#updatethirdparty"><center>'.__( 'Update', 'doliconnect-pro' ).'</center></button></div>';
 print "</small></li>";
 
-if ( is_object($dolibarr) && version_compare($versiondoli[0], '10.0.0') >= 0 ) {
+if ( doliversion('10.0.0') ) {
 
 print "<li class='list-group-item'><h6>".__( 'Shipping address', 'doliconnect-pro' )."</h6><small class='text-muted'>";
 
