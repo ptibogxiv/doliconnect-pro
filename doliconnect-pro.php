@@ -748,7 +748,7 @@ return $deleteline;
  
 } else {
 
-$prdt = callDoliApi("GET", "/products/".$product."?includestockdata=1", null, 0);
+$prdt = callDoliApi("GET", "/products/".$product."?includestockdata=1", null, dolidelay('product', true));
  $ln = [
     'desc' => $prdt->description,
     'date_start' => $date_start,
