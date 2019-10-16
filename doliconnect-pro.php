@@ -53,7 +53,7 @@ $currency=strtolower('eur');
 $stripeAmount=0;
 }
 
-$lock = dolipaymentmodes_lock();
+//$lock = dolipaymentmodes_lock();
 
 $paymentmethod = "<script src='https://js.stripe.com/v3/'></script>";
 
