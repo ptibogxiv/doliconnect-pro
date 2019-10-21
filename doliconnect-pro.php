@@ -784,7 +784,7 @@ $list = null;
 foreach ($object->lines as $line) {
 //$product = callDoliApi("GET", "/products/".$post->product_id."?includestockdata=1", null, 0);
 $list .= "<li class='list-group-item d-flex justify-content-between lh-condensed'><div><h6 class='my-0'>".$line->libelle."</h6><small class='text-muted'>".__( 'Quantity', 'doliconnect-pro' ).": ".$line->qty."</small></div>";
-$remise+=$line->subprice-$line->price;
+$remise+=$line->subprice-$line->total_ht;
 $subprice+=$line->subprice;
 $qty+=$line->qty;
 $list .= "<span class='text-muted'>".doliprice($line, 'total_ttc',isset($object->multicurrency_code) ? $object->multicurrency_code : null)."</span></li>";
