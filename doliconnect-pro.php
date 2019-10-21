@@ -1137,8 +1137,8 @@ $paymentintent = callDoliApi("GET", "/doliconnector/paymentintent/".substr($modu
 print dolipaymentmodes($paymentintent, $paymentmethods, $object, doliconnecturl('dolicart')."?pay", doliconnecturl('dolicart')."?pay");
 } else {
 if ( isset($_GET["ref"]) && $object->statut != 0 ) { $ref = $object->ref; } else { $ref= 'commande #'.$object->id; }
-if ( isset($object->resteapayer) ) { 
-$montant=$object->resteapayer;
+if ( isset($object->remaintopay) ) { 
+$montant=$object->remaintopay;
 } else { 
 $montant=$object->multicurrency_total_ttc?$object->multicurrency_total_ttc:$object->total_ttc;
 }
