@@ -163,7 +163,7 @@ print " ".__( 'yearly', 'doliconnect-pro' );
 $montantdata=($tx*$postadh->price);
 } 
 print ")"; } else { print "<span class='badge badge-pill badge-primary'>".__( 'Free', 'doliconnect-pro' )."</span>"; }
-print "</small></b><br /><small class='text-justify text-muted '>".doliproduct($postadh, 'note')."</small></div><div class='col-md-4'>";
+print "</small></b><br><small class='text-justify text-muted '>".doliproduct($postadh, 'note')."</small></div><div class='col-md-4'>";
 if ( $adherent->datefin != null && $adherent->statut == 1 && $adherent->datefin > $adherent->next_subscription_renew && $adherent->next_subscription_renew > current_time( 'timestamp',1) ) {
 print "<button class='btn btn-info btn-block' disabled>".sprintf(__('From %s', 'doliconnect-pro'), date_i18n('d/m/Y', $adherent->next_subscription_renew))."</a>";
 } elseif ( $postadh->family == '1' ) {
