@@ -836,28 +836,6 @@ print '<input id="card-owner" name="card-owner" value="" type="text" onchange="S
 print '</li>';
 }
 
-//NEW SEPA DIRECT DEBIT
-if ( count($counter) < 5 && $listsource->code_client != null && !empty($listsource->sepa_direct_debit) ) {   
-print "<li class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
-<input id='BkDbt' onclick='ShowHideDiv()' class='custom-control-input' type='radio' name='modepayment' value='src_newbank' ";
-//if ($listsource["sources"]==null) {print " checked";}
-print " ><label class='custom-control-label w-100' for='BkDbt'><div class='row'><div class='col-3 col-md-2 col-xl-2 align-middle'>";
-print "<center><i class='fas fa-university fa-3x fa-fw'></i></center></div><div class='col-9 col-md-10 col-xl-10 align-middle'><h6 class='my-0'>".__( 'Bank levy', 'doliconnect-pro' )."</h6><small class='text-muted'>".__( 'Via SEPA Direct Debit', 'doliconnect-pro' )."</small>";
-print '</div></div></label></div></li>';
-print '<li class="list-group-item list-group-item-secondary" id="BankForm" style="display: none">';
-print "<p class='text-justify'>";
-$blogname=get_bloginfo('name');
-print '<small>'.sprintf( esc_html__( 'By providing your IBAN and confirming this form, you are authorizing %s and Stripe, our payment service provider, to send instructions to your bank to debit your account and your bank to debit your account in accordance with those instructions. You are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited.', 'doliconnect-pro' ), $blogname).'</small>';
-print "</p>";
-print '<input id="iban-owner" name="iban-owner" value="" type="text" onchange="ShowHideDiv()" class="form-control" placeholder="'.__( 'Owner', 'doliconnect-pro' ).'" autocomplete="off">
-<div class="invalid-feedback" role="alert">'.__( 'As on your bank account', 'doliconnect-pro' ).'</div>
-<label for="iban-element"></label>
-<div class="form-control" id="iban-element"><!-- A Stripe Element will be inserted here. --></div>';
-//print '<div id="bank-name"></div>'';
-print '<div id="iban-errors" role="alert"></div>';
-print '</li>';
-}
-
 if ( $mode != 'manage' ) {
 if ( isset($listsource->PAYPAL) && $listsource->PAYPAL != null && get_option('doliconnectbeta')=='1' && current_user_can( 'administrator' ) ) {
 print "<li id='PaypalForm' class='list-group-item list-group-item-action flex-column align-items-start'><div class='custom-control custom-radio'>
