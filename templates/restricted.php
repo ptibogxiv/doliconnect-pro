@@ -13,8 +13,6 @@
   <link rel="shortcut icon" href="<?php echo get_site_icon_url(); ?>" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php wp_head(); ?>
-
-	<link rel="stylesheet" href="https://static.comingsoonpage.com/cspio-assets/1.0.0/style.css">		
 	
 	<!-- Calculated Styles -->
 	<style type="text/css">
@@ -74,10 +72,6 @@
 
 
 	</style>
-
-	<!-- Modernizr -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-
 </head>
 <body>
 
