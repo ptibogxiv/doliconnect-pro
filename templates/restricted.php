@@ -97,7 +97,7 @@
 <?php
 $queried_post = get_post(doliconnectid('doliaccount'));
 $content = $queried_post->post_content;
-$content = apply_filters('the_content', $content);
+$content = apply_filters('the_content', $content, true);
 $content = str_replace(']]>', ']]&gt;', $content);
 echo $content;
 ?>
