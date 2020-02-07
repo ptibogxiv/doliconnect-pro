@@ -36,47 +36,18 @@
 		-o-background-size: cover;
 		background-size: cover;
 	}
-
-	#cspio-page{
-		background-color: rgba(0,0,0,0);
-	}
 	
 	.flexbox #cspio-page{
 		align-items: center;
 		justify-content: center;
 	}
 
-	::-webkit-input-placeholder {
-		font-family:Helvetica, Arial, sans-serif;
-		font-weight: 400;
-		font-style: ;
-	}
-
-	::-moz-placeholder {
-		font-family:Helvetica, Arial, sans-serif;
-		font-weight: 400;
-		font-style: ;
-	} 
-
-	:-ms-input-placeholder {
-		font-family:Helvetica, Arial, sans-serif;
-		font-weight: 400;
-		font-style: ;
-	} 
-
-	:-moz-placeholder {
-		font-family:Helvetica, Arial, sans-serif;
-		font-weight: 400;
-		font-style: ;
-	}
-
-
 	</style>
 </head>
 <body>
 
 	<div class="container vh-100">
-  <div class="row" style="height:15vh;"></div>
+  <div class="row" style="height:20vh;"></div>
   <div class="row"><div class="col-12">
 <?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
