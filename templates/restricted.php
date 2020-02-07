@@ -82,7 +82,7 @@
 <body>
 
 	<div id="cspio-page" class="<?php echo esc_attr(get_theme_mod( 'ptibogxivtheme_container_type')); ?> site-content">
-<?php if(have_posts()): while(have_posts()): the_post(); ?>
+<?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
   <ARTICLE role="article" id="post_<?php the_ID()?>" <?php post_class()?>>
 <DIV class="container">
 <DIV class="row align-items-center justify-content-center">
@@ -92,7 +92,7 @@
 </DIV>
 </DIV> 
     <?php the_content()?>
-  </ARTICLE>
+
 <?php endwhile; else: ?>
 <?php
 $queried_post = get_post(doliconnectid('doliaccount'));
