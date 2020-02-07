@@ -294,17 +294,6 @@ print '</div>
 }
 add_action( 'wp_footer', 'doliconnect_privacy', 10, 1);
 
-function doliconnect_restrict_display($content) {
-if ( ! empty(get_option('doliconnectrestrict')) && !is_user_logged_in() ) {
-return "private site";
-} else {
-return $content;
-}
-
-}
-
-add_filter( 'the_content', 'doliconnect_restrict_display', 10, 1);
-
 function doliconnect_modal() {
 global $current_user;
 $year = strftime("%Y", current_time( 'timestamp', 1));

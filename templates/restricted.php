@@ -94,8 +94,13 @@
     <?php the_content()?>
   </ARTICLE>
 <?php endwhile; else: ?>
-<?php wp_redirect(esc_url( doliconnecturl('doliaccount') )); ?>
-<?php exit; ?>
+<?php
+$queried_post = get_post(doliconnectid('doliaccount'));
+$content = $queried_post->post_content;
+$content = apply_filters('the_content', $content);
+$content = str_replace(']]>', ']]&gt;', $content);
+echo $content;
+?>
 <?php endif; ?>					    									    			    			    							    			     			    		
 	</div>
 
