@@ -47,7 +47,11 @@
 <body>
 
 	<div class="container vh-100">
-  <div class="row" style="height:20vh;"></div>
+  <div class="row" style="height:20vh;"><div class="col-12">
+  <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
+echo '<a href="#" class="text-decoration-none float-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span> '.pll_current_language('name').'</a>';
+} ?>
+  </div></div>
   <div class="row"><div class="col-12">
 <?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
