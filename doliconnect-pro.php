@@ -261,7 +261,7 @@ print "</div><div id='subscription-footer' class='modal-footer border-0'><small 
 function doliconnect_privacy($arg) {
 global $current_user;
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '2' && ( $current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ( $current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
 
 doliconnect_enqueues();
 
@@ -291,18 +291,6 @@ print '</div>
 </div>';
 }
 
-if ( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) )) {
-print "<script>";
-?>
-function DoliconnectShowLoginDiv() {
-jQuery('#DoliconnectLogin').modal('show');
-}
-
-window.onload=DoliconnectShowLoginDiv;
-<?php
-print "</script>";
-}
-
 }
 add_action( 'wp_footer', 'doliconnect_privacy', 10, 1);
 
@@ -321,20 +309,20 @@ function doliconnect_modal() {
 global $current_user;
 $year = strftime("%Y", current_time( 'timestamp', 1));
 
-if ( !is_user_logged_in() && (get_option('doliloginmodal') == '1' || !empty(get_option('doliconnectrestrict'))) ) {
+if ( !is_user_logged_in() && (get_option('doliloginmodal') == '1') ) {
 
 doliconnect_enqueues();
 
 do_action( 'login_head' );
 
 print "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
-if ( ! empty(get_option('doliconnectrestrict')) ) {
-if ( !empty( get_background_color() )) {
-print " style='background-color:#".get_background_color()."' ";
-} else {
-print " style='background-color:#cccccc' ";
-}
-}
+//if ( ! empty(get_option('doliconnectrestrict')) ) {
+//if ( !empty( get_background_color() )) {
+//print " style='background-color:#".get_background_color()."' ";
+//} else {
+//print " style='background-color:#cccccc' ";
+//}
+//}
 print "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
 if ( empty(get_option('doliconnectrestrict')) ) {
@@ -414,5 +402,16 @@ en cours d'integration
 </div></div></div></div>";}
 }
 add_action( 'wp_footer', 'doliconnect_modal' );
+
+add_filter( 'template_include', 'so_13997743_custom_template' );
+
+function so_13997743_custom_template( $template )
+{
+    global $current_user;
+    if( isset( $_GET['mod']) && 'yes' == $_GET['mod'] || ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) ) )
+        $template = plugin_dir_path( __FILE__ ) . 'templates/restricted.php';
+
+    return $template;
+}
 
 ?>
