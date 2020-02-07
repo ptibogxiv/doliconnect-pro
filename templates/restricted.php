@@ -32,7 +32,7 @@
 	
 	body{
 		height:100%;
-		background: #ffffff url(https://images.pexels.com/photos/1029243/pexels-photo-1029243.jpeg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=be8f13a3ec5d152f60ede73809372c97); no-repeat center bottom fixed;
+		background: #ffffff url(https://images.pexels.com/photos/616404/pexels-photo-616404.jpeg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=be8f13a3ec5d152f60ede73809372c97); no-repeat center bottom fixed;
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -81,7 +81,7 @@
 </head>
 <body>
 
-	<div id="cspio-page">
+	<div id="cspio-page" class="<?php echo esc_attr(get_theme_mod( 'ptibogxivtheme_container_type')); ?> site-content">
 <?php if(have_posts()): while(have_posts()): the_post(); ?>
   <ARTICLE role="article" id="post_<?php the_ID()?>" <?php post_class()?>>
 <DIV class="container">
@@ -95,7 +95,7 @@
     <?php wp_link_pages(); ?>
   </ARTICLE>
 <?php endwhile; else: ?>
-<?php wp_redirect(get_bloginfo('url').'/404', 404); ?>
+<?php wp_redirect(esc_url( doliconnecturl('doliaccount') )); ?>
 <?php exit; ?>
 <?php endif; ?>					    									    			    			    							    			     			    		
 	</div>
