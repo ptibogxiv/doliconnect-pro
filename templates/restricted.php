@@ -40,7 +40,7 @@ if ( function_exists( 'wp_body_open' ) ) {
 	<div class="container vh-100">
   <div class="row" style="height:20vh;"><div class="col-12">
   <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
-echo '<a href="#" class="text-decoration-none float-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span> '.pll_current_language('name').'</a>';
+echo '<a href="#" class="text-decoration-none bg-light text-dark float-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span> '.pll_current_language('name').'</a>';
 } ?>
   </div></div>
   <div class="row"><div class="col-12">
