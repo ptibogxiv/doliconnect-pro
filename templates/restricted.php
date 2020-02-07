@@ -75,8 +75,8 @@
 </head>
 <body>
 
-	<div class="container mh-100">
-  <div class="row" style="height:20vh;"></div>
+	<div class="container vh-100">
+  <div class="row" style="height:15vh;"></div>
   <div class="row"><div class="col-12">
 <?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
