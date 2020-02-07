@@ -75,8 +75,9 @@
 </head>
 <body>
 
-	<div class="<?php echo esc_attr(get_theme_mod( 'ptibogxivtheme_container_type')); ?> site-content d-flex justify-content-between align-items-center" style="height:100vh;">
-  <div class="row mw-100"><div class="col-12">
+	<div class="container mh-100">
+  <div class="row" style="height:20vh;"></div>
+  <div class="row"><div class="col-12">
 <?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
     <?php the_content()?>
