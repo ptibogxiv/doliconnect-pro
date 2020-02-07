@@ -92,7 +92,6 @@
 </DIV>
 </DIV> 
     <?php the_content()?>
-    <?php wp_link_pages(); ?>
   </ARTICLE>
 <?php endwhile; else: ?>
 <?php wp_redirect(esc_url( doliconnecturl('doliaccount') )); ?>
