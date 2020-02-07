@@ -75,18 +75,12 @@
 </head>
 <body>
 
-	<div class="<?php echo esc_attr(get_theme_mod( 'ptibogxivtheme_container_type')); ?> site-content">
+	<div class="<?php echo esc_attr(get_theme_mod( 'ptibogxivtheme_container_type')); ?> site-content d-flex justify-content-between align-items-center" style="height:100vh;">
+  <div class="row mw-100"><div class="col-12">
 <?php if(have_posts() && (is_page(doliconnectid('doliaccount')) || is_page(doliconnectid('dolicontact'))) ): while(have_posts()): the_post(); ?>
-  <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>>
-<div class="container">
-<div class="row align-items-center justify-content-center">
-    <div class="col-4">
-<?php if ( has_post_thumbnail() ){ ?><br><br><br><center><img class="d-block w-100 img-fluid rounded" src="<?php the_post_thumbnail_url(); ?>" alt="Third slide"></center><br><?php } ?> 
-    </div>
-</div>
-</div> 
+  <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
     <?php the_content()?>
-
+  </article>
 <?php endwhile; else: ?>
 <?php
 $queried_post = get_post(doliconnectid('doliaccount'));
@@ -96,7 +90,8 @@ $content = str_replace(']]>', ']]&gt;', $content);
 echo $content;
 ?>
 <?php endif; ?>					    									    			    			    							    			     			    		
-	</div>
+	</div></div>
+  </div>
 
 </body>
 <?php wp_footer(); ?>
