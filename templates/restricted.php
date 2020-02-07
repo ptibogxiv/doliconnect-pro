@@ -21,21 +21,6 @@
 		height: 100%;
 		overflow: hidden;
 	}
-
-	body {
-		height:100%;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
-	}
-	
-	body{
-		height:100%;
-		background: #ffffff url(https://images.pexels.com/photos/616404/pexels-photo-616404.jpeg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=be8f13a3ec5d152f60ede73809372c97); no-repeat center bottom fixed;
-		-webkit-background-size: cover;
-		-moz-background-size: cover;
-		-o-background-size: cover;
-		background-size: cover;
-	}
 	
 	.flexbox #cspio-page{
 		align-items: center;
@@ -44,8 +29,14 @@
 
 	</style>
 </head>
-<body>
-
+<body <?php echo body_class(); ?>>
+<?php
+if ( function_exists( 'wp_body_open' ) ) {
+    wp_body_open();
+} else {
+    do_action( 'wp_body_open' );
+}
+?>
 	<div class="container vh-100">
   <div class="row" style="height:20vh;"><div class="col-12">
   <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
