@@ -1,599 +1,168 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
-"POT-Creation-Date: 2019-06-25 10:41+0200\n"
-"PO-Revision-Date: 2019-06-25 11:45+0200\n"
+"POT-Creation-Date: 2020-02-08 16:34+0100\n"
+"PO-Revision-Date: 2020-02-08 16:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: doliconnect-pro.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
-#: doliconnect-pro.php:60
-msgid "Manage payment methods"
-msgstr "Manage payment methods"
-
-#: doliconnect-pro.php:74
-msgid "You changed your default payment method"
-msgstr "You changed your default payment method"
-
-#: doliconnect-pro.php:88
-msgid "You have a new payment method"
-msgstr "You have a new payment method"
-
-#: doliconnect-pro.php:112 doliconnect-pro.php:168
-msgid "New payment method"
-msgstr "New payment method"
-
-#: doliconnect-pro.php:114
-#, php-format
-msgid "Register payment methods needs Dolibarr %s but your version is %s"
-msgstr "Register payment methods needs Dolibarr %s but your version is %s"
-
-#: doliconnect-pro.php:136 doliconnect-pro.php:357 doliconnect-pro.php:2452
-msgid "Account"
-msgstr "Account"
-
-#: doliconnect-pro.php:136 doliconnect-pro.php:357 doliconnect-pro.php:2452
-msgid "Mandate"
-msgstr "Mandate"
-
-#: doliconnect-pro.php:138 doliconnect-pro.php:359 doliconnect-pro.php:2454
-msgid "Card"
-msgstr "Card"
-
-#: doliconnect-pro.php:148 doliconnect-pro.php:150 doliconnect-pro.php:152
-#: doliconnect-pro.php:486
-msgid "Favorite"
-msgstr "Favourite"
-
-#: doliconnect-pro.php:154 doliconnect-pro.php:486 doliconnect-pro.php:2555
-msgid "Delete"
-msgstr "Delete"
-
-#: doliconnect-pro.php:160
-msgid "No payment method"
-msgstr ""
-
-#: doliconnect-pro.php:171
-msgid "Owner as on your card"
-msgstr "Owner as on your card"
-
-#: doliconnect-pro.php:176 doliconnect-pro.php:2690
-msgid "Add"
-msgstr "Add"
-
-#: doliconnect-pro.php:241
-msgid "Need an owner as on your card"
-msgstr ""
-
-#: doliconnect-pro.php:257
-msgid "Oops, an error occurred while adding the card"
-msgstr ""
-
-#: doliconnect-pro.php:314 doliconnect-pro.php:2399
-msgid "Credit of"
-msgstr ""
-
-#: doliconnect-pro.php:316 doliconnect-pro.php:2401
-msgid "Debit of"
-msgstr ""
-
-#: doliconnect-pro.php:318
-msgid "Soon available"
-msgstr ""
-
-#: doliconnect-pro.php:377 doliconnect-pro.php:2469
-msgid "Credit card"
-msgstr "Credit card"
-
-#: doliconnect-pro.php:381
-msgid "Owner as on your credit card"
-msgstr ""
-
-#: doliconnect-pro.php:394
-msgid "Bank transfer"
-msgstr "Transferencia bancaria"
-
-#: doliconnect-pro.php:394 doliconnect-pro.php:2487
-msgid "Via SEPA Direct Debit"
-msgstr ""
-
-#: doliconnect-pro.php:399 doliconnect-pro.php:2492
-#, php-format
-msgid ""
-"By providing your IBAN and confirming this form, you are authorizing %s and "
-"Stripe, our payment service provider, to send instructions to your bank to "
-"debit your account and your bank to debit your account in accordance with "
-"those instructions. You are entitled to a refund from your bank under the "
-"terms and conditions of your agreement with your bank. A refund must be "
-"claimed within 8 weeks starting from the date on which your account was "
-"debited."
-msgstr ""
-
-#: doliconnect-pro.php:401
-msgid "Owner as on your bank account"
-msgstr ""
-
-#: doliconnect-pro.php:417
-msgid "Google Pay"
-msgstr ""
-
-#: doliconnect-pro.php:418 doliconnect-pro.php:422
-msgid "Pay in one clic"
-msgstr ""
-
-#: doliconnect-pro.php:421
-msgid "Apple Pay"
-msgstr ""
-
-#: doliconnect-pro.php:434
-msgid "Redirect to Paypal"
-msgstr ""
-
-#: doliconnect-pro.php:444
-msgid "Transfer"
-msgstr ""
-
-#: doliconnect-pro.php:444 doliconnect-pro.php:454 doliconnect-pro.php:2519
-#: doliconnect-pro.php:2529
-msgid "See your receipt"
-msgstr ""
-
-#: doliconnect-pro.php:454 doliconnect-pro.php:2529
-msgid "Check"
-msgstr ""
-
-#: doliconnect-pro.php:464 doliconnect-pro.php:2539
-msgid "Cash"
-msgstr ""
-
-#: doliconnect-pro.php:464 doliconnect-pro.php:2539
-msgid "Go to reception desk"
-msgstr ""
-
-#: doliconnect-pro.php:472 doliconnect-pro.php:2545
-msgid "Save this payment method"
-msgstr ""
-
-#: doliconnect-pro.php:473
-msgid "Set as default mode"
-msgstr ""
-
-#: doliconnect-pro.php:482 doliconnect-pro.php:2551
-msgid "Recharge"
-msgstr ""
-
-#: doliconnect-pro.php:483
-msgid "Add a card"
-msgstr ""
-
-#: doliconnect-pro.php:484
-msgid "Add an account"
-msgstr ""
-
-#: doliconnect-pro.php:488 doliconnect-pro.php:2557
-msgid "No gateway"
-msgstr ""
-
-#: doliconnect-pro.php:493 doliconnect-pro.php:961 doliconnect-pro.php:994
-#: doliconnect-pro.php:2560
-msgid "Pay"
-msgstr "Pay"
-
-#: doliconnect-pro.php:888
+#: doliconnect-pro.php:100
 msgid "Subscription"
 msgstr "Subscription"
 
-#: doliconnect-pro.php:890
+#: doliconnect-pro.php:102
 #, php-format
 msgid "Available from %s to %s"
-msgstr ""
+msgstr "Available from %s to %s"
 
-#: doliconnect-pro.php:902
+#: doliconnect-pro.php:114
 msgid "An entry fee can be applied to you depending on the type"
-msgstr ""
+msgstr "An entry fee can be applied to you depending on the type"
 
-#: doliconnect-pro.php:903
+#: doliconnect-pro.php:115
 #, php-format
 msgid "From %s, a welcome fee can be apply"
-msgstr ""
+msgstr "From %s, a welcome fee can be apply"
 
-#: doliconnect-pro.php:912
+#: doliconnect-pro.php:124
 msgid "Cancel my subscription"
-msgstr ""
+msgstr "Cancel my subscription"
 
-#: doliconnect-pro.php:914
+#: doliconnect-pro.php:126
 msgid "Will be terminated"
-msgstr ""
+msgstr "Will be terminated"
 
-#: doliconnect-pro.php:916
+#: doliconnect-pro.php:128
 #, php-format
 msgid "from the %s"
-msgstr ""
+msgstr "from the %s"
 
-#: doliconnect-pro.php:917
+#: doliconnect-pro.php:129
 msgid "immediately"
-msgstr ""
+msgstr "immediately"
 
-#: doliconnect-pro.php:919
+#: doliconnect-pro.php:131
 msgid "Resiliate"
 msgstr "Resiliate"
 
-#: doliconnect-pro.php:945
+#: doliconnect-pro.php:159
 msgid "then"
 msgstr "then"
 
-#: doliconnect-pro.php:945 doliconnect-pro.php:948
+#: doliconnect-pro.php:159 doliconnect-pro.php:162
 msgid "yearly"
 msgstr "yearly"
 
-#: doliconnect-pro.php:951
+#: doliconnect-pro.php:165
 msgid "Free"
-msgstr "Gratis"
+msgstr "Free"
 
-#: doliconnect-pro.php:954
+#: doliconnect-pro.php:168
 #, php-format
 msgid "From %s"
-msgstr ""
+msgstr "From %s"
 
-#: doliconnect-pro.php:956 doliconnect-pro.php:2708
+#: doliconnect-pro.php:170
 msgid "Contact us"
 msgstr "Contact us"
 
-#: doliconnect-pro.php:958
+#: doliconnect-pro.php:173
 msgid "Non-renewable"
-msgstr ""
+msgstr "Non-renewable"
 
-#: doliconnect-pro.php:964 doliconnect-pro.php:965 doliconnect-pro.php:968
-#: doliconnect-pro.php:969 doliconnect-pro.php:996 doliconnect-pro.php:997
+#: doliconnect-pro.php:176 doliconnect-pro.php:183 doliconnect-pro.php:184
+#: doliconnect-pro.php:187 doliconnect-pro.php:188 doliconnect-pro.php:215
+#: doliconnect-pro.php:216
 msgid "Renew"
-msgstr ""
+msgstr "Renew"
 
-#: doliconnect-pro.php:976 doliconnect-pro.php:978 doliconnect-pro.php:980
-#: doliconnect-pro.php:985 doliconnect-pro.php:987
+#: doliconnect-pro.php:180 doliconnect-pro.php:213
+msgid "Pay"
+msgstr "Pay"
+
+#: doliconnect-pro.php:195 doliconnect-pro.php:197 doliconnect-pro.php:199
+#: doliconnect-pro.php:204 doliconnect-pro.php:206
 msgid "Subscribe"
 msgstr "Subscribe"
 
-#: doliconnect-pro.php:1001 doliconnect-pro.php:1005 doliconnect-pro.php:1010
-#: doliconnect-pro.php:1013 doliconnect-pro.php:1014 doliconnect-pro.php:1018
-#: doliconnect-pro.php:1021
+#: doliconnect-pro.php:220 doliconnect-pro.php:224 doliconnect-pro.php:229
+#: doliconnect-pro.php:232 doliconnect-pro.php:233 doliconnect-pro.php:237
+#: doliconnect-pro.php:240
 msgid "Ask us"
-msgstr ""
+msgstr "Ask us"
 
-#: doliconnect-pro.php:1004
+#: doliconnect-pro.php:223
 msgid "Request submitted"
-msgstr ""
+msgstr "Opdracht verzonden"
 
-#: doliconnect-pro.php:1028
+#: doliconnect-pro.php:247
 msgid "No available membership type"
-msgstr ""
+msgstr "No available membership type"
 
-#: doliconnect-pro.php:1036
+#: doliconnect-pro.php:255
 msgid ""
 "Note: the admins reserve the right to change your membership (type/status) "
 "in relation to your personal situation when you finalize your order. A "
 "validation of the membership may be necessary depending on the cases."
 msgstr ""
+"Note: the admins reserve the right to change your membership (type/status) "
+"in relation to your personal situation when you finalize your order. A "
+"validation of the membership may be necessary depending on the cases."
 
-#: doliconnect-pro.php:1147
-msgid "Quantity"
-msgstr "Quantity"
-
-#: doliconnect-pro.php:1155
-msgid "Cart"
-msgstr "Cart"
-
-#: doliconnect-pro.php:1155
-#, php-format
-msgid "%s item"
-msgid_plural "%s items"
-msgstr[0] ""
-msgstr[1] ""
-
-#: doliconnect-pro.php:1156 doliconnect-pro.php:1449
-msgid "update"
-msgstr "update"
-
-#: doliconnect-pro.php:1163
-msgid "Customer discount"
-msgstr ""
-
-#: doliconnect-pro.php:1169
-msgid "Total VAT"
-msgstr ""
-
-#: doliconnect-pro.php:1175
-msgid "Already paid"
-msgstr ""
-
-#: doliconnect-pro.php:1178
-msgid "Remains to be paid"
-msgstr ""
-
-#: doliconnect-pro.php:1181
-msgid "Total to pay"
-msgstr ""
-
-#: doliconnect-pro.php:1238
-msgid "Oops, Order's module is not available"
-msgstr ""
-
-#: doliconnect-pro.php:1283
-msgid "Your order has been registered"
-msgstr ""
-
-#: doliconnect-pro.php:1283 doliconnect-pro.php:1308
-msgid "Reference"
-msgstr "Referência"
-
-#: doliconnect-pro.php:1283
-msgid "Payment method"
-msgstr "Payment method"
-
-#: doliconnect-pro.php:1293
-#, php-format
-msgid ""
-"Please send your cheque in the amount of <b>%1$s</b> with reference <b>%2$s</"
-"b> to <b>%3$s</b> at the following address"
-msgstr ""
-
-#: doliconnect-pro.php:1301
-#, php-format
-msgid ""
-"Please send your transfert in the amount of <b>%1$s</b> with reference <b>"
-"%2$s</b> at the following account"
-msgstr ""
-
-#: doliconnect-pro.php:1302
-msgid "Bank"
-msgstr "Bank Account"
-
-#: doliconnect-pro.php:1308
-msgid "Your payment has been registered"
-msgstr ""
-
-#: doliconnect-pro.php:1311
-msgid "An error is occurred"
-msgstr ""
-
-#: doliconnect-pro.php:1314
-msgid "See my order"
-msgstr ""
-
-#: doliconnect-pro.php:1416
-msgid "Oops"
-msgstr "Product/Service not in sale"
-
-#: doliconnect-pro.php:1416
-msgid "An error is occured. Please retry!"
-msgstr ""
-
-#: doliconnect-pro.php:1448
-msgid "Contacts"
-msgstr "Contactos"
-
-#: doliconnect-pro.php:1458 doliconnect-pro.php:1462 doliconnect-pro.php:1581
-#: doliconnect-pro.php:1605
-msgid "Billing address"
-msgstr "Billing address"
-
-#: doliconnect-pro.php:1467 doliconnect-pro.php:1471 doliconnect-pro.php:1616
-msgid "Shipping address"
-msgstr "Endereço de entrega"
-
-#: doliconnect-pro.php:1478 doliconnect-pro.php:1607
-msgid "Billing and shipping address"
-msgstr ""
-
-#: doliconnect-pro.php:1484 doliconnect-pro.php:1649
-msgid "Message"
-msgstr "Message"
-
-#: doliconnect-pro.php:1592 doliconnect-pro.php:1611 doliconnect-pro.php:2688
-msgid "Update"
-msgstr "Update"
-
-#: doliconnect-pro.php:1620
-msgid "Same address that billing"
-msgstr ""
-
-#: doliconnect-pro.php:1646
-#, php-format
-msgid "Add shipping contact needs Dolibarr %s but your version is %s"
-msgstr ""
-
-#: doliconnect-pro.php:1650
-msgid "Enter a message here that you want to send us"
-msgstr ""
-
-#: doliconnect-pro.php:1651
-msgid "Validate"
-msgstr "Validate"
-
-#: doliconnect-pro.php:1680 doliconnect-pro.php:1696
-msgid "Oops!"
-msgstr "Oops!"
-
-#: doliconnect-pro.php:1680 doliconnect-pro.php:1696
-msgid "An error is occured. Please contact us!"
-msgstr ""
-
-#: doliconnect-pro.php:1749
-msgid "Continue shopping"
-msgstr "Continue shopping"
-
-#: doliconnect-pro.php:1753
-msgid "Empty the basket"
-msgstr "Empty the basket"
-
-#: doliconnect-pro.php:1756
-msgid "Process"
-msgstr "Process"
-
-#: doliconnect-pro.php:1916
+#: doliconnect-pro.php:286
 msgid "I approve"
-msgstr ""
+msgstr "Approve"
 
-#: doliconnect-pro.php:1917
+#: doliconnect-pro.php:287
 msgid "I refuse"
-msgstr ""
+msgstr "I refuse"
 
-#: doliconnect-pro.php:1969
+#: doliconnect-pro.php:318
 msgid "Welcome"
 msgstr "Product/Service not in sale"
 
-#: doliconnect-pro.php:1971
+#: doliconnect-pro.php:320
 msgid "Access restricted to users"
-msgstr ""
+msgstr "Access restricted to users"
 
-#: doliconnect-pro.php:1999
+#: doliconnect-pro.php:348
 msgid "Email"
 msgstr "Email"
 
-#: doliconnect-pro.php:2003
+#: doliconnect-pro.php:352
 msgid "Password"
 msgstr "Password"
 
-#: doliconnect-pro.php:2011
+#: doliconnect-pro.php:362
 msgid "Create an account"
 msgstr "Create an account"
 
-#: doliconnect-pro.php:2014
+#: doliconnect-pro.php:365
 msgid "Forgot password?"
-msgstr "Product/Service not in sale"
+msgstr "Forgot password?"
 
-#: doliconnect-pro.php:2024 doliconnect-pro.php:2701
+#: doliconnect-pro.php:375
 msgid "Sign in"
 msgstr "Sign in"
 
-#: doliconnect-pro.php:2051
-msgid "Sign in with"
-msgstr ""
-
-#: doliconnect-pro.php:2055 doliconnect-pro.php:2387
-msgid "or"
-msgstr "or"
-
-#: doliconnect-pro.php:2403
-msgid "Automatic use"
-msgstr ""
-
-#: doliconnect-pro.php:2473 doliconnect-pro.php:2494
-msgid "Owner"
-msgstr "Owner"
-
-#: doliconnect-pro.php:2474
-msgid "As on your credit card"
-msgstr ""
-
-#: doliconnect-pro.php:2487
-msgid "Bank levy"
-msgstr ""
-
-#: doliconnect-pro.php:2495
-msgid "As on your bank account"
-msgstr ""
-
-#: doliconnect-pro.php:2509
-msgid "Pay with your Paypal account"
-msgstr ""
-
-#: doliconnect-pro.php:2519
-msgid "Bank Transfer"
-msgstr ""
-
-#: doliconnect-pro.php:2546
-msgid "Set as default payment mode"
-msgstr ""
-
-#: doliconnect-pro.php:2552
-msgid "Add credit card"
-msgstr ""
-
-#: doliconnect-pro.php:2553
-msgid "Add bank account"
-msgstr ""
-
-#: doliconnect-pro.php:2609
-msgid "for"
-msgstr "para"
-
-#: doliconnect-pro.php:2611
-msgid "years"
-msgstr "years"
-
-#: doliconnect-pro.php:2612
-msgid "months"
-msgstr "months"
-
-#: doliconnect-pro.php:2613
-msgid "days"
-msgstr "days"
-
-#: doliconnect-pro.php:2614
-msgid "hours"
-msgstr "timer"
-
-#: doliconnect-pro.php:2615
-msgid "minutes"
-msgstr "minutter"
-
-#: doliconnect-pro.php:2617
-msgid "year"
-msgstr "year"
-
-#: doliconnect-pro.php:2618
-msgid "month"
-msgstr "month"
-
-#: doliconnect-pro.php:2619
-msgid "day"
-msgstr "day"
-
-#: doliconnect-pro.php:2620 doliconnect-pro.php:2639 doliconnect-pro.php:2648
-msgid "hour"
-msgstr "hour"
-
-#: doliconnect-pro.php:2621
-msgid "minute"
-msgstr "minute"
-
-#: doliconnect-pro.php:2636 doliconnect-pro.php:2645
-msgid "Price"
-msgstr "Price"
-
-#: doliconnect-pro.php:2640
-msgid "You benefit from the rate"
-msgstr ""
-
-#: doliconnect-pro.php:2694
-msgid "Go to cart"
-msgstr ""
-
-#: doliconnect-pro.php:2701 doliconnect-pro.php:2703
-msgid "log in"
-msgstr "log in"
-
-#: doliconnect-pro.php:2708
-msgid "Login"
-msgstr "Login"
-
-#: doliconnect-pro.php:2711
-msgid "Loading"
-msgstr ""
+#: doliconnect-pro.php:423
+msgid "Choose language"
+msgstr "Choose language"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:395
 msgid "Check for updates"
@@ -601,30 +170,30 @@ msgstr "Check for updates"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:432
 msgid "View details"
-msgstr ""
+msgstr "View details"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:455
 #, php-format
 msgid "More information about %s"
-msgstr ""
+msgstr "More information about %s"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:548
 #, php-format
 msgctxt "the plugin title"
 msgid "The %s plugin is up to date."
-msgstr ""
+msgstr "The %s plugin is up to date."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:550
 #, php-format
 msgctxt "the plugin title"
 msgid "A new version of the %s plugin is available."
-msgstr ""
+msgstr "A new version of the %s plugin is available."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:552
 #, php-format
 msgctxt "the plugin title"
 msgid "Could not determine if updates are available for %s."
-msgstr ""
+msgstr "Could not determine if updates are available for %s."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:558
 #, php-format
@@ -637,112 +206,272 @@ msgstr "There is no changelog available."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:204
 msgid "Sorry, you are not allowed to access this page."
-msgstr ""
+msgstr "You are not allowed to access this page."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:251
 msgid "Theme License - "
-msgstr ""
+msgstr "Theme license - "
 
 #: lib/wp-package-updater/class-wp-package-updater.php:406
 msgid ""
 "Unexpected Error! The query to retrieve the license data returned a "
 "malformed response."
 msgstr ""
+"Unexpected Error! The query to retrieve the license data returned a "
+"malformed response."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:424
 msgid "The license is already in use for this domain."
-msgstr ""
+msgstr "The license is already in use for this domain."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:427
 msgid ""
 "The license has reached the maximum number of activations and cannot be "
 "activated for this domain."
 msgstr ""
+"The license has reached the maximum number of activations and cannot be "
+"activated for this domain."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:433
 msgid "The license is already inactive for this domain."
-msgstr ""
+msgstr "The license is already inactive for this domain."
 
 #. translators: the license expiry date
 #: lib/wp-package-updater/class-wp-package-updater.php:444
 #, php-format
 msgid "The license expired on %s and needs to be renewed to be updated."
-msgstr ""
+msgstr "The license expired on %s and needs to be renewed to be updated."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:448
 msgid "The license expired and needs to be renewed to be updated."
-msgstr ""
+msgstr "The license expired and needs to be renewed to be updated."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:454
 msgid ""
 "The license is blocked and cannot be updated anymore. Please use another "
 "license key."
 msgstr ""
+"The license is blocked and cannot be updated anymore. Please use another "
+"license key."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:460
 msgid ""
 "The license has not been activated and its status is stil pending. Please "
 "try again or use another license key."
 msgstr ""
+"The license has not been activated and its status is stil pending. Please "
+"try again or use another license key."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:466
 msgid "The provided license key is invalid. Please use another license key."
-msgstr ""
+msgstr "The provided license key is invalid. Please use another license key."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:469
 msgid ""
 "The provided license key does not appear to be valid. Please use another "
 "license key."
 msgstr ""
+"The provided license key does not appear to be valid. Please use another "
+"license key."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:473
 msgid ""
 "An active license is required to update the plugin. Please provide a valid "
 "license key in Plugins > Installed Plugins."
 msgstr ""
+"An active license is required to update the plugin. Please provide a valid "
+"license key in Plugins > Installed Plugins."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:475
 msgid ""
 "An active license is required to update the theme. Please provide a valid "
 "license key in Appearence > Theme License."
 msgstr ""
+"An active license is required to update the theme. Please provide a valid "
+"license key in Appearence > Theme License."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:481
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the plugin."
 msgstr ""
+"An unexpected error has occured. Please try again. If the problem persists, "
+"please contact the author of the plugin."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:483
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the theme."
 msgstr ""
+"An unexpected error has occured. Please try again. If the problem persists, "
+"please contact the author of the theme."
 
 #: lib/wp-package-updater/templates/license-form.php:6
 msgid "Current license key:"
-msgstr ""
+msgstr "Current license key:"
 
 #: lib/wp-package-updater/templates/license-form.php:9
 msgid "License key to change:"
-msgstr ""
+msgstr "License key to change:"
 
 #. Plugin Name of the plugin/theme
 msgid "Doliconnect PRO"
-msgstr ""
+msgstr "Doliconnect PRO"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ptibogxiv.net"
-msgstr ""
+msgstr "https://www.ptibogxiv.net"
 
 #. Description of the plugin/theme
 msgid "Premium Enhancement of Doliconnect"
-msgstr ""
+msgstr "Premium Enhancement of Doliconnect"
 
 #. Author of the plugin/theme
 msgid "ptibogxiv"
-msgstr ""
+msgstr "ptibogxiv"
 
 #. Author URI of the plugin/theme
 msgid "https://www.ptibogxiv.net/en"
-msgstr ""
+msgstr "https://www.ptibogxiv.net/en"
+
+#~ msgid "Manage payment methods"
+#~ msgstr "Manage payment methods"
+
+#~ msgid "You changed your default payment method"
+#~ msgstr "You changed your default payment method"
+
+#~ msgid "You have a new payment method"
+#~ msgstr "You have a new payment method"
+
+#~ msgid "New payment method"
+#~ msgstr "New payment method"
+
+#, php-format
+#~ msgid "Register payment methods needs Dolibarr %s but your version is %s"
+#~ msgstr "Register payment methods needs Dolibarr %s but your version is %s"
+
+#~ msgid "Account"
+#~ msgstr "Account"
+
+#~ msgid "Mandate"
+#~ msgstr "Mandate"
+
+#~ msgid "Card"
+#~ msgstr "Card"
+
+#~ msgid "Favorite"
+#~ msgstr "Favourite"
+
+#~ msgid "Delete"
+#~ msgstr "Delete"
+
+#~ msgid "Owner as on your card"
+#~ msgstr "Owner as on your card"
+
+#~ msgid "Add"
+#~ msgstr "Add"
+
+#~ msgid "Credit card"
+#~ msgstr "Credit card"
+
+#~ msgid "Bank transfer"
+#~ msgstr "Transferencia bancaria"
+
+#~ msgid "Quantity"
+#~ msgstr "Quantity"
+
+#~ msgid "Cart"
+#~ msgstr "Cart"
+
+#~ msgid "update"
+#~ msgstr "update"
+
+#~ msgid "Reference"
+#~ msgstr "Referência"
+
+#~ msgid "Payment method"
+#~ msgstr "Payment method"
+
+#~ msgid "Bank"
+#~ msgstr "Bank Account"
+
+#~ msgid "Oops"
+#~ msgstr "Product/Service not in sale"
+
+#~ msgid "Contacts"
+#~ msgstr "Contactos"
+
+#~ msgid "Billing address"
+#~ msgstr "Billing address"
+
+#~ msgid "Shipping address"
+#~ msgstr "Endereço de entrega"
+
+#~ msgid "Message"
+#~ msgstr "Message"
+
+#~ msgid "Update"
+#~ msgstr "Update"
+
+#~ msgid "Validate"
+#~ msgstr "Validate"
+
+#~ msgid "Oops!"
+#~ msgstr "Oops!"
+
+#~ msgid "Continue shopping"
+#~ msgstr "Continue shopping"
+
+#~ msgid "Empty the basket"
+#~ msgstr "Empty the basket"
+
+#~ msgid "Process"
+#~ msgstr "Process"
+
+#~ msgid "or"
+#~ msgstr "or"
+
+#~ msgid "Owner"
+#~ msgstr "Owner"
+
+#~ msgid "for"
+#~ msgstr "para"
+
+#~ msgid "years"
+#~ msgstr "years"
+
+#~ msgid "months"
+#~ msgstr "months"
+
+#~ msgid "days"
+#~ msgstr "days"
+
+#~ msgid "hours"
+#~ msgstr "timer"
+
+#~ msgid "minutes"
+#~ msgstr "minutter"
+
+#~ msgid "year"
+#~ msgstr "year"
+
+#~ msgid "month"
+#~ msgstr "month"
+
+#~ msgid "day"
+#~ msgstr "day"
+
+#~ msgid "hour"
+#~ msgstr "hour"
+
+#~ msgid "minute"
+#~ msgstr "minute"
+
+#~ msgid "Price"
+#~ msgstr "Price"
+
+#~ msgid "log in"
+#~ msgstr "log in"
+
+#~ msgid "Login"
+#~ msgstr "Login"
