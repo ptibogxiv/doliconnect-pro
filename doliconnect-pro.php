@@ -392,15 +392,45 @@ en cours d'integration
 }
 add_action( 'wp_footer', 'doliconnect_modal' );
 
-add_filter( 'template_include', 'so_13997743_custom_template' );
+// ********************************************************
 
-function so_13997743_custom_template( $template )
+add_filter( 'template_include', 'doliconnect_restrictedaccess' );
+
+function doliconnect_restrictedaccess( $template )
 {
     global $current_user;
     if( isset( $_GET['mod']) && 'yes' == $_GET['mod'] || ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) ) )
         $template = plugin_dir_path( __FILE__ ) . 'templates/restricted.php';
 
     return $template;
+}
+
+// ********************************************************
+
+add_action( 'wp_body_open', 'doliconnect_networkbar' );
+ 
+function doliconnect_networkbar() {
+if (is_multisite() && !empty(get_theme_mod( 'ptibogxivtheme_networkbar_color'))) { ?>
+<div class="text-dark bg-<?php echo "dark"; //echo esc_attr(get_theme_mod( 'ptibogxivtheme_networkbar_color' )); ?>">
+<div class="<?php echo esc_attr(get_theme_mod('ptibogxivtheme_container_type')); ?>"><div class="row"><div class="col-10 col-md-9"><ul class="nav nav-pills"><?php
+print '<li class="nav-item d-none d-lg-block"><small>';   
+print '<div class="nav-link text-white disabled"><i class="fas fa-globe fa-fw"></i> '.esc_attr( get_network()->site_name ).'</div></small></li>';
+$defaults = array(
+//'site__in'=>(1),
+'public'=>'1'
+	);
+$subsites = get_sites($defaults);
+foreach( $subsites as $subsite ) {
+  $subsite_id = get_object_vars($subsite)["blog_id"];
+  $subsite_name = get_blog_details($subsite_id)->blogname;
+  $subsite_url = get_blog_details($subsite_id)->siteurl; ?>
+<li class="nav-item"><small><a class="nav-link text-white <?php if ( get_current_blog_id()==$subsite_id ) { echo "active"; } ?>" href="<?php echo $subsite_url; ?>"><?php echo $subsite_name; ?></a></small></li>
+<?php } ?>
+</ul></div><div class="col-2 col-md-3">  
+<?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
+print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><div class="d-block d-sm-block d-xs-block d-md-block d-lg-none"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></div><div class="d-none d-lg-block"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span> '.pll_current_language('name').'</div></button>';
+}
+print "</div></div></div></div>"; } 
 }
 
 ?>
