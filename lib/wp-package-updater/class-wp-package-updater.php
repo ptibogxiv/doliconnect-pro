@@ -354,7 +354,7 @@ if ( ! class_exists( 'WP_Package_Updater' ) ) {
 		public function show_license_error_notice() {
 			$error = get_option( 'wppu_' . $this->package_slug . '_license_error' );
 
-			if ( $error && !is_multisite() ) {
+			if ( $error ) {
 				$class = 'license-error-' . $this->package_slug . ' notice notice-error is-dismissible';
 
 				printf( '<div class="%1$s"><p>%2$s</p></div>', $class, $error ); // @codingStandardsIgnoreLine
