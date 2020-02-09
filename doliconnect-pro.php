@@ -391,7 +391,7 @@ add_filter( 'template_include', 'doliconnect_restrictedaccess' );
 function doliconnect_restrictedaccess( $template )
 {
     global $current_user;
-    if( isset( $_GET['mod']) && 'yes' == $_GET['mod'] || ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) ) )
+    if( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) ) )
         $template = plugin_dir_path( __FILE__ ) . 'templates/restricted.php';
 
     return $template;
