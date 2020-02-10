@@ -18,7 +18,7 @@
  * BannerLow: https://www.ptibogxiv.net/wp-content/wppus/banners/doliconnect-pro-722x250.png
  *
  * @author ptibogxiv.net <support@ptibogxiv.net>
- * @copyright Copyright (c) 2017-2019, ptibogxiv.net
+ * @copyright Copyright (c) 2017-2020, ptibogxiv.net
 **/
 
 // Exit if accessed directly.
