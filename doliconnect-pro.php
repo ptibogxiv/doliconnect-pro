@@ -39,7 +39,7 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
 function doliconnectpro_textdomain() {
  load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'after_setup_theme', 'doliconnectpro_textdomain' );
+add_action( 'plugins_loaded', 'doliconnectpro_textdomain' );
 
 //function doliconnectpro_run() {
 
