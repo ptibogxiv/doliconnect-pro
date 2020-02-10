@@ -16,10 +16,7 @@
 	<!-- Calculated Styles -->
 	<style type="text/css">
 	
-	html {
-		height: 100%;
-		overflow: hidden;
-	}
+
 	
 	.flexbox #cspio-page{
 		align-items: center;
@@ -40,7 +37,7 @@ if ( function_exists( 'wp_body_open' ) ) {
   <div class="row" style="height:20vh;"><div class="col-12">
 
   </div></div>
-  <div class="row" style="height:80vh;"><div class="col-12">
+  <div class="row"><div class="col-12">
 <?php if(have_posts() && ( (is_page(doliconnectid('doliaccount')) && !empty(doliconnectid('doliaccount') ) || (is_page(doliconnectid('dolicontact')) && !empty(doliconnectid('dolicontact') ) ))) ): while(have_posts() ) : the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
     <?php the_content()?>
