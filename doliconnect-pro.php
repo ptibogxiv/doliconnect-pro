@@ -36,10 +36,10 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
  );
  
 // Adding language files
-function theme_setup_hook () {
+function doliconnectpro_textdomain() {
  load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
-add_action( 'after_setup_theme', 'theme_setup_hook' );
+add_action( 'after_setup_theme', 'doliconnectpro_textdomain' );
 
 //function doliconnectpro_run() {
 
