@@ -11,20 +11,20 @@
   <link rel="icon" href="<?php echo get_site_icon_url(); ?>" type="image/x-icon">
   <link rel="shortcut icon" href="<?php echo get_site_icon_url(); ?>" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<?php wp_head(); ?>
-	
-	<!-- Calculated Styles -->
 	<style type="text/css">
-	
-
-	
-	.flexbox #cspio-page{
-		align-items: center;
-		justify-content: center;
+	html {
+		height: 100%;
+		overflow: hidden;
 	}
 
-	</style>
+	body {
+		height:100%;
+		overflow: auto;
+	}
+  </style>
+	<?php wp_head(); ?>
 </head>
+
 <body <?php echo body_class(); ?>>
 <?php
 if ( function_exists( 'wp_body_open' ) ) {
@@ -33,11 +33,8 @@ if ( function_exists( 'wp_body_open' ) ) {
     do_action( 'wp_body_open' );
 }
 ?>
-	<div class="container">
-  <div class="row" style="height:20vh;"><div class="col-12">
-
-  </div></div>
-  <div class="row"><div class="col-12">
+	<div class="container d-flex h-100">
+  <div class="row align-self-center w-100"><div class="col-12">
 <?php if(have_posts() && ( (is_page(doliconnectid('doliaccount')) && !empty(doliconnectid('doliaccount') ) || (is_page(doliconnectid('dolicontact')) && !empty(doliconnectid('dolicontact') ) ))) ): while(have_posts() ) : the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
     <?php the_content()?>
