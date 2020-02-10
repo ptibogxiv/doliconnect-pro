@@ -34,8 +34,12 @@ require_once plugin_dir_path( __FILE__ ) . 'lib/wp-package-updater/class-wp-pack
  	wp_normalize_path( plugin_dir_path( __FILE__ ) ),
  	true
  );
-
-load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+ 
+// Adding language files
+function theme_setup_hook () {
+ load_plugin_textdomain( 'doliconnect-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'after_setup_theme', 'theme_setup_hook' );
 
 //function doliconnectpro_run() {
 
