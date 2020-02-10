@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html> 
 <html class="no-js">
-<html lang="fr">
+<html <?php language_attributes(); ?>>
 <head>
   <title><?php bloginfo('name'); ?></title>
   <meta name="description" content="">
