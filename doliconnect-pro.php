@@ -265,7 +265,7 @@ print "</div><div id='subscription-footer' class='modal-footer border-0'><small 
 function doliconnect_privacy($arg) {
 global $current_user;
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ( $current_user->$privacy < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ( 'xx' < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
 
 doliconnect_enqueues();
 
@@ -281,7 +281,7 @@ print "</script>";
 
 print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
-<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - V'.get_the_modified_date( $d, get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
+<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - V'.get_the_modified_date( get_option( 'date_format' ), get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
 //print '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 print '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
 print apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
