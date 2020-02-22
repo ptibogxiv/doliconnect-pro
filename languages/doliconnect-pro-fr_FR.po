@@ -74,7 +74,7 @@ msgstr "Gratuit"
 
 #: doliconnect-pro.php:172
 msgid "Including a federal part of"
-msgstr "Y compris une part fédérale de"
+msgstr "Incluant une part fédérale de"
 
 #: doliconnect-pro.php:175
 #, php-format
