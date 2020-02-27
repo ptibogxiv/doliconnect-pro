@@ -365,10 +365,9 @@ if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_
 switch_to_blog(1);
 } 
 print "<div><div class='float-left'><small>";
-if (((!is_multisite() && get_option( 'users_can_register' )) || (get_option('users_can_register') == '1' && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
+if ((!is_multisite() && get_option( 'users_can_register' )) || ((!is_multisite() && get_option( 'dolicustsupp_can_register' )) || ((get_option( 'dolicustsupp_can_register' ) || get_option('users_can_register') == '1') && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
 print "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro')."'>".__( 'Create an account', 'doliconnect-pro')."</a>";
 }
-
 print "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro')."'>".__( 'Forgot password?', 'doliconnect-pro')."</a></small></div></div>"; 
 if (get_site_option('doliconnect_mode')=='one') {
 restore_current_blog();
