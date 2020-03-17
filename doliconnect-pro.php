@@ -426,7 +426,7 @@ foreach( $subsites as $subsite ) {
 <?php } ?>
 </ul></div><div class="col-2 col-md-3">  
 <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
-print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white align-middle text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><div class="d-block d-sm-block d-xs-block d-md-block d-lg-none"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></div><div class="d-none d-lg-block"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span> <small>'.pll_current_language('name').'</small></div></button>';
+print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
 }
 print "</div></div></div></div>"; } 
 }
