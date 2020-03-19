@@ -33,8 +33,10 @@ if ( function_exists( 'wp_body_open' ) ) {
     do_action( 'wp_body_open' );
 }
 ?>
-	<div class="container d-flex h-100">
-  <div class="row align-self-center w-100"><div class="col-12">
+<div class="container d-flex h-100">
+<table class="h-100 w-100"><tbody><tr>
+<td class="align-middle">
+<div class="row"><div class="col-md-6 offset-md-3">
 <?php if(have_posts() && ( (is_page(doliconnectid('doliaccount')) && !empty(doliconnectid('doliaccount') ) || (is_page(doliconnectid('dolicontact')) && !empty(doliconnectid('dolicontact') ) ))) ): while(have_posts() ) : the_post(); ?>
   <article role="article" id="post_<?php the_ID()?>" <?php post_class()?>> 
     <?php the_content()?>
@@ -47,11 +49,13 @@ $content = apply_filters('the_content', $content, true);
 $content = str_replace(']]>', ']]&gt;', $content);
 echo $content;
 ?>
-<?php endif; ?>					    									    			    			    							    			     			    		
-	</div></div>
-  </div>
+<?php endif; ?>
+</div></div>					    									    			    			    							    			     			    		
+</td>
+</tr></tbody></table> 
+</div>
 
 </body>
-<?php //get_footer(); ?>
-<?php wp_footer(); ?>
+<?php get_footer(); ?>
+<?php //wp_footer(); ?>
 </html>
