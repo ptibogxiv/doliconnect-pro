@@ -96,8 +96,9 @@ $adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'f
 return $adhesion;
 }
 
-if ( !empty(doliconst('MAIN_MODULE_ADHERENTSPLUS')) ) {
+
 function dolimembership_modal() {
+if ( !empty(doliconst('MAIN_MODULE_ADHERENTSPLUS')) ) {
 global $current_user;
 doliconnect_enqueues();
 
@@ -268,9 +269,9 @@ print doliloading('subscription');
 
 print "</div><div id='subscription-footer' class='modal-footer border-0'><small class='text-justify'>".__( 'Note: the admins reserve the right to change your membership (type/status) in relation to your personal situation when you finalize your order. A validation of the membership may be necessary depending on the cases.', 'doliconnect-pro')."</small></div></div></div></div>";
 
-}
+}}
 add_action( 'wp_footer', 'dolimembership_modal');
-}
+
 
 // ********************************************************
 
