@@ -96,11 +96,17 @@ $adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'f
 return $adhesion;
 }
 
-function dolimembership_modal($current_user, $adherent = null, $delay) {
+function dolimembership_modal() {
 global $current_user;
 doliconnect_enqueues();
 
-print "<div class='modal fade' id='activatemember' tabindex='-1' role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
+$delay = dolidelay('member', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null));
+$request = "/adherentsplus/".doliconnector($current_user, 'fk_member', esc_attr(isset($_GET["refresh"]) ? $_GET["refresh"] : null)); 
+if ( !empty(doliconnector($current_user, 'fk_member')) && doliconnector($current_user, 'fk_member') > 0 && doliconnector($current_user, 'fk_soc') > 0 ) {
+$adherent = callDoliApi("GET", $request, null, $delay);
+}
+
+print "<div class='modal fade' id='activatemember' tabindex='-1 role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 print "<h4 class='modal-title' id='myModalLabel'>".__( 'Subscription', 'doliconnect-pro')." ".$adherent->next_subscription_season."</h4><button id='subscription-close' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div><div class='modal-body'>";
 if ( $adherent->id > 0 ) {
 print "<h6 id ='subscription-h6' class='text-center'>".sprintf(__('Available from %s to %s', 'doliconnect-pro'), strftime("%d/%m/%Y",$adherent->next_subscription_date_start), strftime("%d/%m/%Y",$adherent->next_subscription_date_end));
@@ -262,6 +268,7 @@ print doliloading('subscription');
 print "</div><div id='subscription-footer' class='modal-footer border-0'><small class='text-justify'>".__( 'Note: the admins reserve the right to change your membership (type/status) in relation to your personal situation when you finalize your order. A validation of the membership may be necessary depending on the cases.', 'doliconnect-pro')."</small></div></div></div></div>";
 
 }
+add_action( 'wp_footer', 'dolimembership_modal');
 
 // ********************************************************
 
