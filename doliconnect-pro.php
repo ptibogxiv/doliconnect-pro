@@ -97,7 +97,7 @@ return $adhesion;
 }
 
 function dolimembership_modal($current_user, $adherent = null, $delay) {
-
+global $current_user;
 doliconnect_enqueues();
 
 print "<div class='modal fade' id='activatemember' tabindex='-1' role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'><div class='modal-dialog modal-dialog-centered modal-lg' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
