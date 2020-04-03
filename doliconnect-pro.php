@@ -96,6 +96,7 @@ $adhesion = callDoliApi("PUT", "/adherentsplus/".doliconnector($current_user, 'f
 return $adhesion;
 }
 
+if ( !empty(doliconst('MAIN_MODULE_ADHERENTSPLUS')) ) {
 function dolimembership_modal() {
 global $current_user;
 doliconnect_enqueues();
@@ -269,6 +270,7 @@ print "</div><div id='subscription-footer' class='modal-footer border-0'><small 
 
 }
 add_action( 'wp_footer', 'dolimembership_modal');
+}
 
 // ********************************************************
 
