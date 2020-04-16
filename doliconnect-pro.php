@@ -418,11 +418,16 @@ function doliconnect_restrictedaccess( $template )
 add_action( 'wp_body_open', 'doliconnect_networkbar' );
  
 function doliconnect_networkbar() {
-if (is_multisite() && !empty(get_theme_mod( 'ptibogxivtheme_networkbar_color'))) { ?>
-<div class="text-dark bg-<?php echo "dark"; //echo esc_attr(get_theme_mod( 'ptibogxivtheme_networkbar_color' )); ?>">
-<div class="<?php echo esc_attr(get_theme_mod('ptibogxivtheme_container_type')); ?>"><div class="row"><div class="col-10 col-md-9"><ul class="nav nav-pills"><?php
-print '<li class="nav-item d-none d-lg-block"><small>';   
-print '<div class="nav-link text-white disabled"><i class="fas fa-globe fa-fw"></i></div></small></li>';
+if (is_multisite() && !empty(get_theme_mod( 'ptibogxivtheme_networkbar_color'))) {
+//echo esc_attr(get_theme_mod( 'ptibogxivtheme_networkbar_color' )); ?>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark"><div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <span class="navbar-brand mb-0 h1"><i class="fas fa-globe fa-fw"></i> Our websites</span>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+<ul class="nav nav-pills flex-column flex-sm-row"><?php
 $defaults = array(
 //'site__in'=>(1),
 'public'=>'1'
@@ -437,8 +442,9 @@ foreach( $subsites as $subsite ) {
 </ul></div><div class="col-2 col-md-3">  
 <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
 print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
+} ?>
+</div>
+</div></nav>
+<?php } 
 }
-print "</div></div></div></div>"; } 
-}
-
 ?>
