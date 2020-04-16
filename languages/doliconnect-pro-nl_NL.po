@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
-"POT-Creation-Date: 2020-04-16 20:24+0200\n"
-"PO-Revision-Date: 2020-04-16 20:24+0200\n"
+"POT-Creation-Date: 2020-04-16 20:26+0200\n"
+"PO-Revision-Date: 2020-04-16 20:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_FR\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: doliconnect-pro.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -23,100 +23,100 @@ msgstr ""
 
 #: doliconnect-pro.php:112
 msgid "Subscription"
-msgstr "Adhésion"
+msgstr "Abonnement"
 
 #: doliconnect-pro.php:114
 #, php-format
 msgid "Available from %s to %s"
-msgstr "Valable du %s au %s"
+msgstr "Beschikbaar van %s tot %s"
 
 #: doliconnect-pro.php:126
 msgid "An entry fee can be applied to you depending on the type"
-msgstr "Un droit d'entrée peut vous être appliqué selon le type"
+msgstr "Afhankelijk van het type kan u een inschrijfgeld op u toepassen"
 
 #: doliconnect-pro.php:127
 #, php-format
 msgid "From %s, a welcome fee can be apply"
-msgstr "À partir du %s, des frais de bienvenue peuvent être appliqués"
+msgstr "Vanaf %s kan een welkomsttarief worden toegepast"
 
 #: doliconnect-pro.php:136
 msgid "Cancel my subscription"
-msgstr "Annuler mon abonnement"
+msgstr "Mijn abonnement opzeggen"
 
 #: doliconnect-pro.php:138
 msgid "Will be terminated"
-msgstr "Sera résilié"
+msgstr "Zal worden beëindigd"
 
 #: doliconnect-pro.php:140
 #, php-format
 msgid "from the %s"
-msgstr "à partir du %s"
+msgstr "Verlengen vanaf %s"
 
 #: doliconnect-pro.php:141
 msgid "immediately"
-msgstr "immédiatement"
+msgstr "onmiddellijk"
 
 #: doliconnect-pro.php:143
 msgid "Resiliate"
-msgstr "Résilier"
+msgstr "Resiliate Resiliate"
 
 #: doliconnect-pro.php:171
 msgid "then"
-msgstr "puis"
+msgstr "Dan"
 
 #: doliconnect-pro.php:171 doliconnect-pro.php:174
 msgid "yearly"
-msgstr "par an"
+msgstr "jaarlijks"
 
 #: doliconnect-pro.php:177
 msgid "Free"
-msgstr "Gratuit"
+msgstr "Gratis"
 
 #: doliconnect-pro.php:180
 msgid "Including a federal part of"
-msgstr "Incluant une part fédérale de"
+msgstr "Inclusief een federaal deel van"
 
 #: doliconnect-pro.php:183
 #, php-format
 msgid "From %s"
-msgstr "A partir du %s"
+msgstr "Vanaf %s"
 
 #: doliconnect-pro.php:185
 msgid "Contact us"
-msgstr "Contactez-nous"
+msgstr "Neem contact op"
 
 #: doliconnect-pro.php:188
 msgid "Non-renewable"
-msgstr "Non renouvelable"
+msgstr "Niet-hernieuwbaar"
 
 #: doliconnect-pro.php:191 doliconnect-pro.php:198 doliconnect-pro.php:199
 #: doliconnect-pro.php:202 doliconnect-pro.php:203 doliconnect-pro.php:230
 #: doliconnect-pro.php:231
 msgid "Renew"
-msgstr "Renouveler"
+msgstr "Vernieuw"
 
 #: doliconnect-pro.php:195 doliconnect-pro.php:228
 msgid "Pay"
-msgstr "Payer"
+msgstr "Betalen"
 
 #: doliconnect-pro.php:210 doliconnect-pro.php:212 doliconnect-pro.php:214
 #: doliconnect-pro.php:219 doliconnect-pro.php:221
 msgid "Subscribe"
-msgstr "Souscrire"
+msgstr "Inschrijven"
 
 #: doliconnect-pro.php:235 doliconnect-pro.php:239 doliconnect-pro.php:244
 #: doliconnect-pro.php:247 doliconnect-pro.php:248 doliconnect-pro.php:252
 #: doliconnect-pro.php:255
 msgid "Ask us"
-msgstr "Nous demander"
+msgstr "Vraag ons"
 
 #: doliconnect-pro.php:238
 msgid "Request submitted"
-msgstr "Demande soumise"
+msgstr "Aanvraag ingediend"
 
 #: doliconnect-pro.php:262
 msgid "No available membership type"
-msgstr "Aucun type d’adhésion disponible"
+msgstr "Geen beschikbaar lidmaatschapstype"
 
 #: doliconnect-pro.php:270
 msgid ""
@@ -124,208 +124,209 @@ msgid ""
 "in relation to your personal situation when you finalize your order. A "
 "validation of the membership may be necessary depending on the cases."
 msgstr ""
-"Note: les admins se réservent le droit de changer votre adhésion (type/"
-"statut) par rapport à votre situation personnelle lorsque vous finaliser "
-"votre commande. Une validation de l'adhésion peut être nécessaire selon les "
-"cas."
+"Let op: de beheerders behouden zich het recht voor om uw lidmaatschap (type/"
+"status) te wijzigen in relatie tot uw persoonlijke situatie wanneer u uw "
+"bestelling afrondt. Afhankelijk van de gevallen kan een validatie van het "
+"lidmaatschap noodzakelijk zijn."
 
 #: doliconnect-pro.php:303
 msgid "I approve"
-msgstr "J'approuve"
+msgstr "Ik keur het goed"
 
 #: doliconnect-pro.php:304
 msgid "I refuse"
-msgstr "Je refuse"
+msgstr "Ik weiger"
 
 #: doliconnect-pro.php:335
 msgid "Welcome"
-msgstr "Bienvenue"
+msgstr "Welkom"
 
 #: doliconnect-pro.php:337
 msgid "Access restricted to users"
-msgstr "Accès restreint aux utilisateurs"
+msgstr "Toegang beperkt tot gebruikers"
 
 #: doliconnect-pro.php:365
 msgid "Email"
-msgstr "Adresse électronique"
+msgstr "E-mail"
 
 #: doliconnect-pro.php:369
 msgid "Password"
-msgstr "Mot de passe"
+msgstr "Wachtwoord"
 
 #: doliconnect-pro.php:379
 msgid "Create an account"
-msgstr "Créer un compte"
+msgstr "Maak een account aan"
 
 #: doliconnect-pro.php:381
 msgid "Forgot password?"
-msgstr "Mot de passe oublié?"
+msgstr "Wachtwoord vergeten?"
 
 #: doliconnect-pro.php:391
 msgid "Sign in"
-msgstr "S'identifier"
+msgstr "Inloggen"
 
 #: doliconnect-pro.php:427
 msgid "Our websites"
-msgstr "Nos sites web"
+msgstr "Onze websites"
 
 #: doliconnect-pro.php:444
 msgid "Choose language"
-msgstr "Choisir la langue"
+msgstr "Taal kiezen"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:395
 msgid "Check for updates"
-msgstr "Vérifier les mises à jour"
+msgstr "Controleer op updates"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:432
 msgid "View details"
-msgstr "Voir les détails"
+msgstr "Bekijk details"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:455
 #, php-format
 msgid "More information about %s"
-msgstr "Informations à propos de %s"
+msgstr "Meer informatie over %s"
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:548
 #, php-format
 msgctxt "the plugin title"
 msgid "The %s plugin is up to date."
-msgstr "L'extension %s est à jour."
+msgstr "De %s plugin is bijgewerkt."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:550
 #, php-format
 msgctxt "the plugin title"
 msgid "A new version of the %s plugin is available."
-msgstr "Une nouvelle version de %s est disponible."
+msgstr "Er is een nieuwe versie van de %s plugin beschikbaar."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:552
 #, php-format
 msgctxt "the plugin title"
 msgid "Could not determine if updates are available for %s."
-msgstr ""
-"Impossible de déterminer si des mises à jour sont disponibles pour %s."
+msgstr "Kon niet bepalen of updates beschikbaar zijn voor %s."
 
 #: lib/plugin-update-checker/Puc/v4p4/Plugin/UpdateChecker.php:558
 #, php-format
 msgid "Unknown update checker status \"%s\""
-msgstr "Mise à jour inconnue statut \"%s\""
+msgstr "Onbekende update checker status \"%s\""
 
 #: lib/plugin-update-checker/Puc/v4p4/Vcs/PluginUpdateChecker.php:98
 msgid "There is no changelog available."
-msgstr "Aucun registre de modifications disponible."
+msgstr "Er is geen changelog beschikbaar."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:204
 msgid "Sorry, you are not allowed to access this page."
-msgstr "Désolé, vous n'êtes pas autorisé à accéder à cette page."
+msgstr "Je mag deze pagina niet bekijken."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:251
 msgid "Theme License - "
-msgstr "Licence du thème - "
+msgstr "Themalicentie - "
 
 #: lib/wp-package-updater/class-wp-package-updater.php:406
 msgid ""
 "Unexpected Error! The query to retrieve the license data returned a "
 "malformed response."
 msgstr ""
-"Erreur inattendue! La requête pour récupérer les données de licence a "
-"renvoyé une réponse mal formée."
+"Onverwachte fout! De query om de licentiegegevens op te halen, heeft een "
+"verkeerd gegeven antwoord geretourneerd."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:424
 msgid "The license is already in use for this domain."
-msgstr "La licence est déjà utilisée pour ce domaine."
+msgstr "De licentie is al in gebruik voor dit domein."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:427
 msgid ""
 "The license has reached the maximum number of activations and cannot be "
 "activated for this domain."
 msgstr ""
-"La licence a atteint le nombre maximal d'activations et ne peut pas être "
-"activée pour ce domaine."
+"De licentie heeft het maximum aantal activeringen bereikt en kan niet "
+"worden geactiveerd voor dit domein."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:433
 msgid "The license is already inactive for this domain."
-msgstr "La licence est déjà inactive pour ce domaine."
+msgstr "De licentie is al inactief voor dit domein."
 
 #. translators: the license expiry date
 #: lib/wp-package-updater/class-wp-package-updater.php:444
 #, php-format
 msgid "The license expired on %s and needs to be renewed to be updated."
 msgstr ""
-"La licence a expiré sur %s et doit être renouvelée pour être mise à jour."
+"De licentie is verlopen op %s en moet worden verlengd om te worden "
+"bijgewerkt."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:448
 msgid "The license expired and needs to be renewed to be updated."
-msgstr "La licence a expiré et doit être renouvelée pour être mise à jour."
+msgstr ""
+"De licentie is verlopen en moet worden verlengd om te worden bijgewerkt."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:454
 msgid ""
 "The license is blocked and cannot be updated anymore. Please use another "
 "license key."
 msgstr ""
-"La licence est bloquée et ne peut plus être mise à jour. Veuillez utiliser "
-"une autre clé de licence."
+"De licentie is geblokkeerd en kan niet meer worden bijgewerkt. Gebruik een "
+"andere licentiesleutel."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:460
 msgid ""
 "The license has not been activated and its status is stil pending. Please "
 "try again or use another license key."
 msgstr ""
-"La licence n'a pas été activée et son statut est stil en attente. Veuillez "
-"réessayer ou utiliser une autre clé de licence."
+"De licentie is niet geactiveerd en de status ervan is stil in behandeling. "
+"Probeer het opnieuw of gebruik een andere licentiesleutel."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:466
 msgid "The provided license key is invalid. Please use another license key."
 msgstr ""
-"La clé de licence fournie n'est pas valide. Veuillez utiliser une autre clé "
-"de licence."
+"De opgegeven licentiesleutel is ongeldig. Gebruik een andere "
+"licentiesleutel."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:469
 msgid ""
 "The provided license key does not appear to be valid. Please use another "
 "license key."
 msgstr ""
-"La clé de licence fournie ne semble pas valide. Veuillez utiliser une autre "
-"clé de licence."
+"De opgegeven licentiesleutel lijkt niet geldig te zijn. Gebruik een andere "
+"licentiesleutel."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:473
 msgid ""
 "An active license is required to update the plugin. Please provide a valid "
 "license key in Plugins > Installed Plugins."
 msgstr ""
-"Une licence active est nécessaire pour mettre à jour le plugin. S'il vous "
-"plaît fournir une clé de licence valide dans plugins > plugins installés."
+"Een actieve licentie is vereist om de plug-in bij te werken. Geef een "
+"geldige licentiesleutel op in Plug-ins > Geïnstalleerde plug-ins."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:475
 msgid ""
 "An active license is required to update the theme. Please provide a valid "
 "license key in Appearence > Theme License."
 msgstr ""
-"Une licence active est nécessaire pour mettre à jour le thème. Veuillez "
-"fournir une clé de licence valide dans apparence > licence thème."
+"Een actieve licentie is vereist om het thema bij te werken. Geef een "
+"geldige licentiesleutel op in Appearence > Themalicentie."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:481
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the plugin."
 msgstr ""
-"Une erreur inattendue s'est produite. Veuillez réessayer. Si le problème "
-"persiste, veuillez contacter l'auteur du plugin."
+"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het "
+"probleem blijft bestaan, neem dan contact op met de auteur van de plugin."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:483
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the theme."
 msgstr ""
-"Une erreur inattendue s'est produite. Veuillez réessayer. Si le problème "
-"persiste, veuillez contacter l'auteur du thème."
+"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het "
+"probleem blijft bestaan, neem dan contact op met de auteur van het thema."
 
 #: lib/wp-package-updater/templates/license-form.php:6
 msgid "Current license key:"
-msgstr "Clé de licence actuelle:"
+msgstr "Huidige licentiesleutel:"
 
 #: lib/wp-package-updater/templates/license-form.php:9
 msgid "License key to change:"
-msgstr "Clé de licence à changer:"
+msgstr "Licentiesleutel om te wijzigen:"
 
 #. Plugin Name of the plugin/theme
 msgid "Doliconnect PRO"
@@ -333,11 +334,11 @@ msgstr "Doliconnect PRO"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.ptibogxiv.net"
-msgstr "https://www.ptibogxiv.net/fr"
+msgstr "https://www.ptibogxiv.net"
 
 #. Description of the plugin/theme
 msgid "Premium Enhancement of Doliconnect"
-msgstr "Amélioration Premium de Doliconnect"
+msgstr "Premium verbetering van Doliconnect"
 
 #. Author of the plugin/theme
 msgid "ptibogxiv"
@@ -345,4 +346,4 @@ msgstr "ptibogxiv"
 
 #. Author URI of the plugin/theme
 msgid "https://www.ptibogxiv.net/en"
-msgstr "https://www.ptibogxiv.net/fr"
+msgstr "https://www.ptibogxiv.net/en"

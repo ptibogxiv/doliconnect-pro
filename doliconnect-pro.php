@@ -424,7 +424,7 @@ if (is_multisite() && !empty(get_theme_mod( 'ptibogxivtheme_networkbar_color')))
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <span class="navbar-brand mb-0 h1"><i class="fas fa-globe fa-fw"></i> Our websites</span>
+  <span class="navbar-brand mb-0 h1"><i class="fas fa-globe fa-fw"></i> <?php print __( 'Our websites', 'doliconnect-pro'); ?></span>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
 <ul class="nav nav-pills flex-column flex-sm-row"><?php
@@ -441,7 +441,7 @@ foreach( $subsites as $subsite ) {
 <?php } ?>
 </ul></div><div class="col-2 col-md-3">  
 <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
-print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
+print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect-pro').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
 } ?>
 </div>
 </div></nav>
