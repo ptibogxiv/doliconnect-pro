@@ -3,7 +3,7 @@
  * Plugin Name: Doliconnect PRO
  * Plugin URI: https://www.ptibogxiv.net
  * Description: Premium Enhancement of Doliconnect
- * Version: 4.4.1
+ * Version: 4.5.0
  * Author: ptibogxiv
  * Author URI: https://www.ptibogxiv.net/en
  * Network: true
@@ -98,7 +98,7 @@ return $adhesion;
 
 
 function dolimembership_modal() {
-if ( !empty(doliconst('MAIN_MODULE_ADHERENTSPLUS')) ) {
+if ( !empty(doliconst('MAIN_MODULE_ADHERENTSPLUS')) && (is_user_logged_in() && is_page(doliconnectid('doliaccount')) && !empty(doliconnectid('doliaccount')) ) ) {
 global $current_user;
 doliconnect_enqueues();
 
