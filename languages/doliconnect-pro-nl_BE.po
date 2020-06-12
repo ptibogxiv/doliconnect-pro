@@ -1,23 +1,23 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
-"POT-Creation-Date: 2020-04-16 20:25+0200\n"
-"PO-Revision-Date: 2020-04-16 20:26+0200\n"
+"POT-Creation-Date: 2020-06-12 14:38+0200\n"
+"PO-Revision-Date: 2020-06-12 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: doliconnect-pro.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 
@@ -153,23 +153,27 @@ msgstr "E-mail"
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: doliconnect-pro.php:379
+#: doliconnect-pro.php:375
+msgid "Remember me"
+msgstr "Onthoud mij"
+
+#: doliconnect-pro.php:382
 msgid "Create an account"
 msgstr "Maak een account aan"
 
-#: doliconnect-pro.php:381
+#: doliconnect-pro.php:384
 msgid "Forgot password?"
 msgstr "Wachtwoord vergeten?"
 
-#: doliconnect-pro.php:391
+#: doliconnect-pro.php:394
 msgid "Sign in"
 msgstr "Aanmelden"
 
-#: doliconnect-pro.php:427
+#: doliconnect-pro.php:430
 msgid "Our websites"
 msgstr "Onze websites"
 
-#: doliconnect-pro.php:444
+#: doliconnect-pro.php:447
 msgid "Choose language"
 msgstr "Taal kiezen"
 
@@ -238,8 +242,8 @@ msgid ""
 "The license has reached the maximum number of activations and cannot be "
 "activated for this domain."
 msgstr ""
-"De licentie heeft het maximum aantal activeringen bereikt en kan niet "
-"worden geactiveerd voor dit domein."
+"De licentie heeft het maximum aantal activeringen bereikt en kan niet worden "
+"geactiveerd voor dit domein."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:433
 msgid "The license is already inactive for this domain."
@@ -277,8 +281,7 @@ msgstr ""
 #: lib/wp-package-updater/class-wp-package-updater.php:466
 msgid "The provided license key is invalid. Please use another license key."
 msgstr ""
-"De opgegeven licentiesleutel is ongeldig. Gebruik een andere "
-"licentiesleutel."
+"De opgegeven licentiesleutel is ongeldig. Gebruik een andere licentiesleutel."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:469
 msgid ""
@@ -301,24 +304,24 @@ msgid ""
 "An active license is required to update the theme. Please provide a valid "
 "license key in Appearence > Theme License."
 msgstr ""
-"Een actieve licentie is vereist om het thema bij te werken. Geef een "
-"geldige licentiesleutel op in Appearence > Themalicentie."
+"Een actieve licentie is vereist om het thema bij te werken. Geef een geldige "
+"licentiesleutel op in Appearence > Themalicentie."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:481
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the plugin."
 msgstr ""
-"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het "
-"probleem blijft bestaan, neem dan contact op met de auteur van de plugin."
+"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het probleem "
+"blijft bestaan, neem dan contact op met de auteur van de plugin."
 
 #: lib/wp-package-updater/class-wp-package-updater.php:483
 msgid ""
 "An unexpected error has occured. Please try again. If the problem persists, "
 "please contact the author of the theme."
 msgstr ""
-"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het "
-"probleem blijft bestaan, neem dan contact op met de auteur van het thema."
+"Er is een onverwachte fout opgetreden. Probeer het opnieuw. Als het probleem "
+"blijft bestaan, neem dan contact op met de auteur van het thema."
 
 #: lib/wp-package-updater/templates/license-form.php:6
 msgid "Current license key:"

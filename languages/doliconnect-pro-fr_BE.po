@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
-"POT-Creation-Date: 2020-04-16 20:25+0200\n"
-"PO-Revision-Date: 2020-04-16 20:25+0200\n"
+"POT-Creation-Date: 2020-06-12 14:37+0200\n"
+"PO-Revision-Date: 2020-06-12 14:38+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_BE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -153,23 +153,27 @@ msgstr "Adresse électronique"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: doliconnect-pro.php:379
+#: doliconnect-pro.php:375
+msgid "Remember me"
+msgstr "Se souvenir de moi"
+
+#: doliconnect-pro.php:382
 msgid "Create an account"
 msgstr "Créer un compte"
 
-#: doliconnect-pro.php:381
+#: doliconnect-pro.php:384
 msgid "Forgot password?"
 msgstr "Mot de passe oublié?"
 
-#: doliconnect-pro.php:391
+#: doliconnect-pro.php:394
 msgid "Sign in"
 msgstr "S'identifier"
 
-#: doliconnect-pro.php:427
+#: doliconnect-pro.php:430
 msgid "Our websites"
 msgstr "Nos sites Web"
 
-#: doliconnect-pro.php:444
+#: doliconnect-pro.php:447
 msgid "Choose language"
 msgstr "Choisir la langue"
 
