@@ -371,6 +371,9 @@ print "</div></div>";
 
 do_action( 'login_form' );
 
+print "<div class='form-group'><div class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' value='forever' id='remembermemodal' name='rememberme'>";
+print "<label class='custom-control-label' for='remembermemodal'> ".__( 'Remember me', 'doliconnect')."</label></div></div>";
+
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
 } 
