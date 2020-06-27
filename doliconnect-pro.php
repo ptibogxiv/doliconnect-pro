@@ -168,10 +168,10 @@ if ( ( ($postadh->welcome > '0') && ($adherent->datefin == null )) || (($postadh
 $montantdata=($tx*$postadh->price)+$postadh->welcome;
 print "(";
 print doliprice($montantdata)." ";
-print __( 'then', 'doliconnect-pro')." ".doliprice($montant1)." ".__( 'yearly', 'doliconnect-pro'); 
+print __( 'then', 'doliconnect-pro')." ".doliprice($montant1);//." ".__( 'yearly', 'doliconnect-pro'); 
 } else {
 print "(".doliprice($montant1);
-print " ".__( 'yearly', 'doliconnect-pro');
+//print " ".__( 'yearly', 'doliconnect-pro');
 $montantdata=($tx*$postadh->price);
 } 
 print ")"; } else { print "<span class='badge badge-pill badge-primary'>".__( 'Free', 'doliconnect-pro')."</span>"; }
