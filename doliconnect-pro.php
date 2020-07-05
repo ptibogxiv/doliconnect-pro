@@ -152,6 +152,7 @@ print ")"; } else { print "<span class='badge badge-pill badge-primary'>".__( 'F
 print "</small></b>";
 if (!empty(doliproduct($postadh, 'note'))) print "<br><small class='text-justify text-muted '>".doliproduct($postadh, 'note')."</small>";
 if (!empty(number_format($postadh->federal))) print "<br><small class='text-justify text-muted '>".__( 'Including a federal part of', 'doliconnect-pro')." ".doliprice($postadh->federal)."</small>";
+print "<br><small class='text-justify text-muted '>".__( 'From', 'doliconnect-pro')." ".wp_date('d/m/Y', $postadh->date_begin)." ".__( 'until', 'doliconnect-pro')." ".wp_date('d/m/Y', $postadh->date_end)."</small>";
 print "</div><div class='col-md-4'>";
 if ( $adherent->datefin != null && $adherent->statut == 1 && $adherent->datefin > $adherent->next_subscription_renew && $adherent->next_subscription_renew > current_time( 'timestamp',1) ) {
 print "<button class='btn btn-info btn-block' disabled>".sprintf(__('From %s', 'doliconnect-pro'), wp_date('d/m/Y', $adherent->next_subscription_renew))."</a>";
