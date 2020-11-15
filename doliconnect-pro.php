@@ -286,7 +286,7 @@ do_action( 'login_head' );
 
 print "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-keyboard='false' ";
 
-print "><div class='modal-dialog modal-fullscreen-md-dow modal-dialog-centered modal-dialog-scrollable' role='document'><div class='modal-content'><div class='modal-header'>";
+print "><div class='modal-dialog modal-fullscreen-md-down modal-dialog-centered modal-dialog-scrollable' role='document'><div class='modal-content'><div class='modal-header'>";
 
 if ( empty(get_option('doliconnectrestrict')) ) {
 print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doliconnect-pro')."</h5>";
@@ -294,8 +294,8 @@ print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doli
 print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro')."</h5>";
 }
 
-print "<button id='Closeloginmodal-form' type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div><div class='modal-body'><div id='loginmodal-form'>";
-print "<b>".get_option('doliaccountinfo')."</b>";
+print '<button type="button" id="Closeloginmodal-form" class="btn-close" data-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div id="loginmodal-form">';
+print '<b>'.get_option('doliaccountinfo').'</b>';
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
 print socialconnect ( get_permalink() );
@@ -316,28 +316,24 @@ print "<form name='loginmodal-form' action='$login_url' method='post' class='was
 
 print dolimodalloaderscript('loginmodal-form');
 
-print "<div class='form-group'>
-<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
-<div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
-<input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro')."' name='log' value='";
+print '<div class="form-floating mb-3"><input type="email" class="form-control" id="user_login" name="log" placeholder="name@example.com" value="';
 if ( defined("DOLICONNECT_DEMO_EMAIL") && !empty(constant("DOLICONNECT_DEMO_EMAIL")) ) {
 print constant("DOLICONNECT_DEMO_EMAIL");
 }
-print "' required autofocus>";
-print "</div></div><div class='form-group'>
-<div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
-<div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
-<input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro')."' name='pwd' value ='";
+print '" required autofocus><label for="user_login">'.__( 'Email', 'doliconnect-pro').'</label></div>';
+
+print '<div class="form-floating mb-3"><input type="password" class="form-control" id="user_pass" name="pwd" placeholder="Password" value="';
 if ( defined("DOLICONNECT_DEMO_PASSWORD") && !empty(constant("DOLICONNECT_DEMO_PASSWORD")) ) {
 print constant("DOLICONNECT_DEMO_PASSWORD");
 }
-print "' required>";
-print "</div></div>";
+print '" required><label for="user_pass">'.__( 'Password', 'doliconnect-pro').'</label></div>';
 
 do_action( 'login_form' );
 
-print "<div class='form-group'><div class='custom-control custom-checkbox'><input type='checkbox' class='custom-control-input' value='forever' id='remembermemodal' name='rememberme'>";
-print "<label class='custom-control-label' for='remembermemodal'> ".__( 'Remember me', 'doliconnect-pro')."</label></div></div>";
+print '<div class="form-check">
+  <input class="form-check-input" type="checkbox" name="rememberme" value="forever" id="rememberme" checked>
+  <label class="form-check-label" for="rememberme">'.__( 'Remember me', 'doliconnect-pro').'</label>
+</div>';
 
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
@@ -355,9 +351,10 @@ print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
 
 print "".doliloading('loginmodal-form');
 
-print "</div><div id='Footerloginmodal-form' class='modal-footer'><button id='submit' class='btn btn-block btn-primary' type='submit' name='submit' value='Submit'";
-print "><b>".__( 'Sign in', 'doliconnect-pro')."</b></button></form></div>";
-print "</div></div></div>";
+print '</div><div id="Footerloginmodal-form" class="modal-footer"><button id="submit" class="btn btn-primary" type="submit" name="submit" value="Submit">';
+print "<b>".__( 'Sign in', 'doliconnect-pro')."</b></button>";
+print '</form></div>';
+print '</div></div></div>';
 
 //if( !array_key_exists( 'login_footer' , $GLOBALS['wp_filter']) ) { 
 do_action( 'login_footer' );
