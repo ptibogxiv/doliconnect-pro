@@ -319,11 +319,19 @@ print dolimodalloaderscript('loginmodal-form');
 print "<div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-at fa-fw'></i></div></div>
-<input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro')."' name='log' value='' required>";
+<input class='form-control' id='user_login' type='email' placeholder='".__( 'Email', 'doliconnect-pro')."' name='log' value='";
+if ( defined("DOLICONNECT_DEMO_EMAIL") && !empty(constant("DOLICONNECT_DEMO_EMAIL")) ) {
+print constant("DOLICONNECT_DEMO_EMAIL");
+}
+print "' required>";
 print "</div></div><div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
-<input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro')."' name='pwd' value ='' required>";
+<input class='form-control' id='user_pass' type='password' placeholder='".__( 'Password', 'doliconnect-pro')."' name='pwd' value ='";
+if ( defined("DOLICONNECT_DEMO_PASSWORD") && !empty(constant("DOLICONNECT_DEMO_PASSWORD")) ) {
+print constant("DOLICONNECT_DEMO_PASSWORD");
+}
+print "' required>";
 print "</div></div>";
 
 do_action( 'login_form' );
