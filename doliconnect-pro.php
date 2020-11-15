@@ -285,13 +285,7 @@ doliconnect_enqueues();
 do_action( 'login_head' );
 
 print "<div class='modal fade' id='DoliconnectLogin' tabindex='-1' role='dialog' aria-labelledby='DoliconnectLoginTitle' aria-hidden='true' data-backdrop='static' data-keyboard='false' ";
-//if ( ! empty(get_option('doliconnectrestrict')) ) {
-//if ( !empty( get_background_color() )) {
-//print " style='background-color:#".get_background_color()."' ";
-//} else {
-//print " style='background-color:#cccccc' ";
-//}
-//}
+
 print "><div class='modal-dialog modal-dialog-centered' role='document'><div class='modal-content border-0'><div class='modal-header border-0'>";
 
 if ( empty(get_option('doliconnectrestrict')) ) {
