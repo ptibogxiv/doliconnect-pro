@@ -323,7 +323,7 @@ print "<div class='form-group'>
 if ( defined("DOLICONNECT_DEMO_EMAIL") && !empty(constant("DOLICONNECT_DEMO_EMAIL")) ) {
 print constant("DOLICONNECT_DEMO_EMAIL");
 }
-print "' required>";
+print "' required autofocus>";
 print "</div></div><div class='form-group'>
 <div class='input-group mb-2 mr-sm-2'><div class='input-group-prepend'>
 <div class='input-group-text'><i class='fas fa-key fa-fw'></i></div></div>
