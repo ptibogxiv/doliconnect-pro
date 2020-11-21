@@ -351,8 +351,8 @@ print "<input type='hidden' value='$redirect_to' name='redirect_to'></div>";
 
 print "".doliloading('loginmodal-form');
 
-print '</div><div id="Footerloginmodal-form" class="modal-footer"><button id="submit" class="btn btn-primary" type="submit" name="submit" value="Submit">';
-print "<b>".__( 'Sign in', 'doliconnect-pro')."</b></button>";
+print '</div><div id="Footerloginmodal-form" class="modal-footer">';
+print '<div class="d-grid gap-2"><button class="btn btn-outline-secondary" type="submit" value="submit">'.__( 'Sign in', 'doliconnect-pro').'</button></div>';
 print '</form></div>';
 print '</div></div></div>';
 
