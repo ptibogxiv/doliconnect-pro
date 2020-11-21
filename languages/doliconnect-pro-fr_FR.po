@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Doliconnect PRO\n"
-"POT-Creation-Date: 2020-11-21 15:18+0100\n"
-"PO-Revision-Date: 2020-11-21 15:19+0100\n"
+"POT-Creation-Date: 2020-11-21 18:29+0100\n"
+"PO-Revision-Date: 2020-11-21 18:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -25,124 +25,123 @@ msgstr ""
 msgid "Prices"
 msgstr "Tarifs"
 
-#: doliconnect-pro.php:137
+#: doliconnect-pro.php:157
 msgid "then"
 msgstr "puis"
 
-#: doliconnect-pro.php:141
+#: doliconnect-pro.php:161
 msgid "Free"
 msgstr "Gratuit"
 
-#: doliconnect-pro.php:144
+#: doliconnect-pro.php:164
 msgid "Including a federal part of"
 msgstr "Incluant une part fédérale de"
 
-#: doliconnect-pro.php:145
+#: doliconnect-pro.php:165
 msgid "From"
 msgstr "A partir du"
 
-#: doliconnect-pro.php:145
+#: doliconnect-pro.php:165
 msgid "until"
 msgstr "jusqu’au"
 
-#: doliconnect-pro.php:148
+#: doliconnect-pro.php:168
 #, php-format
 msgid "From %s"
 msgstr "A partir du %s"
 
-#: doliconnect-pro.php:150
+#: doliconnect-pro.php:170
 msgid "Contact us"
 msgstr "Contactez-nous"
 
-#: doliconnect-pro.php:153
+#: doliconnect-pro.php:173
 msgid "Non-renewable"
 msgstr "Non renouvelable"
 
-#: doliconnect-pro.php:156 doliconnect-pro.php:163 doliconnect-pro.php:164
-#: doliconnect-pro.php:167 doliconnect-pro.php:168 doliconnect-pro.php:195
-#: doliconnect-pro.php:196
+#: doliconnect-pro.php:176 doliconnect-pro.php:183 doliconnect-pro.php:184
+#: doliconnect-pro.php:187 doliconnect-pro.php:188 doliconnect-pro.php:215
+#: doliconnect-pro.php:216
 msgid "Renew"
 msgstr "Renouveler"
 
-#: doliconnect-pro.php:160 doliconnect-pro.php:193
+#: doliconnect-pro.php:180 doliconnect-pro.php:213
 msgid "Pay"
 msgstr "Payer"
 
-#: doliconnect-pro.php:175 doliconnect-pro.php:177 doliconnect-pro.php:179
-#: doliconnect-pro.php:184 doliconnect-pro.php:186
+#: doliconnect-pro.php:195 doliconnect-pro.php:197 doliconnect-pro.php:199
+#: doliconnect-pro.php:204 doliconnect-pro.php:206
 msgid "Subscribe"
 msgstr "Souscrire"
 
-#: doliconnect-pro.php:200 doliconnect-pro.php:204 doliconnect-pro.php:209
-#: doliconnect-pro.php:212 doliconnect-pro.php:213 doliconnect-pro.php:217
-#: doliconnect-pro.php:220
+#: doliconnect-pro.php:220 doliconnect-pro.php:224 doliconnect-pro.php:229
+#: doliconnect-pro.php:232 doliconnect-pro.php:233 doliconnect-pro.php:237
+#: doliconnect-pro.php:240
 msgid "Ask us"
 msgstr "Nous demander"
 
-#: doliconnect-pro.php:203
+#: doliconnect-pro.php:223
 msgid "Request submitted"
 msgstr "Demande soumise"
 
-#: doliconnect-pro.php:227
+#: doliconnect-pro.php:247
 msgid "No available membership type"
 msgstr "Aucun type d’adhésion disponible"
 
-#: doliconnect-pro.php:235
+#: doliconnect-pro.php:255
 msgid ""
-"Note: the admins reserve the right to change your membership (type/status) "
-"in relation to your personal situation when you finalize your order. A "
-"validation of the membership may be necessary depending on the cases."
+"Note: the admins reserve the right to change your membership in relation to "
+"your personal situation. A validation of the membership may be necessary "
+"depending on the cases."
 msgstr ""
-"Note: les admins se réservent le droit de changer votre adhésion (type/"
-"statut) par rapport à votre situation personnelle lorsque vous finaliser "
-"votre commande. Une validation de l'adhésion peut être nécessaire selon les "
-"cas."
+"Remarque : les administrateurs se réservent le droit de changer d’adhésion "
+"par rapport à votre situation personnelle. Une validation de l’adhésion peut "
+"être nécessaire en fonction des cas."
 
-#: doliconnect-pro.php:268
+#: doliconnect-pro.php:288
 msgid "I approve"
 msgstr "J'approuve"
 
-#: doliconnect-pro.php:269
+#: doliconnect-pro.php:289
 msgid "I refuse"
 msgstr "Je refuse"
 
-#: doliconnect-pro.php:294
+#: doliconnect-pro.php:314
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: doliconnect-pro.php:296
+#: doliconnect-pro.php:316
 msgid "Access restricted to users"
 msgstr "Accès restreint aux utilisateurs"
 
-#: doliconnect-pro.php:325
+#: doliconnect-pro.php:345
 msgid "Email"
 msgstr "Adresse électronique"
 
-#: doliconnect-pro.php:331
+#: doliconnect-pro.php:351
 msgid "Password"
 msgstr "Mot de passe"
 
-#: doliconnect-pro.php:337
+#: doliconnect-pro.php:357
 msgid "Remember me"
 msgstr "Se souvenir de moi"
 
-#: doliconnect-pro.php:345
+#: doliconnect-pro.php:365
 msgid "Create an account"
 msgstr "Créer un compte"
 
-#: doliconnect-pro.php:347
+#: doliconnect-pro.php:367
 msgid "Forgot password?"
 msgstr "Mot de passe oublié?"
 
-#: doliconnect-pro.php:357
+#: doliconnect-pro.php:377
 msgid "Sign in"
 msgstr "S'identifier"
 
-#: doliconnect-pro.php:394
+#: doliconnect-pro.php:414
 msgid "Our websites"
 msgstr "Nos sites web"
 
-#: doliconnect-pro.php:411
+#: doliconnect-pro.php:431
 msgid "Choose language"
 msgstr "Choisir la langue"
 
