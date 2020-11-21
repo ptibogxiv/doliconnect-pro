@@ -108,12 +108,13 @@ if ( !empty(doliconnector($current_user, 'fk_member')) && doliconnector($current
 $adherent = callDoliApi("GET", $request, null, $delay);
 }
 
-print "<div class='modal fade' id='activatemember' tabindex='-1 role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-backdrop='static' data-keyboard='false'>
+print "<div class='modal fade' id='activatemember' tabindex='-1 role='dialog' aria-labelledby='activatememberLabel' aria-hidden='true' data-keyboard='false'>
 <div class='modal-dialog modal-lg modal-fullscreen-md-down modal-dialog-centered modal-dialog-scrollable' role='document'><div class='modal-content'><div class='modal-header'>";
 if ( !isset($adherent->datefin) || ( $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
 $typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.libelle&sortorder=ASC&sqlfilters=(t.morphy%3A=%3A'')%20or%20(t.morphy%3Ais%3Anull)%20or%20(t.morphy%3A%3D%3A'".$current_user->billing_type."')", null, $delay);
 //print $typeadhesion;
 print '<h4 class="modal-title" id="myModalLabel">'.__( 'Prices', 'doliconnect').' '.$typeadhesion[0]->season.'</h4><button id="subscription-close" type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button></div>';
+
 print '<div class="modal-body">';
 
 print "<table class='table table-striped' id ='subscription-table'>";
@@ -260,7 +261,7 @@ print "</script>";
 print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-show="true" data-backdrop="static" data-keyboard="false">
 <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - Version du '.get_the_modified_date( get_option( 'date_format' ), get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
-//print '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+print '<button type="button" class="btn-close" disabled aria-label="Close"></button>';
 print '</div><div class="modal-body" data-spy="scroll">';
 print apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
 print '</div>    
