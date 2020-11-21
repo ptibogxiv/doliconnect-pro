@@ -243,7 +243,7 @@ add_action( 'wp_footer', 'dolimembership_modal');
 function doliconnect_privacy($arg) {
 global $current_user;
 
-if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ( '999999999999999' < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) {  
+if ( is_user_logged_in() && get_option('doliconnectbeta') == '1' && ( '999999999999999999999' < get_the_modified_date( 'U', get_option( 'wp_page_for_privacy_policy' ))) ) { //current_time( 'timestamp', 1) 
 
 doliconnect_enqueues();
 
@@ -261,7 +261,7 @@ print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" 
 <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - Version du '.get_the_modified_date( get_option( 'date_format' ), get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
 //print '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-print '</div><div class="bg-light text-dark" data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="overflow: auto; height:55vh;">';
+print '</div><div class="modal-body" data-spy="scroll">';
 print apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
 print '</div>    
       <div class="modal-footer">
