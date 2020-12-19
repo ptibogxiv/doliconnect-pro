@@ -108,7 +108,7 @@ if ( !empty(doliconnector($current_user, 'fk_member')) && doliconnector($current
 $adherent = callDoliApi("GET", $request, null, $delay);
 }
 
-print "<div class='modal fade' id='activatemember' tabindex='-1' aria-labelledby='activatememberLabel' aria-hidden='true' data-keyboard='false'>
+print "<div class='modal fade' id='activatemember' tabindex='-1' aria-labelledby='activatememberLabel' aria-hidden='true' data-bs-keyboard='false'>
 <div class='modal-dialog modal-lg modal-fullscreen-md-down modal-dialog-centered modal-dialog-scrollable'><div class='modal-content'><div class='modal-header'>";
 if ( !isset($adherent->datefin) || ( $adherent->datefin>current_time( 'timestamp',1)) || ( $adherent->datefin < current_time( 'timestamp',1)) ) {
 $typeadhesion = callDoliApi("GET", "/adherentsplus/type?sortfield=t.libelle&sortorder=ASC&sqlfilters=(t.morphy%3A=%3A'')%20or%20(t.morphy%3Ais%3Anull)%20or%20(t.morphy%3A%3D%3A'".$current_user->billing_type."')", null, $delay);
@@ -277,7 +277,7 @@ print '<div id="DoliconnectPrivacyModal" class="modal fade bd-example-modal-xl" 
 <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">Confidentialite - Version du '.get_the_modified_date( get_option( 'date_format' ), get_option( 'wp_page_for_privacy_policy' ) ).'</h5>';
 print '<button type="button" class="btn-close" disabled aria-label="Close"></button>';
-print '</div><div class="modal-body" data-spy="scroll">';
+print '</div><div class="modal-body" data-bs-spy="scroll">';
 print apply_filters('the_content', get_post_field('post_content', get_option( 'wp_page_for_privacy_policy' ))); 
 print '</div>    
       <div class="modal-footer">
@@ -312,7 +312,7 @@ print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Welcome', 'doli
 print "<h5 class='modal-title' id='DoliconnectLoginTitle'>".__( 'Access restricted to users', 'doliconnect-pro')."</h5>";
 }
 
-print '<button type="button" id="Closeloginmodal-form" class="btn-close" data-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div id="loginmodal-form">';
+print '<button type="button" id="Closeloginmodal-form" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div id="loginmodal-form">';
 print '<b>'.get_option('doliaccountinfo').'</b>';
 
 if ( ! function_exists('dolikiosk') || ( function_exists('dolikiosk') && empty(dolikiosk())) ) {
@@ -356,11 +356,12 @@ print '<div class="form-check">
 if ( get_site_option('doliconnect_mode') == 'one' && function_exists('switch_to_blog') ) {
 switch_to_blog(1);
 } 
-print "<div><div class='float-left'><small>";
+
 if ((!is_multisite() && get_option( 'users_can_register' )) || ((!is_multisite() && get_option( 'dolicustsupp_can_register' )) || ((get_option( 'dolicustsupp_can_register' ) || get_option('users_can_register') == '1') && (get_site_option( 'registration' ) == 'user' || get_site_option( 'registration' ) == 'all')))) {
-print "<a href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro')."'>".__( 'Create an account', 'doliconnect-pro')."</a>";
+print "<a class='float-start' href='".wp_registration_url(get_permalink())."' role='button' title='".__( 'Create an account', 'doliconnect-pro')."'><small>".__( 'Create an account', 'doliconnect-pro')."</small></a>";
 }
-print "</div><div class='float-right'><a href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro')."'>".__( 'Forgot password?', 'doliconnect-pro')."</a></small></div></div>"; 
+print "<a class='float-end' href='".wp_lostpassword_url(get_permalink())."' role='button' title='".__( 'Forgot password?', 'doliconnect-pro')."'><small>".__( 'Forgot password?', 'doliconnect-pro')."</small></a>"; 
+
 if (get_site_option('doliconnect_mode')=='one') {
 restore_current_blog();
 }
@@ -404,7 +405,7 @@ function doliconnect_networkbar() {
 if (is_multisite() && !empty(get_theme_mod( 'ptibogxivtheme_networkbar_color'))) {
 //echo esc_attr(get_theme_mod( 'ptibogxivtheme_networkbar_color' )); ?>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark"><div class="container">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <span class="navbar-brand mb-0 h1"><i class="fas fa-globe fa-fw"></i> <?php print __( 'Our websites', 'doliconnect-pro'); ?></span>
@@ -424,7 +425,7 @@ foreach( $subsites as $subsite ) {
 <?php } ?>
 </ul></div><div class="col-2 col-md-3">  
 <?php if ( function_exists('pll_the_languages') && function_exists('doliconnect_langs') ) {      
-print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-toggle="modal" data-target="#DoliconnectSelectLang" data-dismiss="modal" title="'.__('Choose language', 'doliconnect-pro').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
+print '<button type="button" class="btn btn-block btn-link text-decoration-none text-white text-right" data-bs-toggle="modal" data-bs-target="#DoliconnectSelectLang" data-bs-dismiss="modal" title="'.__('Choose language', 'doliconnect-pro').'"><span class="flag-icon flag-icon-'.strtolower(substr(pll_current_language('slug'), -2)).'"></span></button>';
 } ?>
 </div>
 </div></nav>
