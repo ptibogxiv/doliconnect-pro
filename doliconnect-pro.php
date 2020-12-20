@@ -294,19 +294,6 @@ add_action( 'wp_footer', 'doliconnect_privacy', 10, 1);
 
 // ********************************************************
 
-add_filter( 'template_include', 'doliconnect_restrictedaccess' );
-
-function doliconnect_restrictedaccess( $template )
-{
-    global $current_user;
-    if( ( !is_user_logged_in() && !empty(get_option('doliconnectrestrict')) ) || (!is_user_member_of_blog( $current_user->ID, get_current_blog_id()) && !empty(get_option('doliconnectrestrict')) ) )
-        $template = plugin_dir_path( __FILE__ ) . 'templates/restricted.php';
-
-    return $template;
-}
-
-// ********************************************************
-
 add_action( 'wp_body_open', 'doliconnect_networkbar' );
  
 function doliconnect_networkbar() {
